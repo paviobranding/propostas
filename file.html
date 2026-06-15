@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Identidade Verbal — Saúde e Saber</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cyan: #A8E6EF;
+      --cyan-mid: #7DD4E0;
+      --cyan-deep: #4BBDCC;
+      --white: #FFFFFF;
+      --off-white: #F7FBFC;
+      --gray-light: #EEF6F8;
+      --gray-text: #6B8A8F;
+      --dark: #1C2E31;
+      --border: #D4EEF2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background-color: var(--white);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan-deep);
+      background: var(--gray-light);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    header h1 span {
+      color: var(--cyan-deep);
+      font-weight: 500;
+    }
+
+    header p {
+      margin-top: 16px;
+      font-size: 15px;
+      color: var(--gray-text);
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-line {
+      width: 48px;
+      height: 2px;
+      background: var(--cyan-mid);
+      margin: 32px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ── NAV PILLS ── */
+    .nav-pills {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-pills::-webkit-scrollbar { display: none; }
+
+    .nav-pill {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gray-text);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-pill:hover,
+    .nav-pill.active {
+      background: var(--cyan-deep);
+      border-color: var(--cyan-deep);
+      color: var(--white);
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── ACCORDION ── */
+    .accordion {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--white);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 24px rgba(75,189,204,0.10);
+    }
+
+    .card.open {
+      box-shadow: 0 6px 32px rgba(75,189,204,0.14);
+      border-color: var(--cyan-mid);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 28px;
+      cursor: pointer;
+      user-select: none;
+      background: var(--white);
+      transition: background 0.2s ease;
+    }
+
+    .card.open .card-header {
+      background: var(--off-white);
+    }
+
+    .card-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--cyan-deep);
+      background: var(--gray-light);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--dark);
+      letter-spacing: 0.1px;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray-text);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .card-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+
+    .card-chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--gray-text);
+      transition: transform 0.3s ease;
+    }
+
+    .card.open .card-chevron {
+      transform: rotate(180deg);
+      color: var(--cyan-deep);
+    }
+
+    .card-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .card.open .card-body {
+      max-height: 3000px;
+    }
+
+    .card-content {
+      padding: 0 28px 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── CONTENT STYLES ── */
+    .block {
+      margin-top: 24px;
+    }
+
+    .block-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--cyan-deep);
+      margin-bottom: 10px;
+    }
+
+    .block p {
+      font-size: 14.5px;
+      color: #3A5558;
+      line-height: 1.8;
+    }
+
+    .block blockquote {
+      border-left: 2px solid var(--cyan-mid);
+      padding-left: 16px;
+      margin: 12px 0;
+      font-size: 14.5px;
+      color: var(--gray-text);
+      font-style: italic;
+    }
+
+    .highlight-box {
+      background: var(--gray-light);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-top: 12px;
+    }
+
+    .highlight-box p {
+      font-size: 14px;
+      color: var(--dark);
+    }
+
+    .highlight-box strong {
+      color: var(--cyan-deep);
+      font-weight: 500;
+    }
+
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 400;
+      background: var(--gray-light);
+      color: var(--dark);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .tag.accent {
+      background: var(--cyan);
+      border-color: var(--cyan-mid);
+      color: var(--dark);
+    }
+
+    .phase-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .phase {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .phase-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan-deep);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .phase-text {
+      font-size: 14px;
+      color: #3A5558;
+      line-height: 1.75;
+    }
+
+    .phase-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--cyan-deep);
+      margin-bottom: 4px;
+    }
+
+    .tagline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .tagline-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      background: var(--off-white);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .tagline-item strong {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--dark);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .tagline-item span {
+      font-size: 12.5px;
+      color: var(--gray-text);
+    }
+
+    .tone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .tone-card {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .tone-card h4 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--cyan-deep);
+      margin-bottom: 6px;
+    }
+
+    .tone-card p {
+      font-size: 13px;
+      color: var(--gray-text);
+      line-height: 1.7;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .theme-card {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .theme-card .theme-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .theme-card h4 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cyan-deep);
+      margin-bottom: 8px;
+    }
+
+    .theme-card p {
+      font-size: 13px;
+      color: var(--gray-text);
+      line-height: 1.7;
+    }
+
+    .sig-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    .sig-table td {
+      padding: 12px 16px;
+      font-size: 13.5px;
+      border-bottom: 1px solid var(--border);
+      color: #3A5558;
+    }
+
+    .sig-table tr:last-child td { border-bottom: none; }
+
+    .sig-table td:first-child {
+      font-weight: 500;
+      color: var(--cyan-deep);
+      white-space: nowrap;
+      width: 110px;
+    }
+
+    .manifesto-text {
+      font-size: 15px;
+      color: #3A5558;
+      line-height: 2;
+      font-style: italic;
+      border-left: 3px solid var(--cyan-mid);
+      padding-left: 20px;
+      margin-top: 12px;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--cyan-deep);
+      background: var(--gray-light);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .copy-btn:hover {
+      background: var(--cyan-deep);
+      border-color: var(--cyan-deep);
+      color: var(--white);
+    }
+
+    .copy-btn.copied {
+      background: #4CAF6E;
+      border-color: #4CAF6E;
+      color: var(--white);
+    }
+
+    .emoji-row {
+      font-size: 20px;
+      margin-top: 14px;
+      letter-spacing: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 12px;
+      color: var(--gray-text);
+      letter-spacing: 0.5px;
+    }
+
+    footer span {
+      color: var(--cyan-deep);
+      font-weight: 500;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .card-header { padding: 18px 20px; }
+      .card-content { padding: 0 20px 24px; }
+      .nav-pills { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header>
+  <div class="hero-tag">Identidade Verbal</div>
+  <h1>Saúde e <span>Saber</span></h1>
+  <p>Os 10 pilares que definem como a marca se expressa, se comunica e ressoa em cada ponto de contato.</p>
+  <div class="hero-line"></div>
+</header>
+
+<!-- NAV PILLS -->
+<nav class="nav-pills" id="navPills">
+  <a class="nav-pill" href="#card-1">Posicionamento</a>
+  <a class="nav-pill" href="#card-2">Eixo Narrativo</a>
+  <a class="nav-pill" href="#card-3">Storytelling</a>
+  <a class="nav-pill" href="#card-4">Taglines</a>
+  <a class="nav-pill" href="#card-5">Manifesto</a>
+  <a class="nav-pill" href="#card-6">Território Lexical</a>
+  <a class="nav-pill" href="#card-7">Tom e Voz</a>
+  <a class="nav-pill" href="#card-8">Temas</a>
+  <a class="nav-pill" href="#card-9">Promessa</a>
+  <a class="nav-pill" href="#card-10">Assinaturas</a>
+</nav>
+
+<main>
+  <div class="accordion" id="accordion">
+
+    <!-- CARD 1 -->
+    <div class="card" id="card-1">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">01</div>
+        <div class="card-title">
+          Declaração de Posicionamento
+          <span class="card-subtitle">O espaço único que a marca ocupa na mente do paciente</span>
+        </div>
+        <span class="card-icon">🎯</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+
+          <div class="block">
+            <div class="block-label">Narrativa Estratégica</div>
+            <p>A Saúde e Saber entende de pessoas. Nasceu da união de quem já viveu de perto o sofrimento de um paciente sem cuidado e decidiu que isso poderia ser diferente. É daqui, conhece as famílias da região e sabe o que significa esperar por um atendimento que nunca chega. Por isso escolheu estar presente onde a necessidade é real — com técnica, com presença e com humanidade.</p>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Essência de Marca</div>
+            <div class="highlight-box">
+              <p>A Saúde e Saber é a parceira de cuidado que transforma sofrimento em esperança, unindo conhecimento técnico e acolhimento humano para devolver <strong>autonomia e dignidade</strong> a cada paciente.</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Promessa Central</div>
+            <div class="highlight-box">
+              <p>Atuar ativamente para que nenhum paciente enfrente sua dor sem suporte especializado, e nenhuma família precise buscar longe o cuidado que merece ter perto.</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Síntese</div>
+            <blockquote>Cuida de pessoas. Transforma vidas.</blockquote>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 1)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card" id="card-2">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">02</div>
+        <div class="card-title">
+          Eixo Narrativo
+          <span class="card-subtitle">Como a marca conta sua história para cada público</span>
+        </div>
+        <span class="card-icon">📖</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+
+          <div class="block">
+            <div class="block-label">Narrativa Central</div>
+            <div class="highlight-box">
+              <p>Por trás de cada curativo existe uma pessoa que luta todos os dias para recuperar sua independência — e que merece ser tratada com <strong>atenção, técnica e respeito.</strong></p>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Eixo 1 — Pacientes e Familiares</div>
+            <p>A conversa não é sobre o ferimento. É sobre voltar a andar, a trabalhar, a abraçar quem se ama. O foco sai de <em>"preciso tratar essa ferida"</em> para <em>"não posso perder minha autonomia"</em>. Cuidar é dar continuidade à vida.</p>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Eixo 2 — Gestores Públicos Municipais</div>
+            <p>Cada paciente sem atendimento adequado é uma falha sistêmica que poderia ser evitada. A Saúde e Saber fala a língua da gestão: resultados, responsabilidade e impacto real na saúde da população. Terceirizar com qualidade é também um ato de cuidado público.</p>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Eixo 3 — Profissionais de Saúde</div>
+            <p>Trabalhar com propósito é diferente de apenas cumprir protocolo. A Saúde e Saber acredita que o profissional que cuida também precisa ser cuidado — com um ambiente que valoriza o conhecimento, a ética e a vocação de servir.</p>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 2)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card" id="card-3">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">03</div>
+        <div class="card-title">
+          Storytelling
+          <span class="card-subtitle">A jornada do paciente com a marca</span>
+        </div>
+        <span class="card-icon">🌱</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+          <div class="phase-list">
+            <div class="phase">
+              <div class="phase-dot"></div>
+              <div>
+                <div class="phase-title">Fase 1 — A dor da vulnerabilidade</div>
+                <p class="phase-text">O paciente chega exausto. A família está desorientada. As feridas cronificaram, as dores não passam e o sistema público já não deu conta. Há um sentimento de impotência e abandono. "Será que existe alguém especializado nisso aqui perto? Será que meu familiar vai melhorar?"</p>
+              </div>
+            </div>
+            <div class="phase">
+              <div class="phase-dot"></div>
+              <div>
+                <div class="phase-title">Fase 2 — O encontro</div>
+                <p class="phase-text">É nesse momento que a Saúde e Saber aparece — por indicação, por uma busca no celular ou por uma conversa com outro profissional de saúde. O que chama atenção não é só o serviço: é a forma como comunicam. Uma clínica que fala de gente, não de procedimentos.</p>
+              </div>
+            </div>
+            <div class="phase">
+              <div class="phase-dot"></div>
+              <div>
+                <div class="phase-title">Fase 3 — A consideração</div>
+                <p class="phase-text">O paciente ou familiar entra em contato e percebe que do outro lado há escuta real. O atendimento não é frio nem burocrático. Sente que está sendo visto como pessoa, não como prontuário. Decide dar um voto de confiança e iniciar o acompanhamento.</p>
+              </div>
+            </div>
+            <div class="phase">
+              <div class="phase-dot"></div>
+              <div>
+                <div class="phase-title">Fase 4 — Defensor e promotor</div>
+                <p class="phase-text">Com o tempo, a evolução clínica fala por si. O paciente recupera autonomia, a família respira aliviada. A experiência foi tão significativa que virou história — contada para vizinhos, compartilhada em grupos, indicada ao médico de família. A Saúde e Saber se torna referência não por marketing, mas por transformação real.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 3)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="card" id="card-4">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">04</div>
+        <div class="card-title">
+          Taglines
+          <span class="card-subtitle">Slogans que sintetizam o posicionamento</span>
+        </div>
+        <span class="card-icon">✨</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+          <div class="tagline-list">
+            <div class="tagline-item">
+              <div>
+                <strong>Cuidado que transforma.</strong>
+                <span>Simples e poderosa. Conecta o ato técnico à dimensão humana da transformação.</span>
+              </div>
+            </div>
+            <div class="tagline-item">
+              <div>
+                <strong>De perto, com cuidado.</strong>
+                <span>Reforça a presença regional e o acolhimento como diferenciais da marca.</span>
+              </div>
+            </div>
+            <div class="tagline-item">
+              <div>
+                <strong>Você cuida de quem ama. A gente cuida de você.</strong>
+                <span>Progressiva e emocional. Conecta o universo familiar ao serviço da clínica.</span>
+              </div>
+            </div>
+            <div class="tagline-item">
+              <div>
+                <strong>Saúde com saber, cuidado com amor.</strong>
+                <span>Integra o próprio nome da marca à promessa central de forma memorável.</span>
+              </div>
+            </div>
+            <div class="tagline-item">
+              <div>
+                <strong>Especialistas em pessoas.</strong>
+                <span>Reposiciona o olhar: antes do procedimento, vem a humanidade.</span>
+              </div>
+            </div>
+            <div class="tagline-item">
+              <div>
+                <strong>Onde o cuidado começa pelo nome.</strong>
+                <span>Evoca o acolhimento individualizado e a atenção ao paciente como pessoa.</span>
+              </div>
+            </div>
+            <div class="tagline-item">
+              <div>
+                <strong>Referência em cuidado. Presença em cada etapa.</strong>
+                <span>Institucional — reforça autoridade técnica e continuidade do acompanhamento.</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 4)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="card" id="card-5">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">05</div>
+        <div class="card-title">
+          Manifesto da Marca
+          <span class="card-subtitle">A declaração de princípios e propósito</span>
+        </div>
+        <span class="card-icon">📣</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+          <p class="manifesto-text">
+            A gente sabe o que é ver alguém que ama sofrendo sem resposta. Conhecemos o peso de uma sala de espera que não tem fim, de um encaminhamento que demora meses e de uma ferida que ninguém consegue resolver. Viemos de perto, vimos de perto — e foi exatamente por isso que decidimos agir.<br><br>
+            A Saúde e Saber nasceu da convicção de que cuidar é mais do que executar um procedimento. É olhar nos olhos. É explicar com paciência. É estar presente no momento mais vulnerável da vida de alguém e dizer: você não está sozinho nisso.<br><br>
+            Acreditamos que todo paciente merece ser tratado com técnica de excelência e humanidade genuína — independente de onde mora, do convênio que tem ou da complexidade do seu caso. Porque a dor não escolhe endereço, e o cuidado também não deveria.<br><br>
+            Somos especialistas em feridas, em dores, em reabilitação — mas antes de tudo, somos especialistas em pessoas. E enquanto houver alguém precisando de cuidado de verdade nessa região, a Saúde e Saber vai estar aqui.<br><br>
+            Com saber. Com cuidado. Com propósito.
+          </p>
+
+          <button class="copy-btn" onclick="copyCard(this, 5)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="card" id="card-6">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">06</div>
+        <div class="card-title">
+          Território Lexical
+          <span class="card-subtitle">O vocabulário intencional da marca</span>
+        </div>
+        <span class="card-icon">🔤</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+
+          <div class="block">
+            <div class="block-label">Vocabulário Central</div>
+            <div class="tag-grid">
+              <span class="tag accent">Cuidado</span>
+              <span class="tag accent">Acolhimento</span>
+              <span class="tag accent">Transformação</span>
+              <span class="tag">Especialista</span>
+              <span class="tag">Presença</span>
+              <span class="tag">Ferida</span>
+              <span class="tag">Reabilitação</span>
+              <span class="tag">Autonomia</span>
+              <span class="tag">Confiança</span>
+              <span class="tag">Humanidade</span>
+              <span class="tag">Técnica</span>
+              <span class="tag accent">Família</span>
+              <span class="tag">Acompanhamento</span>
+              <span class="tag">Resultado</span>
+              <span class="tag accent">Dignidade</span>
+              <span class="tag">Esperança</span>
+              <span class="tag">Dor</span>
+              <span class="tag">Próximo</span>
+              <span class="tag accent">Saber</span>
+              <span class="tag">Equipe</span>
+              <span class="tag">Paciente</span>
+              <span class="tag">Evolução</span>
+              <span class="tag">Protocolo</span>
+              <span class="tag">Vínculo</span>
+              <span class="tag">Dedicação</span>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Expressões de Contexto Regional</div>
+            <div class="tag-grid">
+              <span class="tag">Melhora que vem de perto</span>
+              <span class="tag">Tá difícil, mas tem saída</span>
+              <span class="tag">A gente resolve junto</span>
+              <span class="tag">De casa em casa</span>
+              <span class="tag">Quem indica sabe por quê</span>
+              <span class="tag">Não deixa na mão</span>
+              <span class="tag">Curou de vez</span>
+              <span class="tag">Aqui tem resposta</span>
+              <span class="tag">Do jeito que precisa ser</span>
+              <span class="tag">Profissional de verdade</span>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Expressões Características de Marca</div>
+            <div class="phase-list">
+              <div class="phase"><div class="phase-dot"></div><p class="phase-text">"Aqui, o cuidado começa antes do procedimento"</p></div>
+              <div class="phase"><div class="phase-dot"></div><p class="phase-text">"A evolução do paciente é a nossa maior conquista"</p></div>
+              <div class="phase"><div class="phase-dot"></div><p class="phase-text">"Especialistas em feridas. Apaixonados por pessoas."</p></div>
+              <div class="phase"><div class="phase-dot"></div><p class="phase-text">"Você não precisa ir longe para ser bem cuidado"</p></div>
+              <div class="phase"><div class="phase-dot"></div><p class="phase-text">"Cada curativo conta uma história de superação"</p></div>
+              <div class="phase"><div class="phase-dot"></div><p class="phase-text">"Cuidado técnico com olhar humano — sempre"</p></div>
+              <div class="phase"><div class="phase-dot"></div><p class="phase-text">"A família também faz parte do tratamento"</p></div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Emojis da Marca</div>
+            <div class="emoji-row">🩺 🤝 💚 🏥 ✨ 🙌 💪 🌱</div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 6)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="card" id="card-7">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">07</div>
+        <div class="card-title">
+          Tom e Voz
+          <span class="card-subtitle">Como a marca soa em cada canal</span>
+        </div>
+        <span class="card-icon">🗣️</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+
+          <div class="block">
+            <div class="block-label">A Voz da Saúde e Saber</div>
+            <p>A voz da Saúde e Saber é como a daquela profissional de saúde que você nunca esquece — aquela que te olhou nos olhos, explicou tudo com clareza e fez você sair da consulta com esperança. Ela não usa termos para impressionar, não trata você como número e não some depois do atendimento. É próxima, segura e genuinamente comprometida com a sua melhora.</p>
+            <div class="highlight-box" style="margin-top:14px">
+              <p><strong>Nossa voz:</strong> A profissional de referência que você queria ter sempre por perto.</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="block-label">Características Centrais do Tom</div>
+            <div class="tone-grid">
+              <div class="tone-card">
+                <h4>Acolhedora</h4>
+                <p>Antes de informar, ela acolhe. Reconhece a dor do paciente e da família como legítima, e transmite a mensagem de que aqui há suporte real — sem frieza clínica e sem promessas vazias.</p>
+              </div>
+              <div class="tone-card">
+                <h4>Segura</h4>
+                <p>Fala com autoridade sem arrogância. Sabe o que faz e comunica isso com firmeza. Não demonstra insegurança diante de casos complexos — é exatamente nesses momentos que sua especialização se destaca.</p>
+              </div>
+              <div class="tone-card">
+                <h4>Esperançosa</h4>
+                <p>A marca sempre aponta para a evolução. Mesmo diante de quadros difíceis, o tom não é catastrófico — é de encorajamento. Celebra cada avanço do paciente como uma vitória coletiva.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 7)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="card" id="card-8">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">08</div>
+        <div class="card-title">
+          O Que a Marca Fala
+          <span class="card-subtitle">Temas de autoridade e presença digital</span>
+        </div>
+        <span class="card-icon">📡</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+          <div class="theme-grid">
+            <div class="theme-card">
+              <span class="theme-icon">🩹</span>
+              <h4>Especialistas em feridas e dores</h4>
+              <p>Referência técnica em estomaterapia na região. Educamos o público sobre tipos de feridas, prevenção, sinais de alerta e importância do acompanhamento especializado.</p>
+            </div>
+            <div class="theme-card">
+              <span class="theme-icon">🏥</span>
+              <h4>Saúde pública tem solução</h4>
+              <p>Mostramos que é possível ampliar a capacidade de atendimento público sem abrir mão da qualidade. Dialogamos com gestores sobre modelos de parceria eficientes e responsáveis.</p>
+            </div>
+            <div class="theme-card">
+              <span class="theme-icon">🤝</span>
+              <h4>Cuidar é um ato humano</h4>
+              <p>Combatemos a frieza da saúde tecnicista. Valorizamos o vínculo entre profissional e paciente, mostramos os bastidores do cuidado e humanizamos cada procedimento.</p>
+            </div>
+            <div class="theme-card">
+              <span class="theme-icon">🌱</span>
+              <h4>Autonomia é o objetivo final</h4>
+              <p>Nossa narrativa sempre aponta para a independência do paciente. Falamos de reabilitação, evolução e conquista da autonomia como resultado do cuidado bem feito.</p>
+            </div>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 8)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="card" id="card-9">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">09</div>
+        <div class="card-title">
+          Promessa
+          <span class="card-subtitle">O compromisso da marca com seus pacientes</span>
+        </div>
+        <span class="card-icon">💎</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+          <div class="block">
+            <p class="manifesto-text">
+              A Saúde e Saber promete cuidar de cada paciente como se fosse único — porque é. Nos comprometemos a unir o melhor da técnica em saúde com um atendimento que reconhece a dor, respeita a história e acredita na recuperação de cada pessoa que chega até nós.<br><br>
+              Nossa promessa vai além do procedimento: é estar presente em cada etapa do tratamento, orientar a família, evoluir junto com o paciente e ser a referência de cuidado que a região centro-sul merecia ter.<br><br>
+              Nascemos para transformar o que parecia sem solução em esperança concreta — e não vamos parar enquanto houver alguém precisando de cuidado de verdade.
+            </p>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 9)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 10 -->
+    <div class="card" id="card-10">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-number">10</div>
+        <div class="card-title">
+          Assinaturas Verbais
+          <span class="card-subtitle">Expressões institucionais da marca</span>
+        </div>
+        <span class="card-icon">🖊️</span>
+        <svg class="card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+          <div class="block">
+            <p style="font-size:13.5px;color:var(--gray-text);margin-bottom:16px;">Expressões institucionais que acompanham o nome da marca em materiais gráficos, redes sociais, propostas comerciais e comunicações institucionais.</p>
+            <table class="sig-table">
+              <tr>
+                <td>Variação 1</td>
+                <td>Saúde e Saber — Cuidado Especializado em Enfermagem</td>
+              </tr>
+              <tr>
+                <td>Variação 2</td>
+                <td>Saúde e Saber — Onde a técnica encontra o cuidado humano</td>
+              </tr>
+              <tr>
+                <td>Variação 3</td>
+                <td>Saúde e Saber — Referência em feridas e cuidados da região</td>
+              </tr>
+              <tr>
+                <td>Variação 4</td>
+                <td>Saúde e Saber — Especialistas em pessoas, referência em saúde</td>
+              </tr>
+            </table>
+          </div>
+
+          <button class="copy-btn" onclick="copyCard(this, 10)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar conteúdo
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /accordion -->
+</main>
+
+<footer>
+  <p>Identidade Verbal — <span>Saúde e Saber</span> · Branding estratégico para o segmento de saúde</p>
+</footer>
+
+<script>
+  // ── ACCORDION ──
+  function toggleCard(header) {
+    const card = header.closest('.card');
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+  }
+
+  // ── COPY CONTENT ──
+  const cardTexts = {
+    1: `DECLARAÇÃO DE POSICIONAMENTO — SAÚDE E SABER
+
+Narrativa Estratégica:
+A Saúde e Saber entende de pessoas. Nasceu da união de quem já viveu de perto o sofrimento de um paciente sem cuidado e decidiu que isso poderia ser diferente. É daqui, conhece as famílias da região e sabe o que significa esperar por um atendimento que nunca chega. Por isso escolheu estar presente onde a necessidade é real — com técnica, com presença e com humanidade.
+
+Essência de Marca:
+A Saúde e Saber é a parceira de cuidado que transforma sofrimento em esperança, unindo conhecimento técnico e acolhimento humano para devolver autonomia e dignidade a cada paciente.
+
+Promessa Central:
+Atuar ativamente para que nenhum paciente enfrente sua dor sem suporte especializado, e nenhuma família precise buscar longe o cuidado que merece ter perto.
+
+Síntese: "Cuida de pessoas. Transforma vidas."`,
+
+    2: `EIXO NARRATIVO — SAÚDE E SABER
+
+Narrativa Central:
+Por trás de cada curativo existe uma pessoa que luta todos os dias para recuperar sua independência — e que merece ser tratada com atenção, técnica e respeito.
+
+Eixo 1 — Pacientes e Familiares:
+A conversa não é sobre o ferimento. É sobre voltar a andar, a trabalhar, a abraçar quem se ama. O foco sai de "preciso tratar essa ferida" para "não posso perder minha autonomia". Cuidar é dar continuidade à vida.
+
+Eixo 2 — Gestores Públicos Municipais:
+Cada paciente sem atendimento adequado é uma falha sistêmica que poderia ser evitada. A Saúde e Saber fala a língua da gestão: resultados, responsabilidade e impacto real na saúde da população. Terceirizar com qualidade é também um ato de cuidado público.
+
+Eixo 3 — Profissionais de Saúde:
+Trabalhar com propósito é diferente de apenas cumprir protocolo. A Saúde e Saber acredita que o profissional que cuida também precisa ser cuidado — com um ambiente que valoriza o conhecimento, a ética e a vocação de servir.`,
+
+    3: `STORYTELLING — SAÚDE E SABER
+
+Fase 1 — A dor da vulnerabilidade:
+O paciente chega exausto. A família está desorientada. As feridas cronificaram, as dores não passam e o sistema público já não deu conta. Há um sentimento de impotência e abandono. "Será que existe alguém especializado nisso aqui perto? Será que meu familiar vai melhorar?"
+
+Fase 2 — O encontro:
+É nesse momento que a Saúde e Saber aparece — por indicação, por uma busca no celular ou por uma conversa com outro profissional de saúde. O que chama atenção não é só o serviço: é a forma como comunicam. Uma clínica que fala de gente, não de procedimentos.
+
+Fase 3 — A consideração:
+O paciente ou familiar entra em contato e percebe que do outro lado há escuta real. O atendimento não é frio nem burocrático. Sente que está sendo visto como pessoa, não como prontuário. Decide dar um voto de confiança e iniciar o acompanhamento.
+
+Fase 4 — Defensor e promotor:
+Com o tempo, a evolução clínica fala por si. O paciente recupera autonomia, a família respira aliviada. A experiência foi tão significativa que virou história — contada para vizinhos, compartilhada em grupos, indicada ao médico de família. A Saúde e Saber se torna referência não por marketing, mas por transformação real.`,
+
+    4: `TAGLINES — SAÚDE E SABER
+
+1. Cuidado que transforma.
+Simples e poderosa. Conecta o ato técnico à dimensão humana da transformação.
+
+2. De perto, com cuidado.
+Reforça a presença regional e o acolhimento como diferenciais da marca.
+
+3. Você cuida de quem ama. A gente cuida de você.
+Progressiva e emocional. Conecta o universo familiar ao serviço da clínica.
+
+4. Saúde com saber, cuidado com amor.
+Integra o próprio nome da marca à promessa central de forma memorável.
+
+5. Especialistas em pessoas.
+Reposiciona o olhar: antes do procedimento, vem a humanidade.
+
+6. Onde o cuidado começa pelo nome.
+Evoca o acolhimento individualizado e a atenção ao paciente como pessoa.
+
+7. Referência em cuidado. Presença em cada etapa.
+Institucional — reforça autoridade técnica e continuidade do acompanhamento.`,
+
+    5: `MANIFESTO — SAÚDE E SABER
+
+A gente sabe o que é ver alguém que ama sofrendo sem resposta. Conhecemos o peso de uma sala de espera que não tem fim, de um encaminhamento que demora meses e de uma ferida que ninguém consegue resolver. Viemos de perto, vimos de perto — e foi exatamente por isso que decidimos agir.
+
+A Saúde e Saber nasceu da convicção de que cuidar é mais do que executar um procedimento. É olhar nos olhos. É explicar com paciência. É estar presente no momento mais vulnerável da vida de alguém e dizer: você não está sozinho nisso.
+
+Acreditamos que todo paciente merece ser tratado com técnica de excelência e humanidade genuína — independente de onde mora, do convênio que tem ou da complexidade do seu caso. Porque a dor não escolhe endereço, e o cuidado também não deveria.
+
+Somos especialistas em feridas, em dores, em reabilitação — mas antes de tudo, somos especialistas em pessoas. E enquanto houver alguém precisando de cuidado de verdade nessa região, a Saúde e Saber vai estar aqui.
+
+Com saber. Com cuidado. Com propósito.`,
+
+    6: `TERRITÓRIO LEXICAL — SAÚDE E SABER
+
+Vocabulário Central:
+Cuidado · Acolhimento · Transformação · Especialista · Presença · Ferida · Reabilitação · Autonomia · Confiança · Humanidade · Técnica · Família · Acompanhamento · Resultado · Dignidade · Esperança · Dor · Próximo · Saber · Equipe · Paciente · Evolução · Protocolo · Vínculo · Dedicação
+
+Expressões de Contexto Regional:
+"Melhora que vem de perto" · "Tá difícil, mas tem saída" · "A gente resolve junto" · "De casa em casa" · "Quem indica sabe por quê" · "Não deixa na mão" · "Curou de vez" · "Aqui tem resposta" · "Do jeito que precisa ser" · "Profissional de verdade"
+
+Expressões Características de Marca:
+- "Aqui, o cuidado começa antes do procedimento"
+- "A evolução do paciente é a nossa maior conquista"
+- "Especialistas em feridas. Apaixonados por pessoas."
+- "Você não precisa ir longe para ser bem cuidado"
+- "Cada curativo conta uma história de superação"
+- "Cuidado técnico com olhar humano — sempre"
+- "A família também faz parte do tratamento"
+
+Emojis da Marca: 🩺 🤝 💚 🏥 ✨ 🙌 💪 🌱`,
+
+    7: `TOM E VOZ — SAÚDE E SABER
+
+A Voz da Saúde e Saber:
+A voz da Saúde e Saber é como a daquela profissional de saúde que você nunca esquece — aquela que te olhou nos olhos, explicou tudo com clareza e fez você sair da consulta com esperança. Ela não usa termos para impressionar, não trata você como número e não some depois do atendimento. É próxima, segura e genuinamente comprometida com a sua melhora.
+
+Nossa Voz: A profissional de referência que você queria ter sempre por perto.
+
+Características Centrais do Tom:
+
+Acolhedora:
+Antes de informar, ela acolhe. Reconhece a dor do paciente e da família como legítima, e transmite a mensagem de que aqui há suporte real — sem frieza clínica e sem promessas vazias.
+
+Segura:
+Fala com autoridade sem arrogância. Sabe o que faz e comunica isso com firmeza. Não demonstra insegurança diante de casos complexos — é exatamente nesses momentos que sua especialização se destaca.
+
+Esperançosa:
+A marca sempre aponta para a evolução. Mesmo diante de quadros difíceis, o tom não é catastrófico — é de encorajamento. Celebra cada avanço do paciente como uma vitória coletiva.`,
+
+    8: `O QUE A MARCA FALA — SAÚDE E SABER
+
+Temas de Autoridade:
+
+🩹 Especialistas em feridas e dores:
+Referência técnica em estomaterapia na região. Educamos o público sobre tipos de feridas, prevenção, sinais de alerta e importância do acompanhamento especializado.
+
+🏥 Saúde pública tem solução:
+Mostramos que é possível ampliar a capacidade de atendimento público sem abrir mão da qualidade. Dialogamos com gestores sobre modelos de parceria eficientes e responsáveis.
+
+🤝 Cuidar é um ato humano:
+Combatemos a frieza da saúde tecnicista. Valorizamos o vínculo entre profissional e paciente, mostramos os bastidores do cuidado e humanizamos cada procedimento.
+
+🌱 Autonomia é o objetivo final:
+Nossa narrativa sempre aponta para a independência do paciente. Falamos de reabilitação, evolução e conquista da autonomia como resultado do cuidado bem feito.`,
+
+    9: `PROMESSA — SAÚDE E SABER
+
+A Saúde e Saber promete cuidar de cada paciente como se fosse único — porque é. Nos comprometemos a unir o melhor da técnica em saúde com um atendimento que reconhece a dor, respeita a história e acredita na recuperação de cada pessoa que chega até nós.
+
+Nossa promessa vai além do procedimento: é estar presente em cada etapa do tratamento, orientar a família, evoluir junto com o paciente e ser a referência de cuidado que a região centro-sul merecia ter.
+
+Nascemos para transformar o que parecia sem solução em esperança concreta — e não vamos parar enquanto houver alguém precisando de cuidado de verdade.`,
+
+    10: `ASSINATURAS VERBAIS — SAÚDE E SABER
+
+Variação 1: Saúde e Saber — Cuidado Especializado em Enfermagem
+Variação 2: Saúde e Saber — Onde a técnica encontra o cuidado humano
+Variação 3: Saúde e Saber — Referência em feridas e cuidados da região
+Variação 4: Saúde e Saber — Especialistas em pessoas, referência em saúde`
+  };
+
+  function copyCard(btn, cardNum) {
+    const text = cardTexts[cardNum];
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copiado!`;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copiar conteúdo`;
+      }, 2500);
+    });
+  }
+
+  // ── NAV ACTIVE STATE ON SCROLL ──
+  const cards = document.querySelectorAll('.card');
+  const pills = document.querySelectorAll('.nav-pill');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        pills.forEach(p => {
+          p.classList.toggle('active', p.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  cards.forEach(c => observer.observe(c));
+</script>
+</body>
+</html>
