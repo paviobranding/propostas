@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Briefing BAIELL BUSH</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #f0f0f0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .header p {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: #888;
+      letter-spacing: 1px;
+    }
+
+    .progress-bar-wrapper {
+      background: #1a1a1a;
+      border-radius: 8px;
+      height: 6px;
+      margin-bottom: 48px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #a855f7, #ec4899);
+      border-radius: 8px;
+      transition: width 0.4s ease;
+      width: 25%;
+    }
+
+    .step {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .step.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-label {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #a855f7;
+      margin-bottom: 8px;
+    }
+
+    .step-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.88rem;
+      color: #ccc;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    label span.num {
+      color: #a855f7;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      background: #141414;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      color: #f0f0f0;
+      font-size: 0.95rem;
+      padding: 14px 16px;
+      transition: border 0.3s;
+      outline: none;
+      resize: vertical;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #a855f7;
+    }
+
+    textarea { min-height: 90px; }
+
+    select option { background: #1a1a1a; }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-group label,
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 12px 16px;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      transition: border 0.3s, background 0.3s;
+      font-size: 0.92rem;
+      color: #ccc;
+    }
+
+    .radio-group label:hover,
+    .checkbox-group label:hover {
+      border-color: #a855f7;
+      background: #1a1a1a;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      accent-color: #a855f7;
+      width: 16px;
+      height: 16px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      gap: 16px;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      letter-spacing: 1px;
+    }
+
+    .btn-back {
+      background: transparent;
+      border: 1px solid #333;
+      color: #888;
+    }
+
+    .btn-back:hover { border-color: #666; color: #ccc; }
+
+    .btn-next {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: #fff;
+      flex: 1;
+      max-width: 240px;
+    }
+
+    .btn-next:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: #fff;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    .btn-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .step-counter {
+      font-size: 0.8rem;
+      color: #555;
+      letter-spacing: 1px;
+    }
+
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 80px 20px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .success-screen h2 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .success-screen p {
+      color: #888;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .success-icon {
+      font-size: 3.5rem;
+      margin-bottom: 24px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #1e1e1e;
+      margin: 8px 0 24px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>BAIELL BUSH</h1>
+    <p>Briefing de Identidade Visual · Música Eletrônica</p>
+  </div>
+
+  <div class="progress-bar-wrapper">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <form id="briefingForm" action="https://formspree.io/f/xqeojlrj" method="POST">
+
+    <!-- ==============================
+         ETAPA 1 — IDENTIDADE & CONTEXTO
+    =============================== -->
+    <div class="step active" id="step1">
+      <div class="step-label">Etapa 1 de 4</div>
+      <div class="step-title">Identidade & Contexto</div>
+      <hr class="divider"/>
+
+      <div class="form-group">
+        <label><span class="num">01.</span> Qual é o seu nome artístico ou nome do projeto?</label>
+        <input type="text" name="q01_nome_artistico" placeholder="Ex: BAIELL BUSH" required/>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">02.</span> Qual é o seu nome completo e e-mail de contato?</label>
+        <input type="text" name="q02_nome_completo" placeholder="Nome completo" style="margin-bottom:10px"/>
+        <input type="email" name="q02_email" placeholder="seu@email.com" required/>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">03.</span> Em qual cidade/país você está baseado?</label>
+        <input type="text" name="q03_cidade_pais" placeholder="Ex: São Paulo, Brasil"/>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">04.</span> Há quanto tempo você atua como DJ/produtor?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q04_tempo_atuacao" value="Menos de 1 ano"/> Menos de 1 ano</label>
+          <label><input type="radio" name="q04_tempo_atuacao" value="1 a 3 anos"/> 1 a 3 anos</label>
+          <label><input type="radio" name="q04_tempo_atuacao" value="3 a 7 anos"/> 3 a 7 anos</label>
+          <label><input type="radio" name="q04_tempo_atuacao" value="Mais de 7 anos"/> Mais de 7 anos</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">05.</span> Como você descreveria sua música em até 3 palavras?</label>
+        <input type="text" name="q05_3_palavras" placeholder="Ex: Dark, Hypnotic, Underground"/>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">06.</span> Qual é o principal subgênero da sua música eletrônica?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q06_subgenero" value="Techno"/> Techno</label>
+          <label><input type="radio" name="q06_subgenero" value="Tech House"/> Tech House</label>
+          <label><input type="radio" name="q06_subgenero" value="Minimal / Deep Tech"/> Minimal / Deep Tech</label>
+          <label><input type="radio" name="q06_subgenero" value="Melodic Techno / House"/> Melodic Techno / House</label>
+          <label><input type="radio" name="q06_subgenero" value="Afro House / Organic"/> Afro House / Organic</label>
+          <label><input type="radio" name="q06_subgenero" value="Industrial / EBM"/> Industrial / EBM</label>
+          <label><input type="radio" name="q06_subgenero" value="Outro"/> Outro (descreva abaixo)</label>
+        </div>
+        <textarea name="q06_subgenero_outro" placeholder="Caso outro, descreva..." style="margin-top:10px"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">07.</span> Você já possui alguma identidade visual atual (logo, cores, fontes)? Se sim, descreva.</label>
+        <textarea name="q07_identidade_atual" placeholder="Descreva ou escreva 'Não possuo'"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">08.</span> Qual é o principal objetivo deste projeto de branding?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q08_objetivo" value="Criar identidade do zero"/> Criar identidade do zero</label>
+          <label><input type="radio" name="q08_objetivo" value="Reposicionar/atualizar a marca"/> Reposicionar / atualizar marca existente</label>
+          <label><input type="radio" name="q08_objetivo" value="Lançamento de um novo projeto"/> Lançamento de um novo projeto</label>
+          <label><input type="radio" name="q08_objetivo" value="Expandir para mercado internacional"/> Expandir para mercado internacional</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">09.</span> Quais plataformas ou materiais serão prioritários para a identidade visual?</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="q09_plataformas" value="Instagram/Redes Sociais"/> Instagram / Redes Sociais</label>
+          <label><input type="checkbox" name="q09_plataformas" value="SoundCloud/Beatport"/> SoundCloud / Beatport</label>
+          <label><input type="checkbox" name="q09_plataformas" value="Flyers e Cartazes"/> Flyers e Cartazes de Evento</label>
+          <label><input type="checkbox" name="q09_plataformas" value="Capas de Release"/> Capas de Release / EP / Álbum</label>
+          <label><input type="checkbox" name="q09_plataformas" value="Merch / Vestuário"/> Merch / Vestuário</label>
+          <label><input type="checkbox" name="q09_plataformas" value="Site / EPK"/> Site / EPK</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">10.</span> Qual é o prazo ideal para você receber as primeiras propostas criativas?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q10_prazo" value="Urgente (até 1 semana)"/> Urgente (até 1 semana)</label>
+          <label><input type="radio" name="q10_prazo" value="2 a 3 semanas"/> 2 a 3 semanas</label>
+          <label><input type="radio" name="q10_prazo" value="1 mês"/> 1 mês</label>
+          <label><input type="radio" name="q10_prazo" value="Sem prazo definido"/> Sem prazo definido</label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <span class="step-counter">1 / 4</span>
+        <button type="button" class="btn btn-next" onclick="goToStep(2)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- ==============================
+         ETAPA 2 — PERSONALIDADE & ESTÉTICA
+    =============================== -->
+    <div class="step" id="step2">
+      <div class="step-label">Etapa 2 de 4</div>
+      <div class="step-title">Personalidade & Estética Visual</div>
+      <hr class="divider"/>
+
+      <div class="form-group">
+        <label><span class="num">11.</span> Se sua marca fosse uma pessoa, como ela seria? Descreva a personalidade.</label>
+        <textarea name="q11_personalidade" placeholder="Ex: Misteriosa, intensa, introspectiva, sem concessões..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">12.</span> Escolha até 3 adjetivos que melhor descrevem o estilo visual que você busca.</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="q12_adjetivos" value="Dark / Sombrio"/> Dark / Sombrio</label>
+          <label><input type="checkbox" name="q12_adjetivos" value="Minimalista"/> Minimalista</label>
+          <label><input type="checkbox" name="q12_adjetivos" value="Brutalist"/> Brutalist / Cru</label>
+          <label><input type="checkbox" name="q12_adjetivos" value="Futurista"/> Futurista / Tech</label>
+          <label><input type="checkbox" name="q12_adjetivos" value="Orgânico / Textural"/> Orgânico / Textural</label>
+          <label><input type="checkbox" name="q12_adjetivos" value="Psicodélico"/> Psicodélico / Abstrato</label>
+          <label><input type="checkbox" name="q12_adjetivos" value="Elegante / Premium"/> Elegante / Premium</label>
+          <label><input type="checkbox" name="q12_adjetivos" value="Agressivo / Industrial"/> Agressivo / Industrial</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">13.</span> Qual paleta de cores você sente que representa sua música?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q13_cores" value="Preto e branco puro"/> Preto e branco puro</label>
+          <label><input type="radio" name="q13_cores" value="Tons escuros com neon"/> Tons escuros com neon (roxo, ciano, vermelho)</label>
+          <label><input type="radio" name="q13_cores" value="Tons terrosos e orgânicos"/> Tons terrosos e orgânicos</label>
+          <label><input type="radio" name="q13_cores" value="Metálico / prata / cromado"/> Metálico / prata / cromado</label>
+          <label><input type="radio" name="q13_cores" value="Gradientes e cores vivas"/> Gradientes e cores vivas</label>
+          <label><input type="radio" name="q13_cores" value="Outro"/> Outro (descreva abaixo)</label>
+        </div>
+        <textarea name="q13_cores_outro" placeholder="Descreva cores específicas se quiser..." style="margin-top:10px"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">14.</span> Cite 2 ou 3 artistas/DJs cujo visual você admira (não precisa ser seu gênero).</label>
+        <textarea name="q14_referencias_artistas" placeholder="Ex: SPFDJ, Objekt, Paula Temple, Charlotte de Witte..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">15.</span> Cite marcas fora da música que você admira visualmente.</label>
+        <textarea name="q15_referencias_marcas" placeholder="Ex: Nike, Balenciaga, Supreme, Apple, Rick Owens..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">16.</span> Como você se posiciona em relação ao underground vs. mainstream?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q16_posicionamento" value="100% underground, sem concessões"/> 100% underground, sem concessões</label>
+          <label><input type="radio" name="q16_posicionamento" value="Underground com alcance mais amplo"/> Underground com alcance mais amplo</label>
+          <label><input type="radio" name="q16_posicionamento" value="Equilíbrio entre os dois"/> Equilíbrio entre os dois</label>
+          <label><input type="radio" name="q16_posicionamento" value="Mainstream com identidade forte"/> Mainstream com identidade forte</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">17.</span> Qual a relação da sua música com o corpo e o dancefloor?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q17_dancefloor" value="Música para dançar sem parar"/> Música para dançar sem parar</label>
+          <label><input type="radio" name="q17_dancefloor" value="Transe hipnótico e meditativo"/> Transe hipnótico e meditativo</label>
+          <label><input type="radio" name="q17_dancefloor" value="Experiência emocional e introspectiva"/> Experiência emocional e introspectiva</label>
+          <label><input type="radio" name="q17_dancefloor" value="Caos e adrenalina"/> Caos e adrenalina</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">18.</span> Existe algum universo visual (cinema, arte, arquitetura, natureza) que conecta com sua música?</label>
+        <textarea name="q18_universo_visual" placeholder="Ex: Distopia urbana, floresta noturna, brutalism soviético..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">19.</span> Você prefere uma identidade atemporal ou que dialogue com tendências visuais atuais?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q19_atemporal_tendencia" value="Atemporal, clássica"/> Atemporal, clássica — que dure décadas</label>
+          <label><input type="radio" name="q19_atemporal_tendencia" value="Tendência atual"/> Tendência atual — relevante agora</label>
+          <label><input type="radio" name="q19_atemporal_tendencia" value="Mistura dos dois"/> Mistura dos dois</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">20.</span> Existe alguma estética visual que você definitivamente NÃO quer para sua marca?</label>
+        <textarea name="q20_nao_quero" placeholder="Ex: Não quero nada colorido, sem referências clichês de EDM..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-back" onclick="goToStep(1)">← Voltar</button>
+        <span class="step-counter">2 / 4</span>
+        <button type="button" class="btn btn-next" onclick="goToStep(3)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- ==============================
+         ETAPA 3 — PÚBLICO & MERCADO
+    =============================== -->
+    <div class="step" id="step3">
+      <div class="step-label">Etapa 3 de 4</div>
+      <div class="step-title">Público & Mercado</div>
+      <hr class="divider"/>
+
+      <div class="form-group">
+        <label><span class="num">21.</span> Quem é o seu público principal? Descreva o perfil.</label>
+        <textarea name="q21_publico" placeholder="Ex: Jovens de 22-35 anos, frequentadores de clubes underground, consumidores de cultura alternativa..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">22.</span> Em qual tipo de ambiente seu público te consome?</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="q22_ambiente" value="Clubes noturnos"/> Clubes noturnos</label>
+          <label><input type="checkbox" name="q22_ambiente" value="Festivais"/> Festivais ao ar livre</label>
+          <label><input type="checkbox" name="q22_ambiente" value="Raves underground"/> Raves underground / espaços alternativos</label>
+          <label><input type="checkbox" name="q22_ambiente" value="Streamings (SoundCloud, Mixcloud)"/> Streamings (SoundCloud, Mixcloud)</label>
+          <label><input type="checkbox" name="q22_ambiente" value="Lives e transmissões online"/> Lives e transmissões online</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">23.</span> Qual é o mercado geográfico que você quer alcançar?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q23_mercado_geo" value="Local (minha cidade/estado)"/> Local (minha cidade / estado)</label>
+          <label><input type="radio" name="q23_mercado_geo" value="Nacional"/> Nacional</label>
+          <label><input type="radio" name="q23_mercado_geo" value="América Latina"/> América Latina</label>
+          <label><input type="radio" name="q23_mercado_geo" value="Europa"/> Europa</label>
+          <label><input type="radio" name="q23_mercado_geo" value="Global"/> Global</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">24.</span> Você está ligado a algum coletivo, label ou residência? Se sim, qual?</label>
+        <input type="text" name="q24_coletivo_label" placeholder="Nome do coletivo, label ou 'Independente'"/>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">25.</span> Quais são seus principais concorrentes diretos no seu mercado local?</label>
+        <textarea name="q25_concorrentes" placeholder="DJs ou projetos que atuam no mesmo espaço que você..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">26.</span> O que você oferece que nenhum concorrente oferece? Qual é o seu diferencial?</label>
+        <textarea name="q26_diferencial" placeholder="Seja honesto e específico..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">27.</span> Como seu público te descobre hoje? (principais canais)</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="q27_canais" value="Instagram"/> Instagram</label>
+          <label><input type="checkbox" name="q27_canais" value="SoundCloud"/> SoundCloud</label>
+          <label><input type="checkbox" name="q27_canais" value="Indicação boca a boca"/> Indicação / boca a boca</label>
+          <label><input type="checkbox" name="q27_canais" value="Playlists e curadoria"/> Playlists e curadoria</label>
+          <label><input type="checkbox" name="q27_canais" value="YouTube"/> YouTube</label>
+          <label><input type="checkbox" name="q27_canais" value="RA (Resident Advisor)"/> Resident Advisor</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">28.</span> Qual sensação você quer que as pessoas tenham ao ver sua marca pela primeira vez?</label>
+        <textarea name="q28_primeira_impressao" placeholder="Ex: Curiosidade intensa, respeito imediato, mistério, pertencimento..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">29.</span> Em qual estágio de carreira você se encontra?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q29_estagio" value="Iniciando agora"/> Iniciando agora</label>
+          <label><input type="radio" name="q29_estagio" value="Construindo nome localmente"/> Construindo nome localmente</label>
+          <label><input type="radio" name="q29_estagio" value="Reconhecido regionalmente"/> Reconhecido regionalmente</label>
+          <label><input type="radio" name="q29_estagio" value="Atuando em nível nacional"/> Atuando em nível nacional</label>
+          <label><input type="radio" name="q29_estagio" value="Carreira internacional"/> Carreira internacional</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">30.</span> Existe alguma parceria, patrocínio ou colaboração prevista que impacta o branding?</label>
+        <textarea name="q30_parcerias" placeholder="Ex: Parceria com label XYZ, residência em clube ABC..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-back" onclick="goToStep(2)">← Voltar</button>
+        <span class="step-counter">3 / 4</span>
+        <button type="button" class="btn btn-next" onclick="goToStep(4)">Próximo →</button>
+      </div>
+    </div>
+
+    <!-- ==============================
+         ETAPA 4 — ENTREGÁVEIS & VISÃO
+    =============================== -->
+    <div class="step" id="step4">
+      <div class="step-label">Etapa 4 de 4</div>
+      <div class="step-title">Entregáveis & Visão de Futuro</div>
+      <hr class="divider"/>
+
+      <div class="form-group">
+        <label><span class="num">31.</span> Quais entregáveis você precisa neste projeto?</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="q31_entregaveis" value="Logotipo principal"/> Logotipo principal</label>
+          <label><input type="checkbox" name="q31_entregaveis" value="Variações do logo"/> Variações do logo (horizontal, ícone, etc.)</label>
+          <label><input type="checkbox" name="q31_entregaveis" value="Paleta de cores oficial"/> Paleta de cores oficial</label>
+          <label><input type="checkbox" name="q31_entregaveis" value="Tipografia da marca"/> Tipografia da marca</label>
+          <label><input type="checkbox" name="q31_entregaveis" value="Capas de release"/> Capas de release / EP / Álbum</label>
+          <label><input type="checkbox" name="q31_entregaveis" value="Templates para redes sociais"/> Templates para redes sociais</label>
+          <label><input type="checkbox" name="q31_entregaveis" value="Flyers de evento"/> Flyers de evento</label>
+          <label><input type="checkbox" name="q31_entregaveis" value="Manual de identidade visual"/> Manual de identidade visual (Brand Book)</label>
+          <label><input type="checkbox" name="q31_entregaveis" value="Merch / estampas"/> Merch / estampas</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">32.</span> Onde e como você imagina sua marca sendo usada em 3 anos?</label>
+        <textarea name="q32_visao_3anos" placeholder="Ex: Cartazes em clubes europeus, merch com distribuição global, releases em labels de prestígio..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">33.</span> Qual é o nome de um artista que, em termos de trajetória (não estilo), você admira e quer se espelhar?</label>
+        <input type="text" name="q33_artista_referencia_trajetoria" placeholder="Ex: Moderat, Peggy Gou, DJ Shadow..."/>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">34.</span> Você tem alguma frase, manifesto ou conceito que define o seu projeto artisticamente?</label>
+        <textarea name="q34_manifesto" placeholder="Pode ser uma frase curta, uma ideia, uma filosofia..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">35.</span> Qual é a história por trás do seu nome artístico? De onde veio?</label>
+        <textarea name="q35_historia_nome" placeholder="Conte a origem, o significado ou o momento em que surgiu..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">36.</span> Existe algum símbolo, ícone ou elemento visual que você quer que faça parte da identidade?</label>
+        <textarea name="q36_simbolos" placeholder="Ex: Cruz, olho, glitch, frequência sonora, animais, elementos da natureza..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">37.</span> Qual é o seu orçamento aproximado para este projeto de branding?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="q37_orcamento" value="Até R$500"/> Até R$ 500</label>
+          <label><input type="radio" name="q37_orcamento" value="R$500 a R$1.500"/> R$ 500 a R$ 1.500</label>
+          <label><input type="radio" name="q37_orcamento" value="R$1.500 a R$3.000"/> R$ 1.500 a R$ 3.000</label>
+          <label><input type="radio" name="q37_orcamento" value="R$3.000 a R$7.000"/> R$ 3.000 a R$ 7.000</label>
+          <label><input type="radio" name="q37_orcamento" value="Acima de R$7.000"/> Acima de R$ 7.000</label>
+          <label><input type="radio" name="q37_orcamento" value="Prefiro não informar"/> Prefiro não informar</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">38.</span> Você já tem alguma referência visual salva (Pinterest, Instagram, pastas)? Se sim, cole os links ou descreva.</label>
+        <textarea name="q38_referencias_salvas" placeholder="Cole links ou descreva imagens de referência que você já tem..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">39.</span> Existe alguma restrição técnica ou cultural que devemos considerar no projeto?</label>
+        <textarea name="q39_restricoes" placeholder="Ex: Não usar determinadas cores por questões culturais, não usar determinados símbolos..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><span class="num">40.</span> Deixe um recado livre para o time criativo. O que mais você quer que saibamos?</label>
+        <textarea name="q40_recado_livre" placeholder="Espaço livre para você dizer tudo que não foi perguntado..." style="min-height:120px"></textarea>
+      </div>
+
+      <!-- Campo oculto para identificar o formulário -->
+      <input type="hidden" name="_subject" value="Novo Briefing BAIELL BUSH"/>
+      <input type="hidden" name="_next" value="obrigado.html"/>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-back" onclick="goToStep(3)">← Voltar</button>
+        <span class="step-counter">4 / 4</span>
+        <button type="submit" class="btn btn-submit">Enviar Briefing ✦</button>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- Tela de sucesso (fallback visual se _next não for usado) -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✦</div>
+    <h2>Briefing Enviado!</h2>
+    <p>Recebemos suas informações com sucesso.<br/>Em breve o time criativo entrará em contato.</p>
+  </div>
+
+</div>
+
+<script>
+  const totalSteps = 4;
+
+  function goToStep(step) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + step).classList.add('active');
+    const pct = (step / totalSteps) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Intercepta o submit para mostrar tela de sucesso (opcional)
+  document.getElementById('briefingForm').addEventListener('submit', function(e) {
+    // Deixe o Formspree processar normalmente
+    // Se quiser tela local de sucesso, descomente abaixo e comente o _next no input hidden:
+    // e.preventDefault();
+    // this.style.display = 'none';
+    // document.getElementById('successScreen').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
