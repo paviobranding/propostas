@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relatório Audiência — Neval Sorvetes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #121317;
+      color: #e8e8e8;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid #2a2a2e;
+      padding: 32px 48px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header-left .studio {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .header-left h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-left h1 span.accent { color: #D8382D; }
+
+    .header-right { text-align: right; }
+
+    .header-right .pilar-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .header-right .pilar-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #D8382D;
+    }
+
+    .header-right .date {
+      font-size: 12px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #2a2a2e;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .cards-grid.two-col {
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    }
+
+    .cards-grid.full { grid-template-columns: 1fr; }
+
+    .card {
+      background: #121317;
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: #3a3a3e; }
+
+    .card.accent-top { border-top: 3px solid #D8382D; }
+
+    .card-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #999;
+    }
+
+    .card .big-number {
+      font-size: 36px;
+      font-weight: 800;
+      color: #D8382D;
+      line-height: 1.1;
+      margin: 8px 0 4px;
+    }
+
+    .card .big-label {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* ── TABELAS ── */
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    thead tr { border-bottom: 1px solid #D8382D; }
+
+    thead th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #D8382D;
+      font-weight: 600;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #1e1e22;
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover { background: #18181c; }
+
+    tbody td {
+      padding: 11px 14px;
+      color: #ccc;
+      vertical-align: top;
+    }
+
+    tbody td:first-child { color: #fff; font-weight: 500; }
+
+    td .badge {
+      display: inline-block;
+      background: rgba(216,56,45,0.15);
+      color: #D8382D;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    td .badge-blue {
+      display: inline-block;
+      background: rgba(69,123,157,0.15);
+      color: #6aafcc;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    td .badge-green {
+      display: inline-block;
+      background: rgba(42,157,143,0.15);
+      color: #4cc9bd;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── DOBRAS (DETAILS) ── */
+    details {
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    details[open] { border-color: #3a3a3e; }
+
+    summary {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: #e8e8e8;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: '+';
+      font-size: 20px;
+      color: #D8382D;
+      font-weight: 300;
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::after { content: '−'; }
+
+    summary .summary-icon { margin-right: 8px; }
+
+    .details-body {
+      padding: 0 20px 20px;
+      font-size: 14px;
+      color: #999;
+    }
+
+    .details-body p { margin-bottom: 10px; }
+
+    /* ── ALERTA / INSIGHT ── */
+    .insight {
+      background: rgba(216,56,45,0.07);
+      border-left: 3px solid #D8382D;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: #ccc;
+    }
+
+    .insight strong { color: #D8382D; }
+
+    /* ── TAG ── */
+    .tag {
+      display: inline-block;
+      background: #1e1e22;
+      border: 1px solid #2a2a2e;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: #888;
+      margin: 4px 4px 4px 0;
+    }
+
+    /* ── OBJETIVOS ROW ── */
+    .objetivo-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #1e1e22;
+    }
+
+    .objetivo-row:last-child { border-bottom: none; }
+
+    .obj-horizon {
+      min-width: 110px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #D8382D;
+      font-weight: 700;
+      padding-top: 2px;
+    }
+
+    .obj-text {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    /* ── PERFIL CARDS ── */
+    .perfil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .perfil-grid { grid-template-columns: 1fr; }
+    }
+
+    .perfil-card {
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .perfil-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #2a2a2e;
+    }
+
+    .perfil-header.b2b { background: rgba(216,56,45,0.08); border-top: 3px solid #D8382D; }
+    .perfil-header.b2c { background: rgba(69,123,157,0.08); border-top: 3px solid #6aafcc; }
+
+    .perfil-type {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .perfil-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .perfil-desc {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .perfil-body { padding: 0; }
+
+    .perfil-row {
+      display: flex;
+      gap: 12px;
+      padding: 10px 20px;
+      border-bottom: 1px solid #1e1e22;
+      font-size: 13px;
+      align-items: flex-start;
+    }
+
+    .perfil-row:last-child { border-bottom: none; }
+
+    .perfil-key {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #555;
+      min-width: 100px;
+      padding-top: 1px;
+    }
+
+    .perfil-val { color: #ccc; flex: 1; line-height: 1.5; }
+
+    /* ── RISK CARD ── */
+    .risk-card {
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+
+    .risk-card:hover { border-color: #D8382D44; }
+
+    .risk-number {
+      min-width: 28px;
+      height: 28px;
+      background: rgba(216,56,45,0.12);
+      color: #D8382D;
+      font-weight: 800;
+      font-size: 13px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .risk-content h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .risk-content p {
+      font-size: 13.5px;
+      color: #888;
+    }
+
+    /* ── OBJETIVO FINAL ── */
+    .objetivo-final {
+      border: 1px solid #D8382D44;
+      border-radius: 12px;
+      padding: 32px;
+      background: rgba(216,56,45,0.04);
+      margin-top: 8px;
+    }
+
+    .objetivo-final .of-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 14px;
+    }
+
+    .objetivo-final blockquote {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #e8e8e8;
+      font-weight: 500;
+      border: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    .objetivo-final .of-sub {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid #1e1e22;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer span { font-size: 12px; color: #444; }
+    footer span strong { color: #D8382D; }
+
+    @media (max-width: 600px) {
+      header { padding: 24px 20px; }
+      main { padding: 32px 16px 60px; }
+      footer { padding: 20px; }
+      .cards-grid.two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <div class="header-left">
+    <div class="studio">🧨 Pavio Branding — Relatório de Branding</div>
+    <h1>Neval <span class="accent">Sorvetes</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="pilar-label">Pilar 02</div>
+    <div class="pilar-title">👥 Audiência</div>
+    <div class="date">Pesquisa Setorial · 2024–2026</div>
+  </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+  <!-- ── INTRO ── -->
+  <div class="section-label">00 · Para quem a marca existe</div>
+
+  <div class="card" style="margin-bottom: 32px;">
+    <p style="color:#ccc; font-size:14px; line-height:1.8;">
+      A Neval existe para <strong style="color:#fff;">dois públicos simultâneos e interdependentes</strong>: o <strong style="color:#D8382D;">comprador B2B</strong> — dono de mercadinho, padaria, posto ou restaurante — que decide colocar o produto no freezer, e o <strong style="color:#D8382D;">consumidor final das classes B e C</strong> no Sul do Brasil, que compra por impulso, movido principalmente por sabor e preço, em ocasiões cotidianas de prazer imediato.
+    </p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="cards-grid" style="margin-bottom:24px;">
+    <div class="card accent-top">
+      <div class="card-icon">🧍</div>
+      <div class="big-number">94,1%</div>
+      <div class="big-label">consomem sorvete como sobremesa — principal ocasião</div>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">⚡</div>
+      <div class="big-number">60–70%</div>
+      <div class="big-label">das compras são por impulso — o consumidor encontra, não planeja</div>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">📅</div>
+      <div class="big-number">40,4%</div>
+      <div class="big-label">compram semanalmente — sorvete é rotina, não ocasião especial</div>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">💰</div>
+      <div class="big-number">R$37</div>
+      <div class="big-label">ticket médio mensal — consumo acessível e recorrente</div>
+    </div>
+  </div>
+
+  <!-- ── 1. SEGMENTOS ── -->
+  <div class="section-label" style="margin-top:56px;">01 · Segmentos — Canal · Faixa Etária · Ocasião</div>
+
+  <!-- CANAL -->
+  <div class="card" style="margin-bottom:20px;">
+    <h3>🏪 Por Canal — Prioridade Estratégica</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Prioridade</th>
+            <th>Canal</th>
+            <th>Por quê é relevante</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">Alta</span></td>
+            <td>Mercadinhos de bairro</td>
+            <td>Maior capilaridade B/C; decisão emocional do dono; giro constante</td>
+          </tr>
+          <tr>
+            <td><span class="badge">Alta</span></td>
+            <td>Padarias</td>
+            <td>21x/mês de frequência do consumidor; frequência 35% maior que sorveterias</td>
+          </tr>
+          <tr>
+            <td><span class="badge">Alta</span></td>
+            <td>Postos de gasolina</td>
+            <td>Parada rápida + impulso puro; picolé individual domina</td>
+          </tr>
+          <tr>
+            <td><span class="badge-blue">Média</span></td>
+            <td>Farmácias</td>
+            <td>Canal em crescimento; abre porta para linha proteica/funcional</td>
+          </tr>
+          <tr>
+            <td><span class="badge-blue">Média</span></td>
+            <td>Restaurantes / Food Service</td>
+            <td>Sobremesa (64,4% das ocasiões); exige resistência ao derretimento</td>
+          </tr>
+          <tr>
+            <td><span class="badge-blue">Média</span></td>
+            <td>Eventos sazonais</td>
+            <td>Verão e fim de ano; sabores populares, volume</td>
+          </tr>
+          <tr>
+            <td><span class="badge-green">Potencial</span></td>
+            <td>Universidades / RU</td>
+            <td>Público jovem concentrado; alta sensibilidade a preço</td>
+          </tr>
+          <tr>
+            <td><span class="badge-green">Potencial</span></td>
+            <td>Society / Arenas / Lazer</td>
+            <td>Ocasião de passeio (60,27% dos consumos); impulso físico</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight">
+      💡 Sorveterias têm 69,6% de penetração nacional, mas padarias e mercadinhos têm <strong>frequência de visita superior</strong> — o consumidor passa por eles todo dia. A Neval deve dominar esses canais de fluxo cotidiano.
+    </div>
+  </div>
+
+  <!-- FAIXA ETÁRIA -->
+  <details>
+    <summary><span><span class="summary-icon">🎂</span> Segmentação por Faixa Etária</span></summary>
+    <div class="details-body">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Faixa Etária</th>
+              <th>Relevância</th>
+              <th>Comportamento-chave</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>18–25 anos</td>
+              <td><span class="badge">Alta</span></td>
+              <td>91,2% experimenta novos sabores; prefere embalagem individual; forte em redes sociais</td>
+            </tr>
+            <tr>
+              <td>25–34 anos</td>
+              <td><span class="badge">Principal ⭐</span></td>
+              <td>Compra semanal (40,4%); sorvete de massa (73,47%); ticket R$20–50/semana</td>
+            </tr>
+            <tr>
+              <td>35–50 anos</td>
+              <td><span class="badge-blue">Secundária</span></td>
+              <td>Chocolate e flocos; 1–2x/semana; decisor de compra familiar</td>
+            </tr>
+            <tr>
+              <td>+50 anos</td>
+              <td>Baixa</td>
+              <td>Menos de 1x/mês; sabores clássicos; menor prioridade imediata</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight">
+        A faixa <strong>18–34 anos</strong> concentra o maior volume de consumo e a maior abertura para marcas regionais com identidade local. É o núcleo estratégico da comunicação da Neval.
+      </div>
+    </div>
+  </details>
+
+  <!-- OCASIÃO -->
+  <details>
+    <summary><span><span class="summary-icon">🕐</span> Segmentação por Ocasião de Consumo</span></summary>
+    <div class="details-body">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Ocasião</th>
+              <th>% Consumidores</th>
+              <th>Implicação para a Neval</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sobremesa</td>
+              <td><span class="badge">94,1%</span></td>
+              <td>Presença em restaurantes e padarias é estratégica</td>
+            </tr>
+            <tr>
+              <td>Durante passeios</td>
+              <td>60,27%</td>
+              <td>PDV em lazer, arenas e parques — impulso físico e visual</td>
+            </tr>
+            <tr>
+              <td>Lanche</td>
+              <td>21,20%</td>
+              <td>Picolé individual no posto, padaria, mercadinho</td>
+            </tr>
+            <tr>
+              <td>Fora do lar (geral)</td>
+              <td>60%</td>
+              <td>O consumidor não planeja — ele encontra. Visibilidade no PDV vale mais que awareness</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight">
+        ⚠️ <strong>60–70% das compras são por impulso.</strong> A Neval não precisa ser lembrada em casa. Precisa ser encontrada no freezer certo, no momento certo.
+      </div>
+    </div>
+  </details>
+
+  <!-- GÊNERO -->
+  <details>
+    <summary><span><span class="summary-icon">⚖️</span> Consumo por Gênero — Produto Democrático</span></summary>
+    <div class="details-body">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Gênero</th>
+              <th>% Pesquisa</th>
+              <th>Preferência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mulheres</td>
+              <td>73,6%</td>
+              <td>Preferem embalagem individual (41,9%)</td>
+            </tr>
+            <tr>
+              <td>Homens</td>
+              <td>26,4%</td>
+              <td>Sem diferença significativa em frequência</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight">
+        Segundo a Embrapa, para produtos lácteos como sorvete <strong>não há diferença significativa de consumo entre gêneros</strong>. Sorvete é um produto democrático — a comunicação não precisa ser segmentada por gênero.
+      </div>
+    </div>
+  </details>
+
+  <!-- ── 2. COMPORTAMENTO REGIONAL ── -->
+  <div class="section-label" style="margin-top:56px;">02 · Características — Comportamento do Consumidor Regional</div>
+
+  <div class="card" style="margin-bottom:20px;">
+    <h3>🌨️ O que define o consumidor do Sul / PR</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Dado</th>
+            <th>Implicação estratégica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sazonalidade severa</td>
+            <td><span class="badge">Queda até 70% no inverno</span></td>
+            <td>Estratégia de compensação obrigatória em jun–ago</td>
+          </tr>
+          <tr>
+            <td>Preço como filtro primário</td>
+            <td>65,4% considera preço; 56% ganha até 2 salários mínimos</td>
+            <td>Preço não é só critério — é barreira de entrada</td>
+          </tr>
+          <tr>
+            <td>Sabor como motivação dominante</td>
+            <td>91,9% decide pelo sabor</td>
+            <td>Flocos (30,1%) e chocolate (29,4%) lideram; morango e pêssego se destacam no Sul</td>
+          </tr>
+          <tr>
+            <td>Consumo democrático</td>
+            <td>Classes C1/B consomem mais fora de casa (85%) do que classe A (79%)</td>
+            <td>Sorvete é o prazer acessível da classe média — não é luxo, é rotina</td>
+          </tr>
+          <tr>
+            <td>Decisão B2B emocional</td>
+            <td>Dono do PDV não faz planilha de ROI</td>
+            <td>Vendedor precisa ser parceiro, não apenas fornecedor</td>
+          </tr>
+          <tr>
+            <td>Embalagem individual preferida</td>
+            <td>41,9% prefere individual; 74,2% prefere plástico</td>
+            <td>Picolé e potinho são os formatos padrão do impulso</td>
+          </tr>
+          <tr>
+            <td>Frequência de compra</td>
+            <td>40,4% compra semanalmente</td>
+            <td>Produto de recorrência, não de ocasião especial</td>
+          </tr>
+          <tr>
+            <td>Wellness nascente em B/C</td>
+            <td>26,5% observa informação nutricional</td>
+            <td>Linha funcional é oportunidade futura — preço ainda domina</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <details>
+    <summary><span><span class="summary-icon">🍓</span> Sabores — Clássicos vs. Regionais</span></summary>
+    <div class="details-body">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Sabor</th>
+              <th>% Preferência</th>
+              <th>Perfil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Flocos</td>
+              <td><span class="badge">30,1% — 1º lugar</span></td>
+              <td>Clássico absoluto; transversal a todas as faixas etárias</td>
+            </tr>
+            <tr>
+              <td>Chocolate</td>
+              <td>29,4%</td>
+              <td>Clássico; forte em crianças e adultos</td>
+            </tr>
+            <tr>
+              <td>Creme</td>
+              <td>11%</td>
+              <td>Preferência de adultos +35 anos</td>
+            </tr>
+            <tr>
+              <td>Morango</td>
+              <td>8,8%</td>
+              <td>Destaque regional no Sul; frutas de clima temperado</td>
+            </tr>
+            <tr>
+              <td>Pêssego / Cereja / Amora</td>
+              <td>—</td>
+              <td>Diferencial regional Sul — PR e SC</td>
+            </tr>
+            <tr>
+              <td>Napolitano / Coco / Milho / Café</td>
+              <td>—</td>
+              <td>Clássicos populares; presença garantida no mix</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight">
+        Clássicos continuam <strong>campeões de vendas</strong>. Sabores regionais (morango, pêssego, cereja) são crescentes no Sul e funcionam como <strong>diferencial de identidade</strong> para marcas locais como a Neval.
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="summary-icon">📊</span> Classes B e C — Volume de Consumo por Estrato</span></summary>
+    <div class="details-body">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Classe Social</th>
+              <th>% Consome Fora de Casa</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>C1</td>
+              <td><span class="badge">85,96% — maior consumidor</span></td>
+              <td>Perfil central da Neval</td>
+            </tr>
+            <tr>
+              <td>B2</td>
+              <td>84,57%</td>
+              <td>Alta frequência; sensível a preço e qualidade</td>
+            </tr>
+            <tr>
+              <td>B1</td>
+              <td>84,09%</td>
+              <td>Abre espaço para linha premium acessível</td>
+            </tr>
+            <tr>
+              <td>C2</td>
+              <td>80,56%</td>
+              <td>Picolé barato é principal entrada</td>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td>79,17%</td>
+              <td>Menor frequência; foco em premium e gourmet</td>
+            </tr>
+            <tr>
+              <td>D + E</td>
+              <td>62,50%</td>
+              <td>Menor prioridade; preço é barreira</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:14px;">
+        <span class="tag">56% têm renda ≤ 2 salários mínimos</span>
+        <span class="tag">+80% aptos a consumir fora de casa</span>
+        <span class="tag">Ticket médio: R$37/mês</span>
+        <span class="tag">Prioridade: sabor + preço</span>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="summary-icon">🚀</span> Tendências de Comportamento 2024–2026</span></summary>
+    <div class="details-body">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Tendência</th>
+              <th>Impacto para a Neval</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gourmetização e ingredientes naturais</td>
+              <td>Consumidores pagam mais por sofisticação — oportunidade de linha premium</td>
+            </tr>
+            <tr>
+              <td>Proteicos e low-calorie</td>
+              <td><span class="badge">"Tendência que veio para ficar"</span> — já impacta B/C</td>
+            </tr>
+            <tr>
+              <td>Veganos e zero açúcar</td>
+              <td>Saíram do nicho — agora estratégicos no mix</td>
+            </tr>
+            <tr>
+              <td>Sustentabilidade</td>
+              <td>Embalagens biodegradáveis como diferencial competitivo</td>
+            </tr>
+            <tr>
+              <td>Formatos inovadores (bombom de sorvete)</td>
+              <td>44,4% das empresas investindo — oportunidade de SKU novo</td>
+            </tr>
+            <tr>
+              <td>Jovens 18–35 e marcas regionais</td>
+              <td>Identidade local + inovação = vantagem sobre grandes marcas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight">
+        ⚠️ O movimento <strong>wellness já impacta classes B e C</strong>, mas preço ainda é o fator dominante. Linha funcional é oportunidade de médio prazo — não urgência imediata para a Neval.
+      </div>
+    </div>
+  </details>
+
+  <!-- ── 3. CONSUMIDOR IDEAL ── -->
+  <div class="section-label" style="margin-top:56px;">03 · Consumidor Ideal — Perfil Prioritário da Neval</div>
+
+  <div class="perfil-grid">
+
+    <!-- B2B -->
+    <div class="perfil-card">
+      <div class="perfil-header b2b">
+        <div class="perfil-type">Perfil B2B · Parceiro de Canal</div>
+        <div class="perfil-name">🏪 O Dono do Mercadinho de Bairro</div>
+        <div class="perfil-desc">Quem coloca a Neval no freezer</div>
+      </div>
+      <div class="perfil-body">
+        <div class="perfil-row">
+          <span class="perfil-key">Quem é</span>
+          <span class="perfil-val">Homem ou mulher, 35–55 anos, dono de pequeno varejo (mercadinho, padaria, posto)</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Onde está</span>
+          <span class="perfil-val">Bairros populares de Curitiba, Região Metropolitana e interior do PR</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Como decide</span>
+          <span class="perfil-val">Por relacionamento, margem (20–24%) e giro do produto</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">O que precisa</span>
+          <span class="perfil-val">Produto que vende sozinho, freezer bem localizado, reposição confiável</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Dor principal</span>
+          <span class="perfil-val">Estoque parado no inverno; fornecedor que some após a venda</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Como conquistar</span>
+          <span class="perfil-val">Visita consultiva, argumento de giro + margem, suporte ativo no PDV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- B2C -->
+    <div class="perfil-card">
+      <div class="perfil-header b2c">
+        <div class="perfil-type">Perfil B2C · Consumidor Final</div>
+        <div class="perfil-name">🧍 O Adulto Jovem da Classe C1 do Sul</div>
+        <div class="perfil-desc">Quem pega a Neval no freezer</div>
+      </div>
+      <div class="perfil-body">
+        <div class="perfil-row">
+          <span class="perfil-key">Quem é</span>
+          <span class="perfil-val">Homem ou mulher, 25–34 anos, classe B2/C1, Sul do Brasil</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Renda</span>
+          <span class="perfil-val">Até R$3.500/mês; gasta ~R$37/mês em sorvete</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Frequência</span>
+          <span class="perfil-val">Semanal (40,4%); 1–2 picolés ou 100–500ml/semana</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Motivação</span>
+          <span class="perfil-val">Sabor em primeiro lugar, depois preço e validade</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Ocasião</span>
+          <span class="perfil-val">Lanche no caminho, sobremesa improvisada, passeio com família</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Formato</span>
+          <span class="perfil-val">Picolé ou potinho individual, embalagem plástica</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Sabores</span>
+          <span class="perfil-val">Flocos, chocolate, morango — clássicos com identidade regional</span>
+        </div>
+        <div class="perfil-row">
+          <span class="perfil-key">Como compra</span>
+          <span class="perfil-val">Mercadinho, padaria, posto — sempre por impulso, nunca planejado</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 4. PONTOS DE ATENÇÃO ── -->
+  <div class="section-label" style="margin-top:56px;">04 · Pontos de Atenção — Audiência</div>
+
+  <div class="risk-card">
+    <div class="risk-number">1</div>
+    <div class="risk-content">
+      <h4>Sazonalidade severa no Sul</h4>
+      <p>Queda de até 70% no inverno em Curitiba/PR. Exige estratégia ativa de compensação — ativação de PDV, promoções e reforço nos canais fechados (padarias, mercadinhos).</p>
+    </div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-number">2</div>
+    <div class="risk-content">
+      <h4>Compra por impulso exige presença física</h4>
+      <p>60–70% das vendas são por impulso. Qualquer falha na exposição no PDV — freezer mal posicionado, ruptura de estoque — representa perda direta de venda irreversível.</p>
+    </div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-number">3</div>
+    <div class="risk-content">
+      <h4>Preço como barreira de entrada em B/C</h4>
+      <p>56% dos consumidores ganham até 2 salários mínimos. Qualquer reajuste de preço sem comunicação clara pode migrar o consumidor para concorrentes com produtos mais baratos.</p>
+    </div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-number">4</div>
+    <div class="risk-content">
+      <h4>Decisão B2B emocional e frágil</h4>
+      <p>O dono do pequeno PDV decide por relacionamento. Sem presença constante do representante — visita, suporte, material de PDV — a Neval perde espaço para o concorrente que aparece mais.</p>
+    </div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-number">5</div>
+    <div class="risk-content">
+      <h4>Wellness nascente — risco de irrelevância futura</h4>
+      <p>Sem linha saudável no horizonte de médio prazo, a Neval pode perder relevância com jovens 18–34 anos impactados pela tendência low-calorie e proteica que já chegou às classes B e C.</p>
+    </div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-number">6</div>
+    <div class="risk-content">
+      <h4>Concorrência de Bapka no mesmo território</h4>
+      <p>A Bapka já tem identidade regional forte no PR, com parcerias (Cini) e presença em mercadinhos. A Neval precisa de diferenciação clara de posicionamento para não disputar o mesmo espaço de percepção.</p>
+    </div>
+  </div>
+
+  <!-- ── SÍNTESE FINAL ── -->
+  <div class="section-label" style="margin-top:56px;">05 · Síntese Estratégica</div>
+
+  <div class="objetivo-final">
+    <div class="of-label">🎯 Quem é o público da Neval — em uma frase</div>
+    <blockquote>
+      A Neval deve ser a marca do prazer acessível e familiar do Sul — presente no freezer do bairro, reconhecível no picolé do cotidiano, confiável para o dono do mercadinho e irresistível para o adulto jovem que não planejava comprar, mas não resistiu.
+    </blockquote>
+    <div class="of-sub">
+      Não é a marca mais barata. Não é a mais sofisticada. É a mais próxima. O consumidor da Neval não busca experiência premium — busca <strong style="color:#e8e8e8;">sabor, confiança e conveniência</strong>. A marca que dominar a prateleira fria do bairro vence.
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <span>🧨 <strong>Pavio Branding</strong> — Relatório de Branding · Neval Sorvetes</span>
+  <span>Pilar 02 — Audiência · Pesquisa Setorial 2024–2026 · Curitiba, PR</span>
+</footer>
+
+</body>
+</html>

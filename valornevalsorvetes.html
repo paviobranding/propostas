@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relatório Valor — Neval Sorvetes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #121317;
+      color: #e8e8e8;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid #2a2a2e;
+      padding: 32px 48px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header-left .studio {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .header-left h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-left h1 span.accent { color: #D8382D; }
+    .header-right { text-align: right; }
+    .header-right .pilar-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .header-right .pilar-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #D8382D;
+    }
+    .header-right .date {
+      font-size: 12px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #2a2a2e;
+    }
+
+    /* ── CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .cards-grid.two-col {
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    }
+    .cards-grid.full { grid-template-columns: 1fr; }
+
+    .card {
+      background: #121317;
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #3a3a3e; }
+    .card.accent-top { border-top: 3px solid #D8382D; }
+    .card-icon { font-size: 22px; margin-bottom: 10px; }
+    .card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .card p { font-size: 14px; color: #999; }
+    .card .big-number {
+      font-size: 36px;
+      font-weight: 800;
+      color: #D8382D;
+      line-height: 1.1;
+      margin: 8px 0 4px;
+    }
+    .card .big-label { font-size: 12px; color: #666; }
+
+    /* ── TABELAS ── */
+    .table-wrapper { overflow-x: auto; margin-top: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    thead tr { border-bottom: 1px solid #D8382D; }
+    thead th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #D8382D;
+      font-weight: 600;
+    }
+    tbody tr {
+      border-bottom: 1px solid #1e1e22;
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: #18181c; }
+    tbody td { padding: 11px 14px; color: #ccc; vertical-align: top; }
+    tbody td:first-child { color: #fff; font-weight: 500; }
+    td .badge {
+      display: inline-block;
+      background: rgba(216,56,45,0.15);
+      color: #D8382D;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── INSIGHT ── */
+    .insight {
+      background: rgba(216,56,45,0.07);
+      border-left: 3px solid #D8382D;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: #ccc;
+    }
+    .insight strong { color: #D8382D; }
+
+    /* ── TAG ── */
+    .tag {
+      display: inline-block;
+      background: #1e1e22;
+      border: 1px solid #2a2a2e;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: #888;
+      margin: 4px 4px 4px 0;
+    }
+
+    /* ── DOBRAS ── */
+    details {
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    details[open] { border-color: #3a3a3e; }
+    summary {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: #e8e8e8;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+';
+      font-size: 20px;
+      color: #D8382D;
+      font-weight: 300;
+      line-height: 1;
+    }
+    details[open] summary::after { content: '−'; }
+    .summary-icon { margin-right: 8px; }
+    .details-body {
+      padding: 0 20px 20px;
+      font-size: 14px;
+      color: #999;
+    }
+    .details-body p { margin-bottom: 10px; }
+
+    /* ── RISK CARD ── */
+    .risk-card {
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .risk-card:hover { border-color: #D8382D44; }
+    .risk-number {
+      min-width: 28px;
+      height: 28px;
+      background: rgba(216,56,45,0.12);
+      color: #D8382D;
+      font-weight: 800;
+      font-size: 13px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .risk-content h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .risk-content p { font-size: 13.5px; color: #888; }
+
+    /* ── OBJETIVO FINAL ── */
+    .objetivo-final {
+      border: 1px solid #D8382D44;
+      border-radius: 12px;
+      padding: 32px;
+      background: rgba(216,56,45,0.04);
+      margin-top: 8px;
+    }
+    .objetivo-final .of-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 14px;
+    }
+    .objetivo-final blockquote {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #e8e8e8;
+      font-weight: 500;
+      border: none;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+    .objetivo-final .of-sub { font-size: 14px; color: #888; line-height: 1.7; }
+
+    /* ══════════════════════════════════════
+       ESCADA DA MARCA — horizontal progressiva
+    ══════════════════════════════════════ */
+    .escada-wrapper {
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 48px;
+    }
+
+    .escada {
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+      min-width: 860px;
+      position: relative;
+    }
+
+    .escada-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* altura progressiva via --h — valores originais + 60px cada */
+    .escada-block {
+      width: 100%;
+      height: var(--h);
+      border-radius: 10px 10px 0 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 16px 14px 14px;
+      position: relative;
+      transition: filter 0.2s;
+      cursor: default;
+    }
+    .escada-block:hover { filter: brightness(1.15); }
+
+    .escada-step:nth-child(1) .escada-block { background: #1e1e24; border: 1px solid #2a2a2e; border-bottom: none; --h: 180px; }
+    .escada-step:nth-child(2) .escada-block { background: #1f1e26; border: 1px solid #2e2a3a; border-bottom: none; --h: 228px; }
+    .escada-step:nth-child(3) .escada-block { background: #221e28; border: 1px solid #3a2a3e; border-bottom: none; --h: 276px; }
+    .escada-step:nth-child(4) .escada-block { background: #271c24; border: 1px solid #4a2a38; border-bottom: none; --h: 324px; }
+    .escada-step:nth-child(5) .escada-block { background: rgba(216,56,45,0.12); border: 1px solid #D8382D88; border-bottom: none; --h: 372px; }
+
+    .escada-num {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 6px;
+    }
+
+    .escada-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .escada-step:nth-child(5) .escada-label { color: #D8382D; }
+
+    .escada-desc {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    .escada-step:nth-child(5) .escada-desc { color: #bbb; }
+
+    .escada-icon {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .escada-base {
+      height: 3px;
+      background: linear-gradient(to right, #2a2a2e, #D8382D);
+      width: 100%;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .escada-arrow {
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background: #D8382D;
+      clip-path: polygon(0 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0 80%);
+      z-index: 2;
+      opacity: 0.7;
+    }
+
+    .escada-step:last-child .escada-arrow { display: none; }
+
+    .escada-footer {
+      display: flex;
+      min-width: 860px;
+      margin-top: 0;
+    }
+
+    .escada-footer-item {
+      flex: 1;
+      padding: 14px 16px 16px;
+      border: 1px solid #1e1e22;
+      border-top: none;
+      font-size: 11px;
+      color: #555;
+      text-align: center;
+      background: #0e0e12;
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 5px;
+      line-height: 1.5;
+    }
+
+    .escada-footer-item span {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════
+       MAPA DE POSICIONAMENTO — eixo X/Y
+    ══════════════════════════════════════ */
+    .map-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 680px;
+      margin: 0 auto 16px;
+      background: #0e0e12;
+      border: 1px solid #2a2a2e;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .map-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(#1a1a1e 1px, transparent 1px),
+        linear-gradient(90deg, #1a1a1e 1px, transparent 1px);
+      background-size: 10% 10%;
+    }
+
+    .map-q {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+    }
+    .map-q.q1 { top: 0; left: 50%; background: rgba(216,56,45,0.04); }
+    .map-q.q2 { top: 0; left: 0;  background: rgba(100,100,200,0.03); }
+    .map-q.q3 { bottom: 0; left: 0; background: transparent; }
+    .map-q.q4 { bottom: 0; left: 50%; background: rgba(255,200,50,0.03); }
+
+    .map-axis-x {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      right: 5%;
+      height: 1px;
+      background: #2a2a2e;
+      transform: translateY(-50%);
+    }
+    .map-axis-y {
+      position: absolute;
+      left: 50%;
+      top: 5%;
+      bottom: 5%;
+      width: 1px;
+      background: #2a2a2e;
+      transform: translateX(-50%);
+    }
+
+    .map-axis-x::after, .map-axis-x::before,
+    .map-axis-y::after, .map-axis-y::before {
+      content: '';
+      position: absolute;
+      border: 5px solid transparent;
+    }
+    .map-axis-x::after  { right: -2px; top: -5px; border-left-color: #444; }
+    .map-axis-x::before { left: -2px;  top: -5px; border-right-color: #444; }
+    .map-axis-y::after  { top: -2px; left: -5px; border-bottom-color: #444; }
+    .map-axis-y::before { bottom: -2px; left: -5px; border-top-color: #444; }
+
+    .map-label {
+      position: absolute;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #444;
+      white-space: nowrap;
+    }
+    .map-label.top    { top: 2%;  left: 50%; transform: translateX(-50%); color: #666; }
+    .map-label.bottom { bottom: 2%; left: 50%; transform: translateX(-50%); color: #666; }
+    .map-label.left   { left: 2%; top: 50%; transform: translateY(-50%) rotate(-90deg); color: #666; }
+    .map-label.right  { right: 2%; top: 50%; transform: translateY(-50%) rotate(90deg); color: #666; }
+
+    .map-qlabel {
+      position: absolute;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2a2a2e;
+      font-weight: 700;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .map-qlabel.q1 { top: 7%;  right: 7%;  color: rgba(216,56,45,0.18); text-align: right; }
+    .map-qlabel.q2 { top: 7%;  left: 7%;   color: rgba(100,100,180,0.15); }
+    .map-qlabel.q3 { bottom: 7%; left: 7%;  color: rgba(80,80,80,0.15); }
+    .map-qlabel.q4 { bottom: 7%; right: 7%; color: rgba(200,160,40,0.2); text-align: right; }
+
+    .map-dot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: default;
+    }
+
+    .map-dot-circle {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid;
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .map-dot:hover .map-dot-circle { transform: scale(1.4); }
+
+    .map-dot-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #121317;
+      border: 1px solid #2a2a2e;
+    }
+
+    .dot-gebon    .map-dot-circle { background: #e8612044; border-color: #e86120; }
+    .dot-gebon    .map-dot-label  { color: #e86120; }
+    .dot-guri     .map-dot-circle { background: #4a9fd444; border-color: #4a9fd4; }
+    .dot-guri     .map-dot-label  { color: #4a9fd4; }
+    .dot-paviloche .map-dot-circle { background: #7b6fbb44; border-color: #7b6fbb; }
+    .dot-paviloche .map-dot-label  { color: #7b6fbb; }
+    .dot-dielo    .map-dot-circle { background: #88888844; border-color: #888888; }
+    .dot-dielo    .map-dot-label  { color: #888888; }
+    .dot-neval-hoje .map-dot-circle { background: #ffffff22; border-color: #555; }
+    .dot-neval-hoje .map-dot-label  { color: #555; font-style: italic; }
+
+    .dot-neval-destino .map-dot-circle {
+      width: 20px;
+      height: 20px;
+      background: rgba(216,56,45,0.25);
+      border-color: #D8382D;
+      box-shadow: 0 0 0 5px rgba(216,56,45,0.12), 0 0 20px rgba(216,56,45,0.2);
+    }
+    .dot-neval-destino .map-dot-label {
+      color: #D8382D;
+      border-color: #D8382D44;
+      background: rgba(216,56,45,0.08);
+      font-size: 12px;
+    }
+
+    .map-arrow-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      justify-content: center;
+      margin-top: 16px;
+      margin-bottom: 32px;
+    }
+    .map-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .map-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid;
+      flex-shrink: 0;
+    }
+
+    /* ── DECLARAÇÃO DE POSICIONAMENTO ── */
+    .declaracao {
+      border: 1px solid #D8382D44;
+      border-radius: 12px;
+      padding: 36px;
+      background: rgba(216,56,45,0.04);
+      margin-top: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .declaracao::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 24px;
+      font-size: 120px;
+      color: rgba(216,56,45,0.08);
+      font-family: Georgia, serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .declaracao .dec-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 20px;
+    }
+    .declaracao blockquote {
+      font-size: 16px;
+      line-height: 1.85;
+      color: #e8e8e8;
+      font-weight: 400;
+      border: none;
+      padding: 0;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .declaracao blockquote strong { color: #fff; font-weight: 700; }
+    .declaracao .dec-sub {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+      border-top: 1px solid #1e1e22;
+      padding-top: 16px;
+    }
+
+    /* ── DIFERENCIAIS ── */
+    .dif-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .dif-card {
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      padding: 20px;
+      background: #121317;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .dif-card:hover { border-color: #D8382D44; }
+    .dif-num {
+      min-width: 30px;
+      height: 30px;
+      background: rgba(216,56,45,0.12);
+      color: #D8382D;
+      font-weight: 800;
+      font-size: 13px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .dif-body h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .dif-body p  { font-size: 13px; color: #777; line-height: 1.5; }
+
+    /* ── EQUAÇÃO ── */
+    .equacao-wrapper {
+      background: #0e0e12;
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      padding: 32px 24px;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    .eq-formula {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .eq-block {
+      background: #1a1a1e;
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      padding: 16px 20px;
+      min-width: 140px;
+    }
+    .eq-block.highlight {
+      border-color: #D8382D44;
+      background: rgba(216,56,45,0.06);
+    }
+    .eq-block .eq-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .eq-block .eq-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #e8e8e8;
+      line-height: 1.3;
+    }
+    .eq-block.highlight .eq-value { color: #D8382D; }
+    .eq-op {
+      font-size: 22px;
+      color: #444;
+      font-weight: 300;
+    }
+    .eq-divider {
+      width: 100%;
+      max-width: 520px;
+      height: 1px;
+      background: #2a2a2e;
+      margin: 0 auto 12px;
+    }
+    .eq-denominator {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    /* ── PERCEPÇÃO ── */
+    .percepcao-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 600px) {
+      .percepcao-grid { grid-template-columns: 1fr; }
+    }
+    .percepcao-col {
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .percepcao-col-header {
+      padding: 14px 18px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-bottom: 1px solid #2a2a2e;
+    }
+    .percepcao-col.hoje .percepcao-col-header  { color: #555; background: #0e0e12; }
+    .percepcao-col.futuro .percepcao-col-header { color: #D8382D; background: rgba(216,56,45,0.05); border-color: #D8382D33; }
+    .percepcao-row {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid #1a1a1e;
+    }
+    .percepcao-row:last-child { border-bottom: none; }
+    .percepcao-dim {
+      min-width: 110px;
+      padding: 12px 14px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #444;
+      font-weight: 600;
+      border-right: 1px solid #1a1a1e;
+      display: flex;
+      align-items: center;
+    }
+    .percepcao-val {
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #888;
+      line-height: 1.4;
+    }
+    .percepcao-col.futuro .percepcao-val { color: #bbb; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid #1e1e22;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer span { font-size: 12px; color: #444; }
+    footer span strong { color: #D8382D; }
+
+    @media (max-width: 600px) {
+      header { padding: 24px 20px; }
+      main { padding: 32px 16px 60px; }
+      footer { padding: 20px; }
+      .cards-grid.two-col { grid-template-columns: 1fr; }
+      .escada-wrapper, .escada-footer { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <div class="header-left">
+    <div class="studio">🧨 Pavio Branding — Relatório de Branding</div>
+    <h1>Neval <span class="accent">Sorvetes</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="pilar-label">Pilar 03</div>
+    <div class="pilar-title">💎 Valor</div>
+    <div class="date">Workshop · Jun 2026</div>
+  </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+  <!-- ── 1. PREMISSAS DE VALOR ── -->
+  <div class="section-label">01 · Premissas de Valor — O que a marca entrega além do produto</div>
+
+  <div class="cards-grid" style="margin-bottom:48px;">
+    <div class="card accent-top">
+      <div class="card-icon">📦</div>
+      <h3>Produto</h3>
+      <p>Sorvete acessível, variado, com custo-benefício real — entrega prazer sem gerar culpa financeira no consumidor das classes B e C.</p>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">🚚</div>
+      <h3>Serviço</h3>
+      <p>Agilidade de entrega, atendimento próximo ao PDV e suporte comercial ao revendedor — diferenciais operacionais que sustentam a relação B2B.</p>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">🏷️</div>
+      <h3>Marca</h3>
+      <p>Confiança construída por décadas no Sul do Brasil — capital intangível acumulado que nenhum concorrente novo consegue replicar do dia para a noite.</p>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">❤️</div>
+      <h3>Emocional</h3>
+      <p>Familiaridade, memória afetiva e pertencimento regional — o consumidor paranaense que cresceu com a Neval carrega uma relação que vai além da compra.</p>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">🌱</div>
+      <h3>Social</h3>
+      <p>"Marca daqui, feita por gente daqui" — em um contexto onde consumo local é valor crescente, escolher Neval é apoiar o que é regional e genuíno.</p>
+    </div>
+  </div>
+
+  <!-- ── 2. PERCEPÇÃO DE MARCA ── -->
+  <div class="section-label">02 · Percepção de Marca — Hoje vs. Futuro desejado</div>
+
+  <div class="percepcao-grid">
+    <div class="percepcao-col hoje">
+      <div class="percepcao-col-header">⚠️ Como é vista hoje</div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Imagem</div>
+        <div class="percepcao-val">Marca antiga, conhecida, sem personalidade visual clara</div>
+      </div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Tom</div>
+        <div class="percepcao-val">Silenciosa — sem voz própria, sem ponto de vista</div>
+      </div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Visual</div>
+        <div class="percepcao-val">Desatualizado, inconsistente entre linhas e materiais</div>
+      </div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Posição</div>
+        <div class="percepcao-val">"Aquela marca de sorvete barata do mercadinho"</div>
+      </div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Relação</div>
+        <div class="percepcao-val">Transacional — compra por disponibilidade, não por escolha ativa</div>
+      </div>
+    </div>
+    <div class="percepcao-col futuro">
+      <div class="percepcao-col-header">🎯 Como quer ser vista</div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Imagem</div>
+        <div class="percepcao-val">Marca consolidada com identidade clara, moderna e coerente</div>
+      </div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Tom</div>
+        <div class="percepcao-val">Afetiva, confiante, regional com orgulho e voz própria</div>
+      </div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Visual</div>
+        <div class="percepcao-val">Coeso, memorável, com sistema de marca que escala em todos os canais</div>
+      </div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Posição</div>
+        <div class="percepcao-val">"A marca do Sul que eu confio e que me representa"</div>
+      </div>
+      <div class="percepcao-row">
+        <div class="percepcao-dim">Relação</div>
+        <div class="percepcao-val">Emocional — escolho porque me identifica, não só porque está disponível</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. EQUAÇÃO DE VALOR ── -->
+  <div class="section-label">03 · Equação de Valor — Benefício × Preço × Experiência</div>
+
+  <div class="equacao-wrapper">
+    <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#555;margin-bottom:20px;">Fórmula do Valor Percebido</div>
+    <div class="eq-formula">
+      <div class="eq-block highlight">
+        <div class="eq-title">Benefício Percebido</div>
+        <div class="eq-value">Qualidade real + Confiança histórica</div>
+      </div>
+      <div class="eq-op">×</div>
+      <div class="eq-block highlight">
+        <div class="eq-title">Experiência de Marca</div>
+        <div class="eq-value">Afeto + Pertencimento regional</div>
+      </div>
+    </div>
+    <div class="eq-divider"></div>
+    <div class="eq-denominator">Preço acessível + Baixo esforço de compra (PDV próximo)</div>
+    <div class="insight" style="max-width:640px;margin:0 auto;text-align:left;">
+      <strong>Leitura atual:</strong> A Neval tem um denominador favorável — preço competitivo e ampla presença no PDV. O que freia o valor percebido é o numerador fraco: o <strong>benefício emocional e a experiência de marca praticamente não existem na comunicação atual.</strong> O rebranding atua exatamente aqui — aumentar o numerador sem mexer no denominador.
+    </div>
+  </div>
+
+  <!-- ── 4. ESCADA DA MARCA ── -->
+  <div class="section-label">04 · Escada da Marca — Do atributo funcional ao emocional</div>
+
+  <div class="escada-wrapper">
+    <div class="escada">
+
+      <!-- Degrau 1 -->
+      <div class="escada-step">
+        <div class="escada-block">
+          <div class="escada-num">01</div>
+          <div class="escada-icon">⚙️</div>
+          <div class="escada-label">Atributos do Produto</div>
+          <div class="escada-desc">Custo-benefício, variedade de sabores, estrutura própria, presença no PDV</div>
+        </div>
+        <div class="escada-arrow"></div>
+      </div>
+
+      <!-- Degrau 2 -->
+      <div class="escada-step">
+        <div class="escada-block">
+          <div class="escada-num">02</div>
+          <div class="escada-icon">✅</div>
+          <div class="escada-label">Benefício Funcional</div>
+          <div class="escada-desc">Refresca, é sobremesa, combina gelado e doce, substitui o momento de prazer cotidiano</div>
+        </div>
+        <div class="escada-arrow"></div>
+      </div>
+
+      <!-- Degrau 3 -->
+      <div class="escada-step">
+        <div class="escada-block">
+          <div class="escada-num">03</div>
+          <div class="escada-icon">💡</div>
+          <div class="escada-label">Benefício Psicológico</div>
+          <div class="escada-desc">"Estou fazendo uma escolha inteligente — qualidade real sem pagar caro por embalagem"</div>
+        </div>
+        <div class="escada-arrow"></div>
+      </div>
+
+      <!-- Degrau 4 -->
+      <div class="escada-step">
+        <div class="escada-block">
+          <div class="escada-num">04</div>
+          <div class="escada-icon">❤️</div>
+          <div class="escada-label">Benefício Emocional</div>
+          <div class="escada-desc">Pertencimento, nostalgia ativa, confiança afetiva com o Sul e com a memória de infância</div>
+        </div>
+        <div class="escada-arrow"></div>
+      </div>
+
+      <!-- Degrau 5 -->
+      <div class="escada-step">
+        <div class="escada-block">
+          <div class="escada-num">05</div>
+          <div class="escada-icon">🏆</div>
+          <div class="escada-label">Identidade</div>
+          <div class="escada-desc">"Sou alguém que valoriza o que é daqui — escolho marcas que têm raízes, não só tendências"</div>
+        </div>
+      </div>
+
+    </div><!-- /escada -->
+
+    <!-- rodapé da escada -->
+    <div class="escada-footer">
+      <div class="escada-footer-item"><span>Onde a Neval está</span>comunica só aqui</div>
+      <div class="escada-footer-item"><span>Ponto de partida</span>produto cumpre</div>
+      <div class="escada-footer-item"><span>Gap atual</span>não comunicado</div>
+      <div class="escada-footer-item"><span>Objetivo primário</span>chegar aqui</div>
+      <div class="escada-footer-item"><span>Objetivo de longo prazo</span>plantar a semente</div>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-bottom:48px;">
+    🎯 A Neval hoje comunica apenas o <strong>Degrau 1 — atributos do produto</strong>. O rebranding precisa subir a percepção até o <strong>Degrau 4 (emoção)</strong> e plantar a semente do <strong>Degrau 5 (identidade)</strong>. Os degraus 2 e 3 são o caminho — não pular etapas.
+  </div>
+
+  <!-- ── 5. DIFERENCIAIS ESTRATÉGICOS ── -->
+  <div class="section-label">05 · Diferenciais Estratégicos — O que nenhum concorrente regional entrega igual</div>
+
+  <div class="dif-grid">
+    <div class="dif-card">
+      <div class="dif-num">01</div>
+      <div class="dif-body">
+        <h4>Confiança sem arrogância</h4>
+        <p>Gebon grita, Paviloche esfria. A Neval pode ser simultaneamente calorosa e confiável — território que nenhum concorrente ocupa.</p>
+      </div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">02</div>
+      <div class="dif-body">
+        <h4>Regional sem ser caipira</h4>
+        <p>Guri usa mascote infantil para expressar brasilidade. Neval pode ter orgulho regional com maturidade — sem fanfarra, sem boneco.</p>
+      </div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">03</div>
+      <div class="dif-body">
+        <h4>Afeto adulto genuíno</h4>
+        <p>Nenhum concorrente fala com o consumidor adulto de forma emocionalmente ressonante sem infantilizar ou distanciar. Esse espaço está vazio.</p>
+      </div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">04</div>
+      <div class="dif-body">
+        <h4>Acessível e desejada ao mesmo tempo</h4>
+        <p>Dielo tem logística mas sem desejo. Gebon tem presença mas sem narrativa. Neval pode ser a primeira marca acessível do Sul que também é <em>escolhida</em>.</p>
+      </div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-num">05</div>
+      <div class="dif-body">
+        <h4>Memória afetiva ativa</h4>
+        <p>Décadas de mercado no PR equivalem a capital emocional inexplorado. Nenhum concorrente tem esse histórico na mesma proporção — e nenhum o está usando.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. DESCRIÇÃO DOS CONCORRENTES ── -->
+  <div class="section-label">06 · Descrição dos Concorrentes — Players regionais mapeados</div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Marca</th>
+            <th>Origem</th>
+            <th>Posição percebida</th>
+            <th>Canal principal</th>
+            <th>Público</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🟠 Gebon</td>
+            <td>PR</td>
+            <td><span class="badge">Popular / trend</span></td>
+            <td>Autosserviço, freezer PDV</td>
+            <td>Amplo, decisão por impulso</td>
+          </tr>
+          <tr>
+            <td>🔵 Guri</td>
+            <td>RS</td>
+            <td><span class="badge">Familiar / infantil</span></td>
+            <td>Lojas próprias + revenda</td>
+            <td>Famílias com crianças</td>
+          </tr>
+          <tr>
+            <td>🟣 Paviloche</td>
+            <td>SC / PR / RS</td>
+            <td><span class="badge">Premium acessível</span></td>
+            <td>Varejo organizado</td>
+            <td>Adultos, ocasiões de indulgência</td>
+          </tr>
+          <tr>
+            <td>⚫ Dielo</td>
+            <td>Sul do Brasil</td>
+            <td><span class="badge">Escala B2B</span></td>
+            <td>Super / atacarejo / food service</td>
+            <td>Revendedores e varejo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 7. ANÁLISE APROFUNDADA DOS CONCORRENTES ── -->
+  <div class="section-label">07 · Análise dos Concorrentes — Posicionamento, comunicação e visual</div>
+
+  <details open>
+    <summary><span><span class="summary-icon">🟠</span> Gebon — barulhenta, mas sem identidade proprietária</span></summary>
+    <div class="details-body">
+      <div class="cards-grid" style="margin-bottom:16px;">
+        <div class="card">
+          <h3>Posicionamento</h3>
+          <p>Popular com verniz de tendência. Quer parecer premium ("ingredientes de verdade") mas comunica popular (maximalismo, giro rápido). Tensão não resolvida.</p>
+        </div>
+        <div class="card">
+          <h3>Comunicação</h3>
+          <p>Tom entusiasmado e publicitário. Vocabulário genérico: <em>"delicioso", "encante-se", "experimente"</em>. Nenhuma palavra é proprietária — qualquer marca de sorvete poderia dizer o mesmo.</p>
+        </div>
+        <div class="card">
+          <h3>Visual</h3>
+          <p>Laranja dominante, tipografia enorme, padrões orgânicos. Alta shelf impact, mas maximalismo gera ruído e compete com a própria leitura do sabor em freezers congestionados.</p>
+        </div>
+      </div>
+      <div class="insight">
+        <strong>Lacuna estratégica para a Neval:</strong> A Gebon faz muito barulho mas diz pouco. Qualquer marca que chegue com um <strong>ponto de vista genuíno e consistente</strong> no mesmo canal vai se diferenciar imediatamente — sem precisar gritar mais alto.
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="summary-icon">🔵</span> Guri — universo fechado, elasticidade travada</span></summary>
+    <div class="details-body">
+      <div class="cards-grid" style="margin-bottom:16px;">
+        <div class="card">
+          <h3>Posicionamento</h3>
+          <p>Sorvete da família brasileira. Campanhas ancoradas no calendário emocional do Brasil (festas juninas, verão). Mascote 3D como âncora de toda a identidade.</p>
+        </div>
+        <div class="card">
+          <h3>Comunicação</h3>
+          <p>Lúdica, popular, temática. <em>"Arraiá de Sabores"</em>, cremosidade, convite para a loja. Forte comunicação B2B: "seja revendedor", "abra sua loja" — fala com o canal tanto quanto com o consumidor.</p>
+        </div>
+        <div class="card">
+          <h3>Visual</h3>
+          <p>Azul claro + amarelo. Cartoon e mascote centralizado. Muito consistente no digital. Semanticamente restrito ao universo infantil — visualmente amigável mas limitado.</p>
+        </div>
+      </div>
+      <div class="insight">
+        <strong>Lacuna estratégica para a Neval:</strong> O consumidor adulto com 30+ que quer <strong>afeto genuíno, nostalgia real e pertencimento regional não se enxerga nesse mascote</strong>. Esse consumidor está disponível — e é exatamente onde a Neval pode entrar.
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="summary-icon">🟣</span> Paviloche — elegante, mas sem calor humano</span></summary>
+    <div class="details-body">
+      <div class="cards-grid" style="margin-bottom:16px;">
+        <div class="card">
+          <h3>Posicionamento</h3>
+          <p>Premium acessível sensorial. Fala com quem quer se sentir inteligente na escolha. Arquitetura de linhas clara: Premium, Gelato, Zero, Mini — cada uma com posição de preço e ocasião.</p>
+        </div>
+        <div class="card">
+          <h3>Comunicação</h3>
+          <p>Descritiva, confiante, gastronômica. <em>"Pistache de verdade, textura ultra cremosa, finalização crocante"</em>. Única marca regional que usa linguagem de menu de restaurante — cria desejo antes da compra.</p>
+        </div>
+        <div class="card">
+          <h3>Visual</h3>
+          <p>Azul marinho + creme. Tipografia serifada (tradição). Tampas pretas em linhas premium. Fotografia elegante, iluminação suave. A mais consistente visualmente entre os concorrentes analisados.</p>
+        </div>
+      </div>
+      <div class="insight">
+        <strong>Lacuna estratégica para a Neval:</strong> A Paviloche é competente mas não abraça. É elegante mas distante. Fala do produto com maestria — mas <strong>não fala do consumidor com afeto</strong>. Ninguém sente saudade da Paviloche. A Neval pode ser tão confiável quanto — e ainda aquecer quem compra.
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="summary-icon">⚫</span> Dielo — invisível para o consumidor final</span></summary>
+    <div class="details-body">
+      <div class="cards-grid" style="margin-bottom:16px;">
+        <div class="card">
+          <h3>Posicionamento</h3>
+          <p>Infraestrutura de sorvetes do Sul. Indispensável para o canal, irrelevante para o consumidor. Portfólio amplo para cobrir todas as necessidades do revendedor — kids, premium, zero, família, food service.</p>
+        </div>
+        <div class="card">
+          <h3>Comunicação</h3>
+          <p>Comercial-institucional, orientada a performance. <em>"Linha completa", "parceria", "logística ágil", "resultado"</em>. Nenhuma palavra cria desejo no consumidor final — são palavras de gestão, não de experiência.</p>
+        </div>
+        <div class="card">
+          <h3>Visual</h3>
+          <p>Corporativo, funcional, orientado a catálogo de trade. Arquitetura por múltiplas linhas sem identidade unificada. Sem apelo emocional visual — poderia ser qualquer categoria de alimento.</p>
+        </div>
+      </div>
+      <div class="insight">
+        <strong>Lacuna estratégica para a Neval:</strong> A Dielo existe como infraestrutura, não como escolha. Qualquer consumidor que compra Dielo hoje <strong>migraria imediatamente</strong> para uma marca que oferecesse identificação emocional real — no mesmo ponto de venda e faixa de preço. A Neval pode ser essa marca.
+      </div>
+    </div>
+  </details>
+
+  <!-- ── MAPA DE POSICIONAMENTO ── -->
+  <div class="section-label" style="margin-top:56px;">Mapa de Posicionamento — Neval vs. Concorrentes</div>
+
+  <div style="margin-bottom:12px;">
+    <p style="font-size:13px;color:#555;text-align:center;">Eixo X: Comunicação emocional &nbsp;|&nbsp; Eixo Y: Percepção de preço / aspiração</p>
+  </div>
+
+  <div class="map-container">
+    <div class="map-grid"></div>
+    <div class="map-q q1"></div>
+    <div class="map-q q2"></div>
+    <div class="map-q q3"></div>
+    <div class="map-q q4"></div>
+    <div class="map-axis-x"></div>
+    <div class="map-axis-y"></div>
+    <div class="map-label top">Premium / Aspiracional ↑</div>
+    <div class="map-label bottom">↓ Popular / Acessível</div>
+    <div class="map-label left">← Fria / Institucional</div>
+    <div class="map-label right">Calorosa / Emocional →</div>
+    <div class="map-qlabel q1">Premium<br>+ Emocional</div>
+    <div class="map-qlabel q2">Premium<br>+ Fria</div>
+    <div class="map-qlabel q3">Popular<br>+ Fria</div>
+    <div class="map-qlabel q4">Popular<br>+ Emocional</div>
+    <svg class="map-arrow-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#D8382D" opacity="0.5"/>
+        </marker>
+      </defs>
+      <line x1="53" y1="57" x2="70" y2="34" stroke="#D8382D" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.4" marker-end="url(#arrowhead)"/>
+    </svg>
+    <div class="map-dot dot-gebon" style="left:62%;top:72%;">
+      <div class="map-dot-circle"></div>
+      <div class="map-dot-label">Gebon</div>
+    </div>
+    <div class="map-dot dot-guri" style="left:74%;top:80%;">
+      <div class="map-dot-circle"></div>
+      <div class="map-dot-label">Guri</div>
+    </div>
+    <div class="map-dot dot-paviloche" style="left:34%;top:24%;">
+      <div class="map-dot-circle"></div>
+      <div class="map-dot-label">Paviloche</div>
+    </div>
+    <div class="map-dot dot-dielo" style="left:22%;top:68%;">
+      <div class="map-dot-circle"></div>
+      <div class="map-dot-label">Dielo</div>
+    </div>
+    <div class="map-dot dot-neval-hoje" style="left:53%;top:58%;">
+      <div class="map-dot-circle"></div>
+      <div class="map-dot-label">Neval hoje</div>
+    </div>
+    <div class="map-dot dot-neval-destino" style="left:72%;top:33%;">
+      <div class="map-dot-circle"></div>
+      <div class="map-dot-label">★ Neval destino</div>
+    </div>
+  </div>
+
+  <div class="map-legend">
+    <div class="map-legend-item">
+      <div class="map-legend-dot" style="background:#e8612044;border-color:#e86120;"></div>
+      <span style="color:#888;">Gebon</span>
+    </div>
+    <div class="map-legend-item">
+      <div class="map-legend-dot" style="background:#4a9fd444;border-color:#4a9fd4;"></div>
+      <span style="color:#888;">Guri</span>
+    </div>
+    <div class="map-legend-item">
+      <div class="map-legend-dot" style="background:#7b6fbb44;border-color:#7b6fbb;"></div>
+      <span style="color:#888;">Paviloche</span>
+    </div>
+    <div class="map-legend-item">
+      <div class="map-legend-dot" style="background:#88888844;border-color:#888;"></div>
+      <span style="color:#888;">Dielo</span>
+    </div>
+    <div class="map-legend-item">
+      <div class="map-legend-dot" style="background:#ffffff22;border-color:#555;"></div>
+      <span style="color:#555;font-style:italic;">Neval hoje</span>
+    </div>
+    <div class="map-legend-item">
+      <div class="map-legend-dot" style="background:rgba(216,56,45,0.25);border-color:#D8382D;box-shadow:0 0 6px rgba(216,56,45,0.3);"></div>
+      <span style="color:#D8382D;font-weight:700;">★ Neval destino</span>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-bottom:48px;">
+    🎯 O quadrante <strong>"Calorosa + Médio/Premium"</strong> está completamente vazio entre os concorrentes diretos. Nenhuma marca regional do Sul ocupa o território de <strong>afeto adulto com aspiração acessível</strong>. Esse é o território estratégico da Neval.
+  </div>
+
+  <!-- ── 8. DECLARAÇÃO DE POSICIONAMENTO ── -->
+  <div class="section-label">08 · ⭐ Declaração de Posicionamento</div>
+
+  <div class="declaracao">
+    <div class="dec-label">⭐ Entregável central do Pilar 03 — Valor</div>
+    <blockquote>
+      Para o <strong>consumidor das classes B e C do Sul do Brasil</strong>, que busca uma experiência real de prazer sem culpa no dia a dia, a <strong>Neval é a marca de sorvetes regional</strong> que combina décadas de confiança com um produto acessível e genuíno — porque, diferente das marcas que gritam tendências ou fingem ser importadas, <strong>a Neval é feita daqui, para quem é daqui.</strong>
+    </blockquote>
+    <div class="dec-sub">
+      Razão de acreditar: anos de presença no mercado paranaense, estrutura produtiva própria, agilidade de entrega e uma relação de familiaridade com o consumidor regional que nenhum concorrente novo consegue replicar. O que faltava era a identidade que desse forma a tudo isso — e é exatamente isso que o rebranding entrega.
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <span>🧨 <strong>Pavio Branding</strong> — Relatório de Branding · Neval Sorvetes</span>
+  <span>Pilar 03 — Valor · Workshop Jun/2026 · Curitiba, PR</span>
+</footer>
+
+</body>
+</html>

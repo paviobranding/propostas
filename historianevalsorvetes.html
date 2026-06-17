@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relatório História — Neval Sorvetes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #121317;
+      color: #e8e8e8;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid #2a2a2e;
+      padding: 32px 48px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header-left .studio {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .header-left h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-left h1 span.accent { color: #D8382D; }
+    .header-right { text-align: right; }
+    .header-right .pilar-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .header-right .pilar-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #D8382D;
+    }
+    .header-right .date {
+      font-size: 12px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #2a2a2e;
+    }
+
+    /* ── CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .cards-grid.two-col {
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    }
+    .cards-grid.full { grid-template-columns: 1fr; }
+
+    .card {
+      background: #121317;
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #3a3a3e; }
+    .card.accent-top { border-top: 3px solid #D8382D; }
+    .card-icon { font-size: 22px; margin-bottom: 10px; }
+    .card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .card p { font-size: 14px; color: #999; }
+
+    /* ── INSIGHT ── */
+    .insight {
+      background: rgba(216,56,45,0.07);
+      border-left: 3px solid #D8382D;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: #ccc;
+    }
+    .insight strong { color: #D8382D; }
+
+    /* ── TAG ── */
+    .tag {
+      display: inline-block;
+      background: #1e1e22;
+      border: 1px solid #2a2a2e;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: #888;
+      margin: 4px 4px 4px 0;
+    }
+
+    /* ── DOBRAS ── */
+    details {
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    details[open] { border-color: #3a3a3e; }
+    summary {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: #e8e8e8;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+';
+      font-size: 20px;
+      color: #D8382D;
+      font-weight: 300;
+      line-height: 1;
+    }
+    details[open] summary::after { content: '−'; }
+    .summary-icon { margin-right: 8px; }
+    .details-body {
+      padding: 0 20px 20px;
+      font-size: 14px;
+      color: #999;
+    }
+    .details-body p { margin-bottom: 10px; }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 48px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, #D8382D, #2a2a2e);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 36px;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -34px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #D8382D;
+      border: 2px solid #121317;
+      box-shadow: 0 0 0 3px rgba(216,56,45,0.2);
+    }
+    .timeline-dot.dim {
+      background: #2a2a2e;
+      box-shadow: none;
+    }
+    .timeline-year {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .timeline-desc {
+      font-size: 13.5px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    /* ── BRAND STORY ── */
+    .brand-story {
+      border: 1px solid #D8382D44;
+      border-radius: 12px;
+      padding: 40px 44px;
+      background: rgba(216,56,45,0.04);
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-story::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 24px;
+      font-size: 160px;
+      color: rgba(216,56,45,0.06);
+      font-family: Georgia, serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .brand-story .bs-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 24px;
+    }
+    .brand-story p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #ccc;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand-story p:last-child { margin-bottom: 0; }
+    .brand-story p strong { color: #fff; }
+    .brand-story p em { color: #D8382D; font-style: normal; font-weight: 600; }
+
+    /* ── CRENÇAS GRID ── */
+    .crencas-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 640px) {
+      .crencas-wrapper { grid-template-columns: 1fr; }
+    }
+    .crencas-col {
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .crencas-col-header {
+      padding: 14px 18px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-bottom: 1px solid #2a2a2e;
+    }
+    .crencas-col.sim .crencas-col-header  { color: #4caf50; background: rgba(76,175,80,0.05); border-color: rgba(76,175,80,0.2); }
+    .crencas-col.nao .crencas-col-header  { color: #D8382D; background: rgba(216,56,45,0.05); border-color: rgba(216,56,45,0.2); }
+    .crenca-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 18px;
+      border-bottom: 1px solid #1a1a1e;
+      font-size: 13.5px;
+      color: #888;
+      line-height: 1.5;
+    }
+    .crenca-item:last-child { border-bottom: none; }
+    .crenca-icon { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+
+    /* ── PROPÓSITO ── */
+    .proposito {
+      border: 1px solid #D8382D44;
+      border-radius: 12px;
+      padding: 36px;
+      background: rgba(216,56,45,0.04);
+      margin-bottom: 48px;
+    }
+    .proposito .prop-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #D8382D;
+      margin-bottom: 20px;
+    }
+    .proposito blockquote {
+      font-size: 20px;
+      line-height: 1.7;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    .proposito .prop-sub {
+      font-size: 13.5px;
+      color: #666;
+      line-height: 1.7;
+      border-top: 1px solid #1e1e22;
+      padding-top: 16px;
+    }
+
+    /* ── ARQUÉTIPO ── */
+    .arquetipo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 640px) {
+      .arquetipo-grid { grid-template-columns: 1fr; }
+    }
+    .arq-card {
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      padding: 28px;
+      background: #0e0e12;
+      transition: border-color 0.2s;
+    }
+    .arq-card:hover { border-color: #D8382D44; }
+    .arq-card.primary { border-top: 3px solid #D8382D; }
+    .arq-card.secondary { border-top: 3px solid #3a3a3e; }
+    .arq-emoji { font-size: 32px; margin-bottom: 12px; }
+    .arq-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .arq-card.primary .arq-name { color: #D8382D; }
+    .arq-percent {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    .arq-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      align-items: flex-start;
+    }
+    .arq-row-label {
+      min-width: 80px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #444;
+      font-weight: 700;
+      padding-top: 2px;
+    }
+    .arq-row-val { color: #888; line-height: 1.5; }
+    .arq-card.primary .arq-row-val { color: #aaa; }
+    .arq-quote {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid #1e1e22;
+      font-size: 13px;
+      color: #666;
+      font-style: italic;
+      line-height: 1.6;
+    }
+    .arq-card.primary .arq-quote { color: rgba(216,56,45,0.7); }
+
+    /* ── EQUAÇÃO ARQUÉTIPO ── */
+    .eq-arq-wrapper {
+      background: #0e0e12;
+      border: 1px solid #2a2a2e;
+      border-radius: 12px;
+      padding: 32px 24px;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    .eq-arq-formula {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .eq-arq-block {
+      background: #1a1a1e;
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      padding: 18px 24px;
+      min-width: 160px;
+    }
+    .eq-arq-block.hl {
+      border-color: #D8382D44;
+      background: rgba(216,56,45,0.06);
+    }
+    .eq-arq-block .eq-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #555;
+      margin-bottom: 6px;
+    }
+    .eq-arq-block .eq-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #e8e8e8;
+      line-height: 1.4;
+    }
+    .eq-arq-block.hl .eq-value { color: #D8382D; }
+    .eq-arq-op { font-size: 26px; color: #444; font-weight: 300; }
+    .eq-arq-result {
+      font-size: 13px;
+      color: #555;
+      margin-top: 8px;
+    }
+    .eq-arq-result strong { color: #D8382D; }
+
+    /* ── PERSONALIDADE ── */
+    .tom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .tom-card {
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      padding: 20px;
+      background: #0e0e12;
+    }
+    .tom-card .tom-ctx {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #D8382D;
+      margin-bottom: 8px;
+    }
+    .tom-card .tom-text {
+      font-size: 13.5px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .vocab-wrapper {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .vocab-col { flex: 1; min-width: 280px; }
+    .vocab-col h4 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+    .vocab-col.usa h4 { color: #4caf50; }
+    .vocab-col.evita h4 { color: #D8382D; }
+
+    /* ── É / NÃO É ── */
+    .table-wrapper { overflow-x: auto; margin-top: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    thead tr { border-bottom: 1px solid #D8382D; }
+    thead th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #D8382D;
+      font-weight: 600;
+    }
+    tbody tr {
+      border-bottom: 1px solid #1e1e22;
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: #18181c; }
+    tbody td { padding: 11px 14px; color: #ccc; vertical-align: top; }
+    tbody td:first-child { color: #fff; font-weight: 500; }
+    td .badge {
+      display: inline-block;
+      background: rgba(216,56,45,0.15);
+      color: #D8382D;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    td .badge.green {
+      background: rgba(76,175,80,0.12);
+      color: #4caf50;
+    }
+
+    /* ── UNIVERSO VISUAL ── */
+    .universo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .univ-card {
+      border: 1px solid #2a2a2e;
+      border-radius: 10px;
+      padding: 22px;
+      background: #0e0e12;
+      transition: border-color 0.2s;
+    }
+    .univ-card:hover { border-color: #D8382D33; }
+    .univ-emoji { font-size: 26px; margin-bottom: 10px; }
+    .univ-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .univ-desc {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ── SLOGAN ── */
+    .slogan-box {
+      border: 1px solid #D8382D44;
+      border-radius: 16px;
+      padding: 48px 40px;
+      background: rgba(216,56,45,0.04);
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .slogan-box::before {
+      content: '★';
+      position: absolute;
+      font-size: 220px;
+      color: rgba(216,56,45,0.03);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .slogan-box .sl-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .slogan-box .sl-main {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .slogan-box .sl-main span { color: #D8382D; }
+    .slogan-box .sl-sub {
+      font-size: 14px;
+      color: #555;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid #1e1e22;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer span { font-size: 12px; color: #444; }
+    footer span strong { color: #D8382D; }
+
+    @media (max-width: 600px) {
+      header { padding: 24px 20px; }
+      main { padding: 32px 16px 60px; }
+      footer { padding: 20px; }
+      .brand-story { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <div class="header-left">
+    <div class="studio">🧨 Pavio Branding — Relatório de Branding</div>
+    <h1>Neval <span class="accent">Sorvetes</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="pilar-label">Pilar 01</div>
+    <div class="pilar-title">📖 História</div>
+    <div class="date">Workshop · Jun 2026</div>
+  </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+  <!-- ── 1. LINHA DO TEMPO ── -->
+  <div class="section-label">01 · Linha do Tempo — A jornada da Neval</div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">1988 — Fundação</div>
+      <div class="timeline-title">Uma família decide fazer diferente em Irati</div>
+      <div class="timeline-desc">No interior do Paraná, onde todo mundo se conhece pelo nome, a Neval nasce como um projeto familiar. Não havia fórmula mágica — apenas o compromisso de fazer um produto honesto, com cuidado real em cada etapa.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">Anos 1990 — Crescimento local</div>
+      <div class="timeline-title">Irati conquista a Neval — e a Neval conquista Irati</div>
+      <div class="timeline-desc">Os primeiros anos de consolidação regional. A marca ganha reconhecimento na cidade sede e começa a construir o ativo mais valioso que tem hoje: a memória afetiva das famílias do interior paranaense.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">Anos 2000 — Expansão estrutural</div>
+      <div class="timeline-title">A estrutura cresce para sustentar a qualidade</div>
+      <div class="timeline-desc">Investimento em equipamentos de alta produção — capacidade para até 10.000 litros diários. Câmaras frias a -27°C e túnel de congelamento a -37°C passam a garantir uma consistência que poucos concorrentes regionais entregam.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2007 — Segurança alimentar</div>
+      <div class="timeline-title">Implantação do PAS/SENAI — antes de ser tendência</div>
+      <div class="timeline-desc">A Neval adota o Programa de Alimento Seguro ministrado pelo SENAI. Uma decisão que reflete o caráter da empresa: responsabilidade alimentar não como marketing, mas como compromisso estrutural. Isso aconteceu quando ninguém ainda falava em rastreabilidade de forma popular.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-year">2010s — Alcance paranaense</div>
+      <div class="timeline-title">Do interior ao litoral — o Paraná inteiro passa a conhecer</div>
+      <div class="timeline-desc">A distribuição própria — com frota frigorífica controlada — permite que a Neval chegue à capital e ao litoral paranaense sem abrir mão do controle de qualidade. A cadeia de frio é de responsabilidade da empresa do início ao fim.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot dim"></div>
+      <div class="timeline-year">2026 — Rebranding</div>
+      <div class="timeline-title">A marca que sempre existiu finalmente ganha a voz que merecia</div>
+      <div class="timeline-desc">Após mais de 36 anos construindo reputação com produto e operação, a Neval inicia o processo de rebranding — não para mudar quem é, mas para comunicar com clareza e emoção tudo que sempre foi.</div>
+    </div>
+
+  </div>
+
+  <!-- ── 2. BRAND STORY ── -->
+  <div class="section-label">02 · Brand Story — A narrativa emocional da marca</div>
+
+  <div class="brand-story">
+    <div class="bs-label">📖 Narrativa oficial da marca — voz em primeira pessoa do plural</div>
+
+    <p>Tudo começou em <strong>1988, numa cidade do interior do Paraná onde todo mundo se conhece pelo nome.</strong></p>
+
+    <p>Em Irati, uma família decidiu fazer o que famílias do interior fazem de melhor: cuidar das pessoas com o que têm de mais precioso — <strong>tempo, dedicação e orgulho pelo que produzem.</strong></p>
+
+    <p>Não havia atalhos. Cada sorvete saía de mãos que conheciam cada etapa, de olhos que não aceitavam menos do que o melhor. A fábrica cresceu, as câmaras ficaram mais frias, os caminhões passaram a rodar mais longe — <em>mas o compromisso nunca mudou.</em></p>
+
+    <p>A Neval não copiou as grandes. Ela construiu o próprio caminho — <strong>da cidade pequena para o litoral, da família para as famílias do Paraná.</strong></p>
+
+    <p>Enquanto outras marcas gritavam tendências, a gente cuidava da matéria-prima. Enquanto o mercado negociava qualidade por preço, <em>a gente recusava esse trato.</em> Não por teimosia — por princípio.</p>
+
+    <p>Porque sorvete não é só produto. É o final de um almoço de domingo. É a criança correndo para o freezer. É o sorriso que não precisa de explicação. <strong>É o momento em que a vida fica um pouco mais leve.</strong></p>
+
+    <p><em>Isso a Neval sabe fazer desde 1988.</em></p>
+  </div>
+
+  <!-- ── 3. SISTEMA DE CRENÇAS ── -->
+  <div class="section-label">03 · Sistema de Crenças — O que a Neval defende e recusa</div>
+
+  <div class="crencas-wrapper">
+    <div class="crencas-col sim">
+      <div class="crencas-col-header">✅ Defendemos — no que acreditamos</div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🏭</div>
+        <div>Ambiente seguro de produção — da matéria-prima à embalagem, cada etapa é controlada e responsável</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🌾</div>
+        <div>Cuidado rigoroso na escolha de matéria-prima e no manuseio ao longo de toda a cadeia</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">👥</div>
+        <div>Equipe treinada e responsável — pessoas capacitadas são parte essencial do produto final</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🔗</div>
+        <div>Responsabilidade em toda a cadeia produtiva — sem terceirizar o cuidado em nenhum ponto</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🛡️</div>
+        <div>Responsabilidade alimentar como valor estrutural — não como discurso de marketing</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🌱</div>
+        <div>Energia limpa e baixa emissão — consciência ambiental integrada à operação</div>
+      </div>
+    </div>
+
+    <div class="crencas-col nao">
+      <div class="crencas-col-header">❌ Somos contra — o que recusamos</div>
+      <div class="crenca-item">
+        <div class="crenca-icon">📉</div>
+        <div>Nivelamento de preço pelo produto — qualidade não é variável de negociação</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🚫</div>
+        <div>Humilhação por preço — não aceitamos práticas comerciais que diminuem parceiros</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">⛓️</div>
+        <div>Monopólio e chantagem comercial — o mercado deve ser livre e justo para todos</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🏪</div>
+        <div>Políticas que só favorecem o PDV — o equilíbrio da cadeia importa para todos</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🥶</div>
+        <div>Conduta invasiva de equipamentos — não trocamos identidade por espaço em freezer</div>
+      </div>
+      <div class="crenca-item">
+        <div class="crenca-icon">🪜</div>
+        <div>Crescer subindo nas costas dos outros — nosso resultado é construído, não extraído</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. DECLARAÇÃO DE PROPÓSITO ── -->
+  <div class="section-label">04 · Declaração de Propósito — Razão de existir além do lucro</div>
+
+  <div class="proposito">
+    <div class="prop-label">🎯 Propósito central da marca</div>
+    <blockquote>
+      "Criar momentos de felicidade genuína para as famílias do Paraná, levando até cada mesa um sorvete feito com o mesmo cuidado de sempre — do coração de Irati para os melhores momentos da sua vida."
+    </blockquote>
+    <div class="prop-sub">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-bottom:0;">
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#444;margin-bottom:4px;">Para quem</div>
+          <div style="font-size:13.5px;color:#888;">Famílias do Paraná — especialmente do interior</div>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#444;margin-bottom:4px;">O que entrega</div>
+          <div style="font-size:13.5px;color:#888;">Momentos de felicidade real, não fabricada</div>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#444;margin-bottom:4px;">Como faz</div>
+          <div style="font-size:13.5px;color:#888;">Com rigor técnico + alma familiar genuína</div>
+        </div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#444;margin-bottom:4px;">Por que importa</div>
+          <div style="font-size:13.5px;color:#888;">Comemorações merecem marcas que se importam</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. ARQUÉTIPO ── -->
+  <div class="section-label">05 · ⭐ Arquétipo da Marca — Âncora de identidade</div>
+
+  <div class="arquetipo-grid">
+    <div class="arq-card primary">
+      <div class="arq-emoji">🃏</div>
+      <div class="arq-name">Bobo da Corte</div>
+      <div class="arq-percent">Arquétipo primário · 60%</div>
+      <div class="arq-row">
+        <div class="arq-row-label">Missão</div>
+        <div class="arq-row-val">Trazer leveza e alegria genuína para o cotidiano — transformar momentos simples em memórias</div>
+      </div>
+      <div class="arq-row">
+        <div class="arq-row-label">Dom</div>
+        <div class="arq-row-val">Fazer as pessoas sorrirem sem esforço — o prazer como ato de presença, não de performance</div>
+      </div>
+      <div class="arq-row">
+        <div class="arq-row-label">Medo</div>
+        <div class="arq-row-val">Ser irrelevante, chato, sem graça — ser mais uma marca que não diz nada</div>
+      </div>
+      <div class="arq-row">
+        <div class="arq-row-label">Sombra</div>
+        <div class="arq-row-val">Frivolidade sem substância — humor vazio que não sustenta identidade</div>
+      </div>
+      <div class="arq-quote">"A Neval não vende sorvete. Ela vende o sorriso que vem junto."</div>
+    </div>
+
+    <div class="arq-card secondary">
+      <div class="arq-emoji">🤝</div>
+      <div class="arq-name">Prestativo</div>
+      <div class="arq-percent">Arquétipo secundário · 40%</div>
+      <div class="arq-row">
+        <div class="arq-row-label">Missão</div>
+        <div class="arq-row-val">Servir com excelência genuína — cuidar de quem compra do começo ao fim da cadeia</div>
+      </div>
+      <div class="arq-row">
+        <div class="arq-row-label">Dom</div>
+        <div class="arq-row-val">Confiabilidade inabalável — o consumidor sabe exatamente o que vai encontrar, sempre</div>
+      </div>
+      <div class="arq-row">
+        <div class="arq-row-label">Medo</div>
+        <div class="arq-row-val">Decepcionar quem confiou — entregar menos do que foi prometido em qualquer ponto</div>
+      </div>
+      <div class="arq-row">
+        <div class="arq-row-label">Sombra</div>
+        <div class="arq-row-val">Servilidade sem limites — perder a própria identidade tentando agradar a todos</div>
+      </div>
+      <div class="arq-quote">"A Neval faz o que precisa ser feito — com rigor, com cuidado, sem atalhos."</div>
+    </div>
+  </div>
+
+  <div class="eq-arq-wrapper">
+    <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#555;margin-bottom:24px;">A Equação de Identidade da Neval</div>
+    <div class="eq-arq-formula">
+      <div class="eq-arq-block hl">
+        <div class="eq-title">Bobo da Corte</div>
+        <div class="eq-value">Alegria · Leveza · Memória afetiva</div>
+      </div>
+      <div class="eq-arq-op">+</div>
+      <div class="eq-arq-block hl">
+        <div class="eq-title">Prestativo</div>
+        <div class="eq-value">Cuidado · Rigor · Consistência</div>
+      </div>
+      <div class="eq-arq-op">=</div>
+      <div class="eq-arq-block" style="border-color:#fff22;background:#1a1e1a;">
+        <div class="eq-title">Neval</div>
+        <div class="eq-value" style="color:#fff;">Felicidade confiável</div>
+      </div>
+    </div>
+    <div class="eq-arq-result">
+      Alegria + Cuidado = <strong>Qualidade que sorri</strong> &nbsp;·&nbsp;
+      Leveza + Rigor = <strong>Prazer sem culpa</strong> &nbsp;·&nbsp;
+      Memória + Consistência = <strong>Marca que fica</strong>
+    </div>
+  </div>
+
+  <!-- ── 6. PERSONALIDADE ── -->
+  <div class="section-label">06 · Personalidade — Como a Neval fala, age e se comporta</div>
+
+  <div class="tom-grid">
+    <div class="tom-card">
+      <div class="tom-ctx">🤳 Redes Sociais</div>
+      <div class="tom-text">Leve, alegre, com humor afetivo — como um amigo que te oferece sorvete num dia quente sem pedir nada em troca.</div>
+    </div>
+    <div class="tom-card">
+      <div class="tom-ctx">📦 Embalagem</div>
+      <div class="tom-text">Acolhedora, simples, com calor humano. Sem exageros. O produto fala — a marca só confirma.</div>
+    </div>
+    <div class="tom-card">
+      <div class="tom-ctx">🏢 Institucional</div>
+      <div class="tom-text">Orgulhosa da origem, firme nos valores, sem arrogância. Fala com segurança de quem construiu — não de quem herdou.</div>
+    </div>
+    <div class="tom-card">
+      <div class="tom-ctx">⚠️ Crise / Problema</div>
+      <div class="tom-text">Direta, responsável, sem enrolação. Assume, resolve, explica. Nenhum comunicado corporativo vazio.</div>
+    </div>
+    <div class="tom-card">
+      <div class="tom-ctx">🤝 PDV / Trade</div>
+      <div class="tom-text">Parceira, clara, sem chantagem. Fala de valor real — não de desconto desesperado. Constrói junto, não impõe.</div>
+    </div>
+    <div class="tom-card">
+      <div class="tom-ctx">💬 Consumidor direto</div>
+      <div class="tom-text">Próxima, sem pedantismo. Como a marca local que você já conhece — e que finalmente resolveu te contar sua história.</div>
+    </div>
+  </div>
+
+  <div class="vocab-wrapper">
+    <div class="vocab-col usa">
+      <h4>✅ Vocabulário que usa</h4>
+      <span class="tag">família</span>
+      <span class="tag">cuidado</span>
+      <span class="tag">Irati</span>
+      <span class="tag">desde 1988</span>
+      <span class="tag">sabor de verdade</span>
+      <span class="tag">memória</span>
+      <span class="tag">felicidade</span>
+      <span class="tag">nossa gente</span>
+      <span class="tag">feito daqui</span>
+      <span class="tag">confiança</span>
+      <span class="tag">qualidade real</span>
+      <span class="tag">interior do Paraná</span>
+      <span class="tag">domingo</span>
+      <span class="tag">mesa de família</span>
+    </div>
+    <div class="vocab-col evita">
+      <h4>❌ Vocabulário que evita</h4>
+      <span class="tag">premium</span>
+      <span class="tag">exclusivo</span>
+      <span class="tag">sofisticado</span>
+      <span class="tag">disruptivo</span>
+      <span class="tag">inovação</span>
+      <span class="tag">curadoria</span>
+      <span class="tag">artesanal</span>
+      <span class="tag">gourmet</span>
+      <span class="tag">lifestyle</span>
+      <span class="tag">experiência imersiva</span>
+      <span class="tag">sustentável</span>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:0;">A Neval É / A Neval Não É</div>
+
+  <div class="card" style="margin-bottom:48px;">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Dimensão</th>
+            <th>✅ A Neval É</th>
+            <th>❌ A Neval Não É</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge green">Emoção</span></td>
+            <td>Alegre sem ser fútil</td>
+            <td>Engraçadinha sem conteúdo</td>
+          </tr>
+          <tr>
+            <td><span class="badge green">Confiança</span></td>
+            <td>Cuidadosa sem ser arrogante</td>
+            <td>Técnica e fria como manual</td>
+          </tr>
+          <tr>
+            <td><span class="badge green">Origem</span></td>
+            <td>Orgulhosa do interior com maturidade</td>
+            <td>Envergonhada de ser do interior</td>
+          </tr>
+          <tr>
+            <td><span class="badge green">Preço</span></td>
+            <td>Popular sem ser barata</td>
+            <td>Popularesca, sem identidade</td>
+          </tr>
+          <tr>
+            <td><span class="badge green">Tradição</span></td>
+            <td>Familiar sem ser antiquada</td>
+            <td>Nostálgica demais, parada no tempo</td>
+          </tr>
+          <tr>
+            <td><span class="badge green">Presença</span></td>
+            <td>Regional com alcance estadual</td>
+            <td>Genérica, poderia ser de qualquer lugar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── 7. UNIVERSO DA MARCA ── -->
+  <div class="section-label">07 · Universo da Marca — Mundo simbólico e referências</div>
+
+  <div class="universo-grid">
+    <div class="univ-card">
+      <div class="univ-emoji">🍽️</div>
+      <div class="univ-title">Mesa de família</div>
+      <div class="univ-desc">O símbolo central da marca. Pertencimento, celebração, afeto. Onde a Neval sempre quis estar — e está desde 1988.</div>
+    </div>
+    <div class="univ-card">
+      <div class="univ-emoji">☀️</div>
+      <div class="univ-title">Domingo de almoço</div>
+      <div class="univ-desc">O momento mais humano da semana. Quando o tempo desacelera e o que importa é quem está do lado.</div>
+    </div>
+    <div class="univ-card">
+      <div class="univ-emoji">🏘️</div>
+      <div class="univ-title">Cidade pequena</div>
+      <div class="univ-desc">Autenticidade, confiança, raízes. O interior paranaense como território cultural — não como limitação, mas como identidade.</div>
+    </div>
+    <div class="univ-card">
+      <div class="univ-emoji">🧊</div>
+      <div class="univ-title">Câmara fria / bastidores</div>
+      <div class="univ-desc">O rigor invisível que garante o prazer visível. O que o consumidor não vê — mas sente a diferença quando prova.</div>
+    </div>
+    <div class="univ-card">
+      <div class="univ-emoji">🚛</div>
+      <div class="univ-title">Caminhão frigorífico</div>
+      <div class="univ-desc">O compromisso que vai até o fim. Não terceirizamos o cuidado — ele viaja junto com o produto até a última parada.</div>
+    </div>
+    <div class="univ-card">
+      <div class="univ-emoji">📅</div>
+      <div class="univ-title">1988</div>
+      <div class="univ-desc">Prova de tempo, de consistência, de propósito. Mais de três décadas são a razão de acreditar mais poderosa que qualquer campanha.</div>
+    </div>
+    <div class="univ-card">
+      <div class="univ-emoji">👨‍👩‍👧‍👦</div>
+      <div class="univ-title">Família fundadora</div>
+      <div class="univ-desc">A origem familiar não é detalhe histórico — é a alma que diferencia a Neval de qualquer fabricante industrial sem rosto.</div>
+    </div>
+    <div class="univ-card">
+      <div class="univ-emoji">🌲</div>
+      <div class="univ-title">Paraná</div>
+      <div class="univ-desc">O estado como território emocional. Não um mapa — uma identidade compartilhada com quem escolhe o que é daqui.</div>
+    </div>
+    <div class="univ-card">
+      <div class="univ-emoji">😄</div>
+      <div class="univ-title">O sorriso inevitável</div>
+      <div class="univ-desc">O sorvete que aparece na sobremesa e provoca aquele sorriso involuntário. Esse momento é a razão de ser da marca.</div>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-bottom:48px;">
+    🎨 <strong>Direção estética sugerida:</strong> Paleta quente + fresca (alegria + confiança) · Tipografia amigável sem serifa rígida · Fotografias reais com pessoas de verdade, não modelos · Texturas que remetem ao cuidado artesanal · Elementos visuais do interior paranaense — presentes, não decorativos.
+  </div>
+
+  <!-- ── 8. SLOGAN / POSICIONAMENTO ── -->
+  <div class="section-label">08 · ⭐ Posicionamento Final</div>
+
+  <div class="slogan-box">
+    <div class="sl-label">Linha de posicionamento da marca</div>
+    <div class="sl-main">Feita com <span>cuidado.</span><br>Lembrada com carinho.</div>
+    <div class="sl-sub">Uma linha que une os dois arquétipos da Neval — o rigor do Prestativo e o afeto do Bobo da Corte — em sete palavras que nenhum concorrente regional poderia dizer com a mesma credibilidade.</div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card accent-top">
+      <div class="card-icon">⚙️</div>
+      <h3>Feita com cuidado</h3>
+      <p>Remete à operação — câmaras frias, matéria-prima selecionada, equipe treinada, cadeia produtiva controlada. O Prestativo falando.</p>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">❤️</div>
+      <h3>Lembrada com carinho</h3>
+      <p>Remete à experiência — a memória afetiva, o domingo em família, o sorriso involuntário. O Bobo da Corte falando.</p>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">🔗</div>
+      <h3>A tensão criativa</h3>
+      <p>Rigor + afeto. Técnica + emoção. Interior + alcance. Essa tensão é o território único da Neval — e é o que nenhum concorrente ocupa hoje.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <span>🧨 <strong>Pavio Branding</strong> — Relatório de Branding · Neval Sorvetes</span>
+  <span>Pilar 01 — História · Workshop Jun/2026 · Curitiba, PR</span>
+</footer>
+
+</body>
+</html>
