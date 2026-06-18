@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pilar 04 · Estória — Santa Arquitetura · Andressa Pachalki</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg:       #f2f4f3;
+    --card:     #f2f4f3;
+    --accent:   #22333b;
+    --support1: #a9927d;
+    --support2: #5e503f;
+    --studio:   #D8382D;
+    --text:     #2a2f31;
+    --muted:    #6a6f70;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid #dfe3e1;
+    padding: 36px 48px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-left .studio {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .header-left .studio strong { color: var(--studio); }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .header-left h1 span { color: var(--support1); font-weight: 400; }
+  .header-right { text-align: right; }
+  .header-right .pilar-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--support1); margin-bottom: 4px; }
+  .header-right .pilar-title { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .header-right .pilar-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* LAYOUT */
+  main { max-width: 1080px; margin: 0 auto; padding: 48px 24px 100px; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 22px; margin-top: 8px;
+    display: flex; align-items: center; gap: 12px; font-weight: 700;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #dadedc; }
+
+  /* CARD BASE */
+  .card {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .card h3 {
+    font-size: 13.5px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 20px;
+  }
+
+  /* INSIGHT */
+  .insight {
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: var(--text);
+    background: rgba(34,51,59,0.05);
+  }
+  .insight.warm { background: rgba(169,146,125,0.14); border-left-color: var(--support1); }
+  .insight strong { color: var(--accent); }
+  .insight.warm strong { color: var(--support2); }
+
+  /* ─── BLOCO 17 — BRAND STORY ─── */
+  .story-timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e2e6e4;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .story-phase { padding: 32px 28px; position: relative; }
+  .story-phase:not(:last-child) { border-right: 1px solid #e2e6e4; }
+  .story-phase.p1 { border-top: 4px solid var(--muted); background: var(--card); }
+  .story-phase.p2 { border-top: 4px solid var(--support1); background: rgba(169,146,125,0.06); }
+  .story-phase.p3 { border-top: 4px solid var(--accent); background: rgba(34,51,59,0.05); }
+  .phase-tag {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .p1 .phase-tag { color: var(--muted); }
+  .p2 .phase-tag { color: var(--support1); }
+  .p3 .phase-tag { color: var(--accent); }
+  .phase-headline { font-size: 20px; font-weight: 800; color: var(--accent); margin-bottom: 16px; line-height: 1.25; }
+  .p1 .phase-headline { color: var(--muted); }
+  .phase-body { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+  .phase-body strong { color: var(--support2); }
+  .phase-body em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+  /* sinal divino — destaque especial */
+  .sinal-box {
+    background: var(--accent);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin: 16px 0 0;
+  }
+  .sinal-box .sinal-label {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--support1); font-weight: 700; margin-bottom: 8px;
+  }
+  .sinal-box .sinal-quote {
+    font-size: 14px; color: #fff; font-style: italic; line-height: 1.55;
+  }
+  .sinal-box .sinal-quote strong { color: var(--support1); font-style: normal; }
+
+  /* narrative arc */
+  .narrative-arc {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .narrative-arc h3 {
+    font-size: 13.5px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 24px;
+  }
+  .arc-steps { display: flex; flex-direction: column; gap: 0; }
+  .arc-step {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 20px 0; border-bottom: 1px solid #eaeeec;
+    position: relative;
+  }
+  .arc-step:last-child { border-bottom: none; }
+  .arc-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0; margin-top: 2px;
+    background: rgba(169,146,125,0.15);
+  }
+  .arc-step:first-child .arc-icon { background: rgba(106,111,112,0.12); }
+  .arc-step:last-child .arc-icon { background: rgba(34,51,59,0.12); }
+  .arc-content {}
+  .arc-beat {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 700; color: var(--support1); margin-bottom: 4px;
+  }
+  .arc-step:first-child .arc-beat { color: var(--muted); }
+  .arc-step:last-child .arc-beat { color: var(--accent); }
+  .arc-title { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+  .arc-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .arc-desc strong { color: var(--support2); }
+
+  /* ─── BLOCO 18 — SISTEMA DE CRENÇAS ─── */
+  .crencas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .crenca-col {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .crenca-header {
+    padding: 20px 26px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .crenca-col.defende .crenca-header { background: rgba(34,51,59,0.06); border-bottom: 2px solid var(--accent); }
+  .crenca-col.contra  .crenca-header { background: rgba(216,56,45,0.06); border-bottom: 2px solid var(--studio); }
+  .crenca-header-icon { font-size: 22px; }
+  .crenca-header-text {}
+  .crenca-header-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+  }
+  .crenca-col.defende .crenca-header-label { color: var(--accent); }
+  .crenca-col.contra  .crenca-header-label { color: var(--studio); }
+  .crenca-header-title { font-size: 16px; font-weight: 700; color: var(--accent); }
+  .crenca-items { padding: 20px 26px 26px; display: flex; flex-direction: column; gap: 10px; }
+  .crenca-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 13.5px; line-height: 1.5;
+  }
+  .crenca-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px;
+  }
+  .defende .crenca-dot { background: var(--accent); }
+  .contra  .crenca-dot { background: var(--studio); }
+  .crenca-item-text { color: var(--text); }
+  .crenca-item-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ─── BLOCO 19 — IKIGAI + PROPÓSITO ─── */
+  .ikigai-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .ikigai-quad {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .iq-header {
+    padding: 18px 24px 14px;
+    border-bottom: 1px solid #e2e6e4;
+  }
+  .iq-q1 .iq-header { border-left: 4px solid #7a9aaa; }
+  .iq-q2 .iq-header { border-left: 4px solid var(--support1); }
+  .iq-q3 .iq-header { border-left: 4px solid var(--accent); }
+  .iq-q4 .iq-header { border-left: 4px solid #5a9a70; }
+  .iq-tag {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 4px;
+  }
+  .iq-q1 .iq-tag { color: #7a9aaa; }
+  .iq-q2 .iq-tag { color: var(--support1); }
+  .iq-q3 .iq-tag { color: var(--accent); }
+  .iq-q4 .iq-tag { color: #5a9a70; }
+  .iq-title { font-size: 17px; font-weight: 800; color: var(--accent); }
+  .iq-body { padding: 18px 24px 20px; }
+  .iq-positivos { margin-bottom: 14px; }
+  .iq-sub {
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 700; color: var(--muted); margin-bottom: 8px;
+  }
+  .iq-tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .iq-tag-pill {
+    font-size: 12px; padding: 3px 10px; border-radius: 20px;
+    font-weight: 600;
+  }
+  .iq-q1 .iq-tag-pill { background: rgba(122,154,170,0.15); color: #4a7a9a; }
+  .iq-q2 .iq-tag-pill { background: rgba(169,146,125,0.18); color: var(--support2); }
+  .iq-q3 .iq-tag-pill { background: rgba(34,51,59,0.1); color: var(--accent); }
+  .iq-q4 .iq-tag-pill { background: rgba(90,154,112,0.15); color: #3a7a50; }
+  .iq-declaracao {
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.55;
+  }
+  .iq-q1 .iq-declaracao { background: rgba(122,154,170,0.1); color: #3a5a6a; }
+  .iq-q2 .iq-declaracao { background: rgba(169,146,125,0.12); color: var(--support2); }
+  .iq-q3 .iq-declaracao { background: rgba(34,51,59,0.08); color: var(--accent); }
+  .iq-q4 .iq-declaracao { background: rgba(90,154,112,0.1); color: #2a6a40; }
+  .iq-declaracao strong { font-style: normal; }
+
+  /* propósito final */
+  .proposito-final {
+    background: var(--accent);
+    border-radius: 20px;
+    padding: 44px 48px;
+    margin-bottom: 18px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(34,51,59,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .proposito-final::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 24px;
+    font-size: 180px;
+    color: rgba(169,146,125,0.12);
+    font-family: Georgia, serif;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .pf-label {
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--support1); font-weight: 700; margin-bottom: 20px;
+  }
+  .pf-statement {
+    font-size: 22px; font-weight: 800; color: #fff;
+    line-height: 1.4; margin-bottom: 20px; position: relative; z-index: 1;
+  }
+  .pf-statement em { color: var(--support1); font-style: normal; }
+  .pf-sub {
+    font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.6;
+    max-width: 600px; margin: 0 auto; position: relative; z-index: 1;
+  }
+
+  /* ─── BLOCO 20 — PERSONALIDADE ─── */
+  .personalidade-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .pers-card {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 14px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 10px rgba(34,51,59,0.04);
+  }
+  .pers-emoji { font-size: 26px; margin-bottom: 12px; }
+  .pers-dim {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 700; color: var(--support1); margin-bottom: 6px;
+  }
+  .pers-how { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .pers-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .pers-ex {
+    margin-top: 12px; padding: 10px 14px; background: rgba(169,146,125,0.1);
+    border-radius: 8px; font-size: 12px; color: var(--support2); font-style: italic;
+  }
+
+  /* COMO FALA / NÃO FALA */
+  .fala-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px;
+  }
+  .fala-col {
+    background: var(--card); border: 1px solid #e2e6e4;
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .fala-header {
+    padding: 16px 22px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .fala-col.sim .fala-header { background: rgba(34,51,59,0.07); color: var(--accent); border-bottom: 2px solid var(--accent); }
+  .fala-col.nao .fala-header { background: rgba(216,56,45,0.06); color: var(--studio); border-bottom: 2px solid var(--studio); }
+  .fala-list { padding: 18px 22px; display: flex; flex-direction: column; gap: 10px; }
+  .fala-item { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; }
+  .fala-bullet { font-size: 16px; line-height: 1.4; flex-shrink: 0; }
+  .fala-text { color: var(--text); line-height: 1.5; }
+  .fala-text em { color: var(--muted); font-style: normal; font-size: 12px; display: block; margin-top: 2px; }
+
+  /* ─── BLOCO 21 — UNIVERSO DA MARCA ─── */
+  .universo-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 18px;
+  }
+  .univ-card {
+    background: var(--card); border: 1px solid #e2e6e4;
+    border-radius: 14px; padding: 24px 20px;
+    box-shadow: 0 2px 10px rgba(34,51,59,0.04);
+  }
+  .univ-icon { font-size: 24px; margin-bottom: 12px; }
+  .univ-cat {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 700; color: var(--support1); margin-bottom: 6px;
+  }
+  .univ-title { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+  .univ-refs { display: flex; flex-direction: column; gap: 4px; }
+  .univ-ref { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .univ-ref::before { content: '·'; color: var(--support1); font-weight: 700; }
+
+  /* ─── BLOCO 22 — ARQUÉTIPOS ─── */
+  .arq-trio {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+    background: var(--card); border: 1px solid #e2e6e4;
+    border-radius: 16px; overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .arq-col { padding: 32px 28px; }
+  .arq-col:not(:last-child) { border-right: 1px solid #e2e6e4; }
+  .arq-col.dominante { border-top: 4px solid var(--accent); background: rgba(34,51,59,0.04); }
+  .arq-col.enfase    { border-top: 4px solid var(--support1); background: rgba(169,146,125,0.06); }
+  .arq-col.proposito { border-top: 4px solid #7a9aaa; background: rgba(122,154,170,0.05); }
+  .arq-role {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 10px;
+  }
+  .dominante .arq-role { color: var(--accent); }
+  .enfase    .arq-role { color: var(--support1); }
+  .proposito .arq-role { color: #7a9aaa; }
+  .arq-name { font-size: 26px; font-weight: 900; color: var(--accent); margin-bottom: 4px; line-height: 1.1; }
+  .enfase .arq-name { color: var(--support2); }
+  .proposito .arq-name { color: #4a7a9a; }
+  .arq-tagline { font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 18px; }
+  .arq-attrs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .arq-attr { display: flex; gap: 10px; align-items: flex-start; }
+  .arq-attr-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 6px;
+  }
+  .dominante .arq-attr-dot { background: var(--accent); }
+  .enfase    .arq-attr-dot { background: var(--support1); }
+  .proposito .arq-attr-dot { background: #7a9aaa; }
+  .arq-attr-text { font-size: 13.5px; color: var(--text); line-height: 1.5; }
+  .arq-attr-text strong { color: var(--accent); }
+  .enfase .arq-attr-text strong { color: var(--support2); }
+  .proposito .arq-attr-text strong { color: #4a7a9a; }
+  .arq-na-marca {
+    border-radius: 10px; padding: 14px 16px; font-size: 12.5px;
+    line-height: 1.55; font-style: italic;
+  }
+  .dominante .arq-na-marca { background: rgba(34,51,59,0.08); color: var(--accent); }
+  .enfase    .arq-na-marca { background: rgba(169,146,125,0.15); color: var(--support2); }
+  .proposito .arq-na-marca { background: rgba(122,154,170,0.12); color: #3a5a6a; }
+  .arq-na-marca strong { font-style: normal; }
+
+  /* síntese dos arquétipos */
+  .arq-sintese {
+    background: var(--accent); border-radius: 16px; padding: 36px;
+    margin-bottom: 18px; box-shadow: 0 4px 20px rgba(34,51,59,0.14);
+  }
+  .as-label {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--support1); font-weight: 700; margin-bottom: 16px;
+  }
+  .as-formula {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px;
+  }
+  .as-arq {
+    padding: 10px 20px; border-radius: 10px; font-size: 15px; font-weight: 800;
+  }
+  .as-arq.a { background: rgba(255,255,255,0.15); color: #fff; }
+  .as-arq.b { background: rgba(169,146,125,0.3); color: var(--support1); }
+  .as-arq.c { background: rgba(122,154,170,0.25); color: #a8cedd; }
+  .as-plus { font-size: 22px; color: rgba(255,255,255,0.3); }
+  .as-eq { font-size: 22px; color: var(--support1); }
+  .as-result {
+    padding: 14px 22px; background: rgba(255,255,255,0.08);
+    border-radius: 10px; font-size: 16px; font-weight: 800; color: #fff;
+  }
+  .as-desc {
+    font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.65; max-width: 780px;
+  }
+  .as-desc strong { color: var(--support1); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid #dfe3e1;
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    font-size: 12px; color: var(--muted);
+  }
+  footer strong { color: var(--studio); }
+
+  @media (max-width: 780px) {
+    .story-timeline, .crencas-grid, .ikigai-grid, .personalidade-grid,
+    .fala-grid, .universo-grid, .arq-trio { grid-template-columns: 1fr; }
+    .story-phase:not(:last-child) { border-right: none; border-bottom: 1px solid #e2e6e4; }
+    .arq-col:not(:last-child) { border-right: none; border-bottom: 1px solid #e2e6e4; }
+    header { padding: 24px; }
+    .proposito-final { padding: 32px 24px; }
+    .pf-statement { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div class="studio">🧨 <strong>Pavio Branding</strong> — Tese Estratégica</div>
+    <h1>Santa Arquitetura <span>· Andressa Pachalki</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="pilar-label">Pilar 04</div>
+    <div class="pilar-title">📖 Estória</div>
+    <div class="pilar-sub">Brand Story · Crenças · Propósito · Personalidade · Universo · Arquétipo</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 17 — HISTÓRIA DA MARCA
+  ════════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top:0;">📖 Bloco 17 · História da Marca</div>
+  <p style="margin-bottom:20px;color:var(--muted);">A origem, o evento de virada e o estado atual — os três atos que constroem a Brand Story emocional da marca.</p>
+
+  <div class="story-timeline">
+
+    <div class="story-phase p1">
+      <div class="phase-tag">⬅ Ato I · Antes</div>
+      <div class="phase-headline">A menina que não sabia — mas todos já sabiam.</div>
+      <div class="phase-body">
+        Andressa chegou à decisão de carreira sem certeza, mas cercada de sinais que ainda não sabia ler. As pessoas sempre elogiavam seu <strong>talento com o desenho</strong> e sua criatividade. A loja da família pedia uma solução. E uma palavra — <em>arquitetura</em> — soava elegante, chique, como se já pertencesse à sua identidade antes mesmo de ela escolhê-la.
+        <br><br>
+        A dúvida real era entre medicina e arquitetura. Não por aptidão técnica — mas por propósito. Ela queria uma profissão que não desviasse do seu chamado.
+      </div>
+    </div>
+
+    <div class="story-phase p2">
+      <div class="phase-tag">✦ Ato II · O Sinal</div>
+      <div class="phase-headline">Uma passagem. Uma palavra. Uma confirmação.</div>
+      <div class="phase-body">
+        Ela orou. Pediu sinais claros — não queria seguir o próprio desejo disfarçado de vocação. E então, em Gênesis, leu que <em>Deus havia arquitetado todas as coisas</em>. A palavra estava lá, literal. Ela interpretou como uma confirmação — e assim nasceu a convicção de que arquitetura não é só profissão. É um chamado.
+        <div class="sinal-box">
+          <div class="sinal-label">✦ O evento fundador</div>
+          <div class="sinal-quote">"Eu não queria seguir só o que eu queria — eu queria saber se era Deus mostrando. E aí eu vi. <strong>A palavra estava lá.</strong> Arquitetado. Eu achei o máximo."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-phase p3">
+      <div class="phase-tag">➜ Ato III · Hoje</div>
+      <div class="phase-headline">A arquiteta que pensa diferente — e sabe disso.</div>
+      <div class="phase-body">
+        Entrou na faculdade de paraquedas, rodeada de pessoas que já tinham referências. Sentiu a insegurança. Mas quando começou a praticar — no estágio, nos projetos reais — percebeu algo: <em>a forma como ela organiza, pensa e entrega é única</em>. Não é só técnica. É a soma da sua pessoa com a do cliente.
+        <br><br>
+        Hoje está construindo a marca com <strong>intenção e prazo</strong>. Feliz com o processo. Consciente do território que quer ocupar.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ARC NARRATIVO -->
+  <div class="narrative-arc">
+    <h3>🎬 Arco Narrativo — Brand Story para Comunicação</h3>
+    <div class="arc-steps">
+      <div class="arc-step">
+        <div class="arc-icon">🌱</div>
+        <div class="arc-content">
+          <div class="arc-beat">Mundo Comum</div>
+          <div class="arc-title">Uma menina criativa sem nome para o que sentia</div>
+          <div class="arc-desc">Todo mundo reconhecia o talento. Ela ainda não sabia como transformar isso em destino. <strong>Sabia desenhar. Sabia criar. Mas ainda não sabia quem era.</strong></div>
+        </div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-icon">⚡</div>
+        <div class="arc-content">
+          <div class="arc-beat">Chamado à Aventura</div>
+          <div class="arc-title">Uma palavra lida em silêncio mudou tudo</div>
+          <div class="arc-desc">Não foi uma decisão racional. Foi uma convicção. Uma passagem de Gênesis com a palavra <strong>"arquitetado"</strong> — lida como sinal direto. A partir dali, a escolha deixou de ser profissão e virou propósito.</div>
+        </div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-icon">🌀</div>
+        <div class="arc-content">
+          <div class="arc-beat">Provação</div>
+          <div class="arc-title">Entrou sem saber nada — e isso foi o presente</div>
+          <div class="arc-desc">A faculdade chegou com insegurança real: todo mundo tinha referências, ela não. Mas a inexperiência a obrigou a aprender de dentro para fora. <strong>Sem vícios. Sem fórmulas herdadas.</strong></div>
+        </div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-icon">✦</div>
+        <div class="arc-content">
+          <div class="arc-beat">Revelação</div>
+          <div class="arc-title">A mente dela funciona de um jeito que é dela</div>
+          <div class="arc-desc">No primeiro estágio, viu que conseguia entregar algo <strong>"fora da curva"</strong>. Não porque era melhor — mas porque era diferente. A forma como ela organiza o espaço carrega quem ela é. <strong>É a sua pessoa contribuindo para a pessoa do cliente.</strong></div>
+        </div>
+      </div>
+      <div class="arc-step">
+        <div class="arc-icon">🏡</div>
+        <div class="arc-content">
+          <div class="arc-beat">Mundo Transformado</div>
+          <div class="arc-title">Hoje ela cria espaços que as pessoas amam habitar</div>
+          <div class="arc-desc">O objetivo não é entregar uma casa bonita. É entregar um lugar que faz o cliente <strong>querer voltar ao quarto só para olhar de novo</strong>. Um espaço que conta a história de quem mora — com intenção, com afeto, com permanência.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight warm">
+    💡 <strong>Potencial narrativo:</strong> a passagem de Gênesis é um ativo de Brand Story raro — autêntico, emocional e inesperado. Não precisa ser religioso para emocionar. O que toca é a ideia de <em>uma pessoa que ouviu antes de decidir</em> — e isso é exatamente o que ela faz pelos clientes.
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 18 — SISTEMA DE CRENÇAS
+  ════════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top:56px;">🧭 Bloco 18 · Sistema de Crenças</div>
+  <p style="margin-bottom:20px;color:var(--muted);">O que a marca defende com unhas e dentes — e o que ela jamais tolerará dentro de sua conduta.</p>
+
+  <div class="crencas-grid">
+
+    <div class="crenca-col defende">
+      <div class="crenca-header">
+        <div class="crenca-header-icon">✦</div>
+        <div class="crenca-header-text">
+          <div class="crenca-header-label">Defendemos</div>
+          <div class="crenca-header-title">Os inegociáveis da marca</div>
+        </div>
+      </div>
+      <div class="crenca-items">
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Autoria real em cada projeto.</strong></div>
+            <div class="crenca-item-sub">Cada briefing é único. Cada detalhe do cliente tem peso. O que o cliente pede não passa despercebido.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Verdade acima de qualquer proposta.</strong></div>
+            <div class="crenca-item-sub">Erros de projeto são assumidos. Transparência não é fragilidade — é a base da parceria.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>A palavra tem o mesmo valor que o contrato.</strong></div>
+            <div class="crenca-item-sub">Se foi dito, será feito. O combinado verbal é tão sagrado quanto o assinado.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Prazos são respeito, não protocolo.</strong></div>
+            <div class="crenca-item-sub">Cronograma é compromisso com o tempo do cliente. Imprevistos existem — mas o respeito pelo combinado não muda.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Criar para durar — não para preencher lacuna.</strong></div>
+            <div class="crenca-item-sub">Projetos feitos para 15, 20, 25 anos. Sem modismo. Sem desperdício de material, dinheiro ou tempo.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Respeito à legislação e ao Conselho.</strong></div>
+            <div class="crenca-item-sub">Não existem atalhos éticos. RT é norma, não opção. O cliente nunca paga o preço de uma gambiarra legal.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="crenca-col contra">
+      <div class="crenca-header">
+        <div class="crenca-header-icon">✕</div>
+        <div class="crenca-header-text">
+          <div class="crenca-header-label">Somos contra</div>
+          <div class="crenca-header-title">O que jamais entra na marca</div>
+        </div>
+      </div>
+      <div class="crenca-items">
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Ctrl C + Ctrl V de projeto.</strong></div>
+            <div class="crenca-item-sub">Generalizar é o oposto do que a marca é. Se o cliente paga por um projeto único, ele recebe um projeto único.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Briefings vazios.</strong></div>
+            <div class="crenca-item-sub">Fazer briefing por fazer é falta de respeito com o cliente e com o projeto. Ouvir é o primeiro ato de autoria.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Esconder problemas do cliente.</strong></div>
+            <div class="crenca-item-sub">Situações grandes não ficam escondidas. O cliente sabe, junto. A solução também é construída junto.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Falsa expectativa.</strong></div>
+            <div class="crenca-item-sub">Agenda cheia é agenda cheia. Antes de uma primeira reunião que não vai a lugar nenhum, a verdade é melhor.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Criar para o hoje sem pensar no amanhã.</strong></div>
+            <div class="crenca-item-sub">Desperdício de material, modismo vazio, entrega que dura cinco anos — são tudo que a marca recusa.</div>
+          </div>
+        </div>
+        <div class="crenca-item">
+          <div class="crenca-dot"></div>
+          <div>
+            <div class="crenca-item-text"><strong>Faca nas costas do cliente.</strong></div>
+            <div class="crenca-item-sub">Nenhum benefício por trás da parceria. Tudo que a Andressa recebe vai para o cliente — em serviço, em cuidado, em resultado.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="insight">
+    🧭 <strong>Implicação estratégica:</strong> o sistema de crenças da Andressa é o contrário do mercado — ela defende o que a maioria ignora e combate o que a maioria normaliza. Isso não é diferencial de comunicação. É diferencial de conduta. <strong>E conduta é a única prova de marca que não pode ser copiada.</strong>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 19 — DECLARAÇÃO DE PROPÓSITO (IKIGAI)
+  ════════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top:56px;">🌸 Bloco 19 · Declaração de Propósito — Ikigai</div>
+  <p style="margin-bottom:20px;color:var(--muted);">Quatro esferas cruzadas — habilidades, interesses, paixão e impacto — construindo a razão de existir da marca.</p>
+
+  <div class="ikigai-grid">
+
+    <!-- Q1 HABILIDADES -->
+    <div class="ikigai-quad iq-q1">
+      <div class="iq-header">
+        <div class="iq-tag">⚙️ Habilidades</div>
+        <div class="iq-title">O que ela faz bem</div>
+      </div>
+      <div class="iq-body">
+        <div class="iq-positivos">
+          <div class="iq-sub">✦ Pontos fortes</div>
+          <div class="iq-tags-row">
+            <span class="iq-tag-pill">Comunicação</span>
+            <span class="iq-tag-pill">Inovação</span>
+            <span class="iq-tag-pill">Criatividade</span>
+            <span class="iq-tag-pill">Maleabilidade</span>
+            <span class="iq-tag-pill">Confiabilidade</span>
+          </div>
+        </div>
+        <div class="iq-declaracao">
+          <strong>Declaração:</strong> "Sou capaz de criar com presença, me adaptar com elegância e entregar com a responsabilidade de quem trata cada projeto como único."
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 INTERESSES -->
+    <div class="ikigai-quad iq-q2">
+      <div class="iq-header">
+        <div class="iq-tag">🔍 Interesses</div>
+        <div class="iq-title">O que ela quer entender</div>
+      </div>
+      <div class="iq-body">
+        <div class="iq-positivos">
+          <div class="iq-sub">✦ O que a move a aprender</div>
+          <div class="iq-tags-row">
+            <span class="iq-tag-pill">Criação & Design</span>
+            <span class="iq-tag-pill">Marketing de marca</span>
+            <span class="iq-tag-pill">Contexto político</span>
+            <span class="iq-tag-pill">Cultura urbana</span>
+            <span class="iq-tag-pill">Pessoas com profundidade</span>
+          </div>
+        </div>
+        <div class="iq-declaracao">
+          <strong>Declaração:</strong> "Me interessa entender o mundo que habito para projetar com verdade — porque uma casa existe dentro de uma cidade, e uma cidade existe dentro de uma cultura."
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 PAIXÃO -->
+    <div class="ikigai-quad iq-q3">
+      <div class="iq-header">
+        <div class="iq-tag">🔥 Paixão</div>
+        <div class="iq-title">O que faz o coração acelerar</div>
+      </div>
+      <div class="iq-body">
+        <div class="iq-positivos">
+          <div class="iq-sub">✦ Paixões declaradas</div>
+          <div class="iq-tags-row">
+            <span class="iq-tag-pill">Histórias de vida</span>
+            <span class="iq-tag-pill">Crescimento pessoal</span>
+            <span class="iq-tag-pill">O porquê das coisas</span>
+            <span class="iq-tag-pill">Filmes criativos</span>
+            <span class="iq-tag-pill">Estudar e palestrar</span>
+            <span class="iq-tag-pill">Leituras profundas</span>
+          </div>
+        </div>
+        <div class="iq-declaracao">
+          <strong>Declaração:</strong> "Sou movida pelo significado — pelo que existe por trás do que existe. Cada espaço tem um porquê, cada decisão tem uma história. Isso é o que me prende."
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 IMPACTO -->
+    <div class="ikigai-quad iq-q4">
+      <div class="iq-header">
+        <div class="iq-tag">🌱 Impacto</div>
+        <div class="iq-title">O que ela quer deixar no mundo</div>
+      </div>
+      <div class="iq-body">
+        <div class="iq-positivos">
+          <div class="iq-sub">✦ Impactos desejados</div>
+          <div class="iq-tags-row">
+            <span class="iq-tag-pill">Amor pelo próprio lar</span>
+            <span class="iq-tag-pill">Desejo de ficar</span>
+            <span class="iq-tag-pill">Espaço com memória</span>
+            <span class="iq-tag-pill">Permanência real</span>
+          </div>
+        </div>
+        <div class="iq-declaracao">
+          <strong>Declaração:</strong> "Quero que o espaço vire um motivo para ficar — que as pessoas voltem ao quarto só para olhar de novo, que amem onde estão, que sintam que alguém pensou nelas."
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROPÓSITO FINAL -->
+  <div class="proposito-final">
+    <div class="pf-label">✦ Declaração Final de Propósito · Cruzamento Ikigai</div>
+    <div class="pf-statement">
+      Transformar o comum em <em>extraordinário</em> — criando espaços que as pessoas amam habitar,<br>
+      porque cada detalhe foi pensado a partir de <em>quem você é</em>.
+    </div>
+    <div class="pf-sub">
+      Da habilidade de criar com presença, ao interesse em entender o mundo, à paixão pelo significado das coisas, ao impacto de fazer alguém amar o lugar onde vive — tudo converge em uma marca que não entrega projetos. Entrega pertencimento.
+    </div>
+  </div>
+
+  <div class="insight warm">
+    🎯 <strong>Nota estratégica:</strong> o propósito da Andressa não está no projeto — está no <em>efeito que o projeto causa em quem vive nele</em>. Isso muda tudo na comunicação: o produto não é a casa. O produto é a sensação de querer ficar.
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 20 — PERSONALIDADE DA MARCA
+  ════════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top:56px;">🎭 Bloco 20 · Personalidade da Marca</div>
+  <p style="margin-bottom:20px;color:var(--muted);">Como a Santa Arquitetura fala, age, se comporta e se apresenta ao mundo.</p>
+
+  <div class="personalidade-grid">
+
+    <div class="pers-card">
+      <div class="pers-emoji">💬</div>
+      <div class="pers-dim">Tom de Voz</div>
+      <div class="pers-how">Próxima, intencional e clara</div>
+      <div class="pers-desc">Fala como alguém que realmente ouviu antes de responder. Sem jargão técnico desnecessário, sem frieza corporativa. A voz da marca tem calor — mas também tem substância.</div>
+      <div class="pers-ex">"Eu olhei para o briefing e percebi que você não quer só mais espaço — você quer um lugar que seja seu."</div>
+    </div>
+
+    <div class="pers-card">
+      <div class="pers-emoji">🤝</div>
+      <div class="pers-dim">Relação com o Cliente</div>
+      <div class="pers-how">Parceira — não prestadora</div>
+      <div class="pers-desc">Não entrega projeto e some. Acompanha, explica o porquê de cada decisão, alinha expectativas desde o início. O cliente sente que está construindo junto — não esperando do outro lado.</div>
+      <div class="pers-ex">"Antes de mostrar qualquer render, eu já sei o que você não abriria mão."</div>
+    </div>
+
+    <div class="pers-card">
+      <div class="pers-emoji">✦</div>
+      <div class="pers-dim">Postura Criativa</div>
+      <div class="pers-how">Autoral sem ser inacessível</div>
+      <div class="pers-desc">Tem ponto de vista estético claro — mas usa esse ponto de vista a serviço do cliente, não do próprio portfólio. Beleza intencional, não beleza exibicionista.</div>
+      <div class="pers-ex">"Eu poderia fazer de uma forma mais chamativa. Mas faria sentido para você? Para a sua rotina? Para o seu dia a dia?"</div>
+    </div>
+
+    <div class="pers-card">
+      <div class="pers-emoji">🔍</div>
+      <div class="pers-dim">Atitude Intelectual</div>
+      <div class="pers-how">Curiosa, profunda, contextualizada</div>
+      <div class="pers-desc">Não faz por fazer. Questiona, pesquisa, entende o contexto urbano, cultural e de vida do cliente antes de qualquer traço. O projeto nasce de perguntas — não de referências prontas.</div>
+      <div class="pers-ex">"Eu preciso entender como você vive para projetar onde você vai viver."</div>
+    </div>
+
+    <div class="pers-card">
+      <div class="pers-emoji">🛡️</div>
+      <div class="pers-dim">Ética e Conduta</div>
+      <div class="pers-how">Direta, responsável, sem esconder</div>
+      <div class="pers-desc">Transparente quando erra, honesta quando a agenda não cabe mais um projeto, firme quando o caminho certo é diferente do que o cliente imaginou. A verdade não assusta — o contrário é que destrói.</div>
+      <div class="pers-ex">"Para esse período, não vou conseguir te atender com a atenção que você merece. Posso te recomendar para quando eu abrir agenda?"</div>
+    </div>
+
+    <div class="pers-card">
+      <div class="pers-emoji">🌱</div>
+      <div class="pers-dim">Visão de Longo Prazo</div>
+      <div class="pers-how">Pensa em décadas, não em tendências</div>
+      <div class="pers-desc">Recusa modismo que envelhece. Projeta para a vida útil real do espaço. Respeita a matéria-prima, o dinheiro do cliente e o tempo de todos. Um parafuso fora do lugar não é detalhe — é caráter.</div>
+      <div class="pers-ex">"Não estou criando para cinco anos. Estou criando para a sua vida nesse espaço."</div>
+    </div>
+
+  </div>
+
+  <!-- COMO FALA / NÃO FALA -->
+  <div class="fala-grid">
+    <div class="fala-col sim">
+      <div class="fala-header">✓ A marca fala assim</div>
+      <div class="fala-list">
+        <div class="fala-item">
+          <div class="fala-bullet">✦</div>
+          <div class="fala-text">Com afeto sem perder a autoridade técnica<em>Quente e competente ao mesmo tempo</em></div>
+        </div>
+        <div class="fala-item">
+          <div class="fala-bullet">✦</div>
+          <div class="fala-text">Explicando o porquê de cada decisão de projeto<em>O cliente entende, não só aprova</em></div>
+        </div>
+        <div class="fala-item">
+          <div class="fala-bullet">✦</div>
+          <div class="fala-text">Contando histórias reais de processo e aprendizado<em>Vulnerabilidade como prova de autenticidade</em></div>
+        </div>
+        <div class="fala-item">
+          <div class="fala-bullet">✦</div>
+          <div class="fala-text">Celebrando o detalhe — o parafuso, o piso, a luz<em>O micro é onde vive o extraordinário</em></div>
+        </div>
+        <div class="fala-item">
+          <div class="fala-bullet">✦</div>
+          <div class="fala-text">Com convicção, sem arrogância<em>Tem ponto de vista. Escuta o outro também.</em></div>
+        </div>
+      </div>
+    </div>
+    <div class="fala-col nao">
+      <div class="fala-header">✕ A marca nunca fala assim</div>
+      <div class="fala-list">
+        <div class="fala-item">
+          <div class="fala-bullet">✕</div>
+          <div class="fala-text">Com jargão técnico para impressionar<em>Não é sobre parecer especialista. É sobre ser.</em></div>
+        </div>
+        <div class="fala-item">
+          <div class="fala-bullet">✕</div>
+          <div class="fala-text">Promovendo tendências sem contexto<em>"O que está na moda" não é linguagem da marca</em></div>
+        </div>
+        <div class="fala-item">
+          <div class="fala-bullet">✕</div>
+          <div class="fala-text">Sendo genérica para agradar a todos<em>Prefere ser a certa para alguém do que ok para todos</em></div>
+        </div>
+        <div class="fala-item">
+          <div class="fala-bullet">✕</div>
+          <div class="fala-text">Escondendo processo ou dificuldades<em>Transparência é parte do produto</em></div>
+        </div>
+        <div class="fala-item">
+          <div class="fala-bullet">✕</div>
+          <div class="fala-text">Com frieza ou distância emocional<em>A marca é presente — antes, durante e depois</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 21 — UNIVERSO DA MARCA
+  ════════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top:56px;">🌍 Bloco 21 · Universo da Marca</div>
+  <p style="margin-bottom:20px;color:var(--muted);">O mundo simbólico, cultural e estético que a Santa Arquitetura habita e comunica.</p>
+
+  <div class="universo-grid">
+
+    <div class="univ-card">
+      <div class="univ-icon">🎬</div>
+      <div class="univ-cat">Referências Visuais</div>
+      <div class="univ-title">Estética com alma e intenção</div>
+      <div class="univ-refs">
+        <div class="univ-ref">Fotografia de interiores que conta história, não só exibe produto</div>
+        <div class="univ-ref">Texturas naturais — madeira, pedra, linho, cimento queimado</div>
+        <div class="univ-ref">Luz natural como protagonista, não como detalhe</div>
+        <div class="univ-ref">Espaços que parecem habitados, não decorados</div>
+        <div class="univ-ref">Paleta terrosa, calorosa, intemporal</div>
+      </div>
+    </div>
+
+    <div class="univ-card">
+      <div class="univ-icon">🎵</div>
+      <div class="univ-cat">Referências Culturais</div>
+      <div class="univ-title">Profundidade, narrativa, propósito</div>
+      <div class="univ-refs">
+        <div class="univ-ref">Podcasts de empreendedorismo com história real</div>
+        <div class="univ-ref">Documentários de arquitetura e design com propósito</div>
+        <div class="univ-ref">Poesia e literatura que toca o cotidiano</div>
+        <div class="univ-ref">Filmes com construção narrativa densa e visual forte</div>
+        <div class="univ-ref">Cultura local de Curitiba — urbana, fria, exigente</div>
+      </div>
+    </div>
+
+    <div class="univ-card">
+      <div class="univ-icon">🏡</div>
+      <div class="univ-cat">Universo do Cliente</div>
+      <div class="univ-title">Quem habita esse mundo</div>
+      <div class="univ-refs">
+        <div class="univ-ref">Quem quer um lar — não só uma casa bem resolvida</div>
+        <div class="univ-ref">Quem se importa com o porquê de cada escolha</div>
+        <div class="univ-ref">Quem valoriza permanência acima de tendência</div>
+        <div class="univ-ref">Quem quer se sentir visto no projeto</div>
+        <div class="univ-ref">Empreendedores que entendem espaço como identidade de marca</div>
+      </div>
+    </div>
+
+    <div class="univ-card">
+      <div class="univ-icon">🌿</div>
+      <div class="univ-cat">Valores Simbólicos</div>
+      <div class="univ-title">O que a marca carrega como símbolo</div>
+      <div class="univ-refs">
+        <div class="univ-ref">Permanência — o oposto do descartável</div>
+        <div class="univ-ref">Pertencimento — o espaço como extensão de quem você é</div>
+        <div class="univ-ref">Intenção — cada detalhe tem um porquê</div>
+        <div class="univ-ref">Afeto — a escuta como ato técnico</div>
+        <div class="univ-ref">Chamado — arquitetura como vocação, não ofício</div>
+      </div>
+    </div>
+
+    <div class="univ-card">
+      <div class="univ-icon">📐</div>
+      <div class="univ-cat">Linguagem Visual</div>
+      <div class="univ-title">Como a marca aparece</div>
+      <div class="univ-refs">
+        <div class="univ-ref">Tipografia com personalidade — séria mas não fria</div>
+        <div class="univ-ref">Fotografia processual — o canteiro, o detalhe, o antes e depois</div>
+        <div class="univ-ref">Sem excesso de elementos — espaço em branco como decisão</div>
+        <div class="univ-ref">Cores que remetem à terra, à construção, à permanência</div>
+        <div class="univ-ref">Identidade que envelheceria bem — como os projetos que assina</div>
+      </div>
+    </div>
+
+    <div class="univ-card">
+      <div class="univ-icon">✍️</div>
+      <div class="univ-cat">Temas de Conteúdo</div>
+      <div class="univ-title">Sobre o que a marca fala</div>
+      <div class="univ-refs">
+        <div class="univ-ref">O porquê por trás de cada decisão de projeto</div>
+        <div class="univ-ref">Histórias de clientes — quem eram, o que queriam, o que ficou</div>
+        <div class="univ-ref">O processo — do briefing ao detalhe final</div>
+        <div class="univ-ref">Permanência vs. modismo na arquitetura</div>
+        <div class="univ-ref">A relação entre espaço, identidade e bem-estar</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       BLOCO 22 — ARQUÉTIPO DA MARCA
+  ════════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top:56px;">⭐ Bloco 22 · Arquétipo da Marca</div>
+  <p style="margin-bottom:20px;color:var(--muted);">A tríade que ancora a identidade da Santa Arquitetura — dominante, ênfase e propósito.</p>
+
+  <div class="arq-trio">
+
+    <!-- CRIADOR — DOMINANTE -->
+    <div class="arq-col dominante">
+      <div class="arq-role">🏛️ Arquétipo Dominante · Marca</div>
+      <div class="arq-name">Criador</div>
+      <div class="arq-tagline">"Se você pode imaginar, pode ser feito."</div>
+      <div class="arq-attrs">
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Visão que se materializa:</strong> cria coisas de valor duradouro. Cada projeto é uma obra — não um serviço entregue.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Anti-cópia por princípio:</strong> o Criador não replica. A existência de um projeto genérico é uma ofensa à sua identidade.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Autoria como responsabilidade:</strong> assina com o próprio nome — e sabe o que isso significa. Cada escolha carrega quem ela é.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Permanência como critério:</strong> cria para durar 15, 20, 25 anos. O descartável é o oposto do que produz.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Inovação com propósito:</strong> não inova por novidade — inova porque cada cliente é uma nova equação a resolver de forma única.</div>
+        </div>
+      </div>
+      <div class="arq-na-marca">
+        <strong>Na Santa Arquitetura:</strong> aparece na recusa ao Ctrl+C/Ctrl+V, na autoria declarada em cada projeto, na obsessão com o detalhe que ninguém vai ver mas que faz toda a diferença.
+      </div>
+    </div>
+
+    <!-- AMANTE — ÊNFASE -->
+    <div class="arq-col enfase">
+      <div class="arq-role">💛 Ênfase da Personalidade · Andressa</div>
+      <div class="arq-name">Amante</div>
+      <div class="arq-tagline">"Cada pessoa é única — e merece ser tratada assim."</div>
+      <div class="arq-attrs">
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Escuta como ato técnico:</strong> o Amante não começa com o traço — começa com a pergunta. O briefing é o primeiro gesto de afeto.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Beleza como experiência:</strong> não cria espaços bonitos. Cria espaços que fazem as pessoas sentirem algo — vontade de ficar, de voltar, de mostrar.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Conexão como método:</strong> a proximidade real com o cliente não é simpática — é estratégica. Dissolve a insegurança e abre espaço para o projeto verdadeiro.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Intimidade com o processo:</strong> o cliente não espera do lado de fora. Ele está dentro — entende o porquê de cada escolha, participa de cada decisão relevante.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Impacto emocional como meta:</strong> o sucesso do projeto é medido pelo que o cliente sente quando entra no espaço pronto — não pelo que o portfólio mostra.</div>
+        </div>
+      </div>
+      <div class="arq-na-marca">
+        <strong>Na Santa Arquitetura:</strong> aparece no acolhimento da primeira reunião, na memória dos detalhes do briefing, no "eu não vou conseguir te atender como você merece" dito com cuidado — não com frieza.
+      </div>
+    </div>
+
+    <!-- MAGO — PROPÓSITO -->
+    <div class="arq-col proposito">
+      <div class="arq-role">🔮 Propósito da Marca · Escritório</div>
+      <div class="arq-name">Mago</div>
+      <div class="arq-tagline">"Transformar sonhos em realidade — tornar o comum em extraordinário."</div>
+      <div class="arq-attrs">
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Transformação como entrega:</strong> o cliente chega com um problema, uma vontade, um sonho vago. O Mago devolve uma realidade — concreta, habitável, surpreendente.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Consciência que expande:</strong> durante o processo, o cliente entende coisas que não sabia que precisava entender — sobre espaço, sobre si mesmo, sobre o que realmente queria.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>O ordinário virado extraordinário:</strong> não trabalha só com grandes orçamentos ou projetos icônicos. Encontra o extraordinário no detalhe do quarto da filha, na solução da área de serviço.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Nova fase da vida:</strong> o projeto marca uma transição — antes e depois. A casa pronta é o início de um capítulo, não o fim de uma obra.</div>
+        </div>
+        <div class="arq-attr">
+          <div class="arq-attr-dot"></div>
+          <div class="arq-attr-text"><strong>Visão que os outros não têm:</strong> o cliente não sabe o que é possível — o Mago mostra. E quando entrega, o cliente pensa: "eu não sabia que era isso que eu queria."</div>
+        </div>
+      </div>
+      <div class="arq-na-marca">
+        <strong>Na Santa Arquitetura:</strong> aparece no momento em que o cliente vê o render pela primeira vez, no feedback que diz "você entendeu o que eu nem sabia explicar", na casa que faz o morador ficar parado na porta só olhando.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SÍNTESE DOS ARQUÉTIPOS -->
+  <div class="arq-sintese">
+    <div class="as-label">✦ Síntese · Como a tríade funciona junta</div>
+    <div class="as-formula">
+      <div class="as-arq a">Criador</div>
+      <div class="as-plus">+</div>
+      <div class="as-arq b">Amante</div>
+      <div class="as-plus">+</div>
+      <div class="as-arq c">Mago</div>
+      <div class="as-eq">=</div>
+      <div class="as-result">Autoria com Afeto que Transforma</div>
+    </div>
+    <div class="as-desc">
+      O <strong>Criador</strong> garante que cada projeto seja único e assinado — sem cópia, sem fórmula, sem atalho. O <strong>Amante</strong> garante que esse projeto nasça de uma escuta real — o cliente se sente visto, ouvido, cuidado durante todo o processo. E o <strong>Mago</strong> garante que a entrega surpreenda — que o cliente receba algo além do que conseguia imaginar quando chegou. <strong>Esse é o território que nenhum concorrente ocupa.</strong>
+    </div>
+  </div>
+
+  <div class="insight">
+    ⭐ <strong>Âncora de identidade:</strong> toda decisão de marca — visual, verbal, comportamental — deve passar pelo filtro da tríade. Se uma ação não expressa autoria, afeto ou transformação, ela não pertence à Santa Arquitetura.
+  </div>
+
+</main>
+
+<footer>
+  <span>🧨 <strong>Pavio Branding</strong> — Tese Estratégica · Santa Arquitetura · Andressa Pachalki</span>
+  <span>Pilar 04 — Estória · Brand Story · Crenças · Propósito · Personalidade · Universo · Arquétipo</span>
+</footer>
+
+</body>
+</html>
