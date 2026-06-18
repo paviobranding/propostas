@@ -73,6 +73,73 @@
     margin-top: 4px;
   }
 
+ /* ── AVATAR NO HEADER ── */
+.header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.avatar-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--support1);
+  display: block;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 16px rgba(169,146,125,0.30);
+}
+
+/* anel externo animado */
+.avatar-ring {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    linear-gradient(135deg, var(--support1), var(--accent), var(--support2)) border-box;
+  animation: spin-ring 6s linear infinite;
+  z-index: 0;
+}
+
+@keyframes spin-ring {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.avatar-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.avatar-sub {
+  font-size: 11px;
+  color: var(--support1);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* responsivo — some em telas muito pequenas */
+@media (max-width: 600px) {
+  .header-center { display: none; }
+}
+
+
   /* ── HERO ── */
   .hero {
     background: var(--accent);
@@ -526,17 +593,33 @@
 <body>
 
 <!-- HEADER -->
+<!-- HEADER -->
 <header>
   <div class="header-left">
     <div class="studio">🧨 <strong>Pavio Branding</strong> — Tese Estratégica</div>
     <h1>Santa Arquitetura <span>· Andressa Pachalki</span></h1>
   </div>
+
+  <div class="header-center">
+    <div class="avatar-wrap">
+      <img
+        src="http://paviobranding.github.io/propostas/andi.jpg"
+        alt="Andressa Pachalki"
+        class="avatar-img"
+      />
+      <div class="avatar-ring"></div>
+    </div>
+    <div class="avatar-label">Andressa Pachalki</div>
+    <div class="avatar-sub">Santa Arquitetura</div>
+  </div>
+
   <div class="header-right">
     <div class="doc-label">Relatório Completo</div>
     <div class="doc-title">4 Pilares Estratégicos</div>
     <div class="doc-sub">Curitiba/PR · 2025–2026</div>
   </div>
 </header>
+
 
 <!-- HERO -->
 <div class="hero">
