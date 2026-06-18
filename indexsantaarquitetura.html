@@ -73,64 +73,10 @@
     margin-top: 4px;
   }
 
-  /* ── AVATAR NO HEADER ── */
-  .header-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-  .avatar-wrap {
-    position: relative;
-    width: 80px;
-    height: 80px;
-  }
-  .avatar-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center top;
-    border: 3px solid var(--support1);
-    display: block;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 4px 16px rgba(169,146,125,0.30);
-  }
-  .avatar-ring {
-    position: absolute;
-    inset: -5px;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    background:
-      linear-gradient(var(--bg), var(--bg)) padding-box,
-      linear-gradient(135deg, var(--support1), var(--accent), var(--support2)) border-box;
-    animation: spin-ring 6s linear infinite;
-    z-index: 0;
-  }
-  @keyframes spin-ring {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-  .avatar-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.03em;
-    line-height: 1;
-  }
-  .avatar-sub {
-    font-size: 11px;
-    color: var(--support1);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
   /* ── HERO ── */
   .hero {
     background: var(--accent);
-    padding: 0 0 64px;
+    padding: 64px 48px 64px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -143,36 +89,63 @@
       radial-gradient(ellipse at 20% 50%, rgba(169,146,125,0.18) 0%, transparent 60%),
       radial-gradient(ellipse at 80% 20%, rgba(94,80,63,0.12) 0%, transparent 50%);
     pointer-events: none;
-    z-index: 0;
   }
 
-  /* foto hero */
-  .hero-photo-wrap {
+  /* ── SELO CIRCULAR ── */
+  .hero-selo-wrap {
     position: relative;
     z-index: 1;
-    width: 100%;
-    max-height: 520px;
-    overflow: hidden;
-    margin-bottom: 48px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
   }
-  .hero-photo-wrap img {
-    width: 100%;
-    max-height: 520px;
+  .hero-selo {
+    position: relative;
+    width: 112px;
+    height: 112px;
+  }
+  .hero-selo img {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
     object-fit: cover;
     object-position: center top;
     display: block;
-    filter: brightness(0.82);
+    position: relative;
+    z-index: 2;
+    border: 3px solid var(--support1);
+    box-shadow:
+      0 0 0 5px rgba(169,146,125,0.15),
+      0 8px 32px rgba(0,0,0,0.35);
   }
-  /* fade suave na base da foto para fundir com o texto */
-  .hero-photo-wrap::after {
+  /* anel giratório externo */
+  .hero-selo-ring {
+    position: absolute;
+    inset: -7px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(var(--accent), var(--accent)) padding-box,
+      linear-gradient(135deg, var(--support1), transparent 50%, var(--support2)) border-box;
+    animation: ring-spin 7s linear infinite;
+    z-index: 1;
+  }
+  @keyframes ring-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  /* brilho suave embaixo do selo */
+  .hero-selo::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 160px;
-    background: linear-gradient(to bottom, transparent, var(--accent));
-    pointer-events: none;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 18px;
+    background: radial-gradient(ellipse, rgba(169,146,125,0.35) 0%, transparent 70%);
+    z-index: 0;
+    border-radius: 50%;
   }
 
   .hero-label {
@@ -194,7 +167,6 @@
     margin: 0 auto 20px;
     position: relative;
     z-index: 1;
-    padding: 0 24px;
   }
   .hero h2 em {
     color: var(--support1);
@@ -208,7 +180,6 @@
     line-height: 1.75;
     position: relative;
     z-index: 1;
-    padding: 0 24px;
   }
   .hero-stats {
     display: flex;
@@ -218,7 +189,6 @@
     flex-wrap: wrap;
     position: relative;
     z-index: 1;
-    padding: 0 24px;
   }
   .hero-stat { text-align: center; }
   .hero-stat .hs-num {
@@ -323,34 +293,20 @@
     transform: translateX(6px);
     opacity: 1;
   }
-  .pilar-card:hover .pilar-capa {
-    filter: brightness(0.88);
-  }
 
   .pilar-card.p1 { border-top: 4px solid var(--accent); }
   .pilar-card.p2 { border-top: 4px solid var(--support1); }
   .pilar-card.p3 { border-top: 4px solid var(--support2); }
   .pilar-card.p4 { border-top: 4px solid #7a9aaa; }
 
-  .pilar-capa {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    background: #e0e4e2;
-    transition: filter 0.35s ease;
-  }
-
   .pilar-capa-placeholder {
     width: 100%;
-    height: 180px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 56px;
     background: linear-gradient(135deg, rgba(34,51,59,0.06), rgba(169,146,125,0.12));
-    transition: filter 0.35s ease;
   }
 
   .pilar-body {
@@ -479,10 +435,7 @@
     margin-bottom: 20px;
     position: relative; z-index: 1;
   }
-  .valor-section h3 em {
-    color: var(--support1);
-    font-style: normal;
-  }
+  .valor-section h3 em { color: var(--support1); font-style: normal; }
   .valor-section > p {
     font-size: 15px;
     color: rgba(255,255,255,0.65);
@@ -506,12 +459,7 @@
   }
   .valor-item:hover { background: rgba(255,255,255,0.12); }
   .vi-ico { font-size: 26px; margin-bottom: 12px; }
-  .vi-titulo {
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 8px;
-  }
+  .vi-titulo { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px; }
   .vi-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
 
   /* ── TOMADA DE DECISÃO ── */
@@ -593,8 +541,7 @@
     .valor-grid { grid-template-columns: 1fr; }
     .decisao-grid { grid-template-columns: 1fr; }
     .hero h2 { font-size: 26px; }
-    .hero-photo-wrap { max-height: 340px; }
-    .hero-photo-wrap img { max-height: 340px; }
+    .hero { padding: 48px 24px 56px; }
     .hero-divider { display: none; }
     .valor-section { padding: 36px 24px; }
     .valor-section h3 { font-size: 22px; }
@@ -602,7 +549,6 @@
   }
   @media (max-width: 600px) {
     header { padding: 24px 20px; }
-    .header-center { display: none; }
     main   { padding: 40px 16px 60px; }
     footer { padding: 20px; }
   }
@@ -617,20 +563,6 @@
     <div class="studio">🧨 <strong>Pavio Branding</strong> — Tese Estratégica</div>
     <h1>Santa Arquitetura <span>· Andressa Pachalki</span></h1>
   </div>
-
-  <div class="header-center">
-    <div class="avatar-wrap">
-      <img
-        src="http://paviobranding.github.io/propostas/andi.jpg"
-        alt="Andressa Pachalki"
-        class="avatar-img"
-      />
-      <div class="avatar-ring"></div>
-    </div>
-    <div class="avatar-label">Andressa Pachalki</div>
-    <div class="avatar-sub">Santa Arquitetura</div>
-  </div>
-
   <div class="header-right">
     <div class="doc-label">Relatório Completo</div>
     <div class="doc-title">4 Pilares Estratégicos</div>
@@ -641,16 +573,17 @@
 <!-- HERO -->
 <div class="hero">
 
-  <!-- FOTO EM DESTAQUE — sem texto descritivo -->
-  <div class="hero-photo-wrap">
-    <img
-      src="http://paviobranding.github.io/propostas/andi.jpg"
-      alt=""
-      aria-hidden="true"
-    />
+  <!-- SELO CIRCULAR -->
+  <div class="hero-selo-wrap">
+    <div class="hero-selo">
+      <div class="hero-selo-ring"></div>
+      <img
+        src="http://paviobranding.github.io/propostas/andi.jpg"
+        alt="Andressa Pachalki"
+      />
+    </div>
   </div>
 
-  <!-- TEXTOS DO HERO -->
   <div class="hero-label">✦ Tese Estratégica de Marca</div>
   <h2>O território está vago.<br><em>A Andressa pode ocupá-lo.</em></h2>
   <p>Um relatório aprofundado que cruza workshop de marca, audição de concorrentes e pesquisa de mercado — para construir uma marca que nenhum player ainda ocupa.</p>
@@ -676,6 +609,7 @@
       <div class="hs-label">Personas criadas</div>
     </div>
   </div>
+
 </div>
 
 <!-- MAIN -->
@@ -702,9 +636,7 @@
         <div class="pilar-num">Pilar 01</div>
         <div class="pilar-titulo">🏢 Negócio</div>
         <div class="pilar-subtitulo">Premissas · Objetivos · Riscos · Foco</div>
-        <div class="pilar-desc">
-          A fundação estratégica antes de qualquer decisão de identidade. Onde o mercado está, como a Santa Arquitetura se posiciona nos dois eixos — residencial e B2B — e quais são os riscos e objetivos que guiam o crescimento de Irati a Curitiba.
-        </div>
+        <div class="pilar-desc">A fundação estratégica antes de qualquer decisão de identidade. Onde o mercado está, como a Santa Arquitetura se posiciona nos dois eixos — residencial e B2B — e quais são os riscos e objetivos que guiam o crescimento de Irati a Curitiba.</div>
         <div class="pilar-tags">
           <span class="pilar-tag">Análise de mercado</span>
           <span class="pilar-tag">Modelo de negócio</span>
@@ -716,9 +648,7 @@
             <div class="blocos-label">Blocos cobertos</div>
             <div class="blocos-nums">01 — 04</div>
           </div>
-          <div style="text-align:right;">
-            <div class="pilar-cta">Explorar pilar</div>
-          </div>
+          <div style="text-align:right;"><div class="pilar-cta">Explorar pilar</div></div>
           <div class="pilar-arrow">→</div>
         </div>
       </div>
@@ -731,9 +661,7 @@
         <div class="pilar-num">Pilar 02</div>
         <div class="pilar-titulo">🎯 Audiência</div>
         <div class="pilar-subtitulo">Segmentos · Características · Personas</div>
-        <div class="pilar-desc">
-          Do mercado amplo ao cliente ideal — um funil que cruza pesquisa de comportamento com a visão da Andressa. Duas personas concretas: Helena (o lar) e Rafael (a marca) — e o fio que une os dois: o ódio ao genérico.
-        </div>
+        <div class="pilar-desc">Do mercado amplo ao cliente ideal — um funil que cruza pesquisa de comportamento com a visão da Andressa. Duas personas concretas: Helena (o lar) e Rafael (a marca) — e o fio que une os dois: o ódio ao genérico.</div>
         <div class="pilar-tags">
           <span class="pilar-tag">Persona Helena</span>
           <span class="pilar-tag">Persona Rafael</span>
@@ -745,9 +673,7 @@
             <div class="blocos-label">Blocos cobertos</div>
             <div class="blocos-nums">05 — 10</div>
           </div>
-          <div style="text-align:right;">
-            <div class="pilar-cta">Explorar pilar</div>
-          </div>
+          <div style="text-align:right;"><div class="pilar-cta">Explorar pilar</div></div>
           <div class="pilar-arrow">→</div>
         </div>
       </div>
@@ -755,20 +681,12 @@
 
     <!-- PILAR 03 — VALOR -->
     <a class="pilar-card p3" href="https://paviobranding.github.io/propostas/valorsantaarquitetura.html">
-      <img
-        class="pilar-capa"
-        src="http://paviobranding.github.io/propostas/thaisbittencourt.webp"
-        alt="Mapa de Posicionamento — Santa Arquitetura"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-      />
-      <div class="pilar-capa-placeholder" style="display:none;">💎</div>
+      <div class="pilar-capa-placeholder">💎</div>
       <div class="pilar-body">
         <div class="pilar-num">Pilar 03</div>
         <div class="pilar-titulo">💎 Valor</div>
         <div class="pilar-subtitulo">Percepção · Equação · Escada · Mapa</div>
-        <div class="pilar-desc">
-          A tese central: nenhum player une autoria técnica + afeto + beleza intencional + identidade do morador. O mapa de posicionamento confirma o território vago — e a equação de valor explica por que preço nunca foi o problema real do cliente.
-        </div>
+        <div class="pilar-desc">A tese central: nenhum player une autoria técnica + afeto + beleza intencional + identidade do morador. O mapa de posicionamento confirma o território vago — e a equação de valor explica por que preço nunca foi o problema real do cliente.</div>
         <div class="pilar-tags">
           <span class="pilar-tag">Mapa de posicionamento</span>
           <span class="pilar-tag">Escada de valor</span>
@@ -780,9 +698,7 @@
             <div class="blocos-label">Blocos cobertos</div>
             <div class="blocos-nums">11 — 17</div>
           </div>
-          <div style="text-align:right;">
-            <div class="pilar-cta">Explorar pilar</div>
-          </div>
+          <div style="text-align:right;"><div class="pilar-cta">Explorar pilar</div></div>
           <div class="pilar-arrow">→</div>
         </div>
       </div>
@@ -795,9 +711,7 @@
         <div class="pilar-num">Pilar 04</div>
         <div class="pilar-titulo">📖 Estória</div>
         <div class="pilar-subtitulo">Brand Story · Crenças · Propósito · Arquétipo</div>
-        <div class="pilar-desc">
-          A narrativa que dá alma à marca — do sinal em Gênesis à declaração de propósito. O sistema de crenças inegociáveis, o Ikigai, a personalidade de voz e os três arquétipos que definem como a Santa Arquitetura existe no mundo: Criador + Amante + Mago.
-        </div>
+        <div class="pilar-desc">A narrativa que dá alma à marca — do sinal em Gênesis à declaração de propósito. O sistema de crenças inegociáveis, o Ikigai, a personalidade de voz e os três arquétipos que definem como a Santa Arquitetura existe no mundo: Criador + Amante + Mago.</div>
         <div class="pilar-tags">
           <span class="pilar-tag">Brand Story</span>
           <span class="pilar-tag">Arquétipos</span>
@@ -809,9 +723,7 @@
             <div class="blocos-label">Blocos cobertos</div>
             <div class="blocos-nums">17 — 22</div>
           </div>
-          <div style="text-align:right;">
-            <div class="pilar-cta">Explorar pilar</div>
-          </div>
+          <div style="text-align:right;"><div class="pilar-cta">Explorar pilar</div></div>
           <div class="pilar-arrow">→</div>
         </div>
       </div>
