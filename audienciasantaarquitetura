@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pilar 2 · Audiência — Andressa Pachalki Santa Arquitetura</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f2f4f3; --card: #f2f4f3; --accent: #22333b;
+    --support1: #a9927d; --support2: #5e503f; --studio: #D8382D;
+    --text: #2a2f31; --muted: #6a6f70;
+  }
+
+  body { background: var(--bg); color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px; line-height: 1.7; }
+
+  /* ── HEADER ── */
+  header { border-bottom: 1px solid #dfe3e1; padding: 36px 48px 30px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px; }
+  .header-left .studio { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px; }
+  .header-left .studio strong { color: var(--studio); }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--accent); letter-spacing: 0.01em; }
+  .header-left h1 span { color: var(--support1); font-weight: 400; }
+  .header-right { text-align: right; }
+  .header-right .pilar-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--support1); margin-bottom: 4px; }
+  .header-right .pilar-title { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .header-right .date { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── LAYOUT ── */
+  main { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 22px; margin-top: 8px;
+    display: flex; align-items: center; gap: 12px; font-weight: 700; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #dadedc; }
+
+  /* ── INTRO ── */
+  .intro { background: var(--card); border: 1px solid #e2e6e4;
+    border-left: 4px solid var(--accent); border-radius: 14px;
+    padding: 30px 34px; margin-bottom: 14px; box-shadow: 0 2px 14px rgba(34,51,59,0.04); }
+  .intro h2 { font-size: 18px; color: var(--accent); margin-bottom: 12px; font-weight: 700; }
+  .intro p { color: var(--text); margin-bottom: 12px; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro .hl { color: var(--support2); font-weight: 600; }
+
+  /* ── FUNIL ── */
+  .funil { background: var(--accent); border-radius: 16px; padding: 32px 36px;
+    margin-bottom: 22px; box-shadow: 0 4px 20px rgba(34,51,59,0.12); }
+  .funil-step { display: flex; align-items: center; gap: 18px; padding: 12px 0; }
+  .funil-num { min-width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(169,146,125,0.25); border: 1px solid var(--support1);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+  .funil-body { flex: 1; }
+  .funil-body .ft { color: #fff; font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .funil-body .fd { color: var(--support1); font-size: 13px; }
+  .funil-arrow { text-align: center; color: var(--support1); font-size: 20px; line-height: 0.4; }
+
+  .fio { background: var(--card); border: 1px dashed var(--support1); border-radius: 14px;
+    padding: 24px 28px; margin-bottom: 14px; }
+  .fio .lbl { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--support1); font-weight: 700; margin-bottom: 10px; }
+  .fio p { font-size: 16px; color: var(--accent); font-weight: 500; font-style: italic; margin-bottom: 12px; }
+  .fio .src { font-size: 13px; color: var(--muted); padding: 4px 0 4px 16px; position: relative; }
+  .fio .src::before { content:'•'; position:absolute; left:0; color:var(--support1); font-weight:700; }
+  .fio .src strong { color: var(--support2); }
+
+  /* ── TABELAS ── */
+  .table-wrapper { overflow-x: auto; margin-top: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead tr { border-bottom: 2px solid var(--accent); }
+  thead th { text-align: left; padding: 10px 14px; font-size: 11px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  tbody tr { border-bottom: 1px solid #e6e9e7; }
+  tbody tr:hover { background: #eaedec; }
+  tbody td { padding: 11px 14px; color: var(--text); vertical-align: top; }
+  tbody td:first-child { color: var(--accent); font-weight: 600; }
+  .stars { color: var(--studio); letter-spacing: 1px; }
+
+  /* ── CARDS ── */
+  .card { background: var(--card); border: 1px solid #e2e6e4; border-radius: 14px;
+    padding: 24px; box-shadow: 0 2px 14px rgba(34,51,59,0.04); margin-bottom: 18px; }
+  .card h3 { font-size: 13.5px; font-weight: 700; color: var(--accent);
+    margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── INSIGHT ── */
+  .insight { background: rgba(34,51,59,0.05); border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 16px;
+    font-size: 13.5px; color: var(--text); }
+  .insight strong { color: var(--accent); }
+  .insight.warm { background: rgba(169,146,125,0.14); border-left-color: var(--support1); }
+  .insight.warm strong { color: var(--support2); }
+
+  /* ── VETORES ── */
+  .vetores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 22px; }
+  @media (max-width:680px){ .vetores-grid{ grid-template-columns:1fr; } }
+  .vetor { background: var(--card); border: 1px solid #e2e6e4; border-radius: 14px;
+    padding: 26px; box-shadow: 0 2px 14px rgba(34,51,59,0.05); }
+  .vetor.a { border-top: 3px solid var(--support2); }
+  .vetor.b { border-top: 3px solid var(--support1); }
+  .vetor .v-tag { font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    font-weight: 700; color: var(--studio); margin-bottom: 8px; }
+  .vetor h3 { font-size: 17px; color: var(--accent); font-weight: 800; margin-bottom: 12px; line-height: 1.3; }
+  .vetor p { font-size: 14px; color: var(--muted); }
+  .vetor p strong { color: var(--support2); }
+
+  .comum { background: var(--card); border: 1px solid #e2e6e4; border-left: 4px solid var(--accent);
+    border-radius: 14px; padding: 24px 28px; }
+  .comum h4 { color: var(--accent); font-size: 13px; text-transform: uppercase; letter-spacing: .06em;
+    margin-bottom: 14px; }
+  .comum ul { list-style: none; }
+  .comum li { font-size: 14px; color: var(--text); padding: 6px 0 6px 28px; position: relative; }
+  .comum li .ico { position: absolute; left: 0; top: 5px; }
+
+  /* ── FICHA DE PERSONA ── */
+  .persona { display: grid; grid-template-columns: 300px 1fr; gap: 0;
+    background: var(--card); border: 1px solid #e2e6e4; border-radius: 16px;
+    overflow: hidden; margin-bottom: 28px; box-shadow: 0 2px 16px rgba(34,51,59,0.05); }
+  .persona.res { border-top: 3px solid var(--support2); }
+  .persona.b2b { border-top: 3px solid var(--support1); }
+  .persona-img { position: relative;
+    background: linear-gradient(135deg, rgba(34,51,59,0.06), rgba(169,146,125,0.10));
+    display: flex; align-items: center; justify-content: center; min-height: 100%; padding: 22px; }
+  .persona-img img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover;
+    border-radius: 12px; box-shadow: 0 6px 22px rgba(34,51,59,0.18); display: block; }
+  .persona-body { padding: 28px 30px; }
+  .persona-head { border-bottom: 1px solid #e2e6e4; padding-bottom: 16px; margin-bottom: 18px; }
+  .persona-head .p-name { font-size: 21px; font-weight: 800; color: var(--accent); line-height: 1.2; }
+  .persona-head .p-meta { font-size: 12.5px; color: var(--muted); margin-top: 4px; letter-spacing: 0.02em; }
+  .persona-head .p-role { display: inline-block; margin-top: 10px;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+    color: #fff; padding: 3px 12px; border-radius: 14px; }
+  .persona.res .p-role { background: var(--support2); }
+  .persona.b2b .p-role { background: var(--support1); }
+  .persona-tagline { font-size: 15px; font-style: italic; color: var(--accent);
+    border-left: 3px solid var(--support1); padding: 8px 0 8px 16px; margin-bottom: 20px; line-height: 1.6; }
+  .persona-bio { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; }
+  .persona-bio strong { color: var(--support2); }
+  .p-traits { margin-bottom: 20px; }
+  .p-traits h4 { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent);
+    font-weight: 700; margin-bottom: 8px; }
+  .p-traits .tag { display: inline-block; background: #e8ebe9; border: 1px solid #d8ddda;
+    border-radius: 20px; padding: 3px 12px; font-size: 12px; color: var(--support2); margin: 3px 4px 3px 0; }
+  .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .p-block.full { grid-column: 1 / -1; }
+  .p-block h4 { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 7px; }
+  .p-block ul { list-style: none; }
+  .p-block li { font-size: 13px; color: var(--text); padding: 3px 0 3px 16px; position: relative; }
+  .p-block li::before { content: '•'; position: absolute; left: 0; top: 2px; color: var(--support1); font-weight: 700; }
+  .p-block.fear { background: rgba(216,56,45,0.05); border: 1px solid rgba(216,56,45,0.15);
+    border-radius: 10px; padding: 14px 16px; }
+  .p-block.fear h4 { color: var(--studio); }
+  .p-block.fear li::before { color: var(--studio); }
+  @media (max-width: 720px) {
+    .persona { grid-template-columns: 1fr; }
+    .persona-img img { max-width: 260px; margin: 0 auto; }
+    .persona-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── SÍNTESE ── */
+  .objetivo-final { border: 1px solid #d8ddda; border-radius: 16px; padding: 36px;
+    background: linear-gradient(135deg, rgba(34,51,59,0.04), rgba(169,146,125,0.06));
+    box-shadow: 0 4px 20px rgba(34,51,59,0.06); margin-top: 22px; }
+  .objetivo-final .of-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--support2); margin-bottom: 16px; font-weight: 700; }
+  .objetivo-final blockquote { font-size: 18px; line-height: 1.75; color: var(--accent); font-weight: 500;
+    border: none; padding: 0; margin-bottom: 18px; }
+  .objetivo-final blockquote em { color: var(--support2); font-style: normal; font-weight: 700; }
+  .objetivo-final .of-sub { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid #dfe3e1; padding: 26px 48px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer span { font-size: 12px; color: var(--muted); }
+  footer strong { color: var(--studio); }
+  @media (max-width: 600px) {
+    header { padding: 24px 20px; }
+    main { padding: 32px 16px 60px; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <div class="header-left">
+    <div class="studio">🧨 <strong>Pavio Branding</strong> — Tese Estratégica</div>
+    <h1>Andressa Pachalki <span>· Arquitetura</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="pilar-label">Pilar 02</div>
+    <div class="pilar-title">🎯 Audiência</div>
+    <div class="date">Segmentos → Características → Consumidor Ideal → Personas</div>
+  </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+  <!-- ── INTRODUÇÃO ── -->
+  <div class="section-label">Tese Estratégica Completa</div>
+  <div class="intro">
+    <h2>O fio condutor que a pesquisa confirmou</h2>
+    <p>Este pilar percorre um funil: do <span class="hl">mercado amplo</span> (pesquisa) à <span class="hl">visão do workshop</span> (Andressa), cruzando em um <span class="hl">consumidor ideal</span> e materializando em <strong>duas personas concretas</strong> — Helena & Rafael.</p>
+    <p>O que a pesquisa confirmou é exatamente o que a tese de Segmentos já apontava.</p>
+  </div>
+
+  <!-- ── FUNIL ── -->
+  <div class="section-label" style="margin-top:48px;">🔭 A lógica do funil</div>
+  <div class="funil">
+    <div class="funil-step">
+      <div class="funil-num">1</div>
+      <div class="funil-body"><div class="ft">MERCADO AMPLO (pesquisa)</div><div class="fd">→ 3 grupos viáveis</div></div>
+    </div>
+    <div class="funil-arrow">↓</div>
+    <div class="funil-step">
+      <div class="funil-num">2</div>
+      <div class="funil-body"><div class="ft">VISÃO DO WORKSHOP (Andressa)</div><div class="fd">→ já atende × deseja atender</div></div>
+    </div>
+    <div class="funil-arrow">↓</div>
+    <div class="funil-step">
+      <div class="funil-num">3</div>
+      <div class="funil-body"><div class="ft">CONSUMIDOR IDEAL (cruzamento)</div><div class="fd">→ 2 vetores prioritários</div></div>
+    </div>
+    <div class="funil-arrow">↓</div>
+    <div class="funil-step">
+      <div class="funil-num">4</div>
+      <div class="funil-body"><div class="ft">PERSONAS (concretas)</div><div class="fd">→ Helena & Rafael</div></div>
+    </div>
+  </div>
+
+  <div class="fio">
+    <div class="lbl">🧬 O coração do pilar</div>
+    <p>O cliente da Andressa não compra projeto — compra a expressão fiel de uma identidade.</p>
+    <div class="src"><strong>Residencial:</strong> "Adeus ao minimalismo" → maximalismo afetivo, "casa que expressa quem você é", quiet luxury <em>(Correio Braziliense, Brain, 2026)</em></div>
+    <div class="src"><strong>Comercial:</strong> "design como ativo de marca" → efeito Starbucks, "espaço físico como extensão da marca" <em>(Boldfy, 2026)</em></div>
+    <div class="src" style="border:none;color:var(--accent);font-weight:600;margin-top:8px;">É o mesmo desejo, em dois territórios.</div>
+  </div>
+
+  <!-- ══ BLOCO 5 — SEGMENTOS ══ -->
+  <div class="section-label" style="margin-top:56px;">📊 Bloco 5 · Segmentos</div>
+  <p style="margin-bottom:18px;color:var(--muted);">Por canal, faixa etária e ocasião de consumo. A pesquisa permitiu priorizar os 3 grupos do workshop por <strong style="color:var(--support2)">viabilidade real</strong>.</p>
+  <div class="card">
+    <h3>🎯 Priorização dos grupos do workshop</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Grupo (workshop)</th><th>Tamanho / Crescimento (PR)</th><th>Ticket projeto</th><th>Concorrência</th><th>Prioridade</th></tr></thead>
+        <tbody>
+          <tr><td>🏡 Famílias (alto padrão)</td><td>R$ 52,2 bi BR · +40-50% Curitiba 2026</td><td>R$ 100-200/m²</td><td>Média-alta</td><td class="stars">⭐⭐⭐</td></tr>
+          <tr><td>🎨 Experiência (hotel/criativo)</td><td>R$ 10,6 bi BR · +340 meios PR</td><td>(por empreendimento)</td><td>Média-baixa</td><td class="stars">⭐⭐⭐</td></tr>
+          <tr><td>🏛️ Comercial (café/clínica/rest.)</td><td>+15% faturamento Q1/25</td><td>R$ 150-800/m²</td><td>Média</td><td class="stars">⭐⭐</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🧭 Recortes estratégicos</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Eixo</th><th>Leitura</th></tr></thead>
+        <tbody>
+          <tr><td>📱 Canal</td><td>Indicação (máxima) + Instagram (validação visual) dominam nos dois perfis. Google/Houzz para reputação. Em 2026, Google Ads cresce para captação de intenção.</td></tr>
+          <tr><td>👥 Faixa etária</td><td>29-35 anos (jovens, exigentes, decisão rápida 2-3 meses, digital) × 40-60 anos (tradicionais, cautelosos, 4-6 meses, indicação)</td></tr>
+          <tr><td>🎬 Ocasião</td><td>Residencial: aquisição de imóvel + mudança de fase de vida. Comercial: abrir/renovar negócio onde o espaço ficou atrás da ambição da marca.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight warm">
+      🎯 <strong>Decisão de foco:</strong> os grupos <em>Famílias</em> e <em>Experiência/Comercial</em> concentram o maior potencial × menor atrito. Por isso as duas personas representam exatamente esses dois vetores.
+    </div>
+  </div>
+
+  <!-- ══ BLOCO 6 — CARACTERÍSTICAS ══ -->
+  <div class="section-label" style="margin-top:56px;">🧠 Bloco 6 · Características</div>
+  <p style="margin-bottom:18px;color:var(--muted);">Comportamento do consumidor regional (Curitiba/PR).</p>
+
+  <div class="card">
+    <h3>🏡 Perfil Residencial (Famílias)</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Dimensão</th><th>Característica confirmada</th></tr></thead>
+        <tbody>
+          <tr><td>Renda</td><td>R$ 24 mil – R$ 100 mil/mês (núcleo A1-A2); imóvel médio R$ 1,11 mi</td></tr>
+          <tr><td>Bairros</td><td>Ecoville, Mercês, Cabral, Cristo Rei, Jardim Botânico</td></tr>
+          <tr><td>Decisão</td><td>Casal decide junto — ela lidera o visual (Instagram), ele os custos/cronograma</td></tr>
+          <tr><td>Valor de época</td><td>Quiet luxury — bem-estar real > status; casa como extensão do indivíduo</td></tr>
+          <tr><td>Medo central</td><td>"Render ≠ obra real" + projeto genérico/copia-e-cola</td></tr>
+          <tr><td>Critérios</td><td>Portfólio construído real · identidade sem fórmula · processo transparente · referências</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🎨🏛️ Perfil Empresarial (Experiência/Comercial)</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Dimensão</th><th>Característica confirmada</th></tr></thead>
+        <tbody>
+          <tr><td>Porte</td><td>Faturamento R$ 500 mil – R$ 10 mi+/ano</td></tr>
+          <tr><td>Decisão</td><td>Indicação de parceiros + Instagram; ciclo 1-6 meses</td></tr>
+          <tr><td>Lógica</td><td>Projeto = investimento com ROI, não custo estético</td></tr>
+          <tr><td>Valor de época</td><td>Design como ativo de marca (efeito Starbucks); experiência como diferencial</td></tr>
+          <tr><td>Medo central</td><td>"Projeto não gera retorno" + obra longa = receita parada</td></tr>
+          <tr><td>Critérios</td><td>Experiência comercial específica · entende experiência do cliente · cronograma rígido · custo previsível</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight">
+      🧭 <strong>Padrão regional que une os dois:</strong> Curitiba vive a transição "da ostensão à experiência". O cliente paranaense de alto padrão é exigente, investigativo e valoriza autoria sem fórmula — terreno perfeito para uma marca de identidade.
+    </div>
+  </div>
+
+  <!-- ══ BLOCO 7 — CONSUMIDOR IDEAL ══ -->
+  <div class="section-label" style="margin-top:56px;">🎯 Bloco 7 · Consumidor Ideal</div>
+  <p style="margin-bottom:18px;color:var(--muted);">Cruzando <strong style="color:var(--support2)">viabilidade de mercado × visão de futuro da Andressa × fio condutor da identidade</strong>, chegamos a dois vetores prioritários.</p>
+
+  <div class="vetores-grid">
+    <div class="vetor a">
+      <div class="v-tag">⭐ Vetor A</div>
+      <h3>"A família que quer pertencer"</h3>
+      <p>Casal de alto padrão, em mudança de fase de vida, que rejeita a casa genérica e quer um lar que seja o retrato de quem eles são. Conecta-se ao grupo <strong>Famílias</strong> + aspiração "casais do descanso".</p>
+    </div>
+    <div class="vetor b">
+      <div class="v-tag">⭐ Vetor B</div>
+      <h3>"O empreendedor da experiência"</h3>
+      <p>Dono de negócio com identidade forte, cujo espaço físico ainda não corresponde à ambição da marca, e que vê arquitetura como ativo estratégico. Conecta-se ao grupo <strong>Experiência/Comercial</strong> + aspirações "cafeteria cult", "empreendedor pra frente", "hotel jovem".</p>
+    </div>
+  </div>
+
+  <div class="comum">
+    <h4>🤝 O que ambos têm em comum (o consumidor ideal essencial)</h4>
+    <ul>
+      <li><span class="ico">💡</span>Veem o espaço como expressão de identidade (pessoal ou de marca)</li>
+      <li><span class="ico">🚫</span>Têm como inimigo o genérico, o sem-alma, o copia-e-cola</li>
+      <li><span class="ico">🤝</span>Valorizam autoria com método — não querem fórmula, mas querem segurança</li>
+      <li><span class="ico">📈</span>Estão dispostos a investir em significado, não só em metro quadrado</li>
+    </ul>
+  </div>
+
+  <!-- ══ BLOCO 8 — PERSONAS ══ -->
+  <div class="section-label" style="margin-top:56px;">🧑‍🤝‍🧑 Bloco 8 · Personas</div>
+
+  <!-- PERSONA HELENA -->
+  <div class="persona res">
+    <div class="persona-img">
+      <img src="https://paviobranding.github.io/propostas/personahelena-santaarquitetura.jpg"
+           alt="Persona Helena Marchetti — Andressa Pachalki Arquitetura" loading="lazy" />
+    </div>
+    <div class="persona-body">
+      <div class="persona-head">
+        <div class="p-name">👩 Helena Marchetti</div>
+        <div class="p-meta">34 anos · Ecoville, Curitiba/PR · Dentista (clínica própria), casada com sócio de escritório de advocacia</div>
+        <span class="p-role">🏡 Vetor Famílias · O Lar</span>
+      </div>
+      <div class="persona-tagline">“Eu não quero a casa mais cara — quero a casa que parece comigo.”</div>
+      <div class="persona-bio">
+        Helena e o marido compraram um terreno no Ecoville depois do nascimento da primeira filha. Cresceram vendo apartamentos padronizados e juraram que sua casa seria diferente. Ela segue dezenas de perfis de arquitetura no Instagram, salva referências, mas <strong>se frustra com projetos "bonitos e iguais"</strong>. Valoriza bem-estar, luz natural, áreas verdes e um lar onde a família se reúna e pertença. Não busca ostentação — busca quiet luxury: o luxo de viver bem e de ter um espaço com alma.
+      </div>
+      <div class="p-traits">
+        <h4>🎭 Traços de personalidade</h4>
+        <span class="tag">Exigente e detalhista</span>
+        <span class="tag">Estética apurada</span>
+        <span class="tag">Investigativa</span>
+        <span class="tag">Emocional na escolha, racional na contratação</span>
+        <span class="tag">Antenada em tendências</span>
+        <span class="tag">Familiar</span>
+      </div>
+      <div class="persona-grid">
+        <div class="p-block"><h4>💎 Valoriza</h4><ul>
+          <li>Autenticidade e identidade ("sem fórmula")</li>
+          <li>Bem-estar e qualidade de vida acima do status</li>
+          <li>Portfólio com obras reais construídas</li>
+          <li>Processo transparente e relação de confiança</li></ul></div>
+        <div class="p-block"><h4>✨ Vontades</h4><ul>
+          <li>Uma casa que conte a história da família</li>
+          <li>Sentir orgulho ao receber pessoas</li>
+          <li>Acertar de primeira em uma decisão cara e definitiva</li></ul></div>
+        <div class="p-block"><h4>🧩 Necessidades</h4><ul>
+          <li>Segurança de que o render = obra real</li>
+          <li>Cronograma e custos claros</li>
+          <li>Um arquiteto que escute quem ela é antes de propor</li></ul></div>
+        <div class="p-block"><h4>🎯 Objetivos</h4><ul>
+          <li>Construir o "lugar de pertencer" da família</li>
+          <li>Criar raízes e legado para os filhos</li>
+          <li>Ter um lar funcional, iluminado e com identidade própria</li></ul></div>
+        <div class="p-block fear full"><h4>😰 Medos</h4><ul>
+          <li>Receber uma casa genérica, "cara e sem alma"</li>
+          <li>"Render ≠ obra real" — frustração na entrega</li>
+          <li>Cortes escondidos em fundações/qualidade</li>
+          <li>Processo opaco, arquiteto que some</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONA RAFAEL -->
+  <div class="persona b2b">
+    <div class="persona-img">
+      <img src="https://paviobranding.github.io/propostas/personarafael-santaarquitetura.jpg"
+           alt="Persona Rafael Okabe — Andressa Pachalki Arquitetura" loading="lazy" />
+    </div>
+    <div class="persona-body">
+      <div class="persona-head">
+        <div class="p-name">👨 Rafael Okabe</div>
+        <div class="p-meta">39 anos · Batel, Curitiba/PR · Empreendedor, dono de rede em expansão de cafeterias autorais</div>
+        <span class="p-role">🎨 Vetor Experiência/Comercial · A Marca</span>
+      </div>
+      <div class="persona-tagline">“Meu café já tem alma. Meu espaço precisa provar isso na primeira olhada.”</div>
+      <div class="persona-bio">
+        Rafael construiu uma marca de café com forte identidade — produto premium, comunidade fiel, Instagram movimentado. O negócio rodou, mas ele percebeu que o espaço físico ficou atrás da marca: as pessoas amam o café, mas o ambiente não conta a mesma história. <strong>Inspirado pelo "efeito Starbucks"</strong>, ele entende que o espaço é a marca e gera mídia espontânea. Vai abrir a terceira unidade e quer que ela seja inesquecível — um lugar de experiência, não só de consumo.
+      </div>
+      <div class="p-traits">
+        <h4>🎭 Traços de personalidade</h4>
+        <span class="tag">Visionário e ambicioso</span>
+        <span class="tag">Orientado a ROI</span>
+        <span class="tag">Introvertido com domínio técnico</span>
+        <span class="tag">Exigente com coerência de marca</span>
+        <span class="tag">Decisão ágil ao ver retorno</span>
+        <span class="tag">Comunidade > ego</span>
+      </div>
+      <div class="persona-grid">
+        <div class="p-block"><h4>💎 Valoriza</h4><ul>
+          <li>Design como ativo estratégico, não custo</li>
+          <li>Coerência entre o que entrega e onde entrega</li>
+          <li>Experiência do cliente (fluxo, luz, aroma, "instagramabilidade")</li>
+          <li>Cronograma rígido — tempo de obra = receita parada</li></ul></div>
+        <div class="p-block"><h4>✨ Vontades</h4><ul>
+          <li>Um espaço que vire referência e gere mídia espontânea</li>
+          <li>Que o ambiente "tire o fôlego" e fidelize</li>
+          <li>Escalar a marca sem perder a alma</li></ul></div>
+        <div class="p-block"><h4>🧩 Necessidades</h4><ul>
+          <li>ROI claro do projeto</li>
+          <li>Custo total previsível, sem surpresas</li>
+          <li>Arquiteto com repertório comercial/experiência</li></ul></div>
+        <div class="p-block"><h4>🎯 Objetivos</h4><ul>
+          <li>Transformar cada unidade em experiência memorável</li>
+          <li>Alinhar espaço físico ↔ identidade da marca</li>
+          <li>Diferenciar-se num mercado de cafés saturado</li></ul></div>
+        <div class="p-block fear full"><h4>😰 Medos</h4><ul>
+          <li>Investir e o projeto não gerar retorno</li>
+          <li>Obra longa parando o faturamento</li>
+          <li>Espaço que "entregue menos" que a qualidade do produto</li>
+          <li>Arquiteto que não entenda fluxo comercial e experiência</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SÍNTESE DA TESE ══ -->
+  <div class="section-label" style="margin-top:56px;">🧭 Síntese da Tese — O que isso significa para a marca</div>
+  <div class="card">
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th></th><th>🏡 Helena (Famílias)</th><th>🎨 Rafael (Experiência)</th></tr></thead>
+        <tbody>
+          <tr><td>Compra</td><td>Pertencimento</td><td>Diferenciação</td></tr>
+          <tr><td>Espaço é...</td><td>Extensão da família</td><td>Extensão da marca</td></tr>
+          <tr><td>Inimigo</td><td>Casa genérica</td><td>Espaço incoerente</td></tr>
+          <tr><td>Decisão</td><td>Emocional → racional</td><td>Racional (ROI) → ágil</td></tr>
+          <tr><td>Prova que pede</td><td>Portfólio real + escuta</td><td>Repertório + cronograma</td></tr>
+          <tr><td>Medo-mãe</td><td>"Não vai parecer comigo"</td><td>"Não vai dar retorno"</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="objetivo-final">
+    <div class="of-label">🎯 A grande tese da Audiência</div>
+    <blockquote>
+      A Andressa Pachalki atende dois mundos — o <em>lar</em> e o <em>negócio</em> — mas um único desejo: transformar espaços em <em>expressão fiel de uma identidade</em>. O posicionamento da marca deve falar a língua de quem rejeita o genérico e quer significado, oferecendo <em>autoria com método</em> (a segurança que vence o medo central de ambos).
+    </blockquote>
+    <div class="of-sub">
+      Isso conecta diretamente com o <strong style="color:var(--support2)">Pilar de Posicionamento e Arquétipo</strong> (provável Criador) — e já temos o terreno preparado.
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <span>🧨 <strong>Pavio Branding</strong> — Tese Estratégica · Andressa Pachalki Arquitetura</span>
+  <span>Pilar 02 — Audiência · Segmentos → Características → Consumidor Ideal → Personas</span>
+</footer>
+
+</body>
+</html>
