@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Relatório Negócio — Santa Arquitetura</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f2f4f3;
+    --card: #f2f4f3;
+    --accent: #22333b;
+    --support1: #a9927d;
+    --support2: #5e503f;
+    --studio: #D8382D;
+    --text: #2a2f31;
+    --muted: #6a6f70;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid #dfe3e1;
+    padding: 36px 48px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .header-left .studio {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .header-left .studio strong { color: var(--studio); }
+
+  .header-left h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .header-left h1 span { color: var(--support1); font-weight: 400; }
+
+  .header-right { text-align: right; }
+  .header-right .pilar-label {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--support1); margin-bottom: 4px;
+  }
+  .header-right .pilar-title { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .header-right .date { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ── LAYOUT ── */
+  main { max-width: 1080px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 22px; margin-top: 8px;
+    display: flex; align-items: center; gap: 12px; font-weight: 700;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px; background: #dadedc;
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-left: 4px solid var(--accent);
+    border-radius: 14px;
+    padding: 30px 34px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .intro h2 { font-size: 18px; color: var(--accent); margin-bottom: 12px; font-weight: 700; }
+  .intro p { color: var(--text); margin-bottom: 12px; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro .hl { color: var(--support2); font-weight: 600; }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    margin-bottom: 34px;
+  }
+  .cards-grid.kpi { grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(34,51,59,0.09); }
+  .card.accent-top { border-top: 3px solid var(--accent); }
+
+  .card-icon { font-size: 22px; margin-bottom: 10px; }
+  .card h3 {
+    font-size: 13.5px; font-weight: 700; color: var(--accent);
+    margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .card p { font-size: 14px; color: var(--muted); }
+
+  .card .big-number { font-size: 34px; font-weight: 800; color: var(--accent); line-height: 1.1; margin: 6px 0 4px; }
+  .card .big-label { font-size: 12.5px; color: var(--muted); }
+
+  .full { grid-column: 1 / -1; }
+
+  /* ── TABELAS ── */
+  .table-wrapper { overflow-x: auto; margin-top: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead tr { border-bottom: 2px solid var(--accent); }
+  thead th {
+    text-align: left; padding: 10px 14px; font-size: 11px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 700;
+  }
+  tbody tr { border-bottom: 1px solid #e6e9e7; }
+  tbody tr:hover { background: #eaedec; }
+  tbody td { padding: 11px 14px; color: var(--text); vertical-align: top; }
+  tbody td:first-child { color: var(--accent); font-weight: 600; }
+
+  .badge {
+    display: inline-block; background: rgba(34,51,59,0.08);
+    color: var(--accent); border-radius: 5px; padding: 2px 9px; font-size: 12px; font-weight: 600;
+  }
+  .badge.warm { background: rgba(169,146,125,0.18); color: var(--support2); }
+
+  /* arrow column (vs) */
+  .vs-arrow { color: var(--support1); font-weight: 700; }
+
+  /* ── DETAILS ── */
+  details {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(34,51,59,0.03);
+  }
+  details[open] { border-color: var(--support1); }
+  summary {
+    padding: 17px 22px; cursor: pointer; font-weight: 600; font-size: 14px;
+    color: var(--accent); list-style: none; display: flex; align-items: center;
+    justify-content: space-between; gap: 12px; user-select: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '+'; font-size: 22px; color: var(--support1); font-weight: 300; line-height: 1;
+  }
+  details[open] summary::after { content: '−'; }
+  .summary-icon { margin-right: 8px; }
+  .details-body { padding: 0 22px 22px; font-size: 14px; color: var(--muted); }
+  .details-body p { margin-bottom: 10px; }
+
+  /* ── INSIGHT ── */
+  .insight {
+    background: rgba(34,51,59,0.05);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px; margin-top: 16px; font-size: 13.5px; color: var(--text);
+  }
+  .insight strong { color: var(--accent); }
+  .insight.warm { background: rgba(169,146,125,0.14); border-left-color: var(--support1); }
+  .insight.warm strong { color: var(--support2); }
+
+  /* ── TAGS ── */
+  .tag {
+    display: inline-block; background: #e8ebe9;
+    border: 1px solid #d8ddda; border-radius: 20px; padding: 4px 13px;
+    font-size: 12px; color: var(--support2); margin: 4px 4px 4px 0;
+  }
+
+  /* ── COMPARATIVO INIMIGO ── */
+  .versus h3 { margin-bottom: 4px; }
+
+  /* ── OBJETIVOS ── */
+  .objetivo-row {
+    display: flex; align-items: flex-start; gap: 18px;
+    padding: 16px 0; border-bottom: 1px solid #e6e9e7;
+  }
+  .objetivo-row:last-child { border-bottom: none; }
+  .obj-horizon {
+    min-width: 120px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--support2); font-weight: 700; padding-top: 2px;
+  }
+  .obj-text { font-size: 14px; color: var(--text); }
+
+  /* ── VERTICAIS ── */
+  .vert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width:640px){ .vert-grid{ grid-template-columns:1fr; } }
+  .vert-card { padding: 22px; border-radius: 14px; border: 1px solid #e2e6e4; background: var(--card); box-shadow: 0 2px 12px rgba(34,51,59,0.04); }
+  .vert-card.res { border-top: 3px solid var(--support2); }
+  .vert-card.b2b { border-top: 3px solid var(--support1); }
+  .vert-card h4 { color: var(--accent); font-size: 15px; margin-bottom: 4px; }
+  .vert-card .eixo { font-size: 12px; color: var(--support1); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+
+  /* ── RISCO ── */
+  .risk-card {
+    background: var(--card); border: 1px solid #e2e6e4; border-radius: 12px;
+    padding: 18px; margin-bottom: 12px; display: flex; gap: 16px; align-items: flex-start;
+    box-shadow: 0 2px 10px rgba(34,51,59,0.03); transition: border-color .2s;
+  }
+  .risk-card:hover { border-color: var(--support1); }
+  .risk-number {
+    min-width: 30px; height: 30px; background: rgba(34,51,59,0.08); color: var(--accent);
+    font-weight: 800; font-size: 13px; border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .risk-content h4 { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .risk-content p { font-size: 13.5px; color: var(--muted); }
+
+  /* ── OBJETIVO FINAL ── */
+  .objetivo-final {
+    border: 1px solid #d8ddda; border-radius: 16px; padding: 36px;
+    background: linear-gradient(135deg, rgba(34,51,59,0.04), rgba(169,146,125,0.06));
+    box-shadow: 0 4px 20px rgba(34,51,59,0.06);
+  }
+  .objetivo-final .of-label {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--support2); margin-bottom: 16px; font-weight: 700;
+  }
+  .objetivo-final blockquote {
+    font-size: 18px; line-height: 1.75; color: var(--accent); font-weight: 500;
+    border: none; padding: 0; margin-bottom: 18px;
+  }
+  .objetivo-final blockquote em { color: var(--support2); font-style: normal; font-weight: 700; }
+  .objetivo-final .of-sub { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+  /* ── POSICIONAMENTO HIPÓTESE ── */
+  .hipotese {
+    background: var(--card); border: 1px dashed var(--support1); border-radius: 14px;
+    padding: 26px 30px; margin-top: 14px; box-shadow: 0 2px 12px rgba(34,51,59,0.03);
+  }
+  .hipotese .lbl { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--support1); font-weight: 700; margin-bottom: 10px; }
+  .hipotese q { font-size: 17px; color: var(--accent); font-weight: 500; line-height: 1.7; font-style: italic; }
+
+  /* ════════════════════════════════════════ */
+  /* ── O MAPA · LINHA DO TEMPO FLUIDA ── */
+  /* ════════════════════════════════════════ */
+  .mapa-wrap {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    padding: 34px 30px 30px;
+    margin-bottom: 34px;
+    box-shadow: 0 2px 16px rgba(34,51,59,0.05);
+  }
+  .mapa-head { margin-bottom: 30px; }
+  .mapa-head h3 {
+    font-size: 16px; color: var(--accent); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
+  }
+  .mapa-head p { font-size: 13px; color: var(--muted); }
+
+  /* Trilha vertical contínua */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin-top: 8px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 6px; bottom: 6px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--support1), var(--support2));
+    border-radius: 2px;
+  }
+
+  /* Rótulo de fase na trilha */
+  .tl-phase {
+    position: relative;
+    font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--support1); font-weight: 700;
+    margin: 26px 0 12px;
+  }
+  .tl-phase:first-child { margin-top: 0; }
+  .tl-phase::before {
+    content: '';
+    position: absolute;
+    left: -31px; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--support1);
+  }
+
+  /* Nó da linha do tempo */
+  .tl-node {
+    position: relative;
+    padding: 4px 0 14px;
+  }
+  .tl-node::before {
+    content: '';
+    position: absolute;
+    left: -29px; top: 9px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+  .tl-node .tl-title {
+    font-size: 14px; font-weight: 700; color: var(--accent);
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .tl-node .tl-desc {
+    font-size: 13px; color: var(--muted); margin-top: 3px;
+  }
+  .tl-node .tl-desc .sep { color: var(--support1); margin: 0 6px; }
+
+  /* Marcador de prazo inline */
+  .tl-flag {
+    display: inline-block; background: var(--support2); color: #fff;
+    font-size: 10px; padding: 2px 9px; border-radius: 12px; font-weight: 600;
+    letter-spacing: .04em; text-transform: none;
+  }
+
+  /* Nó de ramificação (sublinhas) */
+  .tl-branch {
+    margin-top: 6px;
+    padding-left: 4px;
+    border-left: 2px dashed #d8ddda;
+    margin-left: 2px;
+  }
+  .tl-branch .tl-sub {
+    position: relative;
+    padding: 5px 0 5px 18px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .tl-branch .tl-sub::before {
+    content: '↳';
+    position: absolute; left: 0; top: 5px;
+    color: var(--support1); font-weight: 700;
+  }
+  .tl-branch .tl-sub strong { color: var(--accent); font-weight: 700; }
+  .tl-branch .tl-sub span { color: var(--muted); }
+
+  /* Nó final */
+  .tl-node.final::before {
+    background: var(--support2);
+    width: 14px; height: 14px;
+    left: -31px;
+  }
+  .tl-node.final .tl-title { color: var(--support2); font-size: 15px; }
+
+  .mapa-notes {
+    border: 1px dashed var(--support1); border-radius: 12px;
+    padding: 14px 18px; margin-top: 26px; font-size: 13px; color: var(--support2);
+    background: rgba(169,146,125,0.08);
+  }
+  .mapa-notes strong { display: block; margin-bottom: 4px; letter-spacing: .04em; color: var(--support2); }
+  .mapa-notes em { color: var(--accent); font-style: italic; }
+
+  @media (max-width:600px){
+    .mapa-wrap { padding: 26px 18px 22px; }
+    .timeline { padding-left: 26px; }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid #dfe3e1; padding: 26px 48px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  footer span { font-size: 12px; color: var(--muted); }
+  footer strong { color: var(--studio); }
+
+  @media (max-width: 600px) {
+    header { padding: 24px 20px; }
+    main { padding: 32px 16px 60px; }
+    footer { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <div class="header-left">
+    <div class="studio">🧨 <strong>Pavio Branding</strong> — Relatório de Branding</div>
+    <h1>Santa Arquitetura <span>· Andressa Pachalki</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="pilar-label">Pilar 01</div>
+    <div class="pilar-title">🏢 Negócio</div>
+    <div class="date">Base: Irati-PR · Praça: Curitiba-PR</div>
+  </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+  <!-- ── INTRODUÇÃO ── -->
+  <div class="section-label">Introdução · O terreno onde a marca pisa</div>
+  <div class="intro">
+    <h2>A base estratégica antes da identidade</h2>
+    <p>O <span class="hl">Pilar Negócio</span> estabelece a fundação estratégica da operação antes de qualquer decisão de nome, identidade ou linguagem. Esta tese cruza cinco fontes: a entrevista fundadora, a Análise de Contexto, o Canvas de Modelo de Negócio, o Mapa de Jornada e a pesquisa externa de mercado.</p>
+    <p>A descoberta central que organiza toda a tese: a Santa Arquitetura <span class="hl">não se estrutura por verticais de mercado, mas por uma horizontal de comportamento</span> — fazer arquitetura sem pressa, com autenticidade e olhar para a beleza — que atravessa dois verticais com chaves de valor distintas: o residencial (o lar) e o B2B (a experiência).</p>
+    <p style="font-size:13px;color:var(--support1);">📌 <em>Santa Arquitetura é um nome provisório — a hipótese mais validada até aqui. Será confirmado na fase de Identidade.</em></p>
+  </div>
+
+  <!-- ── 1. PREMISSAS ── -->
+  <div class="section-label" style="margin-top:52px;">01 · Premissas — Contexto de Mercado</div>
+
+  <!-- KPIs -->
+  <div class="cards-grid kpi">
+    <div class="card accent-top">
+      <div class="card-icon">🏗️</div>
+      <div class="big-number">+20%</div>
+      <div class="big-label">crescimento do alto padrão no Brasil em 2025 (≈ R$ 30 bi em VGV)</div>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">📈</div>
+      <div class="big-number">+40-50%</div>
+      <div class="big-label">projeção de vendas em Curitiba para 2026 — praça de crescimento</div>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">🛋️</div>
+      <div class="big-number">62%</div>
+      <div class="big-label">dos arquitetos brasileiros atuam em interiores — território principal</div>
+    </div>
+    <div class="card accent-top">
+      <div class="card-icon">🏨</div>
+      <div class="big-number">R$ 10,6 bi</div>
+      <div class="big-label">hotelaria de experiência em 2025 — 73% no interior (lastro do B2B)</div>
+    </div>
+  </div>
+
+  <!-- Dois territórios -->
+  <div class="card full" style="margin-bottom:34px;">
+    <h3>📍 Os Dois Territórios da Marca</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>Território</th><th>Papel</th><th>Implicação estratégica</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Irati-PR</td><td>Base de localização — origem, raiz e players de referência</td><td>Operação, repertório local e relacionamento de proximidade</td></tr>
+          <tr><td>Curitiba-PR</td><td>Mercado em potencial — expansão e escala</td><td>Alvo de crescimento, alto padrão aquecido, competição consolidada</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight">
+      💡 Toda análise de mercado, players e oportunidade passa a considerar <strong>dois territórios em camadas diferentes</strong>: base operacional (Irati) e praça de crescimento (Curitiba).
+    </div>
+  </div>
+
+  <!-- Horizontal de comportamento -->
+  <div class="section-label" style="font-size:10.5px;">A horizontal de comportamento que estrutura o negócio</div>
+  <p style="margin-bottom:18px;color:var(--muted);">A marca não se organiza por <em>o que</em> atende, mas por <em>como</em> atende. A mesma horizontal — <strong style="color:var(--support2)">tempo, autenticidade e beleza com significado</strong> — aplica-se a dois verticais:</p>
+  <div class="vert-grid" style="margin-bottom:34px;">
+    <div class="vert-card res">
+      <div class="eixo">Eixo Interno · "cara de casa"</div>
+      <h4>🏡 Residencial</h4>
+      <p style="color:var(--muted);font-size:13.5px;">Lar, pertencimento, intimidade — a vida que acontece. O espaço fala para quem mora.</p>
+    </div>
+    <div class="vert-card b2b">
+      <div class="eixo">Eixo Externo · "obra-prima a ser apreciada"</div>
+      <h4>🏨 B2B (Experiência)</h4>
+      <p style="color:var(--muted);font-size:13.5px;">Experiência, impacto, o visual como ativo de negócio. O espaço fala para quem aprecia e consome.</p>
+    </div>
+  </div>
+  <div class="insight warm" style="margin-bottom:34px;">
+    🔄 O <strong>refinamento fino do segmento</strong> será aprofundado na fase de <strong>Audiência</strong>, com mais dados disponíveis. A diretriz atual é este recorte horizontal.
+  </div>
+
+  <!-- Dobras temáticas -->
+  <details>
+    <summary><span><span class="summary-icon">🌱</span> Tendências socioculturais que validam o propósito</span></summary>
+    <div class="details-body">
+      <p>O mercado se move na direção do que a Andressa já acredita. A cultura valida o propósito — não o contraria:</p>
+      <div style="margin-top:6px;">
+        <span class="tag">🏡 Valorização do lar pós-pandemia</span>
+        <span class="tag">🕰️ Slow living</span>
+        <span class="tag">💛 Arquitetura afetiva</span>
+        <span class="tag">🌿 Bioarquitetura mainstream</span>
+        <span class="tag">📈 Cliente quer alguém gerindo o projeto</span>
+      </div>
+      <div class="insight">
+        💡 A cultura (lenta, afetiva, autoral) <strong>valida o propósito</strong>. O contexto externo joga a favor da tese da marca.
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="summary-icon">🏢</span> Players de referência por território</span></summary>
+    <div class="details-body">
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Território</th><th>Players de referência</th><th>Característica</th></tr></thead>
+          <tbody>
+            <tr><td>Irati-PR (base)</td><td>Maria Eduarda Chami · Cintra · Cabral</td><td>Referência de proximidade e relacionamento local</td></tr>
+            <tr><td>Curitiba-PR (potencial)</td><td>BSA · Pride</td><td>Domínio consolidado do alto padrão</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="insight warm">⚠️ Mapeamento aprofundado (posicionamento, comunicação e visual) será feito no Pilar <strong>Valor</strong>.</div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span><span class="summary-icon">📊</span> Contexto macroeconômico</span></summary>
+    <div class="details-body">
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Indicador</th><th>Dado</th><th>Leitura</th></tr></thead>
+          <tbody>
+            <tr><td>Selic</td><td><span class="badge">~15%</span></td><td>Crédito travado até meados de 2026</td></tr>
+            <tr><td>Disposição a pagar a mais</td><td><span class="badge">29%</span></td><td>Indício de valor por diferencial (sustentabilidade)</td></tr>
+            <tr><td>Segmento mais impactado</td><td>Médio / alto</td><td>Atenção ao ciclo de decisão mais longo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <!-- ── 2. ALINHAMENTO DE OBJETIVOS ── -->
+  <div class="section-label" style="margin-top:56px;">02 · Alinhamento de Objetivos</div>
+
+  <!-- O Inimigo -->
+  <div class="card full versus" style="margin-bottom:20px;">
+    <h3>⚔️ O Inimigo está claro — e é o eixo do diferencial</h3>
+    <p style="margin-bottom:6px;">A marca nasce de uma rejeição articulada ao status quo. O diferencial não é estético — é <strong style="color:var(--support2)">processual e ético</strong>. A beleza é a consequência; o processo íntegro é a causa.</p>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>O que o mercado faz</th><th></th><th>O que a Santa propõe</th></tr></thead>
+        <tbody>
+          <tr><td>Pressa / "ver pronto logo"</td><td class="vs-arrow">→</td><td>Tempo para pensar</td></tr>
+          <tr><td>Ctrl+C + Ctrl+V</td><td class="vs-arrow">→</td><td>Detalhamento autoral</td></tr>
+          <tr><td>Comissão por fora / lesa o cliente</td><td class="vs-arrow">→</td><td>Ética e transparência radical</td></tr>
+          <tr><td>Ignora particularidades</td><td class="vs-arrow">→</td><td>Projeto na escala do ser humano</td></tr>
+          <tr><td>Funcional / superficial</td><td class="vs-arrow">→</td><td>Olhar para o belo / divino</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Ecologia de negócio -->
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🌐</div>
+      <h3>Um modelo que é "ecologia"</h3>
+      <p>A receita não nasce só do projeto. A marca educa o mercado <em>antes</em> de vender — o conteúdo qualifica o lead que valoriza a pauta.</p>
+      <div style="margin-top:12px;">
+        <span class="tag">💰 Projetos (núcleo)</span>
+        <span class="tag">🎓 Consultorias</span>
+        <span class="tag">🎤 Eventos · Cursos · Palestras</span>
+      </div>
+      <div style="margin-top:8px;">
+        <span class="tag">📸 Instagram</span>
+        <span class="tag">▶️ YouTube</span>
+        <span class="tag">👥 Comunidades</span>
+        <span class="tag">🤝 Indicações</span>
+        <span class="tag">🎙️ Podcasts</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧭</div>
+      <h3>O Mapa: a jornada como produto</h3>
+      <p>O fluxo (briefing → estudo de caso → anteprojeto → executivo → acompanhamento → experiência) <strong style="color:var(--support2)">é o produto</strong>. Cada etapa é uma prova de cuidado. <em>Veja o fluxo completo abaixo.</em></p>
+      <div class="insight" style="margin-top:12px;">
+        <strong>Andressa:</strong> "Olhar para cada etapa e perguntar: como eu poderia melhorá-la / otimizá-la?"
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ O MAPA · LINHA DO TEMPO ════════ -->
+  <div class="mapa-wrap">
+    <div class="mapa-head">
+      <h3>🧭 O Mapa — Fluxo de Atendimento &amp; Projeto</h3>
+      <p>A jornada completa do cliente, da origem ao “final feliz” — cada etapa, uma prova de cuidado.</p>
+    </div>
+
+    <div class="timeline">
+
+      <!-- FASE: ENTRADA -->
+      <div class="tl-phase">Entrada · Personagens</div>
+
+      <div class="tl-node">
+        <div class="tl-title">Cliente &amp; Origem</div>
+        <div class="tl-desc">Sara <span class="sep">·</span> chega via Instagram, igreja ou loja</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">WhatsApp</div>
+        <div class="tl-desc">Portfólio <span class="sep">·</span> entender a demanda</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">Briefing</div>
+        <div class="tl-desc">Análise completa da necessidade</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">Contrato <span class="tl-flag">✱ prazo</span></div>
+        <div class="tl-desc">Proposta e valores <span class="sep">·</span> definições</div>
+      </div>
+
+      <!-- FASE: DESENVOLVIMENTO -->
+      <div class="tl-phase">Desenvolvimento · Projeto</div>
+
+      <div class="tl-node">
+        <div class="tl-title">Cronograma &amp; Execução</div>
+        <div class="tl-desc">Etapas e prazos <span class="sep">·</span> estudo de caso e viabilidade</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">Estudo de Caso</div>
+        <div class="tl-desc">Prévias <span class="sep">·</span> base para o projeto</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">Estudo Preliminar</div>
+        <div class="tl-desc">Planta baixa, detalhes técnicos <span class="sep">·</span> ainda passível de mudança</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">Anteprojeto <span class="tl-flag">✱ 3D · decisão</span></div>
+        <div class="tl-desc">Prévia de interiores <span class="sep">·</span> origina o projeto legal</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">Projeto Legal <span class="tl-flag">✱ complemento</span></div>
+        <div class="tl-desc">Prefeitura <span class="sep">·</span> complemento de disciplinas</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">Projeto Executivo</div>
+        <div class="tl-desc">Manual detalhado para mestres de obra, engenheiro etc.</div>
+      </div>
+
+      <!-- FASE: RAMIFICAÇÃO -->
+      <div class="tl-phase">Ramificação · Entrega paralela</div>
+
+      <div class="tl-node">
+        <div class="tl-title">Três frentes simultâneas</div>
+        <div class="tl-branch">
+          <div class="tl-sub"><strong>Acompanhamento</strong> <span>— coordena, orienta, informa e atua de forma cautelar</span></div>
+          <div class="tl-sub"><strong>Projeto de Interiores</strong> <span>— detalhamento</span></div>
+          <div class="tl-sub"><strong>Caderno</strong> <span>— entrega final do projeto</span></div>
+        </div>
+      </div>
+
+      <!-- FASE: CONCLUSÃO -->
+      <div class="tl-phase">Conclusão · Experiência</div>
+
+      <div class="tl-node">
+        <div class="tl-title">Projeto Finalizado</div>
+        <div class="tl-desc">Entrega de caderno <span class="sep">·</span> inauguração</div>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-title">Experiência</div>
+        <div class="tl-desc">O cliente usufrui do espaço projetado</div>
+      </div>
+
+      <div class="tl-node final">
+        <div class="tl-title">★ Final Feliz</div>
+        <div class="tl-desc">“Casa do seu jeito” <span class="sep">·</span> um projeto com tempo para pensar</div>
+      </div>
+
+    </div>
+
+    <!-- NOTA -->
+    <div class="mapa-notes">
+      <strong>📝 Nota estratégica</strong>
+      Olhar para cada etapa e perguntar: <em>como eu poderia melhorá-la / otimizá-la?</em> — o processo é, ele mesmo, o produto e a maior prova de valor da marca.
+    </div>
+  </div>
+
+  <div class="insight warm" style="margin-bottom:34px;">
+    ➡️ <strong>Andressa não busca clientes — busca discípulos da sua visão.</strong> A marca quer ser mensageira de uma "teoria de ver as coisas".
+  </div>
+
+  <!-- Horizontes -->
+  <div class="card full">
+    <h3>🎯 Onde a Santa quer chegar</h3>
+    <div style="margin-top:14px;">
+      <div class="objetivo-row">
+        <div class="obj-horizon">Base</div>
+        <div class="obj-text">Estruturar o posicionamento para <strong>qualificar leads</strong> — parar de "querer abranger tudo de uma vez".</div>
+      </div>
+      <div class="objetivo-row">
+        <div class="obj-horizon">Curto prazo</div>
+        <div class="obj-text">Entrar com diferencial resolutivo e comunicar com clareza as etapas do processo (o "Mapa").</div>
+      </div>
+      <div class="objetivo-row">
+        <div class="obj-horizon">Médio prazo</div>
+        <div class="obj-text">Consolidar <strong>autoridade autoral</strong> — levar as pessoas a refletirem sobre arquitetura na escala humana.</div>
+      </div>
+      <div class="objetivo-row">
+        <div class="obj-horizon">Longo prazo</div>
+        <div class="obj-text">Aprofundar repertório e crescer de Irati para Curitiba, do residencial para o B2B de experiência.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. PONTOS DE ATENÇÃO ── -->
+  <div class="section-label" style="margin-top:56px;">03 · Pontos de Atenção</div>
+
+  <div class="risk-card"><div class="risk-number">1</div><div class="risk-content"><h4>Querer abranger tudo de uma vez</h4><p>Atender residencial + B2B sem foco dilui o posicionamento — a maior dor declarada pela própria Andressa.</p></div></div>
+  <div class="risk-card"><div class="risk-number">2</div><div class="risk-content"><h4>Olhar generalizado</h4><p>Falar para "todo mundo" mata a diferenciação. A clareza de público é pré-condição da marca.</p></div></div>
+  <div class="risk-card"><div class="risk-number">3</div><div class="risk-content"><h4>Não se diferenciar</h4><p>Risco de cair no "Ctrl+C + Ctrl+V" que a própria marca critica.</p></div></div>
+  <div class="risk-card"><div class="risk-number">4</div><div class="risk-content"><h4>Apressar o processo</h4><p>Contradição fatal: a marca prega tempo para pensar, mas pode sucumbir à pressa do próprio branding.</p></div></div>
+  <div class="risk-card"><div class="risk-number">5</div><div class="risk-content"><h4>Ignorar a autenticidade</h4><p>Moldar-se de novo ao padrão de mercado — exatamente o que motivou o rompimento.</p></div></div>
+  <div class="risk-card"><div class="risk-number">6</div><div class="risk-content"><h4>Tensão residencial × B2B</h4><p>Chaves de valor distintas (interno/lar vs. externo/experiência) e ciclos comerciais diferentes. A ponte é o <em>como</em>; o propósito não filtra público, então coexistem sem traição à identidade.</p></div></div>
+  <div class="risk-card"><div class="risk-number">7</div><div class="risk-content"><h4>Pressão competitiva</h4><p>BSA e Pride dominam o alto padrão em Curitiba; em Irati, os players locais são a referência de proximidade.</p></div></div>
+  <div class="risk-card"><div class="risk-number">8</div><div class="risk-content"><h4>Cenário macroeconômico restritivo</h4><p>Selic ~15% trava crédito até meados de 2026; o segmento médio/alto é o mais impactado.</p></div></div>
+
+  <!-- ── 4. OBJETIVO PRINCIPAL ── -->
+  <div class="section-label" style="margin-top:56px;">04 · Objetivo Principal Definido</div>
+
+  <div class="objetivo-final">
+    <div class="of-label">🎯 Foco estratégico central</div>
+    <blockquote>
+      Consolidar o posicionamento da Santa Arquitetura sobre uma <em>horizontal de comportamento</em> — fazer arquitetura sem pressa, com autenticidade e olhar para a beleza — aplicada a dois verticais com chaves de valor distintas: o <em>residencial</em> (lar / interno) e o <em>B2B</em> (experiência / externo). Operar a partir de <em>Irati-PR</em> com olhos em <em>Curitiba</em>, tendo na identidade cristã sua bússola interna — diferencial que dá alma ao processo, sem condicionar a escolha de clientes.
+    </blockquote>
+    <div class="of-sub">
+      O mercado cresce, a cultura valoriza o afetivo e o autoral, e há espaço claro contra a industrialização do setor. O que falta à Santa Arquitetura é <strong style="color:var(--support2)">clareza estruturada de quem ela é</strong> — e comunicar isso de dentro para fora, sem pressa e sem perder a autenticidade.
+    </div>
+  </div>
+
+  <!-- Hipótese de posicionamento -->
+  <div class="hipotese">
+    <div class="lbl">🧭 Direcionamento de posicionamento (hipótese — a validar nos próximos pilares)</div>
+    <q>Arquitetura como ato de cuidado: lares pensados sem pressa, para quem entende que a casa é o lugar onde a vida e o sagrado acontecem.</q>
+  </div>
+
+  <!-- Nota de roteiro -->
+  <div class="insight warm" style="margin-top:22px;">
+    ✝️ <strong>Nota de roteiro:</strong> o propósito cristão é <strong>bússola interna de identidade</strong>, não filtro de cliente. Seu desenvolvimento pertence ao pilar de <strong>Personalidade / História</strong> — não ao Negócio.
+  </div>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <span>🧨 <strong>Pavio Branding</strong> — Relatório de Branding · Santa Arquitetura</span>
+  <span>Pilar 01 — Negócio · Base: Irati-PR · Praça: Curitiba-PR</span>
+</footer>
+
+</body>
+</html>
