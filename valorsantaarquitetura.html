@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pilar 03 · Valor — Santa Arquitetura · Andressa Pachalki</title>
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:       #f2f4f3;
+    --card:     #f2f4f3;
+    --accent:   #22333b;
+    --support1: #a9927d;
+    --support2: #5e503f;
+    --studio:   #D8382D;
+    --text:     #2a2f31;
+    --muted:    #6a6f70;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid #dfe3e1;
+    padding: 36px 48px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-left .studio {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .header-left .studio strong { color: var(--studio); }
+  .header-left h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .header-left h1 span { color: var(--support1); font-weight: 400; }
+  .header-right { text-align: right; }
+  .header-right .pilar-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--support1);
+    margin-bottom: 4px;
+  }
+  .header-right .pilar-title { font-size: 18px; font-weight: 700; color: var(--accent); }
+  .header-right .pilar-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* LAYOUT */
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #dadedc;
+  }
+
+  /* INTRO */
+  .intro {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-left: 4px solid var(--accent);
+    border-radius: 14px;
+    padding: 30px 34px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .intro h2 { font-size: 18px; color: var(--accent); margin-bottom: 12px; font-weight: 700; }
+  .intro p { color: var(--text); margin-bottom: 12px; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro .hl { color: var(--support2); font-weight: 600; }
+
+  /* INSIGHT */
+  .insight {
+    background: rgba(34,51,59,0.05);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 13.5px;
+    color: var(--text);
+  }
+  .insight strong { color: var(--accent); }
+  .insight.warm {
+    background: rgba(169,146,125,0.14);
+    border-left-color: var(--support1);
+  }
+  .insight.warm strong { color: var(--support2); }
+
+  /* PERCEPÇÃO */
+  .percepcao-track {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .perc-col { padding: 28px 26px; position: relative; }
+  .perc-col:not(:last-child) { border-right: 1px solid #e2e6e4; }
+  .perc-col.past   { border-top: 3px solid var(--muted); }
+  .perc-col.now    { border-top: 3px solid var(--support1); background: rgba(169,146,125,0.05); }
+  .perc-col.future { border-top: 3px solid var(--accent); background: rgba(34,51,59,0.04); }
+  .perc-era {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .perc-col.past   .perc-era { color: var(--muted); }
+  .perc-col.now    .perc-era { color: var(--support1); }
+  .perc-col.future .perc-era { color: var(--accent); }
+  .perc-headline { font-size: 17px; font-weight: 800; color: var(--accent); margin-bottom: 10px; line-height: 1.3; }
+  .perc-col.past .perc-headline { color: var(--muted); }
+  .perc-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* EQUAÇÃO */
+  .equacao {
+    background: var(--accent);
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 20px rgba(34,51,59,0.12);
+    text-align: center;
+  }
+  .equacao .eq-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--support1);
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .eq-formula {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .eq-fraction { display: flex; flex-direction: column; align-items: center; }
+  .eq-num, .eq-den { font-size: 14px; font-weight: 700; padding: 10px 20px; }
+  .eq-num { color: #fff; border-bottom: 2px solid var(--support1); }
+  .eq-den { color: var(--support1); }
+  .eq-op { font-size: 28px; font-weight: 300; color: var(--support1); }
+  .eq-result { text-align: left; max-width: 280px; }
+  .eq-result .eq-r-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .eq-result .eq-r-desc { font-size: 13px; color: var(--support1); line-height: 1.5; }
+
+  /* ESCADA */
+  .escada-wrapper {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .escada-wrapper h3 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+  }
+  .escada { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .degrau { display: flex; align-items: stretch; gap: 0; position: relative; margin-bottom: 3px; }
+
+  .degrau:nth-child(5) .degrau-bar { width: 40%; }
+  .degrau:nth-child(4) .degrau-bar { width: 55%; }
+  .degrau:nth-child(3) .degrau-bar { width: 70%; }
+  .degrau:nth-child(2) .degrau-bar { width: 85%; }
+  .degrau:nth-child(1) .degrau-bar { width: 100%; }
+
+  .degrau-bar {
+    display: flex;
+    align-items: center;
+    padding: 16px 22px;
+    border-radius: 10px;
+    gap: 16px;
+    position: relative;
+  }
+  .degrau:nth-child(5) .degrau-bar { background: #dde1df; }
+  .degrau:nth-child(4) .degrau-bar { background: #cdd4d0; }
+  .degrau:nth-child(3) .degrau-bar { background: rgba(169,146,125,0.35); }
+  .degrau:nth-child(2) .degrau-bar { background: rgba(94,80,63,0.45); }
+  .degrau:nth-child(1) .degrau-bar { background: var(--accent); }
+
+  .degrau-num {
+    min-width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .degrau:nth-child(5) .degrau-num { color: var(--muted); background: rgba(0,0,0,0.07); }
+  .degrau:nth-child(4) .degrau-num { color: var(--support2); background: rgba(0,0,0,0.07); }
+  .degrau:nth-child(3) .degrau-num { color: var(--support2); background: rgba(255,255,255,0.25); }
+  .degrau:nth-child(2) .degrau-num { color: #fff; background: rgba(255,255,255,0.2); }
+  .degrau:nth-child(1) .degrau-num { color: var(--support1); background: rgba(255,255,255,0.1); }
+
+  .degrau-content { flex: 1; }
+  .degrau-nivel {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .degrau:nth-child(5) .degrau-nivel { color: var(--muted); }
+  .degrau:nth-child(4) .degrau-nivel { color: var(--support2); }
+  .degrau:nth-child(3) .degrau-nivel { color: var(--support2); }
+  .degrau:nth-child(2) .degrau-nivel { color: rgba(255,255,255,0.7); }
+  .degrau:nth-child(1) .degrau-nivel { color: var(--support1); }
+
+  .degrau-titulo { font-size: 15px; font-weight: 700; line-height: 1.3; margin-bottom: 4px; }
+  .degrau:nth-child(5) .degrau-titulo { color: var(--text); }
+  .degrau:nth-child(4) .degrau-titulo { color: var(--accent); }
+  .degrau:nth-child(3) .degrau-titulo { color: var(--accent); }
+  .degrau:nth-child(2) .degrau-titulo { color: #fff; }
+  .degrau:nth-child(1) .degrau-titulo { color: #fff; }
+
+  .degrau-desc { font-size: 12.5px; line-height: 1.5; }
+  .degrau:nth-child(5) .degrau-desc { color: var(--muted); }
+  .degrau:nth-child(4) .degrau-desc { color: var(--support2); }
+  .degrau:nth-child(3) .degrau-desc { color: var(--support2); }
+  .degrau:nth-child(2) .degrau-desc { color: rgba(255,255,255,0.8); }
+  .degrau:nth-child(1) .degrau-desc { color: rgba(255,255,255,0.85); }
+
+  .degrau-diff {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    align-self: center;
+    flex-shrink: 0;
+  }
+  .degrau:nth-child(5) .degrau-diff { background: rgba(0,0,0,0.08); color: var(--muted); }
+  .degrau:nth-child(4) .degrau-diff { background: rgba(0,0,0,0.08); color: var(--support2); }
+  .degrau:nth-child(3) .degrau-diff { background: rgba(94,80,63,0.2); color: var(--support2); }
+  .degrau:nth-child(2) .degrau-diff { background: rgba(255,255,255,0.15); color: #fff; }
+  .degrau:nth-child(1) .degrau-diff { background: rgba(169,146,125,0.3); color: var(--support1); }
+
+  .escada-legenda {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e6e4;
+    flex-wrap: wrap;
+  }
+  .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* MAPA */
+  .mapa-wrapper {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .mapa-wrapper h3 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .mapa-wrapper .mapa-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .mapa-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 0.9;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .mapa-grid {
+    position: absolute;
+    top: 40px; left: 60px; right: 40px; bottom: 50px;
+    border-left: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  .mapa-grid::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; bottom: 0;
+    width: 1px;
+    background: #dadedc;
+  }
+  .mapa-grid::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+    background: #dadedc;
+  }
+  .eixo-y-top {
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+  }
+  .eixo-y-bot {
+    position: absolute;
+    bottom: 8px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+  .quad-label {
+    position: absolute;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .ql-tl { top: 6%; left: 3%; color: var(--muted); background: rgba(0,0,0,0.04); }
+  .ql-tr { top: 6%; right: 3%; color: var(--accent); background: rgba(34,51,59,0.07); }
+  .ql-bl { bottom: 6%; left: 3%; color: var(--muted); background: rgba(0,0,0,0.04); }
+  .ql-br { bottom: 6%; right: 3%; color: var(--support1); background: rgba(169,146,125,0.12); }
+
+  /* eixo x labels — fora do grid */
+  .eixo-x-left {
+    position: absolute;
+    left: -56px; top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .eixo-x-right {
+    position: absolute;
+    right: -56px; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .player-dot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: default;
+    text-align: center;
+  }
+  .dot-circle {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin: 0 auto 4px;
+  }
+  .dot-label { font-size: 11px; font-weight: 700; white-space: nowrap; line-height: 1.2; }
+  .dot-sub   { font-size: 10px; white-space: nowrap; opacity: 0.75; }
+
+  .player-dot.andressa .dot-circle {
+    width: 22px; height: 22px;
+    background: var(--studio);
+    border-color: #fff;
+    box-shadow: 0 0 0 4px rgba(216,56,45,0.25), 0 4px 14px rgba(216,56,45,0.3);
+  }
+  .player-dot.andressa .dot-label { font-size: 13px; color: var(--studio); }
+  .player-dot.andressa .dot-sub   { color: var(--studio); }
+
+  .mapa-legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid #e2e6e4;
+    justify-content: center;
+  }
+  .mleg { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text); }
+  .mleg-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); flex-shrink: 0; }
+
+  /* PLAYERS GRID */
+  .players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .player-card {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(34,51,59,0.04);
+  }
+  .player-card .pc-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 10px;
+  }
+  .pc-name { font-size: 15px; font-weight: 800; color: var(--accent); line-height: 1.2; }
+  .pc-terr {
+    font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; font-weight: 700;
+    color: #fff; background: var(--support2);
+    padding: 3px 10px; border-radius: 20px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .pc-desc { font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.55; }
+  .pc-gap {
+    background: rgba(169,146,125,0.12);
+    border-left: 3px solid var(--support1);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--support2);
+  }
+  .pc-gap strong { color: var(--accent); }
+
+  /* DIFERENCIAIS */
+  .dif-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .dif-item {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: 0 2px 10px rgba(34,51,59,0.03);
+  }
+  .dif-item.destaque { border-color: var(--support1); background: rgba(169,146,125,0.06); }
+  .dif-ico { font-size: 22px; margin-bottom: 8px; }
+  .dif-titulo { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+  .dif-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+  .dif-quem { margin-top: 10px; font-size: 11px; color: var(--studio); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* OBJETIVO FINAL */
+  .objetivo-final {
+    border: 1px solid #d8ddda;
+    border-radius: 16px;
+    padding: 36px;
+    background: linear-gradient(135deg, rgba(34,51,59,0.04), rgba(169,146,125,0.06));
+    box-shadow: 0 4px 20px rgba(34,51,59,0.06);
+    margin-top: 22px;
+  }
+  .objetivo-final .of-label {
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--support2);
+    margin-bottom: 16px; font-weight: 700;
+  }
+  .objetivo-final blockquote {
+    font-size: 18px; line-height: 1.75;
+    color: var(--accent); font-weight: 500;
+    border: none; padding: 0; margin-bottom: 18px;
+  }
+  .objetivo-final blockquote em { color: var(--support2); font-style: normal; font-weight: 700; }
+  .objetivo-final .of-sub { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid #dfe3e1;
+    padding: 26px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer span { font-size: 12px; color: var(--muted); }
+  footer strong { color: var(--studio); }
+
+  /* RESPONSIVO */
+  @media (max-width: 720px) {
+    .percepcao-track { grid-template-columns: 1fr; }
+    .perc-col:not(:last-child) { border-right: none; border-bottom: 1px solid #e2e6e4; }
+    .dif-grid { grid-template-columns: 1fr; }
+    .degrau-diff { display: none; }
+    .degrau:nth-child(5) .degrau-bar,
+    .degrau:nth-child(4) .degrau-bar,
+    .degrau:nth-child(3) .degrau-bar,
+    .degrau:nth-child(2) .degrau-bar,
+    .degrau:nth-child(1) .degrau-bar { width: 100%; }
+  }
+  @media (max-width: 600px) {
+    header { padding: 24px 20px; }
+    main   { padding: 32px 16px 60px; }
+    footer { padding: 20px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div class="studio">🧨 <strong>Pavio Branding</strong> — Tese Estratégica</div>
+    <h1>Santa Arquitetura <span>· Andressa Pachalki</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="pilar-label">Pilar 03</div>
+    <div class="pilar-title">💎 Valor</div>
+    <div class="pilar-sub">Percepção · Equação · Escada da Marca · Mapa de Posicionamento</div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- INTRODUÇÃO -->
+  <div class="section-label">Introdução · O que este pilar responde</div>
+  <div class="intro">
+    <h2>O território está vago. A Andressa pode ocupá-lo.</h2>
+    <p>Este pilar cruza três fontes: o <span class="hl">workshop de marca</span> (auto-percepção), a <span class="hl">audição de players</span> (5 concorrentes mapeados) e a <span class="hl">pesquisa de mercado</span> (comportamento do consumidor em Curitiba/PR). O resultado é uma tese de valor com diferencial genuíno — um território que nenhum dos concorrentes ocupa.</p>
+    <p>A síntese: <strong>nenhum player une autoria técnica + afeto + beleza intencional + identidade do morador</strong>. Esse espaço pertence à Andressa.</p>
+  </div>
+
+  <!-- BLOCO 11 — PERCEPÇÃO -->
+  <div class="section-label" style="margin-top:56px;">🪞 Bloco 11 · Percepção de Marca</div>
+  <p style="margin-bottom:18px;color:var(--muted);">A jornada de percepção: de onde veio, onde está, para onde vai.</p>
+
+  <div class="percepcao-track">
+    <div class="perc-col past">
+      <div class="perc-era">⬅ Passado</div>
+      <div class="perc-headline">"A mais barata"</div>
+      <div class="perc-desc">Percepção defensiva e de preço. Reconhecida por criatividade e bom gosto, mas ancorada em custo. "A opção em conta" — sem ancoragem em significado.</div>
+    </div>
+    <div class="perc-col now">
+      <div class="perc-era">● Presente</div>
+      <div class="perc-headline">"Confiável que surpreende"</div>
+      <div class="perc-desc">Responsável, detalhista, maleável. Entrega além do combinado. Move-se da "barata" para a "confiável que entrega valor real". Transição em curso.</div>
+    </div>
+    <div class="perc-col future">
+      <div class="perc-era">➜ Futuro desejado</div>
+      <div class="perc-headline">"A arquiteta dos sonhos"</div>
+      <div class="perc-desc">Referência em projetos que expressam a identidade de quem mora ou empreende. A marca que <strong>pensa em você antes de você precisar</strong>.</div>
+    </div>
+  </div>
+
+  <div class="insight warm">
+    ⚠️ <strong>Tensão central a resolver:</strong> a marca nasceu ancorada em preço e precisa migrar para ancoragem em significado. Toda a estratégia serve a essa transição.
+  </div>
+
+  <!-- BLOCO 12 — PREMISSAS -->
+  <div class="section-label" style="margin-top:56px;">✨ Bloco 12 · Premissas de Valor</div>
+
+  <div class="dif-grid">
+    <div class="dif-item destaque">
+      <div class="dif-ico">🏡</div>
+      <div class="dif-titulo">Pertencimento com autoria</div>
+      <div class="dif-desc">Não entrega "uma casa bonita" — entrega um lar que <em>só poderia ser seu</em>. O espaço como extensão da identidade de quem vive.</div>
+    </div>
+    <div class="dif-item destaque">
+      <div class="dif-ico">🔍</div>
+      <div class="dif-titulo">Intencionalidade visível</div>
+      <div class="dif-desc">Cada detalhe tem intenção declarada e o cliente sente isso. "Alguém pensou nisso por mim" — o antídoto ao genérico.</div>
+    </div>
+    <div class="dif-item">
+      <div class="dif-ico">🤝</div>
+      <div class="dif-titulo">Proximidade real</div>
+      <div class="dif-desc">Presença humana no processo, sem limite de reuniões. Acompanhamento que dissolve a insegurança de "por onde começar".</div>
+    </div>
+    <div class="dif-item">
+      <div class="dif-ico">✦</div>
+      <div class="dif-titulo">Beleza como princípio</div>
+      <div class="dif-desc">Estética é função, não decoração. Beleza como princípio inegociável — não enfeite aplicado no final.</div>
+    </div>
+  </div>
+
+  <!-- BLOCO 13 — EQUAÇÃO -->
+  <div class="section-label" style="margin-top:56px;">⚖️ Bloco 13 · Equação de Valor</div>
+
+  <div class="equacao">
+    <div class="eq-label">Como o cliente calcula o valor</div>
+    <div class="eq-formula">
+      <div class="eq-fraction">
+        <div class="eq-num">Autoria + Afeto + Método visível</div>
+        <div class="eq-den">Insegurança do processo + Medo do genérico</div>
+      </div>
+      <div class="eq-op">=</div>
+      <div class="eq-result">
+        <div class="eq-r-title">Valor percebido</div>
+        <div class="eq-r-desc">O atrito real do cliente não é o preço — é o medo de não ser entendido e de receber o genérico. A Andressa dissolve os dois com escuta + intenção + entrega que surpreende.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight">
+    🧭 <strong>Implicação estratégica:</strong> comunicar preço não aumenta valor percebido. Comunicar <strong>método + casos reais + intenção por trás de cada decisão</strong> é o que move o cliente da insegurança para a confiança.
+  </div>
+
+  <!-- BLOCO 14 — ESCADA -->
+  <div class="section-label" style="margin-top:56px;">🪜 Bloco 14 · Escada da Marca</div>
+  <p style="margin-bottom:18px;color:var(--muted);">Do atributo funcional ao propósito — quanto mais alto o degrau, maior o valor percebido e menor a concorrência direta.</p>
+
+  <div class="escada-wrapper">
+    <h3>🪜 Escada de Valor — Santa Arquitetura</h3>
+    <div class="escada">
+
+      <div class="degrau">
+        <div class="degrau-bar">
+          <div class="degrau-num">5</div>
+          <div class="degrau-content">
+            <div class="degrau-nivel">Propósito · Significado</div>
+            <div class="degrau-titulo">"Alguém pensou em mim. Esse espaço tem a minha história."</div>
+            <div class="degrau-desc">O cliente não sente que contratou um serviço — sente que foi cuidado. A casa ou o negócio passa a ser parte da sua narrativa de vida.</div>
+          </div>
+          <div class="degrau-diff">🎯 Território exclusivo</div>
+        </div>
+      </div>
+
+      <div class="degrau">
+        <div class="degrau-bar">
+          <div class="degrau-num">4</div>
+          <div class="degrau-content">
+            <div class="degrau-nivel">Benefício Emocional</div>
+            <div class="degrau-titulo">Sentir-se ouvido, cuidado e pensado</div>
+            <div class="degrau-desc">Segurança de que o projeto nasceu de uma escuta real — não de uma fórmula. O cliente sente que a Andressa "entendeu quem eu sou".</div>
+          </div>
+          <div class="degrau-diff">⚡ Diferencial forte</div>
+        </div>
+      </div>
+
+      <div class="degrau">
+        <div class="degrau-bar">
+          <div class="degrau-num">3</div>
+          <div class="degrau-content">
+            <div class="degrau-nivel">Benefício Subjetivo</div>
+            <div class="degrau-titulo">Um espaço com identidade — bonito e com alma</div>
+            <div class="degrau-desc">Beleza intencional que conta uma história. O oposto do "copia-e-cola" — cada projeto parece único e autoral.</div>
+          </div>
+          <div class="degrau-diff">✦ Diferencial presente</div>
+        </div>
+      </div>
+
+      <div class="degrau">
+        <div class="degrau-bar">
+          <div class="degrau-num">2</div>
+          <div class="degrau-content">
+            <div class="degrau-nivel">Benefício Funcional</div>
+            <div class="degrau-titulo">Casa viável, bem resolvida, sem retrabalho</div>
+            <div class="degrau-desc">Projeto tecnicamente sólido, cronograma cumprido, custo previsível, obra que corresponde ao render.</div>
+          </div>
+          <div class="degrau-diff">Todos entregam</div>
+        </div>
+      </div>
+
+      <div class="degrau">
+        <div class="degrau-bar">
+          <div class="degrau-num">1</div>
+          <div class="degrau-content">
+            <div class="degrau-nivel">Atributo Funcional · Base</div>
+            <div class="degrau-titulo">Projeto residencial e comercial detalhado</div>
+            <div class="degrau-desc">Formação técnica, domínio de BIM, entrega de pranchas, compatibilização com obra. A base necessária — mas insuficiente para diferenciação.</div>
+          </div>
+          <div class="degrau-diff">Commodidade</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="escada-legenda">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--accent)"></div>Propósito (exclusivo)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(94,80,63,0.7)"></div>Emocional (diferencial)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:rgba(169,146,125,0.6)"></div>Subjetivo</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#cdd4d0"></div>Funcional / Commodidade</div>
+    </div>
+  </div>
+
+  <div class="insight warm">
+    🎯 <strong>Estratégia de comunicação:</strong> a maioria dos arquitetos comunica os degraus 1 e 2 (técnica + funcional). A Santa Arquitetura deve comunicar a partir do degrau 3 para cima — <strong>emoção, identidade e propósito</strong>. É onde não há concorrência.
+  </div>
+
+  <!-- BLOCO 15 — MAPA -->
+  <div class="section-label" style="margin-top:56px;">🗺️ Bloco 15 · Mapa de Posicionamento</div>
+  <p style="margin-bottom:18px;color:var(--muted);">Onde cada player se posiciona nos dois eixos estratégicos do mercado — e onde a Andressa pode ocupar o território livre.</p>
+
+  <div class="mapa-wrapper">
+    <h3>🗺️ Mapa de Marca — Arquitetura e Design · Curitiba/PR</h3>
+    <div class="mapa-sub">
+      Eixo vertical: <strong>Inspiração/Conteúdo</strong> ↔ <strong>Autoria/Projeto</strong> &nbsp;·&nbsp;
+      Eixo horizontal: <strong>Técnico/Racional</strong> ↔ <strong>Afetivo/Humano</strong>
+    </div>
+
+    <div class="mapa-container">
+      <div class="mapa-grid">
+
+        <div class="quad-label ql-tl">Técnico sem alma</div>
+        <div class="quad-label ql-tr">Autoria afetiva</div>
+        <div class="quad-label ql-bl">DIY / Inspiração</div>
+        <div class="quad-label ql-br">Conteúdo afetivo</div>
+
+        <div class="eixo-y-top">↑ Autoria / Projeto</div>
+        <div class="eixo-y-bot">↓ Inspiração / Conteúdo</div>
+        <div class="eixo-x-left">← Técnico / Racional</div>
+        <div class="eixo-x-right">Afetivo / Humano →</div>
+
+        <!-- Thais -->
+        <div class="player-dot" style="left:68%;top:82%;">
+          <div class="dot-circle" style="background:#9db5a0;"></div>
+          <div class="dot-label" style="color:#5a7a64;">Thais</div>
+          <div class="dot-sub" style="color:#5a7a64;">DIY orgânico</div>
+        </div>
+
+        <!-- Micaela -->
+        <div class="player-dot" style="left:75%;top:72%;">
+          <div class="dot-circle" style="background:#b8a898;"></div>
+          <div class="dot-label" style="color:#7a6050;">Micaela</div>
+          <div class="dot-sub" style="color:#7a6050;">Slow vintage</div>
+        </div>
+
+        <!-- Vesta -->
+        <div class="player-dot" style="left:18%;top:22%;">
+          <div class="dot-circle" style="background:#7a9aaa;"></div>
+          <div class="dot-label" style="color:#3a5a6a;">Vesta</div>
+          <div class="dot-sub" style="color:#3a5a6a;">Colonial técnico</div>
+        </div>
+
+        <!-- Arq. Tau -->
+        <div class="player-dot" style="left:35%;top:30%;">
+          <div class="dot-circle" style="background:#c4845a;"></div>
+          <div class="dot-label" style="color:#8a4a20;">Arq. Tau</div>
+          <div class="dot-sub" style="color:#8a4a20;">Vernacular BIM</div>
+        </div>
+
+        <!-- Zé -->
+        <div class="player-dot" style="left:72%;top:38%;">
+          <div class="dot-circle" style="background:#d4a060;"></div>
+          <div class="dot-label" style="color:#8a5a10;">Zé o Arq.</div>
+          <div class="dot-sub" style="color:#8a5a10;">Regionalista</div>
+        </div>
+
+        <!-- ANDRESSA -->
+        <div class="player-dot andressa" style="left:82%;top:18%;">
+          <div class="dot-circle"></div>
+          <div class="dot-label">Santa Arq.</div>
+          <div class="dot-sub">Autoria afetiva</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="mapa-legenda">
+      <div class="mleg"><div class="mleg-dot" style="background:#D8382D;"></div><strong>Santa Arquitetura (Andressa)</strong> — Território livre: autoria afetiva</div>
+      <div class="mleg"><div class="mleg-dot" style="background:#9db5a0;"></div>Thais Bittencourt</div>
+      <div class="mleg"><div class="mleg-dot" style="background:#b8a898;"></div>Micaela Di Corrado</div>
+      <div class="mleg"><div class="mleg-dot" style="background:#7a9aaa;"></div>Vesta Arquitetura</div>
+      <div class="mleg"><div class="mleg-dot" style="background:#c4845a;"></div>Arq. Tau</div>
+      <div class="mleg"><div class="mleg-dot" style="background:#d4a060;"></div>Zé o Arquiteto</div>
+    </div>
+  </div>
+
+  <div class="insight warm">
+    📍 <strong>Território livre confirmado:</strong> o quadrante <em>Autoria com Alta Afetividade</em> está vago. Thais e Micaela têm o afeto mas não têm autoria técnica. Vesta e Arq.Tau têm autoria mas são técnicos e frios. Zé tem humanidade mas é regional/artesanal. <strong>A Andressa é a única que pode habitar o topo direito.</strong>
+  </div>
+
+  <!-- BLOCO 16 — PLAYERS -->
+  <div class="section-label" style="margin-top:56px;">🔍 Bloco 16 · Audição de Players</div>
+  <p style="margin-bottom:18px;color:var(--muted);">O que cada concorrente faz bem — e a lacuna que cada um deixa para a Santa Arquitetura.</p>
+
+  <div class="players-grid">
+
+    <div class="player-card">
+      <div class="pc-top">
+        <div class="pc-name">Thais Bittencourt</div>
+        <div class="pc-terr">DIY Orgânico</div>
+      </div>
+      <div class="pc-desc">Designer de interiores de Campinas-SP. Posicionamento "café com decoração" — simplicidade, faça você mesmo, transformação com pouco. Linguagem próxima e cotidiana.</div>
+      <div class="pc-gap"><strong>Lacuna deixada:</strong> inspira, mas não projeta. Falta profundidade técnica e autoria. Sem método — só narrativa.</div>
+    </div>
+
+    <div class="player-card">
+      <div class="pc-top">
+        <div class="pc-name">Micaela Di Corrado</div>
+        <div class="pc-terr">Slow Vintage</div>
+      </div>
+      <div class="pc-desc">"Slow living com alma vintage" — fotógrafa no litoral de SC. Curadoria visual refinada, iluminação como diferencial, narrativas de intimidade e afeto doméstico.</div>
+      <div class="pc-gap"><strong>Lacuna deixada:</strong> cria conteúdo, não projeta. Alta estética, baixo método. Falta a ponte entre inspiração e execução técnica.</div>
+    </div>
+
+    <div class="player-card">
+      <div class="pc-top">
+        <div class="pc-name">Vesta Arquitetura</div>
+        <div class="pc-terr">Anti-Modernismo</div>
+      </div>
+      <div class="pc-desc">Defesa das linhas tradicionais e era colonial brasileira. Posicionamento analítico e histórico. Tipografia serifada, contraste azul petróleo × bronze.</div>
+      <div class="pc-gap"><strong>Lacuna deixada:</strong> frio, analítico, pouco humano. Tem autoria técnica — mas sem calor afetivo. Não se conecta emocionalmente.</div>
+    </div>
+
+    <div class="player-card">
+      <div class="pc-top">
+        <div class="pc-name">Arq. Tau</div>
+        <div class="pc-terr">Vernacular BIM</div>
+      </div>
+      <div class="pc-desc">Fundado por Neide Lima. Forte em 3D e BIM. Linguagem entre o poético e o técnico. Cor terracota como identidade. Estilos vernacular, rústico e geométrico.</div>
+      <div class="pc-gap"><strong>Lacuna deixada:</strong> poético, mas hermético. Significado muito técnico — falta calor afetivo e narrativa do morador. Concorrente mais próximo da Andressa.</div>
+    </div>
+
+    <div class="player-card">
+      <div class="pc-top">
+        <div class="pc-name">Zé o Arquiteto</div>
+        <div class="pc-terr">Regionalista</div>
+      </div>
+      <div class="pc-desc">Defende a arquitetura feita de história, luz e calor do agreste. VLOG descontraído, sotaque regionalista, baião e xote como fundo. Reconstruiu a casa da mãe — narrativa virou notícia.</div>
+      <div class="pc-gap"><strong>Lacuna deixada:</strong> carisma e narrativa fortes, mas regional demais para o mercado de alto padrão curitibano. Falta sofisticação e escala.</div>
+    </div>
+
+  </div>
+
+  <!-- BLOCO 17 — DIFERENCIAIS -->
+  <div class="section-label" style="margin-top:56px;">⭐ Bloco 17 · Diferenciais Estratégicos</div>
+
+  <div class="dif-grid">
+    <div class="dif-item destaque">
+      <div class="dif-ico">🎨</div>
+      <div class="dif-titulo">Arquitetura afetiva</div>
+      <div class="dif-desc">O projeto nasce da história do cliente — não de um estilo predefinido. Cada entrega é única porque cada pessoa é única.</div>
+      <div class="dif-quem">Nenhum dos 5 concorrentes tem isso</div>
+    </div>
+    <div class="dif-item destaque">
+      <div class="dif-ico">✍️</div>
+      <div class="dif-titulo">Autoria com método</div>
+      <div class="dif-desc">Não é só inspiração — é entrega técnica com alma. A ponte entre o "bonito" e o "funcional que dura" está no método.</div>
+      <div class="dif-quem">Thais e Micaela não têm método</div>
+    </div>
+    <div class="dif-item">
+      <div class="dif-ico">💡</div>
+      <div class="dif-titulo">Beleza intencional</div>
+      <div class="dif-desc">Cada decisão de projeto tem propósito declarado. A beleza serve à vida — não é decoração aplicada por cima.</div>
+      <div class="dif-quem">Vesta é frio · Zé é artesanal</div>
+    </div>
+    <div class="dif-item">
+      <div class="dif-ico">🤝</div>
+      <div class="dif-titulo">Proximidade real</div>
+      <div class="dif-desc">Presença humana no processo sem limite. O cliente nunca sente que "o arquiteto sumiu" — medo central do perfil residencial.</div>
+      <div class="dif-quem">Arq. Tau é hermético</div>
+    </div>
+  </div>
+
+  <!-- SÍNTESE FINAL -->
+  <div class="section-label" style="margin-top:56px;">🧭 Síntese · Declaração de Posicionamento</div>
+
+  <div class="objetivo-final">
+    <div class="of-label">🎯 A grande tese do Valor</div>
+    <blockquote>
+      Para quem recusa o espaço genérico e quer um lugar que conte sua história, a Santa Arquitetura é a marca que projeta com <em>intenção, beleza e afeto</em>. Diferente de quem entrega técnica sem alma ou inspiração sem método, ela <em>ouve antes de desenhar</em> — porque acredita que toda arquitetura verdadeira nasce de uma identidade, e que o espaço mais bonito é aquele que <em>parece com você</em>.
+    </blockquote>
+    <div class="of-sub">
+      Isso alimenta diretamente o <strong style="color:var(--support2)">Pilar de Posicionamento e Arquétipo</strong> — o Criador que não cria para si, mas para revelar o outro. O território está livre. O momento é agora.
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span>🧨 <strong>Pavio Branding</strong> — Tese Estratégica · Santa Arquitetura · Andressa Pachalki</span>
+  <span>Pilar 03 — Valor · Percepção · Equação · Escada · Mapa de Posicionamento</span>
+</footer>
+
+</body>
+</html>
