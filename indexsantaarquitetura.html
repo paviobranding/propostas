@@ -73,77 +73,64 @@
     margin-top: 4px;
   }
 
- /* ── AVATAR NO HEADER ── */
-.header-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.avatar-wrap {
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-
-.avatar-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center top;
-  border: 3px solid var(--support1);
-  display: block;
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 4px 16px rgba(169,146,125,0.30);
-}
-
-/* anel externo animado */
-.avatar-ring {
-  position: absolute;
-  inset: -5px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  background:
-    linear-gradient(var(--bg), var(--bg)) padding-box,
-    linear-gradient(135deg, var(--support1), var(--accent), var(--support2)) border-box;
-  animation: spin-ring 6s linear infinite;
-  z-index: 0;
-}
-
-@keyframes spin-ring {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-.avatar-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.03em;
-  line-height: 1;
-}
-
-.avatar-sub {
-  font-size: 11px;
-  color: var(--support1);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-/* responsivo — some em telas muito pequenas */
-@media (max-width: 600px) {
-  .header-center { display: none; }
-}
-
+  /* ── AVATAR NO HEADER ── */
+  .header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .avatar-wrap {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 3px solid var(--support1);
+    display: block;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(169,146,125,0.30);
+  }
+  .avatar-ring {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box,
+      linear-gradient(135deg, var(--support1), var(--accent), var(--support2)) border-box;
+    animation: spin-ring 6s linear infinite;
+    z-index: 0;
+  }
+  @keyframes spin-ring {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .avatar-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+  .avatar-sub {
+    font-size: 11px;
+    color: var(--support1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
 
   /* ── HERO ── */
   .hero {
     background: var(--accent);
-    padding: 72px 48px 64px;
+    padding: 0 0 64px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -156,7 +143,38 @@
       radial-gradient(ellipse at 20% 50%, rgba(169,146,125,0.18) 0%, transparent 60%),
       radial-gradient(ellipse at 80% 20%, rgba(94,80,63,0.12) 0%, transparent 50%);
     pointer-events: none;
+    z-index: 0;
   }
+
+  /* foto hero */
+  .hero-photo-wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-height: 520px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .hero-photo-wrap img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: brightness(0.82);
+  }
+  /* fade suave na base da foto para fundir com o texto */
+  .hero-photo-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent, var(--accent));
+    pointer-events: none;
+  }
+
   .hero-label {
     font-size: 11px;
     letter-spacing: 0.3em;
@@ -176,6 +194,7 @@
     margin: 0 auto 20px;
     position: relative;
     z-index: 1;
+    padding: 0 24px;
   }
   .hero h2 em {
     color: var(--support1);
@@ -189,6 +208,7 @@
     line-height: 1.75;
     position: relative;
     z-index: 1;
+    padding: 0 24px;
   }
   .hero-stats {
     display: flex;
@@ -198,6 +218,7 @@
     flex-wrap: wrap;
     position: relative;
     z-index: 1;
+    padding: 0 24px;
   }
   .hero-stat { text-align: center; }
   .hero-stat .hs-num {
@@ -306,7 +327,6 @@
     filter: brightness(0.88);
   }
 
-  /* faixa superior colorida por pilar */
   .pilar-card.p1 { border-top: 4px solid var(--accent); }
   .pilar-card.p2 { border-top: 4px solid var(--support1); }
   .pilar-card.p3 { border-top: 4px solid var(--support2); }
@@ -322,7 +342,6 @@
     transition: filter 0.35s ease;
   }
 
-  /* placeholder enquanto não há imagem de capa */
   .pilar-capa-placeholder {
     width: 100%;
     height: 180px;
@@ -496,9 +515,7 @@
   .vi-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
 
   /* ── TOMADA DE DECISÃO ── */
-  .decisao-section {
-    margin-bottom: 48px;
-  }
+  .decisao-section { margin-bottom: 48px; }
   .decisao-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -576,7 +593,8 @@
     .valor-grid { grid-template-columns: 1fr; }
     .decisao-grid { grid-template-columns: 1fr; }
     .hero h2 { font-size: 26px; }
-    .hero { padding: 48px 24px; }
+    .hero-photo-wrap { max-height: 340px; }
+    .hero-photo-wrap img { max-height: 340px; }
     .hero-divider { display: none; }
     .valor-section { padding: 36px 24px; }
     .valor-section h3 { font-size: 22px; }
@@ -584,6 +602,7 @@
   }
   @media (max-width: 600px) {
     header { padding: 24px 20px; }
+    .header-center { display: none; }
     main   { padding: 40px 16px 60px; }
     footer { padding: 20px; }
   }
@@ -592,7 +611,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <!-- HEADER -->
 <header>
   <div class="header-left">
@@ -620,12 +638,23 @@
   </div>
 </header>
 
-
 <!-- HERO -->
 <div class="hero">
+
+  <!-- FOTO EM DESTAQUE — sem texto descritivo -->
+  <div class="hero-photo-wrap">
+    <img
+      src="http://paviobranding.github.io/propostas/andi.jpg"
+      alt=""
+      aria-hidden="true"
+    />
+  </div>
+
+  <!-- TEXTOS DO HERO -->
   <div class="hero-label">✦ Tese Estratégica de Marca</div>
   <h2>O território está vago.<br><em>A Andressa pode ocupá-lo.</em></h2>
   <p>Um relatório aprofundado que cruza workshop de marca, audição de concorrentes e pesquisa de mercado — para construir uma marca que nenhum player ainda ocupa.</p>
+
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="hs-num">4</div>
@@ -667,7 +696,7 @@
   <div class="pilares-grid">
 
     <!-- PILAR 01 — NEGÓCIO -->
-    <a class="pilar-card p1" href="https://paviobranding.github.io/propostas/negociosantaarquitetura.html" >
+    <a class="pilar-card p1" href="https://paviobranding.github.io/propostas/negociosantaarquitetura.html">
       <div class="pilar-capa-placeholder">🏢</div>
       <div class="pilar-body">
         <div class="pilar-num">Pilar 01</div>
@@ -696,7 +725,7 @@
     </a>
 
     <!-- PILAR 02 — AUDIÊNCIA -->
-    <a class="pilar-card p2" href="https://paviobranding.github.io/propostas/audienciasantaarquitetura.html" >
+    <a class="pilar-card p2" href="https://paviobranding.github.io/propostas/audienciasantaarquitetura.html">
       <div class="pilar-capa-placeholder">🎯</div>
       <div class="pilar-body">
         <div class="pilar-num">Pilar 02</div>
@@ -725,7 +754,7 @@
     </a>
 
     <!-- PILAR 03 — VALOR -->
-    <a class="pilar-card p3" href="https://paviobranding.github.io/propostas/valorsantaarquitetura.html" >
+    <a class="pilar-card p3" href="https://paviobranding.github.io/propostas/valorsantaarquitetura.html">
       <img
         class="pilar-capa"
         src="http://paviobranding.github.io/propostas/thaisbittencourt.webp"
@@ -760,7 +789,7 @@
     </a>
 
     <!-- PILAR 04 — HISTÓRIA -->
-    <a class="pilar-card p4" href="https://paviobranding.github.io/propostas/historiasantaarquitetura.html" >
+    <a class="pilar-card p4" href="https://paviobranding.github.io/propostas/historiasantaarquitetura.html">
       <div class="pilar-capa-placeholder">📖</div>
       <div class="pilar-body">
         <div class="pilar-num">Pilar 04</div>
