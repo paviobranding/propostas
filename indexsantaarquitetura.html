@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tese Estratégica — Santa Arquitetura · Andressa Pachalki</title>
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:       #f2f4f3;
+    --card:     #ffffff;
+    --accent:   #22333b;
+    --support1: #a9927d;
+    --support2: #5e503f;
+    --studio:   #D8382D;
+    --text:     #2a2f31;
+    --muted:    #6a6f70;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid #dfe3e1;
+    padding: 36px 48px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: var(--bg);
+  }
+  .header-left .studio {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .header-left .studio strong { color: var(--studio); }
+  .header-left h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .header-left h1 span { color: var(--support1); font-weight: 400; }
+  .header-right { text-align: right; }
+  .header-right .doc-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--support1);
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .header-right .doc-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .header-right .doc-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--accent);
+    padding: 72px 48px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(169,146,125,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(94,80,63,0.12) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--support1);
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    max-width: 700px;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h2 em {
+    color: var(--support1);
+    font-style: normal;
+  }
+  .hero p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 600px;
+    margin: 0 auto 36px;
+    line-height: 1.75;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .hs-num {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--support1);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat .hs-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .hero-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #dadedc;
+  }
+
+  /* ── INTRO CARD ── */
+  .intro-card {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-left: 4px solid var(--accent);
+    border-radius: 14px;
+    padding: 30px 34px;
+    margin-bottom: 56px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .intro-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .intro-card p {
+    color: var(--muted);
+    font-size: 14.5px;
+    margin-bottom: 10px;
+  }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card strong { color: var(--support2); }
+
+  /* ── PILARES GRID ── */
+  .pilares-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+
+  .pilar-card {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 18px rgba(34,51,59,0.06);
+    cursor: pointer;
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.35s ease,
+      border-color 0.25s ease;
+    position: relative;
+  }
+  .pilar-card:hover {
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 20px 48px rgba(34,51,59,0.14);
+    border-color: var(--support1);
+  }
+  .pilar-card:hover .pilar-arrow {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+  .pilar-card:hover .pilar-capa {
+    filter: brightness(0.88);
+  }
+
+  /* faixa superior colorida por pilar */
+  .pilar-card.p1 { border-top: 4px solid var(--accent); }
+  .pilar-card.p2 { border-top: 4px solid var(--support1); }
+  .pilar-card.p3 { border-top: 4px solid var(--support2); }
+  .pilar-card.p4 { border-top: 4px solid #7a9aaa; }
+
+  .pilar-capa {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    background: #e0e4e2;
+    transition: filter 0.35s ease;
+  }
+
+  /* placeholder enquanto não há imagem de capa */
+  .pilar-capa-placeholder {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    background: linear-gradient(135deg, rgba(34,51,59,0.06), rgba(169,146,125,0.12));
+    transition: filter 0.35s ease;
+  }
+
+  .pilar-body {
+    padding: 28px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .pilar-num {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .p1 .pilar-num { color: var(--accent); }
+  .p2 .pilar-num { color: var(--support1); }
+  .p3 .pilar-num { color: var(--support2); }
+  .p4 .pilar-num { color: #7a9aaa; }
+
+  .pilar-titulo {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 6px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pilar-subtitulo {
+    font-size: 12px;
+    color: var(--support1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .pilar-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+  .pilar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .pilar-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    background: rgba(169,146,125,0.12);
+    color: var(--support2);
+  }
+  .pilar-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid #e6e9e7;
+  }
+  .pilar-cta {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pilar-arrow {
+    font-size: 20px;
+    color: var(--support1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.6;
+  }
+
+  /* ── BLOCOS RESUMO ── */
+  .blocos-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .blocos-nums {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  /* ── SEÇÃO VALOR ESTRATÉGICO ── */
+  .valor-section {
+    background: var(--accent);
+    border-radius: 24px;
+    padding: 56px 52px;
+    margin-bottom: 48px;
+    box-shadow: 0 8px 32px rgba(34,51,59,0.14);
+    position: relative;
+    overflow: hidden;
+  }
+  .valor-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 90% 10%, rgba(169,146,125,0.2) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .valor-section .vs-label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--support1);
+    font-weight: 700;
+    margin-bottom: 18px;
+    position: relative; z-index: 1;
+  }
+  .valor-section h3 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    max-width: 640px;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+  .valor-section h3 em {
+    color: var(--support1);
+    font-style: normal;
+  }
+  .valor-section > p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    max-width: 640px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+    position: relative; z-index: 1;
+  }
+  .valor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    position: relative; z-index: 1;
+  }
+  .valor-item {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 22px 20px;
+    transition: background 0.25s ease;
+  }
+  .valor-item:hover { background: rgba(255,255,255,0.12); }
+  .vi-ico { font-size: 26px; margin-bottom: 12px; }
+  .vi-titulo {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .vi-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ── TOMADA DE DECISÃO ── */
+  .decisao-section {
+    margin-bottom: 48px;
+  }
+  .decisao-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .decisao-card {
+    background: var(--card);
+    border: 1px solid #e2e6e4;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 2px 14px rgba(34,51,59,0.04);
+  }
+  .decisao-card.destaque {
+    border-color: var(--support1);
+    background: rgba(169,146,125,0.05);
+  }
+  .dc-ico { font-size: 28px; margin-bottom: 12px; }
+  .dc-titulo { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .dc-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+  /* ── FRASE FINAL ── */
+  .frase-final {
+    background: linear-gradient(135deg, rgba(34,51,59,0.04), rgba(169,146,125,0.07));
+    border: 1px solid #dadedc;
+    border-radius: 20px;
+    padding: 48px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .ff-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--support2);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .ff-quote {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto 18px;
+  }
+  .ff-quote em {
+    color: var(--support2);
+    font-style: normal;
+    font-weight: 700;
+  }
+  .ff-sub {
+    font-size: 13.5px;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid #dfe3e1;
+    padding: 26px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer span { font-size: 12px; color: var(--muted); }
+  footer strong { color: var(--studio); }
+
+  /* ── RESPONSIVO ── */
+  @media (max-width: 760px) {
+    .pilares-grid { grid-template-columns: 1fr; }
+    .valor-grid { grid-template-columns: 1fr; }
+    .decisao-grid { grid-template-columns: 1fr; }
+    .hero h2 { font-size: 26px; }
+    .hero { padding: 48px 24px; }
+    .hero-divider { display: none; }
+    .valor-section { padding: 36px 24px; }
+    .valor-section h3 { font-size: 22px; }
+    .frase-final { padding: 36px 24px; }
+  }
+  @media (max-width: 600px) {
+    header { padding: 24px 20px; }
+    main   { padding: 40px 16px 60px; }
+    footer { padding: 20px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div class="studio">🧨 <strong>Pavio Branding</strong> — Tese Estratégica</div>
+    <h1>Santa Arquitetura <span>· Andressa Pachalki</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="doc-label">Relatório Completo</div>
+    <div class="doc-title">4 Pilares Estratégicos</div>
+    <div class="doc-sub">Curitiba/PR · 2025–2026</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">✦ Tese Estratégica de Marca</div>
+  <h2>O território está vago.<br><em>A Andressa pode ocupá-lo.</em></h2>
+  <p>Um relatório aprofundado que cruza workshop de marca, audição de concorrentes e pesquisa de mercado — para construir uma marca que nenhum player ainda ocupa.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hs-num">4</div>
+      <div class="hs-label">Pilares</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hs-num">22</div>
+      <div class="hs-label">Blocos de análise</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hs-num">5</div>
+      <div class="hs-label">Concorrentes mapeados</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hs-num">2</div>
+      <div class="hs-label">Personas criadas</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- INTRO -->
+  <div class="section-label">📋 Sobre este relatório</div>
+  <div class="intro-card">
+    <h3>Uma tese construída de dentro para fora — e validada pelo mercado.</h3>
+    <p>Este documento reúne <strong>quatro pilares estratégicos</strong> que juntos respondem às perguntas mais críticas de qualquer marca: onde o negócio está, quem é o cliente ideal, qual é o valor real entregue e qual é a história que conecta tudo isso. Cada seção foi construída cruzando a visão da Andressa com dados reais do mercado de arquitetura em Curitiba/PR.</p>
+    <p>Navegue pelos pilares abaixo para explorar o relatório completo. Cada card abre a análise detalhada daquele pilar — com dados, gráficos, mapas e declarações estratégicas.</p>
+  </div>
+
+  <!-- PILARES -->
+  <div class="section-label">🧱 Os 4 Pilares da Tese Estratégica</div>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:28px;">Passe o mouse sobre cada card para explorá-lo — clique para abrir o pilar completo.</p>
+
+  <div class="pilares-grid">
+
+    <!-- PILAR 01 — NEGÓCIO -->
+    <a class="pilar-card p1" href="https://paviobranding.github.io/propostas/negociosantaarquitetura.html" target="_blank">
+      <div class="pilar-capa-placeholder">🏢</div>
+      <div class="pilar-body">
+        <div class="pilar-num">Pilar 01</div>
+        <div class="pilar-titulo">🏢 Negócio</div>
+        <div class="pilar-subtitulo">Premissas · Objetivos · Riscos · Foco</div>
+        <div class="pilar-desc">
+          A fundação estratégica antes de qualquer decisão de identidade. Onde o mercado está, como a Santa Arquitetura se posiciona nos dois eixos — residencial e B2B — e quais são os riscos e objetivos que guiam o crescimento de Irati a Curitiba.
+        </div>
+        <div class="pilar-tags">
+          <span class="pilar-tag">Análise de mercado</span>
+          <span class="pilar-tag">Modelo de negócio</span>
+          <span class="pilar-tag">Jornada do cliente</span>
+          <span class="pilar-tag">Pontos de atenção</span>
+        </div>
+        <div class="pilar-footer">
+          <div>
+            <div class="blocos-label">Blocos cobertos</div>
+            <div class="blocos-nums">01 — 04</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="pilar-cta">Explorar pilar</div>
+          </div>
+          <div class="pilar-arrow">→</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- PILAR 02 — AUDIÊNCIA -->
+    <a class="pilar-card p2" href="https://paviobranding.github.io/propostas/audienciasantaarquitetura.html" target="_blank">
+      <div class="pilar-capa-placeholder">🎯</div>
+      <div class="pilar-body">
+        <div class="pilar-num">Pilar 02</div>
+        <div class="pilar-titulo">🎯 Audiência</div>
+        <div class="pilar-subtitulo">Segmentos · Características · Personas</div>
+        <div class="pilar-desc">
+          Do mercado amplo ao cliente ideal — um funil que cruza pesquisa de comportamento com a visão da Andressa. Duas personas concretas: Helena (o lar) e Rafael (a marca) — e o fio que une os dois: o ódio ao genérico.
+        </div>
+        <div class="pilar-tags">
+          <span class="pilar-tag">Persona Helena</span>
+          <span class="pilar-tag">Persona Rafael</span>
+          <span class="pilar-tag">Comportamento regional</span>
+          <span class="pilar-tag">Segmentação</span>
+        </div>
+        <div class="pilar-footer">
+          <div>
+            <div class="blocos-label">Blocos cobertos</div>
+            <div class="blocos-nums">05 — 10</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="pilar-cta">Explorar pilar</div>
+          </div>
+          <div class="pilar-arrow">→</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- PILAR 03 — VALOR -->
+    <a class="pilar-card p3" href="https://paviobranding.github.io/propostas/valorsantaarquitetura.html" target="_blank">
+      <img
+        class="pilar-capa"
+        src="http://paviobranding.github.io/propostas/thaisbittencourt.webp"
+        alt="Mapa de Posicionamento — Santa Arquitetura"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+      />
+      <div class="pilar-capa-placeholder" style="display:none;">💎</div>
+      <div class="pilar-body">
+        <div class="pilar-num">Pilar 03</div>
+        <div class="pilar-titulo">💎 Valor</div>
+        <div class="pilar-subtitulo">Percepção · Equação · Escada · Mapa</div>
+        <div class="pilar-desc">
+          A tese central: nenhum player une autoria técnica + afeto + beleza intencional + identidade do morador. O mapa de posicionamento confirma o território vago — e a equação de valor explica por que preço nunca foi o problema real do cliente.
+        </div>
+        <div class="pilar-tags">
+          <span class="pilar-tag">Mapa de posicionamento</span>
+          <span class="pilar-tag">Escada de valor</span>
+          <span class="pilar-tag">5 concorrentes</span>
+          <span class="pilar-tag">Equação de percepção</span>
+        </div>
+        <div class="pilar-footer">
+          <div>
+            <div class="blocos-label">Blocos cobertos</div>
+            <div class="blocos-nums">11 — 17</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="pilar-cta">Explorar pilar</div>
+          </div>
+          <div class="pilar-arrow">→</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- PILAR 04 — HISTÓRIA -->
+    <a class="pilar-card p4" href="https://paviobranding.github.io/propostas/historiasantaarquitetura.html" target="_blank">
+      <div class="pilar-capa-placeholder">📖</div>
+      <div class="pilar-body">
+        <div class="pilar-num">Pilar 04</div>
+        <div class="pilar-titulo">📖 Estória</div>
+        <div class="pilar-subtitulo">Brand Story · Crenças · Propósito · Arquétipo</div>
+        <div class="pilar-desc">
+          A narrativa que dá alma à marca — do sinal em Gênesis à declaração de propósito. O sistema de crenças inegociáveis, o Ikigai, a personalidade de voz e os três arquétipos que definem como a Santa Arquitetura existe no mundo: Criador + Amante + Mago.
+        </div>
+        <div class="pilar-tags">
+          <span class="pilar-tag">Brand Story</span>
+          <span class="pilar-tag">Arquétipos</span>
+          <span class="pilar-tag">Declaração de propósito</span>
+          <span class="pilar-tag">Tom de voz</span>
+        </div>
+        <div class="pilar-footer">
+          <div>
+            <div class="blocos-label">Blocos cobertos</div>
+            <div class="blocos-nums">17 — 22</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="pilar-cta">Explorar pilar</div>
+          </div>
+          <div class="pilar-arrow">→</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- VALOR ESTRATÉGICO -->
+  <div class="valor-section">
+    <div class="vs-label">✦ Por que dados aprofundados mudam tudo</div>
+    <h3>Uma marca construída sobre <em>achismo</em> não dura.<br>Uma construída sobre dados, sim.</h3>
+    <p>Este relatório não é um documento de apresentação — é uma ferramenta de decisão. Cada bloco foi desenhado para responder perguntas que a maioria das marcas nunca para para fazer. O resultado é uma base estratégica que sustenta cada escolha de comunicação, conteúdo, precificação e posicionamento.</p>
+    <div class="valor-grid">
+      <div class="valor-item">
+        <div class="vi-ico">🎯</div>
+        <div class="vi-titulo">Clareza de público</div>
+        <div class="vi-desc">Chega de falar para todo mundo — e não convencer ninguém. Duas personas com medos, desejos e critérios reais orientam cada peça de comunicação.</div>
+      </div>
+      <div class="valor-item">
+        <div class="vi-ico">🗺️</div>
+        <div class="vi-titulo">Território livre mapeado</div>
+        <div class="vi-desc">5 concorrentes analisados revelaram um quadrante inteiro sem dono: autoria afetiva de alto padrão. A Andressa é a única que pode habitá-lo agora.</div>
+      </div>
+      <div class="valor-item">
+        <div class="vi-ico">💡</div>
+        <div class="vi-titulo">Diferencial que não se copia</div>
+        <div class="vi-desc">Conduta, processo e escuta não são diferenciais de comunicação — são diferenciais de entrega. E entrega não pode ser copiada por nenhum concorrente.</div>
+      </div>
+      <div class="valor-item">
+        <div class="vi-ico">📈</div>
+        <div class="vi-titulo">Decisões menos arriscadas</div>
+        <div class="vi-desc">Mercado em +40-50% de crescimento em Curitiba. Saber onde entrar — e onde não entrar — vale mais do que qualquer campanha de mídia.</div>
+      </div>
+      <div class="valor-item">
+        <div class="vi-ico">🧭</div>
+        <div class="vi-titulo">Narrativa que conecta</div>
+        <div class="vi-desc">A passagem de Gênesis que originou a vocação é um ativo de Brand Story raro. Autêntico e inesperado — o que emociona não é religião, é a coragem de ouvir antes de agir.</div>
+      </div>
+      <div class="valor-item">
+        <div class="vi-ico">🔄</div>
+        <div class="vi-titulo">Base para crescer sem perder a alma</div>
+        <div class="vi-desc">De Irati a Curitiba, do residencial ao B2B — a horizontal de comportamento sustenta os dois eixos sem trair a identidade. Crescer sem se diluir.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOMADA DE DECISÃO -->
+  <div class="decisao-section">
+    <div class="section-label">🧠 Como usar este relatório nas decisões do dia a dia</div>
+    <div class="decisao-grid">
+      <div class="decisao-card destaque">
+        <div class="dc-ico">📱</div>
+        <div class="dc-titulo">Antes de criar um conteúdo</div>
+        <div class="dc-desc">Consulte o Pilar de Audiência e Estória. Pergunte: isso fala com Helena ou Rafael? Está no tom de voz da marca? Comunica degraus 3, 4 ou 5 da escada de valor — ou está no nível de commodidade?</div>
+      </div>
+      <div class="decisao-card destaque">
+        <div class="dc-ico">💬</div>
+        <div class="dc-titulo">Antes de fazer uma proposta</div>
+        <div class="dc-desc">Consulte o Pilar de Valor. A equação de percepção lembra que o atrito real do cliente não é preço — é o medo de não ser entendido. Apresente método, intenção e processo antes de apresentar número.</div>
+      </div>
+      <div class="decisao-card">
+        <div class="dc-ico">🤝</div>
+        <div class="dc-titulo">Antes de aceitar um projeto</div>
+        <div class="dc-desc">Consulte o sistema de crenças do Pilar de Estória. O projeto alinha com os inegociáveis da marca? O cliente valoriza autoria ou só preço? Qualificar o lead antes do briefing economiza tempo e preserva energia.</div>
+      </div>
+      <div class="decisao-card">
+        <div class="dc-ico">🌐</div>
+        <div class="dc-titulo">Antes de planejar crescimento</div>
+        <div class="dc-desc">Consulte o Pilar de Negócio. O crescimento de Irati para Curitiba tem ritmo próprio. Os dados macroeconômicos, os players consolidados e a janela de oportunidade estão todos mapeados — use-os.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRASE FINAL -->
+  <div class="frase-final">
+    <div class="ff-label">🎯 A tese em uma frase</div>
+    <div class="ff-quote">
+      Para quem recusa o espaço genérico e quer um lugar que conte sua história, a Santa Arquitetura é a marca que projeta com <em>intenção, beleza e afeto</em> — porque acredita que o espaço mais bonito é aquele que <em>parece com você</em>.
+    </div>
+    <div class="ff-sub">
+      O território está livre. Os dados confirmam. A narrativa está pronta. O próximo passo é a identidade visual — e ela nascerá sobre uma base que pouquíssimas marcas têm a coragem de construir.
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <span>🧨 <strong>Pavio Branding</strong> — Tese Estratégica · Santa Arquitetura · Andressa Pachalki</span>
+  <span>4 Pilares · 22 Blocos · Curitiba/PR · 2025–2026</span>
+</footer>
+
+</body>
+</html>
