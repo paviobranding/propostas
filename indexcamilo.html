@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Estratégico — Camilo | Pavio Branding</title>
+<style>
+  :root {
+    --brown: #7B4F2E;
+    --brown-light: #A0693A;
+    --brown-pale: #F5EDE4;
+    --brown-border: #C9956A;
+    --white: #FFFFFF;
+    --gray-soft: #F9F6F3;
+    --gray-text: #4A3728;
+    --gray-muted: #9E8070;
+    --font: 'Georgia', serif;
+    --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--gray-soft);
+    font-family: var(--font-sans);
+    color: var(--gray-text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--white);
+    border-bottom: 3px solid var(--brown);
+    padding: 40px 40px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .header-studio {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+  }
+
+  .header-title {
+    font-family: var(--font);
+    font-size: 32px;
+    color: var(--brown);
+    font-weight: normal;
+    line-height: 1.2;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    color: var(--gray-muted);
+    margin-top: 4px;
+    line-height: 1.65;
+    max-width: 680px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--brown-pale);
+    border: 1px solid var(--brown-border);
+    color: var(--brown);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    width: fit-content;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-left: 5px solid var(--brown);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+
+  .intro-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 12px;
+  }
+
+  .intro-block p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray-text);
+  }
+
+  .intro-block p + p { margin-top: 10px; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-top: 52px;
+  }
+
+  .section-label:first-of-type { margin-top: 0; }
+
+  .section-icon {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--brown);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+
+  .section-label h2 {
+    font-family: var(--font);
+    font-size: 19px;
+    font-weight: normal;
+    color: var(--brown);
+  }
+
+  .section-label span {
+    font-size: 12px;
+    color: var(--gray-muted);
+    display: block;
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* ── PILARES GRID ── */
+  .pilares-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .pilar-card {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .pilar-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(123,79,46,0.18);
+    border-color: var(--brown);
+  }
+
+  .pilar-card:hover .pilar-header {
+    background: #6A3F22;
+  }
+
+  .pilar-header {
+    background: var(--brown);
+    padding: 22px 24px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: background 0.25s ease;
+  }
+
+  .pilar-emoji { font-size: 30px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+
+  .pilar-num {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 4px;
+  }
+
+  .pilar-name {
+    font-family: var(--font);
+    font-size: 20px;
+    color: var(--white);
+    font-weight: normal;
+    line-height: 1.2;
+  }
+
+  .pilar-tagline {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .pilar-body {
+    padding: 20px 24px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pilar-resumo {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--gray-text);
+  }
+
+  .pilar-topicos {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pilar-topicos li {
+    font-size: 12.5px;
+    color: var(--gray-muted);
+    padding: 5px 0;
+    border-bottom: 1px dashed #EDE0D4;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .pilar-topicos li:last-child { border-bottom: none; }
+
+  .pilar-topicos li::before {
+    content: '–';
+    color: var(--brown-border);
+    flex-shrink: 0;
+  }
+
+  .pilar-cta {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--brown-light);
+    font-style: italic;
+    padding-top: 14px;
+    border-top: 1px solid var(--brown-pale);
+    transition: gap 0.2s ease;
+  }
+
+  .pilar-card:hover .pilar-cta { gap: 10px; }
+  .pilar-cta::after { content: '→'; font-style: normal; font-size: 14px; }
+
+  /* ── ENTREGÁVEIS ── */
+  .entregaveis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .entregavel-card {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .entregavel-icon { font-size: 22px; flex-shrink: 0; width: 36px; text-align: center; margin-top: 2px; }
+
+  .entregavel-tag {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 4px;
+  }
+
+  .entregavel-card h3 {
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--brown);
+    font-weight: normal;
+    margin-bottom: 6px;
+  }
+
+  .entregavel-card p {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--gray-muted);
+  }
+
+  /* ── USOS PRÁTICOS ── */
+  .uso-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+
+  .uso-card {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 20px 18px;
+    transition: box-shadow 0.2s;
+  }
+
+  .uso-card:hover { box-shadow: 0 4px 16px rgba(123,79,46,0.10); }
+
+  .uso-icon { font-size: 24px; margin-bottom: 10px; }
+
+  .uso-setor {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 6px;
+  }
+
+  .uso-card h3 {
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--brown);
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  .uso-card p {
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--gray-muted);
+  }
+
+  /* ── SÍNTESE FINAL ── */
+  .sintese-block {
+    background: var(--brown);
+    border-radius: 14px;
+    padding: 36px 40px;
+  }
+
+  .sintese-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 18px;
+  }
+
+  .sintese-block blockquote {
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.95;
+    color: var(--white);
+    font-style: italic;
+    border-left: 3px solid var(--brown-border);
+    padding-left: 20px;
+    margin: 0;
+  }
+
+  .sintese-block blockquote strong {
+    font-style: normal;
+    color: var(--brown-pale);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    color: var(--gray-muted);
+    border-top: 1px solid #EDE0D4;
+    margin-top: 40px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    header { padding: 28px 20px; }
+    main { padding: 32px 16px 60px; }
+    .pilares-grid,
+    .entregaveis-grid,
+    .uso-grid { grid-template-columns: 1fr; }
+    .sintese-block { padding: 28px 22px; }
+    .sintese-block blockquote { font-size: 15px; }
+    .header-title { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-studio">🧨 Pavio Branding — Relatório Estratégico de Marca</div>
+  <div class="header-title">Camilo — Estratégia Completa de Marca</div>
+  <div class="header-sub">Olá, Meri! Este é o seu relatório estratégico completo — construído a partir dos nossos workshops, pesquisa de mercado regional e análise de concorrentes. Aqui está tudo que define quem o Camilo é, para quem existe, o que entrega e o que quer deixar no mundo.</div>
+  <div class="header-meta">
+    <div class="header-badge">4 Pilares Estratégicos</div>
+    <div class="header-badge">Workshop Mai–Jun 2026</div>
+    <div class="header-badge">Irati · Paraná</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- INTRO -->
+  <div class="intro-block">
+    <div class="intro-label">📌 Como usar este relatório</div>
+    <p>Este documento vai muito além da identidade visual. Ele é a espinha dorsal do negócio — um mapa estratégico que orienta decisões de gestão, treinamentos, cardápio, comunicação, reformas e expansão. Cada pilar foi construído com base no que você nos contou e no que o mercado confirma.</p>
+    <p>Clique em cada pilar para acessar o relatório completo daquela etapa. Compartilhe com sua equipe, use como referência em reuniões e, sempre que precisar tomar uma decisão importante — volte aqui primeiro.</p>
+  </div>
+
+  <!-- PILARES -->
+  <div class="section-label">
+    <div class="section-icon">◈</div>
+    <div>
+      <h2>Os 4 Pilares Estratégicos</h2>
+      <span>Clique em qualquer pilar para acessar o relatório completo</span>
+    </div>
+  </div>
+
+  <div class="pilares-grid">
+
+    <a class="pilar-card" href="https://github.com/paviobranding/propostas/negociocamilo.html">
+      <div class="pilar-header">
+        <div class="pilar-emoji">🏢</div>
+        <div>
+          <div class="pilar-num">Pilar 1</div>
+          <div class="pilar-name">Negócio</div>
+          <div class="pilar-tagline">A base estratégica da operação</div>
+        </div>
+      </div>
+      <div class="pilar-body">
+        <p class="pilar-resumo">O contexto de mercado que o Camilo enfrenta, os objetivos de crescimento mapeados em workshop e os riscos que precisam ser monitorados durante o rebranding.</p>
+        <ul class="pilar-topicos">
+          <li>Cenário regional de alimentação fora do lar em Irati</li>
+          <li>Objetivos em 3 horizontes: 6 meses, 1 ano e 5 anos</li>
+          <li>Riscos críticos — incluindo o de não escutar o cliente</li>
+          <li>Foco central: crescer sem se perder</li>
+        </ul>
+        <div class="pilar-cta">Acessar relatório do Negócio</div>
+      </div>
+    </a>
+
+    <a class="pilar-card" href="https://github.com/paviobranding/propostas/audienciacamilo.html">
+      <div class="pilar-header">
+        <div class="pilar-emoji">👥</div>
+        <div>
+          <div class="pilar-num">Pilar 2</div>
+          <div class="pilar-name">Audiência</div>
+          <div class="pilar-tagline">Para quem a marca existe</div>
+        </div>
+      </div>
+      <div class="pilar-body">
+        <p class="pilar-resumo">Os segmentos de público, o perfil comportamental do consumidor regional e os três perfis prioritários que orientam cada decisão de comunicação e operação do Camilo.</p>
+        <ul class="pilar-topicos">
+          <li>5 segmentos: famílias, agro, negócios, política e relacionamento</li>
+          <li>Clientes vindos de Curitiba, Ponta Grossa e Santa Catarina</li>
+          <li>3 perfis detalhados com gatilhos de retorno e alertas</li>
+          <li>Projeção de demanda gerada pela BR-153</li>
+        </ul>
+        <div class="pilar-cta">Acessar relatório da Audiência</div>
+      </div>
+    </a>
+
+    <a class="pilar-card" href="https://github.com/paviobranding/propostas/valorcamilo.html">
+      <div class="pilar-header">
+        <div class="pilar-emoji">💎</div>
+        <div>
+          <div class="pilar-num">Pilar 3</div>
+          <div class="pilar-name">Valor</div>
+          <div class="pilar-tagline">Por que escolher a marca</div>
+        </div>
+      </div>
+      <div class="pilar-body">
+        <p class="pilar-resumo">O que o Camilo entrega além do prato, como é percebido hoje vs. como quer ser visto, os diferenciais que nenhum concorrente replicará e a declaração de posicionamento central da marca.</p>
+        <ul class="pilar-topicos">
+          <li>Equação de valor — e o que a corrói (tempo de espera)</li>
+          <li>Escada da marca: do peixe fresco ao pertencimento emocional</li>
+          <li>Mapeamento e análise de 5 concorrentes regionais</li>
+          <li>Declaração de posicionamento — o entregável central</li>
+        </ul>
+        <div class="pilar-cta">Acessar relatório de Valor</div>
+      </div>
+    </a>
+
+    <a class="pilar-card" href="https://github.com/paviobranding/propostas/historiacamilo.html">
+      <div class="pilar-header">
+        <div class="pilar-emoji">📖</div>
+        <div>
+          <div class="pilar-num">Pilar 4</div>
+          <div class="pilar-name">Estória</div>
+          <div class="pilar-tagline">A alma da marca</div>
+        </div>
+      </div>
+      <div class="pilar-body">
+        <p class="pilar-resumo">A origem do Camilo em 4 capítulos, os valores inegociáveis da família, o propósito além do lucro, como a marca fala e age — e o arquétipo que ancora toda a identidade.</p>
+        <ul class="pilar-topicos">
+          <li>Brand Story: da perda do caminhão ao restaurante de 35 anos</li>
+          <li>Sistema de crenças — o que defende e o que nunca aceita</li>
+          <li>Personalidade e tom de voz com exemplos práticos</li>
+          <li>Arquétipo duplo: O Inocente + O Homem Comum</li>
+        </ul>
+        <div class="pilar-cta">Acessar relatório da Estória</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ENTREGÁVEIS -->
+  <div class="section-label">
+    <div class="section-icon">⭐</div>
+    <div>
+      <h2>Entregáveis Prioritários</h2>
+      <span>Os quatro itens que sintetizam toda a estratégia</span>
+    </div>
+  </div>
+
+  <div class="entregaveis-grid">
+    <div class="entregavel-card">
+      <div class="entregavel-icon">🎯</div>
+      <div>
+        <div class="entregavel-tag">Pilar 3 · Valor</div>
+        <h3>Declaração de Posicionamento</h3>
+        <p>"Para famílias e viajantes que buscam uma refeição autêntica, o Camilo é o único restaurante da região que une peixe fresco com a experiência de um ambiente amplo — porque aqui, a comida é o símbolo das boas relações."</p>
+      </div>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">🌿</div>
+      <div>
+        <div class="entregavel-tag">Pilar 4 · Estória</div>
+        <h3>Arquétipo da Marca</h3>
+        <p><strong>O Inocente + O Homem Comum.</strong> Simples como só o genuíno consegue ser — e por isso conecta. Autêntico demais para ser copiado, humano demais para ser esquecido.</p>
+      </div>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">🏆</div>
+      <div>
+        <div class="entregavel-tag">Pilar 3 · Valor</div>
+        <h3>Diferenciais Estratégicos</h3>
+        <p>Especialidade em peixe fresco, experiência de natureza, vínculo familiar de geração, reconhecimento como destino de rota e autenticidade sem performance.</p>
+      </div>
+    </div>
+    <div class="entregavel-card">
+      <div class="entregavel-icon">👥</div>
+      <div>
+        <div class="entregavel-tag">Pilar 2 · Audiência</div>
+        <h3>Perfis de Consumidor</h3>
+        <p>A Família que Faz do Camilo o Seu Lugar · O Profissional que Para na Rota · O Anfitrião de Relacionamento.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- USOS PRÁTICOS -->
+  <div class="section-label">
+    <div class="section-icon">↗</div>
+    <div>
+      <h2>Como usar este relatório no dia a dia</h2>
+      <span>Isso não é só referência de design — é ferramenta de gestão</span>
+    </div>
+  </div>
+
+  <div class="uso-grid">
+    <div class="uso-card">
+      <div class="uso-icon">📣</div>
+      <div class="uso-setor">Comunicação & Redes</div>
+      <h3>Tom de voz e conteúdo</h3>
+      <p>Use a Personalidade (Pilar 4) para revisar legendas, respostas no Google e WhatsApp. A marca fala simples, acolhe de verdade e nunca performa.</p>
+    </div>
+    <div class="uso-card">
+      <div class="uso-icon">🍽️</div>
+      <div class="uso-setor">Cardápio & Produto</div>
+      <h3>O que entra e o que sai</h3>
+      <p>Cada item novo no cardápio deve passar pelo filtro da Equação de Valor (Pilar 3): fortalece a especialidade em peixe ou dilui a proposta?</p>
+    </div>
+    <div class="uso-card">
+      <div class="uso-icon">🤝</div>
+      <div class="uso-setor">Atendimento & Equipe</div>
+      <h3>Treinar com propósito</h3>
+      <p>Use o Sistema de Crenças (Pilar 4) no onboarding. A equipe que conhece os valores age com coerência — sem manual de procedimento forçado.</p>
+    </div>
+    <div class="uso-card">
+      <div class="uso-icon">🏗️</div>
+      <div class="uso-setor">Obras & Ambiente</div>
+      <h3>Cada reforma com intenção</h3>
+      <p>Antes de qualquer mudança física, consulte o Universo da Marca (Pilar 4) e os Pontos de Atenção (Pilar 1): acessibilidade e coerência com a identidade não são detalhes.</p>
+    </div>
+    <div class="uso-card">
+      <div class="uso-icon">📍</div>
+      <div class="uso-setor">Captação & Visibilidade</div>
+      <h3>Público em trânsito</h3>
+      <p>O Perfil 02 (Pilar 2) mostra que a BR-153 é um motor de captação. Sinalização visível e Google Maps atualizado valem tanto quanto qualquer campanha paga.</p>
+    </div>
+    <div class="uso-card">
+      <div class="uso-icon">💰</div>
+      <div class="uso-setor">Gestão & Decisões</div>
+      <h3>Crescer sem se perder</h3>
+      <p>O Objetivo Principal (Pilar 1) é o filtro de todas as decisões grandes: essa mudança vai contra a essência que fidelizou o cliente? Então não vale.</p>
+    </div>
+  </div>
+
+  <!-- SÍNTESE -->
+  <div class="section-label" style="margin-top: 52px;">
+    <div class="section-icon">✦</div>
+    <div>
+      <h2>A Alma do Camilo em Uma Frase</h2>
+      <span>A síntese de tudo que construímos juntos</span>
+    </div>
+  </div>
+
+  <div class="sintese-block">
+    <div class="sintese-label">✦ Síntese Estratégica — Camilo · Irati · 2026</div>
+    <blockquote>
+      "O Camilo nasceu de uma perda, cresceu de pouquinho em pouquinho e resistiu ao que a vida trouxe. Um restaurante que <strong>escolheu o caráter antes do conceito</strong>. Cada lajota diferente no chão é uma história. Cada peixe frito é uma promessa cumprida. E cada cliente que entra pela porta é tratado como alguém que <strong>pertence àquele lugar</strong> — porque no Camilo, a comida é o símbolo das boas relações."
+    </blockquote>
+  </div>
+
+</main>
+
+<footer>
+  🧨 Pavio Branding &nbsp;·&nbsp; Relatório Estratégico Camilo &nbsp;·&nbsp; Workshop Mai–Jun 2026 &nbsp;·&nbsp; Irati, Paraná
+</footer>
+
+</body>
+</html>
