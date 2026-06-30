@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Estratégico — Camilo | Pilar 4 · Estória</title>
+<style>
+  :root {
+    --brown: #7B4F2E;
+    --brown-light: #A0693A;
+    --brown-pale: #F5EDE4;
+    --brown-border: #C9956A;
+    --white: #FFFFFF;
+    --gray-soft: #F9F6F3;
+    --gray-text: #4A3728;
+    --gray-muted: #9E8070;
+    --font: 'Georgia', serif;
+    --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--gray-soft);
+    font-family: var(--font-sans);
+    color: var(--gray-text);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--white);
+    border-bottom: 3px solid var(--brown);
+    padding: 32px 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .header-studio { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); }
+  .header-title { font-family: var(--font); font-size: 28px; color: var(--brown); font-weight: normal; }
+  .header-sub { font-size: 13px; color: var(--gray-muted); margin-top: 4px; line-height: 1.6; }
+  .header-badge {
+    display: inline-block;
+    background: var(--brown-pale);
+    border: 1px solid var(--brown-border);
+    color: var(--brown);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: fit-content;
+  }
+
+  main { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    margin-top: 52px;
+  }
+
+  .section-label:first-of-type { margin-top: 0; }
+
+  .section-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--brown); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+
+  .section-label h2 { font-family: var(--font); font-size: 20px; font-weight: normal; color: var(--brown); }
+  .section-label span { font-size: 12px; color: var(--gray-muted); display: block; margin-top: 2px; font-style: italic; }
+
+  .card {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover { box-shadow: 0 4px 16px rgba(123,79,46,0.10); }
+  .card.highlight { border-left: 5px solid var(--brown); }
+  .card-tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brown-light); margin-bottom: 8px; }
+  .card h3 { font-family: var(--font); font-size: 16px; color: var(--brown); font-weight: normal; margin-bottom: 10px; }
+  .card p { font-size: 14px; line-height: 1.8; color: var(--gray-text); }
+
+  .cards-grid { display: grid; gap: 16px; }
+  .cards-grid.col-2 { grid-template-columns: 1fr 1fr; }
+  .cards-grid.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* ── BRAND STORY ── */
+  .story-wrap {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .story-header {
+    background: var(--brown);
+    padding: 20px 28px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .story-header-icon { font-size: 28px; }
+
+  .story-header-text h3 {
+    font-family: var(--font);
+    font-size: 18px;
+    color: var(--white);
+    font-weight: normal;
+  }
+
+  .story-header-text span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+  }
+
+  .story-body { padding: 28px; }
+
+  .story-chapter {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--brown-pale);
+  }
+
+  .story-chapter:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+  .story-chapter-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: var(--brown-pale);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  .story-chapter-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 6px;
+  }
+
+  .story-chapter-content p {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--gray-text);
+    font-family: var(--font);
+    font-style: italic;
+  }
+
+  .story-signature {
+    background: var(--brown-pale);
+    border-top: 2px solid var(--brown-border);
+    padding: 18px 28px;
+    font-size: 13px;
+    color: var(--brown);
+    font-family: var(--font);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* ── CRENÇAS ── */
+  .crencas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .crencas-col { padding: 0; }
+
+  .crencas-header {
+    padding: 14px 20px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .crencas-header.sim { background: var(--brown); color: var(--white); }
+  .crencas-header.nao { background: var(--brown-pale); color: var(--brown); border-left: 1px solid var(--brown-border); }
+
+  .crencas-item {
+    padding: 12px 20px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--gray-text);
+    border-bottom: 1px solid var(--brown-pale);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .crencas-item:last-child { border-bottom: none; }
+  .crencas-item.nao-item { border-left: 1px solid var(--brown-border); }
+  .crencas-icon { flex-shrink: 0; font-size: 13px; margin-top: 2px; }
+
+  /* ── PROPÓSITO ── */
+  .purpose-quadrants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .purpose-quad {
+    padding: 22px 20px;
+    border-bottom: 1px solid var(--brown-pale);
+    border-right: 1px solid var(--brown-pale);
+  }
+
+  .purpose-quad:nth-child(2n) { border-right: none; }
+  .purpose-quad:nth-last-child(-n+2) { border-bottom: none; }
+
+  .pq-tag { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); margin-bottom: 6px; }
+  .pq-icon { font-size: 22px; margin-bottom: 8px; }
+  .pq-label { font-family: var(--font); font-size: 14px; color: var(--brown); margin-bottom: 10px; font-weight: normal; }
+
+  .pq-list { list-style: none; padding: 0; margin-bottom: 14px; }
+  .pq-list li {
+    font-size: 13px; line-height: 1.6; color: var(--gray-text);
+    padding: 4px 0; border-bottom: 1px dashed #EDE0D4;
+    display: flex; gap: 8px;
+  }
+  .pq-list li:last-child { border-bottom: none; }
+  .pq-list li::before { content: '–'; color: var(--brown-border); flex-shrink: 0; }
+
+  .pq-declaration {
+    background: var(--brown-pale);
+    border-left: 3px solid var(--brown);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: var(--font);
+    font-style: italic;
+    color: var(--brown);
+    line-height: 1.65;
+  }
+
+  .purpose-final {
+    background: var(--brown);
+    padding: 28px 32px;
+    border-radius: 12px;
+    margin-top: 16px;
+  }
+
+  .purpose-final-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 14px; }
+
+  .purpose-final blockquote {
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--white);
+    font-style: italic;
+    border: none; padding: 0; margin: 0;
+  }
+
+  .purpose-final blockquote strong { font-style: normal; color: var(--brown-pale); }
+
+  /* ── PERSONALIDADE ── */
+  .personality-wrap {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .personality-trait {
+    display: flex;
+    border-bottom: 1px solid var(--brown-pale);
+  }
+
+  .personality-trait:last-child { border-bottom: none; }
+
+  .pt-left {
+    width: 180px; flex-shrink: 0;
+    background: var(--brown-pale);
+    padding: 16px 20px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--brown-border);
+  }
+
+  .pt-label { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brown-light); margin-bottom: 4px; }
+  .pt-title { font-family: var(--font); font-size: 14px; color: var(--brown); }
+
+  .pt-right { padding: 16px 20px; flex: 1; }
+  .pt-right p { font-size: 13.5px; line-height: 1.75; color: var(--gray-text); }
+
+  .pt-example {
+    margin-top: 8px;
+    background: var(--brown-pale);
+    border-left: 3px solid var(--brown-border);
+    padding: 8px 12px;
+    font-size: 13px;
+    font-family: var(--font);
+    font-style: italic;
+    color: var(--brown);
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── UNIVERSO ── */
+  .universe-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .universe-item {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+
+  .universe-emoji { font-size: 28px; margin-bottom: 10px; }
+  .universe-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brown-light); margin-bottom: 6px; }
+  .universe-item h4 { font-family: var(--font); font-size: 14px; color: var(--brown); font-weight: normal; margin-bottom: 6px; }
+  .universe-item p { font-size: 12px; line-height: 1.65; color: var(--gray-muted); }
+
+  /* ── ARQUÉTIPO ── */
+  .archetype-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .archetype-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1.5px solid var(--brown-border);
+  }
+
+  .archetype-header { background: var(--brown); padding: 20px 24px; }
+  .archetype-name { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
+  .archetype-title { font-family: var(--font); font-size: 22px; color: var(--white); font-weight: normal; }
+  .archetype-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+
+  .archetype-body { background: var(--white); padding: 20px 24px; }
+
+  .archetype-motto {
+    font-family: var(--font);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--brown);
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--brown-pale);
+  }
+
+  .archetype-body ul { list-style: none; padding: 0; }
+  .archetype-body ul li {
+    font-size: 13px; line-height: 1.65; color: var(--gray-text);
+    padding: 6px 0; border-bottom: 1px dashed #EDE0D4;
+    display: flex; gap: 8px;
+  }
+  .archetype-body ul li:last-child { border-bottom: none; }
+  .archetype-body ul li::before { content: '–'; color: var(--brown-border); flex-shrink: 0; }
+
+  .archetype-union {
+    background: var(--brown-pale);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-top: 16px;
+  }
+
+  .archetype-union-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brown-light); margin-bottom: 12px; }
+
+  .archetype-union p {
+    font-size: 14px; line-height: 1.8; color: var(--gray-text);
+    font-family: var(--font); font-style: italic;
+  }
+
+  .archetype-union p strong { font-style: normal; color: var(--brown); }
+
+  /* ── SÍNTESE FINAL ── */
+  .final-statement {
+    background: var(--brown);
+    border-radius: 14px;
+    padding: 36px 40px;
+    margin-top: 8px;
+  }
+
+  .fs-eyebrow { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .fs-title { font-family: var(--font); font-size: 15px; color: var(--brown-pale); margin-bottom: 20px; font-weight: normal; letter-spacing: 0.5px; }
+
+  .fs-quote {
+    font-family: var(--font);
+    font-size: 18px;
+    line-height: 1.95;
+    color: var(--white);
+    font-style: italic;
+    border-left: 3px solid var(--brown-border);
+    padding-left: 20px;
+  }
+
+  .fs-quote strong { font-style: normal; color: var(--brown-pale); }
+
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    color: var(--gray-muted);
+    border-top: 1px solid #EDE0D4;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 700px) {
+    header { padding: 24px 20px; }
+    main { padding: 28px 16px 60px; }
+    .cards-grid.col-2, .cards-grid.col-3,
+    .crencas-grid, .purpose-quadrants,
+    .archetype-wrap, .universe-grid { grid-template-columns: 1fr; }
+    .crencas-header.nao, .crencas-item.nao-item { border-left: none; border-top: 1px solid var(--brown-border); }
+    .purpose-quad { border-right: none !important; }
+    .pt-left { width: 120px; }
+    .final-statement { padding: 24px 20px; }
+    .fs-quote { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-studio">🧨 Pavio Branding — Relatório Estratégico de Marca</div>
+  <div class="header-title">Camilo — Estória & Identidade</div>
+  <div class="header-sub">A alma da marca — de onde veio, no que acredita, como age e o que quer deixar no mundo.</div>
+  <div class="header-badge">Pilar 4 · Estória · A identidade que nenhum concorrente pode copiar</div>
+</header>
+
+<main>
+
+  <!-- 17 · HISTÓRIA -->
+  <div class="section-label">
+    <div class="section-icon">17</div>
+    <div>
+      <h2>História da Marca</h2>
+      <span>Origem e Brand Story — 35 anos de tijolos, peixe e resistência</span>
+    </div>
+  </div>
+
+  <div class="story-wrap">
+    <div class="story-header">
+      <div class="story-header-icon">📖</div>
+      <div class="story-header-text">
+        <h3>A história do Camilo começa antes do Camilo existir</h3>
+        <span>Fundado pela família da Meri · Irati, Paraná · 35 anos de história</span>
+      </div>
+    </div>
+    <div class="story-body">
+
+      <div class="story-chapter">
+        <div class="story-chapter-icon">🚚</div>
+        <div class="story-chapter-content">
+          <div class="story-chapter-label">Capítulo 1 · A Perda e o Recomeço</div>
+          <p>O pai da Meri era da lavoura. Puxava batata com caminhão, guardou cada centavo para comprar o seu próprio. Pagou. O agenciador sumiu com o dinheiro — e o caminhão nunca chegou. Voltou para a roça sem nada. Recomeçou. Comprou outro. Trabalhou, ficou doente do coração. Os filhos assumiram as viagens, depois um armazém no interior, depois um mercado no bairro Lagoa. A família aprendeu cedo que construir de verdade exige mais do que uma tentativa.</p>
+        </div>
+      </div>
+
+      <div class="story-chapter">
+        <div class="story-chapter-icon">🐟</div>
+        <div class="story-chapter-content">
+          <div class="story-chapter-label">Capítulo 2 · O Acidente Que Virou Destino</div>
+          <p>Algumas famílias chegaram para pescar no tanque da chácara. Ninguém planejou um restaurante. O pai viu o movimento, saiu do mercado e foi investindo de pouquinho em pouquinho. Uma peixaria de madeira, um banheiro, um fogão de duas bocas, peixe frito inteiro. Simples como só pode ser o começo de algo verdadeiro.</p>
+        </div>
+      </div>
+
+      <div class="story-chapter">
+        <div class="story-chapter-icon">🧱</div>
+        <div class="story-chapter-content">
+          <div class="story-chapter-label">Capítulo 3 · Tijolo por Tijolo</div>
+          <p>Da madeira veio o tijolo. Chegaram as fritadeiras, a cozinha mais moderna, o piso novo sobre o velho — e cada lajota diferente guarda um capítulo. A mãe da Meri inovou trazendo a batata ruffles caseira para Irati. A Meri cresceu ali, ficou nos finais de semana, depois à noite, até deixar seu emprego na informática e assumir de vez. O pai passou a empresa andando — não o dinheiro. A responsabilidade.</p>
+        </div>
+      </div>
+
+      <div class="story-chapter">
+        <div class="story-chapter-icon">🌧️</div>
+        <div class="story-chapter-content">
+          <div class="story-chapter-label">Capítulo 4 · A Resistência</div>
+          <p>Vieram o poço artesiano, a placa solar, a câmara fria, a cozinha nova. Veio a pandemia — e quase descapitalizaram. Veio a perda do filho Murilo. E mesmo assim, ficaram. Empresa familiar, espaço próprio, poucos funcionários, a economia que o pai sempre ensinou. Tudo que está feito aqui tem valor de entrega, de trabalho e de dor.</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="story-signature">
+      "Quando a Meri olha para as lajotas diferentes no mesmo chão, ela lembra de toda essa história."
+    </div>
+  </div>
+
+  <!-- 18 · CRENÇAS -->
+  <div class="section-label">
+    <div class="section-icon">18</div>
+    <div>
+      <h2>Sistema de Crenças</h2>
+      <span>O que o Camilo defende — e o que nunca aceita</span>
+    </div>
+  </div>
+
+  <div class="crencas-grid">
+    <div class="crencas-col">
+      <div class="crencas-header sim">✅ Defendemos</div>
+      <div class="crencas-item"><span class="crencas-icon">—</span>Honestidade com o próximo e com o produto</div>
+      <div class="crencas-item"><span class="crencas-icon">—</span>Nunca trocar qualidade por lucro</div>
+      <div class="crencas-item"><span class="crencas-icon">—</span>Responsabilidade com a economia do negócio</div>
+      <div class="crencas-item"><span class="crencas-icon">—</span>Cuidado com a apresentação do ambiente</div>
+      <div class="crencas-item"><span class="crencas-icon">—</span>Limpeza e organização como respeito ao cliente</div>
+      <div class="crencas-item"><span class="crencas-icon">—</span>Conquistar pelo próprio suor — sem atalhos</div>
+    </div>
+    <div class="crencas-col">
+      <div class="crencas-header nao">🚫 Somos Contra</div>
+      <div class="crencas-item nao-item"><span class="crencas-icon">—</span>Cobrar valores que não existem</div>
+      <div class="crencas-item nao-item"><span class="crencas-icon">—</span>"Erros" contábeis e o jeitinho</div>
+      <div class="crencas-item nao-item"><span class="crencas-icon">—</span>Conduta vingativa dentro da cozinha</div>
+      <div class="crencas-item nao-item"><span class="crencas-icon">—</span>Parcialidade — nenhum pedido na frente por preferência</div>
+      <div class="crencas-item nao-item"><span class="crencas-icon">—</span>Bajulação por cargo ou status</div>
+      <div class="crencas-item nao-item"><span class="crencas-icon">—</span>Trocar os valores da família por conveniência</div>
+    </div>
+  </div>
+
+  <!-- 19 · PROPÓSITO -->
+  <div class="section-label">
+    <div class="section-icon">19</div>
+    <div>
+      <h2>Declaração de Propósito</h2>
+      <span>Por que o Camilo existe além do lucro</span>
+    </div>
+  </div>
+
+  <div class="purpose-quadrants">
+
+    <div class="purpose-quad">
+      <div class="pq-icon">🎯</div>
+      <div class="pq-tag">Habilidades · O que fazemos bem</div>
+      <div class="pq-label">Nossa competência central</div>
+      <ul class="pq-list">
+        <li>Comida e atendimento de qualidade</li>
+        <li>Bom espaço e ambiente</li>
+        <li>Especialidade e domínio no peixe</li>
+        <li>Processar a matéria-prima do início ao fim</li>
+      </ul>
+      <div class="pq-declaration">"Somos habilidosos em transformar peixe fresco em uma experiência que as pessoas querem repetir."</div>
+    </div>
+
+    <div class="purpose-quad">
+      <div class="pq-icon">❤️</div>
+      <div class="pq-tag">Interesses · O que gostamos de fazer</div>
+      <div class="pq-label">O que nos move no dia a dia</div>
+      <ul class="pq-list">
+        <li>Conhecer os clientes pelo nome</li>
+        <li>Saber do dia a dia e da família de quem chega</li>
+        <li>Contar e ouvir histórias ao redor da mesa</li>
+      </ul>
+      <div class="pq-declaration">"Nos interessa genuinamente a vida de quem senta à nossa mesa — não apenas o pedido."</div>
+    </div>
+
+    <div class="purpose-quad">
+      <div class="pq-icon">🔥</div>
+      <div class="pq-tag">Paixão · O que nos acende</div>
+      <div class="pq-label">O combustível da marca</div>
+      <ul class="pq-list">
+        <li>Atendimento próximo e genuíno</li>
+        <li>Tirar um sorriso logo na entrada</li>
+        <li>Criar uma boa lembrança em cada visita</li>
+        <li>Ver o cliente bem atendido e satisfeito</li>
+      </ul>
+      <div class="pq-declaration">"Somos movidos pela gratificação de fazer alguém se sentir bem-vindo e querido."</div>
+    </div>
+
+    <div class="purpose-quad">
+      <div class="pq-icon">🌍</div>
+      <div class="pq-tag">Impacto · O que o mundo ganha</div>
+      <div class="pq-label">Nossa contribuição real</div>
+      <ul class="pq-list">
+        <li>Uma boa experiência que vale guardar</li>
+        <li>Uma boa conversa, uma boa lembrança</li>
+        <li>Gratificação genuína — não forçada</li>
+      </ul>
+      <div class="pq-declaration">"Cada pessoa que sai daqui deve carregar uma lembrança boa — do peixe, do lugar e de quem estava ao lado."</div>
+    </div>
+
+  </div>
+
+  <div class="purpose-final">
+    <div class="purpose-final-label">⭐ Declaração Final de Propósito</div>
+    <blockquote>
+      "Existimos para transformar uma refeição simples em uma <strong>lembrança que vale guardar</strong> — porque acreditamos que a melhor comida é aquela feita com <strong>honestidade</strong> e servida com <strong>genuíno cuidado</strong> por quem está à mesa."
+    </blockquote>
+  </div>
+
+  <!-- 20 · PERSONALIDADE -->
+  <div class="section-label">
+    <div class="section-icon">20</div>
+    <div>
+      <h2>Personalidade da Marca</h2>
+      <span>Como o Camilo fala, age e se comporta</span>
+    </div>
+  </div>
+
+  <div class="personality-wrap">
+
+    <div class="personality-trait">
+      <div class="pt-left">
+        <div class="pt-label">Tom de Voz</div>
+        <div class="pt-title">Simples e direto</div>
+      </div>
+      <div class="pt-right">
+        <p>Fala como quem você conhece há anos. Sem rebuscamento, sem termos técnicos, sem performance. Usa frases curtas, palavras do cotidiano e um calor que só aparece quando é real.</p>
+        <div class="pt-example">Não: "Venha desfrutar de uma experiência gastronômica ímpar." — Sim: "Vem comer um peixe com a gente."</div>
+      </div>
+    </div>
+
+    <div class="personality-trait">
+      <div class="pt-left">
+        <div class="pt-label">Postura</div>
+        <div class="pt-title">Acolhedora</div>
+      </div>
+      <div class="pt-right">
+        <p>Age como quem abre a porta de casa. Cuida sem cobrar reconhecimento, pergunta se está bom, lembra do nome. O acolhimento não é protocolo — é caráter.</p>
+        <div class="pt-example">"A Meri te conhece pelo nome antes de você sentar."</div>
+      </div>
+    </div>
+
+    <div class="personality-trait">
+      <div class="pt-left">
+        <div class="pt-label">Humor</div>
+        <div class="pt-title">Leve, sem ironia</div>
+      </div>
+      <div class="pt-right">
+        <p>Tem leveza e alegria naturais — sem tentar ser engraçado, sem memes, sem ironia que possa excluir alguém. O humor é o de quem está bem consigo mesmo.</p>
+        <div class="pt-example">Uma foto da fritadeira com a legenda: "Pronto pra você desde às 11h."</div>
+      </div>
+    </div>
+
+    <div class="personality-trait">
+      <div class="pt-left">
+        <div class="pt-label">Autenticidade</div>
+        <div class="pt-title">Sem performance</div>
+      </div>
+      <div class="pt-right">
+        <p>Não segue tendência de comunicação sofisticada. Não inventa conceito forçado. Conta o que é, mostra o que tem, entrega o que promete. A identidade é genuína — e as pessoas percebem.</p>
+        <div class="pt-example">"35 anos no mesmo lugar. Porque o que é bom não precisa mudar de endereço."</div>
+      </div>
+    </div>
+
+    <div class="personality-trait">
+      <div class="pt-left">
+        <div class="pt-label">Valores em ação</div>
+        <div class="pt-title">Honesto e firme</div>
+      </div>
+      <div class="pt-right">
+        <p>Quando algo não sai como deveria, assume. Não passa o pano. Não dá desculpa. Corrige e segue. A firmeza nos valores é parte do carisma da marca.</p>
+        <div class="pt-example">"Se demorou mais que o esperado, a gente te avisa — e faz valer a espera."</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 21 · UNIVERSO -->
+  <div class="section-label">
+    <div class="section-icon">21</div>
+    <div>
+      <h2>Universo da Marca</h2>
+      <span>O mundo simbólico, sensorial e cultural que o Camilo habita</span>
+    </div>
+  </div>
+
+  <div class="universe-grid">
+    <div class="universe-item">
+      <div class="universe-emoji">🌊</div>
+      <div class="universe-label">Sensação</div>
+      <h4>Água parada de tanque</h4>
+      <p>A quietude da natureza de interior paranaense — não é selvagem, é familiar.</p>
+    </div>
+    <div class="universe-item">
+      <div class="universe-emoji">🪵</div>
+      <div class="universe-label">Matéria</div>
+      <h4>Madeira e tijolo</h4>
+      <p>Construído à mão, reforma por reforma — cada material carrega a memória do trabalho de quem ergueu.</p>
+    </div>
+    <div class="universe-item">
+      <div class="universe-emoji">🍳</div>
+      <div class="universe-label">Sensorial</div>
+      <h4>Cheiro de fritura no ar fresco</h4>
+      <p>O contraste entre o campo aberto e a cozinha quente — cheiro que avisa que chegou.</p>
+    </div>
+    <div class="universe-item">
+      <div class="universe-emoji">🛣️</div>
+      <div class="universe-label">Movimento</div>
+      <h4>A Estrada</h4>
+      <p>Próximo à rodovia, o Camilo é o destino de uma rua cuja única saída é ele mesmo — quem entra, veio de propósito.</p>
+    </div>
+    <div class="universe-item">
+      <div class="universe-emoji">👨‍👩‍👧‍👦</div>
+      <div class="universe-label">Ritual</div>
+      <h4>Mesa de família de domingo</h4>
+      <p>Toalha xadrez, mesa de madeira, prato farto — o ritual que marca as gerações.</p>
+    </div>
+    <div class="universe-item">
+      <div class="universe-emoji">🪨</div>
+      <div class="universe-label">Símbolo</div>
+      <h4>Lajotas diferentes no mesmo chão</h4>
+      <p>Cada reforma é uma camada de história — o chão conta o tempo sem precisar de palavras.</p>
+    </div>
+  </div>
+
+  <!-- 22 · ARQUÉTIPO -->
+  <div class="section-label">
+    <div class="section-icon">⭐</div>
+    <div>
+      <h2>Arquétipo da Marca</h2>
+      <span>A âncora de identidade do Camilo — quem ela é no fundo</span>
+    </div>
+  </div>
+
+  <div class="archetype-wrap">
+
+    <div class="archetype-card">
+      <div class="archetype-header">
+        <span class="archetype-icon">🌿</span>
+        <div class="archetype-name">Arquétipo Primário</div>
+        <div class="archetype-title">O Inocente</div>
+      </div>
+      <div class="archetype-body">
+        <div class="archetype-motto">"A felicidade está nas coisas simples — e o simples feito com cuidado é o suficiente."</div>
+        <ul>
+          <li>Não precisa de conceito elaborado para ser especial</li>
+          <li>Encontra valor no cotidiano, no peixe frito, no sorriso na chegada</li>
+          <li>Acredita que honestidade e simplicidade são virtudes, não limitações</li>
+          <li>Não tenta impressionar — prefere acolher</li>
+          <li>A alegria é genuína, não performática</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="archetype-card">
+      <div class="archetype-header">
+        <span class="archetype-icon">🤝</span>
+        <div class="archetype-name">Arquétipo Secundário</div>
+        <div class="archetype-title">O Homem Comum</div>
+      </div>
+      <div class="archetype-body">
+        <div class="archetype-motto">"Aqui todo mundo é igual — e é exatamente isso que faz você se sentir em casa."</div>
+        <ul>
+          <li>Se conecta com as pessoas pelo que elas são, não pelo que representam</li>
+          <li>Não hierarquiza cliente por status — mesa boa é para todos</li>
+          <li>A conversa é produto tão importante quanto o prato</li>
+          <li>Pertencer é o valor central — sentir que esse lugar é seu também</li>
+          <li>Realidade sobre aspiração: o Camilo não tenta ser o que não é</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="archetype-union">
+    <div class="archetype-union-label">🔗 A Fusão dos Dois Arquétipos</div>
+    <p>O Camilo é a marca que <strong>não precisa se explicar</strong>. Ela é simples como só o genuíno consegue ser — e por isso conecta. O Inocente traz a leveza de quem encontra significado no peixe bem frito e na mesa farta. O Homem Comum traz o pertencimento de quem faz todo cliente sentir que <strong>esse lugar também é dele</strong>. Juntos, formam uma identidade rara: <em>autêntica demais para ser copiada, humana demais para ser esquecida.</em></p>
+  </div>
+
+  <!-- SÍNTESE FINAL -->
+  <div class="section-label">
+    <div class="section-icon">✦</div>
+    <div>
+      <h2>Síntese da Estória</h2>
+      <span>A alma do Camilo em uma declaração</span>
+    </div>
+  </div>
+
+  <div class="final-statement">
+    <div class="fs-eyebrow">✦ Síntese · Pilar 4 · Estória</div>
+    <div class="fs-title">O que o Camilo é — no fundo</div>
+    <div class="fs-quote">
+      "O Camilo nasceu de uma perda, cresceu de pouquinho em pouquinho e resistiu ao que a vida trouxe. Um restaurante que <strong>escolheu o caráter antes do conceito</strong>. Cada lajota diferente no chão é uma história. Cada peixe frito é uma promessa cumprida. E cada cliente que entra pela porta é tratado como alguém que <strong>pertence àquele lugar</strong> — porque no Camilo, a comida é o símbolo das boas relações."
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  🧨 Pavio Branding · Relatório Estratégico Camilo · Workshop 19.06.2026 · Pilar 4 — Estória
+</footer>
+
+</body>
+</html>

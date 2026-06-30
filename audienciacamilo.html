@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Estratégico — Camilo | Pavio Branding</title>
+<style>
+  :root {
+    --brown: #7B4F2E;
+    --brown-light: #A0693A;
+    --brown-pale: #F5EDE4;
+    --brown-border: #C9956A;
+    --white: #FFFFFF;
+    --gray-soft: #F9F6F3;
+    --gray-text: #4A3728;
+    --gray-muted: #9E8070;
+    --font: 'Georgia', serif;
+    --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--gray-soft);
+    font-family: var(--font-sans);
+    color: var(--gray-text);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--white);
+    border-bottom: 3px solid var(--brown);
+    padding: 32px 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .header-studio {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    font-family: var(--font-sans);
+  }
+
+  .header-title {
+    font-family: var(--font);
+    font-size: 28px;
+    color: var(--brown);
+    font-weight: normal;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--gray-muted);
+    margin-top: 4px;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--brown-pale);
+    border: 1px solid var(--brown-border);
+    color: var(--brown);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: fit-content;
+  }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    margin-top: 48px;
+  }
+
+  .section-label:first-of-type { margin-top: 0; }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--brown);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .section-label h2 {
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: normal;
+    color: var(--brown);
+  }
+
+  .section-label span {
+    font-size: 12px;
+    color: var(--gray-muted);
+    display: block;
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  .cards-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .cards-grid.col-2 { grid-template-columns: 1fr 1fr; }
+  .cards-grid.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards-grid.col-1 { grid-template-columns: 1fr; }
+
+  .card {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover { box-shadow: 0 4px 16px rgba(123,79,46,0.10); }
+
+  .card.accent {
+    background: var(--brown-pale);
+    border-color: var(--brown);
+  }
+
+  .card.highlight {
+    border-color: var(--brown);
+    border-width: 2px;
+    border-left: 5px solid var(--brown);
+  }
+
+  .card-tag {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+    font-family: var(--font-sans);
+  }
+
+  .card h3 {
+    font-family: var(--font);
+    font-size: 16px;
+    color: var(--brown);
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--gray-text);
+  }
+
+  details { margin-top: 10px; }
+
+  details summary {
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--brown-light);
+    font-style: italic;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+    padding: 4px 0;
+  }
+
+  details summary::before {
+    content: '▸';
+    font-size: 11px;
+    transition: transform 0.2s;
+  }
+
+  details[open] summary::before { content: '▾'; }
+
+  details .dobra-content {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--gray-text);
+    border-left: 2px solid var(--brown-border);
+    padding-left: 12px;
+  }
+
+  .card ul {
+    padding-left: 0;
+    list-style: none;
+    margin-top: 4px;
+  }
+
+  .card ul li {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--gray-text);
+    padding: 5px 0;
+    border-bottom: 1px solid #F0E6DC;
+    display: flex;
+    gap: 8px;
+  }
+
+  .card ul li:last-child { border-bottom: none; }
+
+  .card ul li::before {
+    content: '–';
+    color: var(--brown-border);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead tr {
+    background: var(--brown);
+    color: white;
+  }
+
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr:nth-child(even) { background: var(--brown-pale); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+
+  tbody td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #EDE0D4;
+    line-height: 1.5;
+  }
+
+  /* PERSONA CARD */
+  .persona-card {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .persona-card:hover { box-shadow: 0 4px 16px rgba(123,79,46,0.10); }
+
+  .persona-header {
+    background: var(--brown);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .persona-emoji {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .persona-header-text .persona-name {
+    font-family: var(--font);
+    font-size: 16px;
+    color: var(--white);
+    font-weight: normal;
+  }
+
+  .persona-header-text .persona-subtitle {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  .persona-body {
+    padding: 18px 20px;
+  }
+
+  .persona-row {
+    margin-bottom: 14px;
+  }
+
+  .persona-row:last-child { margin-bottom: 0; }
+
+  .persona-row-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 5px;
+  }
+
+  .persona-row p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--gray-text);
+  }
+
+  .persona-alert {
+    background: #FFF4EC;
+    border: 1px solid var(--brown-border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--brown);
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.55;
+  }
+
+  .persona-alert::before {
+    content: '⚠';
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* PRIORIDADE BADGE */
+  .priority-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .priority-card {
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1.5px solid var(--brown-border);
+    background: var(--white);
+  }
+
+  .priority-card.alta {
+    border-left: 5px solid var(--brown);
+    background: var(--brown-pale);
+  }
+
+  .priority-card.media {
+    border-left: 5px solid var(--brown-border);
+  }
+
+  .priority-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .priority-badge.alta {
+    background: var(--brown);
+    color: white;
+  }
+
+  .priority-badge.media {
+    background: var(--brown-pale);
+    color: var(--brown);
+    border: 1px solid var(--brown-border);
+  }
+
+  .priority-card h3 {
+    font-family: var(--font);
+    font-size: 15px;
+    color: var(--brown);
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  .priority-card p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--gray-text);
+  }
+
+  /* DESTAQUE DADO */
+  .insight-box {
+    background: var(--brown-pale);
+    border: 1.5px solid var(--brown-border);
+    border-left: 5px solid var(--brown);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 14px;
+  }
+
+  .insight-box .insight-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+  }
+
+  .insight-box p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--gray-text);
+  }
+
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    color: var(--gray-muted);
+    border-top: 1px solid #EDE0D4;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 700px) {
+    .cards-grid.col-2,
+    .cards-grid.col-3,
+    .priority-grid { grid-template-columns: 1fr; }
+    header { padding: 24px 20px; }
+    main { padding: 28px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-studio">🧨 Pavio Branding — Relatório Estratégico de Marca</div>
+  <div class="header-title">Camilo — Audiência & Consumidor</div>
+  <div class="header-sub">Olá, Meri! Este é o segundo pilar estratégico — construído a partir do workshop, observação in loco e pesquisa regional sobre hábitos de consumo, fluxo rodoviário e perfil socioeconômico da região de Irati.</div>
+  <div class="header-badge">Pilar 2 · Audiência · Para quem a marca existe</div>
+</header>
+
+<main>
+
+  <!-- SEÇÃO 5: SEGMENTOS -->
+  <div class="section-label">
+    <div class="section-icon">5</div>
+    <div>
+      <h2>Segmentos de Mercado</h2>
+      <span>Grupos organizados por ocasião de consumo e vínculo com a marca</span>
+    </div>
+  </div>
+
+  <div class="cards-grid col-1">
+    <div class="card highlight">
+      <div class="card-tag">Mapeamento de Segmentos</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Segmento</th>
+              <th>Ocasião Central</th>
+              <th>Origem Predominante</th>
+              <th>Frequência</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td><strong>Famílias</strong></td>
+              <td>Celebrações, fim de semana, datas especiais</td>
+              <td>Irati e municípios vizinhos</td>
+              <td>Alta recorrência</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td><strong>Relacionamento</strong></td>
+              <td>Amigos, casais, grupos sociais</td>
+              <td>Irati local</td>
+              <td>Moderada</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td><strong>Política</strong></td>
+              <td>Almoços reservados, visitas institucionais</td>
+              <td>Irati + cidades da região</td>
+              <td>Situacional</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td><strong>Agro</strong></td>
+              <td>Almoço de equipe, comemoração de resultado, passagem pela BR</td>
+              <td>Ponta Grossa, Curitiba, interior</td>
+              <td>Regular</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td><strong>Negócios</strong></td>
+              <td>Almoço de trabalho, fechamento de acordos, rotina de rota</td>
+              <td>Ponta Grossa, Curitiba, SC</td>
+              <td>Semanal/mensal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-label">📍 Dado Crítico</div>
+    <p>A observação in loco confirmou clientes vindos de Ponta Grossa, Curitiba, Mallet e Santa Catarina — o que reposiciona o Camilo de <strong>restaurante local para destino regional de rota</strong>, ancorado na BR-153.</p>
+  </div>
+
+  <!-- SEÇÃO 6: CARACTERÍSTICAS -->
+  <div class="section-label">
+    <div class="section-icon">6</div>
+    <div>
+      <h2>Características do Consumidor Regional</h2>
+      <span>Perfil, comportamento e critérios de escolha</span>
+    </div>
+  </div>
+
+  <div class="cards-grid col-2">
+    <div class="card">
+      <div class="card-tag">Perfil Etário e Socioeconômico</div>
+      <h3>Quem é esse público</h3>
+      <ul>
+        <li>Faixa predominante de 35 a 64 anos — adultos maduros, financeiramente estáveis</li>
+        <li>PIB per capita de Irati em R$ 37,2 mil — suporta ticket médio com margem</li>
+        <li>Mix de produtores rurais, técnicos do agro, profissionais liberais e gestores locais</li>
+        <li>Estrutura familiar como eixo central de consumo e decisão</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-tag">Como Decide Onde Comer</div>
+      <h3>Gatilhos de escolha</h3>
+      <ul>
+        <li>Indicação de conhecidos e familiares — peso maior que avaliações online</li>
+        <li>Reputação local construída por experiências anteriores</li>
+        <li>Público em trânsito decide por visibilidade na rota e confiança na qualidade</li>
+        <li>Ambiente e estrutura comunicam o convite antes da refeição</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-tag">O Que é Inegociável</div>
+      <h3>Critérios de permanência</h3>
+      <ul>
+        <li>Qualidade e consistência da comida em toda visita</li>
+        <li>Higiene visível — percebida antes mesmo de sentar</li>
+        <li>Estacionamento adequado, inclusive para caminhonetes</li>
+        <li>Atendimento sem ruído operacional e sem espera excessiva</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-tag">Janela de Consumo</div>
+      <h3>Volume vs. margem</h3>
+      <ul>
+        <li><strong>Almoço em dias úteis:</strong> volume — profissionais, agro, negócios e passagem pela BR</li>
+        <li><strong>Jantar e fins de semana:</strong> margem — famílias, celebrações, casais, grupos</li>
+        <li>Ticket do jantar tende a ser 30–40% maior que o do almoço</li>
+        <li>Fins de semana e feriados concentram demanda familiar de alta recorrência</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 7: CONSUMIDOR IDEAL -->
+  <div class="section-label">
+    <div class="section-icon">7</div>
+    <div>
+      <h2>Consumidor Ideal</h2>
+      <span>Grupos com maior potencial estratégico para o Camilo</span>
+    </div>
+  </div>
+
+  <div class="priority-grid">
+    <div class="priority-card alta">
+      <div class="priority-badge alta">🥇 Prioridade Alta</div>
+      <h3>Famílias (com e sem crianças)</h3>
+      <p>Alta recorrência e vínculo emocional com o ambiente. Famílias com crianças retornam pela estrutura; famílias sem crianças têm maior ticket médio e consomem mais bebidas. São o <strong>coração da marca</strong>.</p>
+    </div>
+    <div class="priority-card alta">
+      <div class="priority-badge alta">🥇 Prioridade Alta</div>
+      <h3>Profissionais de agro e negócios em trânsito</h3>
+      <p>Vêm de fora, almoçam com equipe, têm pressa mas gastam bem. A BR-153 é o <strong>gatilho de captação</strong>; a experiência é o <strong>gatilho de recomendação</strong>. Alto potencial de fidelização por rotina de deslocamento.</p>
+    </div>
+    <div class="priority-card media">
+      <div class="priority-badge media">🥈 Prioridade Média</div>
+      <h3>Lideranças políticas e empresariais</h3>
+      <p>Não são volume — são <strong>reputação e validação social</strong>. A presença de uma figura de referência sinaliza para os demais segmentos que o Camilo é o lugar certo.</p>
+    </div>
+    <div class="priority-card media">
+      <div class="priority-badge media">🥈 Prioridade Média</div>
+      <h3>Casais sem filhos</h3>
+      <p>Subexplorado atualmente. Alto potencial de ticket e frequência noturna. Requer pequeno investimento em experiência: ambiente, carta de bebidas e iluminação noturna.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 8: PERSONAS -->
+  <div class="section-label">
+    <div class="section-icon">8</div>
+    <div>
+      <h2>Perfis de Consumidor Ideal</h2>
+      <span>Três perfis concretos com contexto de comportamento e compra</span>
+    </div>
+  </div>
+
+  <div class="cards-grid col-1">
+    <div class="card accent" style="margin-bottom:4px; padding: 12px 22px;">
+      <p style="font-size:13px; font-style:italic; color: var(--gray-muted);">Em vez de personas individuais fictícias, optamos por perfis coletivos de comportamento — mais aderentes ao volume e à diversidade real do público do Camilo.</p>
+    </div>
+  </div>
+
+  <div class="cards-grid col-1" style="margin-top:4px; gap: 20px;">
+
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-emoji">👨‍👩‍👧‍👦</div>
+        <div class="persona-header-text">
+          <div class="persona-name">Perfil 01 — A Família que Faz do Camilo o Seu Lugar</div>
+          <div class="persona-subtitle">Famílias de Irati e municípios vizinhos · Fins de semana e celebrações · Coração da marca</div>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-row">
+          <div class="persona-row-label">Quem é</div>
+          <p>Famílias de Irati e municípios vizinhos, com adultos entre 35 e 60 anos. Vêm com crianças, adolescentes, avós ou apenas o casal. Frequentam em fins de semana e datas comemorativas — aniversários, formaturas, crismas, casamentos, reuniões entre gerações vindas de cidades diferentes.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">Como decide</div>
+          <p>Por indicação de parentes ou pela própria experiência anterior. Quando confia, repete — e indica. Não pesquisa muito antes de escolher. A decisão é social e coletiva: quem convida quer garantia de acerto.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">O que busca</div>
+          <p>Um lugar onde caiba todo mundo, onde as crianças possam circular, onde a comida seja farta e a experiência não dê trabalho. Quer sair de casa sem precisar "organizar muito". O ambiente externo e a estrutura física são parte do produto.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">Gatilho de retorno</div>
+          <p>Sentir que foi bem recebido, que o ambiente aguentou o grupo e que a comida valeu o deslocamento. A estrutura para crianças e o espaço amplo são âncoras de fidelidade de longo prazo.</p>
+        </div>
+        <div class="persona-alert">
+          Demora no atendimento e falta de espaço para grupos grandes quebram a experiência e eliminam o retorno — e a indicação.
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-emoji">🚗</div>
+        <div class="persona-header-text">
+          <div class="persona-name">Perfil 02 — O Profissional que Para na Rota</div>
+          <div class="persona-subtitle">Técnicos, representantes e gestores em trânsito · BR-153 · Almoço de semana</div>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-row">
+          <div class="persona-row-label">Quem é</div>
+          <p>Técnicos agrônomos, representantes comerciais, vendedores, engenheiros e gestores que circulam entre Ponta Grossa, Curitiba, Irati, Mallet e Santa Catarina. Vêm em duplas ou grupos pequenos. Passam pela BR-153 com frequência — às vezes semanal.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">Como decide</div>
+          <p>Por visibilidade na via, facilidade de acesso e reputação. Já ouviu falar ou viu de passagem. Não quer arriscar em lugar desconhecido quando tem horário para cumprir.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">O que busca</div>
+          <p>Refeição de qualidade, atendimento ágil, estacionamento fácil — inclusive para caminhonetes. Quer almoçar bem sem perder o ritmo do dia. Porções generosas e consistência são decisivos.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">Gatilho de retorno</div>
+          <p>Experiência sem atrito — chegou, estacionou, foi atendido, comeu bem, saiu no horário. O Camilo vira <strong>ponto fixo na rota</strong>. A recomendação acontece naturalmente entre colegas de trabalho.</p>
+        </div>
+        <div class="persona-alert">
+          Espera longa ou desorganização no pico do almoço elimina esse perfil definitivamente — e ele não volta.
+        </div>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-emoji">🤝</div>
+        <div class="persona-header-text">
+          <div class="persona-name">Perfil 03 — O Anfitrião de Relacionamento</div>
+          <div class="persona-subtitle">Empresários, lideranças e produtores rurais · Almoço de negócios e política · Validação social</div>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="persona-row">
+          <div class="persona-row-label">Quem é</div>
+          <p>Empresários locais, donos de indústria, lideranças políticas, produtores rurais e gerentes que usam o almoço como ferramenta de relacionamento e fechamento de negócios. Escolhem o Camilo para receber clientes, equipes ou parceiros — incluindo visitantes de outras cidades.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">Como decide</div>
+          <p>Pela reputação do ambiente e pela certeza de que o local "faz jus" ao convite. Não quer passar vergonha — o restaurante escolhido diz algo sobre quem convida. Em cidades pequenas, essa lógica tem peso enorme.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">O que busca</div>
+          <p>Ambiente discreto, atendimento confiável, comida que impressione sem ser exótica demais, espaço que permita conversa sem barulho excessivo. Valoriza a possibilidade de área mais reservada para reuniões.</p>
+        </div>
+        <div class="persona-row">
+          <div class="persona-row-label">Gatilho de retorno</div>
+          <p>Quando o convidado elogia. A validação vem de fora — do parceiro, do cliente que veio de Curitiba, do aliado político. O Camilo se torna o lugar que "faz bem para a imagem".</p>
+        </div>
+        <div class="persona-alert">
+          Barulho excessivo, atendimento instável ou falta de área reservada comprometem esse uso — e afastam o perfil permanentemente, inclusive de outros públicos que ele influencia.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NOTA DE FLUXO RODOVIÁRIO -->
+  <div class="section-label" style="margin-top: 48px;">
+    <div class="section-icon">+</div>
+    <div>
+      <h2>Dado de Suporte — Fluxo Rodoviário</h2>
+      <span>Projeção de demanda gerada pela BR-153 · Cenários de trabalho</span>
+    </div>
+  </div>
+
+  <div class="cards-grid col-1">
+    <div class="card">
+      <div class="card-tag">Premissas de Fluxo — Cenários</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Variável</th>
+              <th>Conservador</th>
+              <th>Base</th>
+              <th>Agressivo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Veículos/dia na rota útil</td><td>1.200</td><td>2.000</td><td>3.500</td></tr>
+            <tr><td>% com potencial de parada</td><td>0,8%</td><td>1,5%</td><td>2,2%</td></tr>
+            <tr><td>Taxa de conversão (dias úteis)</td><td>55%</td><td>65%</td><td>75%</td></tr>
+            <tr><td>Ticket médio almoço</td><td>R$ 58</td><td>R$ 68</td><td>R$ 78</td></tr>
+            <tr><td>Ticket médio jantar</td><td>R$ 82</td><td>R$ 95</td><td>R$ 115</td></tr>
+            <tr><td>Ticket médio grupos/famílias</td><td>R$ 240</td><td>R$ 290</td><td>R$ 360</td></tr>
+            <tr><td>Faturamento mensal estimado</td><td>R$ 17.820</td><td>R$ 48.300</td><td>R$ 96.570</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <details style="margin-top:14px">
+        <summary>Ver como usar esses números</summary>
+        <div class="dobra-content">
+          <p>Estes são <strong>cenários de trabalho</strong> para calibrar com contagem real de fluxo e ticket médio observado. A variável mais importante para validar é <em>veículos/dia na rota útil</em> — ela define todo o funil de conversão. Boa sinalização e acesso simples sobem a taxa de parada; acesso pouco visível derruba a conversão. Para dimensionamento preciso, recomenda-se consulta ao DNIT ou à concessionária responsável pelo trecho.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-label">Implicação Estratégica</div>
+    <p>Para o Camilo, o almoço funciona como <strong>motor de volume</strong> — captado pela BR e pela rotina de trabalho — enquanto o jantar e os fins de semana funcionam como <strong>motor de margem e reputação</strong>. Os dois ciclos precisam de narrativas distintas, mas da mesma consistência operacional.</p>
+  </div>
+
+</main>
+
+<footer>
+  🧨 Pavio Branding &nbsp;·&nbsp; Relatório Estratégico Camilo &nbsp;·&nbsp; Workshop 27.05.2026 &nbsp;·&nbsp; Pilar 2 — Audiência
+</footer>
+
+</body>
+</html>

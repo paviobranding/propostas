@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Estratégico — Camilo | Pavio Branding</title>
+<style>
+  :root {
+    --brown: #7B4F2E;
+    --brown-light: #A0693A;
+    --brown-pale: #F5EDE4;
+    --brown-border: #C9956A;
+    --white: #FFFFFF;
+    --gray-soft: #F9F6F3;
+    --gray-text: #4A3728;
+    --gray-muted: #9E8070;
+    --font: 'Georgia', serif;
+    --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--gray-soft);
+    font-family: var(--font-sans);
+    color: var(--gray-text);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--white);
+    border-bottom: 3px solid var(--brown);
+    padding: 32px 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .header-studio {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+  }
+
+  .header-title {
+    font-family: var(--font);
+    font-size: 28px;
+    color: var(--brown);
+    font-weight: normal;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--gray-muted);
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--brown-pale);
+    border: 1px solid var(--brown-border);
+    color: var(--brown);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: fit-content;
+  }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    margin-top: 52px;
+  }
+
+  .section-label:first-of-type { margin-top: 0; }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--brown);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .section-label h2 {
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: normal;
+    color: var(--brown);
+  }
+
+  .section-label span {
+    font-size: 12px;
+    color: var(--gray-muted);
+    display: block;
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  .cards-grid { display: grid; gap: 16px; }
+  .cards-grid.col-2 { grid-template-columns: 1fr 1fr; }
+  .cards-grid.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards-grid.col-1 { grid-template-columns: 1fr; }
+
+  .card {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover { box-shadow: 0 4px 16px rgba(123,79,46,0.10); }
+  .card.accent { background: var(--brown-pale); border-color: var(--brown); }
+  .card.highlight { border-color: var(--brown); border-left: 5px solid var(--brown); }
+
+  .card-tag {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+  }
+
+  .card h3 {
+    font-family: var(--font);
+    font-size: 16px;
+    color: var(--brown);
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+
+  .card p { font-size: 14px; line-height: 1.75; color: var(--gray-text); }
+
+  .card ul { padding-left: 0; list-style: none; margin-top: 4px; }
+
+  .card ul li {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--gray-text);
+    padding: 6px 0;
+    border-bottom: 1px solid #F0E6DC;
+    display: flex;
+    gap: 8px;
+  }
+
+  .card ul li:last-child { border-bottom: none; }
+
+  .card ul li::before {
+    content: '–';
+    color: var(--brown-border);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  details { margin-top: 12px; }
+
+  details summary {
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--brown-light);
+    font-style: italic;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+    padding: 4px 0;
+  }
+
+  details summary::before { content: '▸'; font-size: 11px; }
+  details[open] summary::before { content: '▾'; }
+
+  details .dobra-content {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--gray-text);
+    border-left: 2px solid var(--brown-border);
+    padding-left: 12px;
+  }
+
+  .table-wrap { overflow-x: auto; margin-top: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: var(--brown); color: white; }
+
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr:nth-child(even) { background: var(--brown-pale); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+
+  tbody td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #EDE0D4;
+    line-height: 1.5;
+  }
+
+  .insight-box {
+    background: var(--brown-pale);
+    border: 1.5px solid var(--brown-border);
+    border-left: 5px solid var(--brown);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 14px;
+  }
+
+  .insight-box .insight-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+  }
+
+  .insight-box p { font-size: 14px; line-height: 1.7; color: var(--gray-text); }
+
+  /* ── EQUAÇÃO DE VALOR ── */
+  .equation-wrap {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-left: 5px solid var(--brown);
+    border-radius: 10px;
+    padding: 24px 24px 20px;
+  }
+
+  .equation-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+  }
+
+  .eq-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 14px;
+  }
+
+  .eq-chip {
+    background: var(--brown-pale);
+    border: 1px solid var(--brown-border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--brown);
+    font-family: var(--font);
+  }
+
+  .eq-operator { font-size: 18px; color: var(--brown-border); font-weight: bold; line-height: 1; }
+
+  .eq-divider {
+    width: 100%;
+    height: 2px;
+    background: var(--brown-border);
+    margin: 10px 0;
+    border-radius: 2px;
+  }
+
+  .eq-row-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray-muted);
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  /* ── ESCADA DA MARCA ── */
+  .ladder-frame {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 12px 12px 0 0;
+    padding: 28px 24px 0;
+    overflow: hidden;
+  }
+
+  .ladder-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .ladder-block {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 16px 14px 20px;
+    transition: filter 0.2s;
+  }
+
+  .ladder-block:hover { filter: brightness(1.06); }
+
+  .step-1 .ladder-block { height: 120px; background: #E8D5C4; }
+  .step-2 .ladder-block { height: 180px; background: #C9956A; }
+  .step-3 .ladder-block { height: 240px; background: #A0693A; }
+  .step-4 .ladder-block { height: 300px; background: #7B4F2E; }
+
+  .step-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+
+  .step-1 .step-number { color: var(--brown); background: rgba(123,79,46,0.15); }
+
+  .step-nivel {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .step-1 .step-nivel { color: var(--brown-light); }
+  .step-2 .step-nivel,
+  .step-3 .step-nivel,
+  .step-4 .step-nivel { color: rgba(255,255,255,0.7); }
+
+  .step-title {
+    font-family: var(--font);
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  .step-1 .step-title { color: var(--brown); }
+  .step-2 .step-title,
+  .step-3 .step-title,
+  .step-4 .step-title { color: var(--white); }
+
+  .step-desc { font-size: 12px; line-height: 1.6; }
+
+  .step-1 .step-desc { color: var(--gray-text); }
+  .step-2 .step-desc,
+  .step-3 .step-desc,
+  .step-4 .step-desc { color: rgba(255,255,255,0.82); }
+
+  .ladder-arrow {
+    position: absolute;
+    right: -14px;
+    bottom: 20px;
+    width: 22px;
+    height: 22px;
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--brown);
+    z-index: 2;
+    flex-shrink: 0;
+  }
+
+  .step-4 .ladder-arrow { display: none; }
+
+  .ladder-footer-wrap {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 0 24px 20px;
+  }
+
+  .ladder-footer {
+    display: flex;
+    gap: 6px;
+    border-top: 2px solid var(--brown-pale);
+    padding-top: 14px;
+  }
+
+  .ladder-footer-item {
+    flex: 1;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray-muted);
+  }
+
+  .ladder-footer-item strong {
+    display: block;
+    font-size: 11px;
+    color: var(--brown);
+    margin-bottom: 2px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .ladder-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--gray-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── DIFERENCIAIS ── */
+  .diferencial-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .diferencial-item {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+
+  .diferencial-item:hover { box-shadow: 0 4px 16px rgba(123,79,46,0.10); }
+
+  .dif-icon { font-size: 22px; flex-shrink: 0; width: 36px; text-align: center; margin-top: 2px; }
+
+  .dif-body h4 {
+    font-family: var(--font);
+    font-size: 15px;
+    color: var(--brown);
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+
+  .dif-body p { font-size: 13.5px; line-height: 1.65; color: var(--gray-text); }
+
+  /* ── PERCEPÇÃO ── */
+  .perception-wrap {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .perception-header-row {
+    display: grid;
+    grid-template-columns: 1fr 32px 1fr;
+    padding: 10px 20px;
+    background: var(--brown);
+    gap: 8px;
+  }
+
+  .perception-header-row span {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .perception-row {
+    display: grid;
+    grid-template-columns: 1fr 32px 1fr;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid #F0E6DC;
+    gap: 8px;
+  }
+
+  .perception-row:last-child { border-bottom: none; }
+  .perception-row:nth-child(even) { background: var(--brown-pale); }
+
+  .perception-before { font-size: 13px; color: var(--gray-muted); line-height: 1.5; font-style: italic; }
+  .perception-arrow-cell { text-align: center; font-size: 16px; color: var(--brown-border); }
+
+  .perception-after {
+    font-size: 13px;
+    color: var(--brown);
+    line-height: 1.5;
+    font-family: var(--font);
+  }
+
+  /* ── MAPA SVG ── */
+  .map-wrap {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+
+  .map-tag {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 16px;
+  }
+
+  .map-svg-wrap { width: 100%; max-width: 640px; margin: 0 auto; display: block; }
+
+  /* ── DECLARAÇÃO ── */
+  .statement-wrap {
+    background: var(--brown);
+    border-radius: 12px;
+    padding: 32px 36px;
+  }
+
+  .statement-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 16px;
+  }
+
+  .statement-wrap blockquote {
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--white);
+    font-style: italic;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .statement-wrap blockquote strong {
+    font-style: normal;
+    color: var(--brown-pale);
+  }
+
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    color: var(--gray-muted);
+    border-top: 1px solid #EDE0D4;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 700px) {
+    .cards-grid.col-2,
+    .cards-grid.col-3 { grid-template-columns: 1fr; }
+    header { padding: 24px 20px; }
+    main { padding: 28px 16px 60px; }
+    .statement-wrap { padding: 24px 20px; }
+    .statement-wrap blockquote { font-size: 15px; }
+    .perception-row { grid-template-columns: 1fr 24px 1fr; padding: 12px 14px; }
+    .perception-header-row { grid-template-columns: 1fr 24px 1fr; padding: 8px 14px; }
+
+    .ladder-frame {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      padding: 16px 16px 0;
+      gap: 4px;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .ladder-block {
+      height: auto !important;
+      border-radius: 6px !important;
+      padding: 14px 16px;
+      flex-direction: row;
+      gap: 12px;
+      align-items: flex-start;
+      display: flex;
+    }
+
+    .step-number { margin-bottom: 0; flex-shrink: 0; }
+    .ladder-arrow { display: none; }
+    .ladder-footer { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-studio">🧨 Pavio Branding — Relatório Estratégico de Marca</div>
+  <div class="header-title">Camilo — Valor & Posicionamento</div>
+  <div class="header-sub">Olá, Meri! Este é o terceiro pilar estratégico — construído a partir do workshop, pesquisa de concorrentes regionais e análise de avaliações do Google. Aqui definimos por que escolher o Camilo e qual espaço ele ocupa no mercado de Irati.</div>
+  <div class="header-badge">Pilar 3 · Valor · Por que escolher a marca</div>
+</header>
+
+<main>
+
+  <!-- 9 · PREMISSAS DE VALOR -->
+  <div class="section-label">
+    <div class="section-icon">9</div>
+    <div>
+      <h2>Premissas de Valor</h2>
+      <span>O que o Camilo entrega além do prato</span>
+    </div>
+  </div>
+
+  <div class="card highlight" style="margin-bottom: 16px;">
+    <div class="card-tag">O que está sendo vendido de verdade</div>
+    <p>O Camilo entrega <strong>autenticidade de origem</strong> — peixe fresco em uma região onde o produto é raro como especialidade — combinada com uma experiência de ambiente que evoca natureza, acolhimento e memória afetiva. O valor vai além do prato: é o ritual de parar, sentar, comer bem e estar com quem importa.</p>
+  </div>
+
+  <div class="cards-grid col-3">
+    <div class="card">
+      <div class="card-tag">Valor de Produto</div>
+      <h3>Peixe fresco de verdade</h3>
+      <p>Especialidade que nenhum concorrente regional entrega com a mesma identidade e consistência.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag">Valor de Experiência</div>
+      <h3>Ambiente + natureza</h3>
+      <p>Espaço amplo que evoca pausa, mata e convívio — impossível de replicar por churrascarias ou sushis.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag">Valor Emocional</div>
+      <h3>Memória e relação</h3>
+      <p>A refeição como símbolo das boas relações — momento de reconexão com família, com a terra e consigo mesmo.</p>
+    </div>
+  </div>
+
+  <!-- 10 · PERCEPÇÃO DE MARCA -->
+  <div class="section-label">
+    <div class="section-icon">10</div>
+    <div>
+      <h2>Percepção de Marca</h2>
+      <span>Como o Camilo é visto hoje — e como quer ser visto</span>
+    </div>
+  </div>
+
+  <div class="perception-wrap">
+    <div class="perception-header-row">
+      <span>📍 Como é visto hoje</span>
+      <span></span>
+      <span>🎯 Como quer ser visto</span>
+    </div>
+    <div class="perception-row">
+      <div class="perception-before">"Restaurante de peixe bom e barato"</div>
+      <div class="perception-arrow-cell">→</div>
+      <div class="perception-after">Destino gastronômico de peixe fresco no Paraná</div>
+    </div>
+    <div class="perception-row">
+      <div class="perception-before">"Lugar familiar e simples"</div>
+      <div class="perception-arrow-cell">→</div>
+      <div class="perception-after">Experiência de natureza + culinária autêntica</div>
+    </div>
+    <div class="perception-row">
+      <div class="perception-before">"Vale a pena ir"</div>
+      <div class="perception-arrow-cell">→</div>
+      <div class="perception-after">"Tem que ir pelo menos uma vez na vida"</div>
+    </div>
+  </div>
+
+  <!-- 11 · EQUAÇÃO DE VALOR -->
+  <div class="section-label">
+    <div class="section-icon">11</div>
+    <div>
+      <h2>Equação de Valor</h2>
+      <span>O que entra e o que sai na percepção de quem escolhe o Camilo</span>
+    </div>
+  </div>
+
+  <div class="equation-wrap">
+    <div class="eq-label">Como o cliente calcula se vale a pena</div>
+
+    <div class="eq-row-label">O que o Camilo entrega (numerador)</div>
+    <div class="equation-row">
+      <div class="eq-chip">🐟 Peixe fresco</div>
+      <div class="eq-operator">+</div>
+      <div class="eq-chip">🌿 Ambiente de natureza</div>
+      <div class="eq-operator">+</div>
+      <div class="eq-chip">🤝 Acolhimento familiar</div>
+    </div>
+
+    <div class="eq-divider"></div>
+
+    <div class="eq-row-label">O que o cliente tolera pagar (denominador)</div>
+    <div class="equation-row">
+      <div class="eq-chip">💰 Preço justo</div>
+      <div class="eq-operator">+</div>
+      <div class="eq-chip">⏱ Demora aceitável</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-label">⚠️ Ponto de Atenção Crítico</div>
+    <p>A demora é o único vetor que corrói a equação. Reclamações recentes apontam <strong>mais de 1h30 de espera</strong> e falta de comunicação sobre o tempo de preparo. Isso não é problema de produto — é problema de <strong>gestão de expectativa e operação de salão</strong>.</p>
+  </div>
+
+  <!-- 12 · ESCADA DA MARCA -->
+  <div class="section-label">
+    <div class="section-icon">12</div>
+    <div>
+      <h2>Escada da Marca</h2>
+      <span>Da base concreta até o vínculo emocional com o cliente</span>
+    </div>
+  </div>
+
+  <div class="ladder-frame">
+
+    <div class="ladder-step step-1">
+      <div class="ladder-block">
+        <div class="step-number">1</div>
+        <div class="step-nivel">Atributo</div>
+        <div class="step-title">O que o cliente pode verificar</div>
+        <div class="step-desc">Especialidade em tilápia e peixes de água doce — base tangível e verificável da proposta da marca.</div>
+      </div>
+      <div class="ladder-arrow">→</div>
+    </div>
+
+    <div class="ladder-step step-2">
+      <div class="ladder-block">
+        <div class="step-number">2</div>
+        <div class="step-nivel">Funcional</div>
+        <div class="step-title">O que o cliente recebe</div>
+        <div class="step-desc">Peixe fresco, bem preparado, preço justo — entrega consistente que justifica o deslocamento.</div>
+      </div>
+      <div class="ladder-arrow">→</div>
+    </div>
+
+    <div class="ladder-step step-3">
+      <div class="ladder-block">
+        <div class="step-number">3</div>
+        <div class="step-nivel">Experiencial</div>
+        <div class="step-title">O que o cliente vive</div>
+        <div class="step-desc">Ambiente de natureza, mesa farta, ritual familiar — experiência que não se encontra em nenhum outro lugar da região.</div>
+      </div>
+      <div class="ladder-arrow">→</div>
+    </div>
+
+    <div class="ladder-step step-4">
+      <div class="ladder-block">
+        <div class="step-number">4</div>
+        <div class="step-nivel">Emocional</div>
+        <div class="step-title">"Aqui eu me reconecto com o que importa"</div>
+        <div class="step-desc">O Camilo representa pausa, pertencimento e memória afetiva — o momento de estar com quem você ama em um lugar que parece de família.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ladder-footer-wrap">
+    <div class="ladder-footer">
+      <div class="ladder-footer-item"><strong>Base</strong>O produto em si</div>
+      <div class="ladder-footer-item"><strong>Entrega</strong>O que promete</div>
+      <div class="ladder-footer-item"><strong>Vivência</strong>O que transforma</div>
+      <div class="ladder-footer-item"><strong>Significado</strong>O que representa</div>
+    </div>
+  </div>
+
+  <div class="ladder-progress">
+    <span style="color: var(--brown-light);">concreto ——————→ emocional</span>
+  </div>
+
+  <!-- 13 · DIFERENCIAIS ESTRATÉGICOS -->
+  <div class="section-label">
+    <div class="section-icon">13</div>
+    <div>
+      <h2>Diferenciais Estratégicos</h2>
+      <span>O que nenhum concorrente regional entrega igual</span>
+    </div>
+  </div>
+
+  <div class="diferencial-list">
+    <div class="diferencial-item">
+      <div class="dif-icon">🐟</div>
+      <div class="dif-body">
+        <h4>Especialidade em peixe fresco</h4>
+        <p>Nenhum concorrente regional tem peixe como identidade central. O Camilo é o único com autoridade, consistência e reputação construída nesse produto.</p>
+      </div>
+    </div>
+    <div class="diferencial-item">
+      <div class="dif-icon">🌿</div>
+      <div class="dif-body">
+        <h4>Experiência de natureza</h4>
+        <p>Ambiente que evoca pausa, mata e rio — algo que churrascarias, sushis e restaurantes generalistas da região não conseguem replicar nem aproximar.</p>
+      </div>
+    </div>
+    <div class="diferencial-item">
+      <div class="dif-icon">👨‍👩‍👧</div>
+      <div class="dif-body">
+        <h4>Destino familiar de geração</h4>
+        <p>Clientes que voltam há anos, levam os filhos, celebram datas — vínculo emocional construído ao longo do tempo que nenhum concorrente novo consegue comprar.</p>
+      </div>
+    </div>
+    <div class="diferencial-item">
+      <div class="dif-icon">🗺️</div>
+      <div class="dif-body">
+        <h4>Vale a viagem</h4>
+        <p>Único restaurante de Irati mencionado por turistas estrangeiros no Google — reconhecimento que vai muito além do público local e posiciona a marca como destino de rota.</p>
+      </div>
+    </div>
+    <div class="diferencial-item">
+      <div class="dif-icon">🤝</div>
+      <div class="dif-body">
+        <h4>Autenticidade sem performance</h4>
+        <p>Sem conceito forçado — a identidade é genuína e percebida como real pelo público, o que gera confiança difícil de imitar por concorrentes mais novos ou sofisticados.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14 · CONCORRENTES -->
+  <div class="section-label">
+    <div class="section-icon">14</div>
+    <div>
+      <h2>Concorrentes — Descrição</h2>
+      <span>Players mapeados em Irati e entorno</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Restaurante</th>
+            <th>Nota</th>
+            <th>Avaliações</th>
+            <th>Posicionamento</th>
+            <th>Fraqueza</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Italiano Restaurante</strong></td>
+            <td>4.6 ⭐</td>
+            <td>3.780</td>
+            <td>Generalista, volume, tradição local</td>
+            <td>Sem especialidade clara</td>
+          </tr>
+          <tr>
+            <td><strong>Kokeshi Sushi</strong></td>
+            <td>4.7 ⭐</td>
+            <td>331</td>
+            <td>Premium, nicho japonês</td>
+            <td>Alto ticket, alcance reduzido</td>
+          </tr>
+          <tr>
+            <td><strong>República Requinte</strong></td>
+            <td>4.6 ⭐</td>
+            <td>803</td>
+            <td>Mix populão, alto giro</td>
+            <td>Sem identidade de marca</td>
+          </tr>
+          <tr>
+            <td><strong>WA Steak House</strong></td>
+            <td>4.7 ⭐</td>
+            <td>219</td>
+            <td>Burger/steak jovem, casual</td>
+            <td>Sem experiência de destino</td>
+          </tr>
+          <tr>
+            <td><strong>Lopes Padaria</strong></td>
+            <td>5.0 ⭐</td>
+            <td>Baixo</td>
+            <td>Nicho artesanal, café</td>
+            <td>Não compete no almoço/jantar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 15 · ANÁLISE DOS CONCORRENTES -->
+  <div class="section-label">
+    <div class="section-icon">15</div>
+    <div>
+      <h2>Análise dos Concorrentes</h2>
+      <span>Posicionamento, comunicação e espaço que cada um ocupa</span>
+    </div>
+  </div>
+
+  <div class="cards-grid col-2">
+    <div class="card">
+      <div class="card-tag">Italiano Restaurante</div>
+      <h3>O gigante generalista</h3>
+      <p>Maior volume de avaliações da cidade (3.780). Ocupa o espaço de "opção segura" para qualquer ocasião. Não tem identidade forte — mas tem volume, tradição e familiaridade. Não é destino, é padrão. Sua força é a inércia do público.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag">Kokeshi Sushi</div>
+      <h3>O nicho premium</h3>
+      <p>Melhor avaliado (4.7) com base pequena. Ocupa nicho específico sem competir diretamente com o Camilo. Tem potencial de experiência de destino, mas está restrito ao público de ticket alto e paladar específico.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag">República Requinte</div>
+      <h3>O populão sem rosto</h3>
+      <p>Volume intermediário (803 avaliações), sem posicionamento claro. Atende a muitos, mas não representa nada específico. Disputa clientela cotidiana sem criar vínculos emocionais duradouros.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag">WA Steak House</div>
+      <h3>O casual jovem</h3>
+      <p>Foca em burger e steak, atende público mais jovem e informal. Bem avaliado (4.7) mas base ainda pequena (219). Não compete na experiência de natureza nem na ocasião familiar.</p>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-label">🎯 Vazio Estratégico Identificado</div>
+    <p>Nenhum player ocupa o espaço de <em>experiência gastronômica de destino com identidade de natureza</em>. O Kokeshi se aproxima em "experiência", mas está preso a um nicho. <strong>O Camilo é o único com os ativos necessários para ocupar esse quadrante — e já é reconhecido por isso, mesmo sem comunicar conscientemente.</strong></p>
+  </div>
+
+  <!-- MAPA DE POSICIONAMENTO -->
+  <div class="section-label">
+    <div class="section-icon">↗</div>
+    <div>
+      <h2>Mapa de Posicionamento</h2>
+      <span>Onde cada concorrente está — e onde o Camilo pode ir</span>
+    </div>
+  </div>
+
+  <div class="map-wrap">
+    <div class="map-tag">📍 Eixo horizontal: Especialidade → Cardápio Amplo · Eixo vertical: Refeição Cotidiana → Experiência de Destino</div>
+
+    <div class="map-svg-wrap">
+      <svg viewBox="0 0 560 440" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+
+        <rect width="560" height="440" fill="#F9F6F3" rx="8"/>
+
+        <rect x="40" y="30" width="240" height="190" fill="#F5EDE4" opacity="0.5" rx="4"/>
+        <rect x="280" y="30" width="240" height="190" fill="#FFF" opacity="0.4" rx="4"/>
+        <rect x="40" y="220" width="240" height="190" fill="#FFF" opacity="0.4" rx="4"/>
+        <rect x="280" y="220" width="240" height="190" fill="#F5EDE4" opacity="0.3" rx="4"/>
+
+        <line x1="40" y1="220" x2="510" y2="220" stroke="#C9956A" stroke-width="1.5"/>
+        <polygon points="514,220 506,216 506,224" fill="#C9956A"/>
+        <polygon points="36,220 44,216 44,224" fill="#C9956A"/>
+
+        <line x1="280" y1="410" x2="280" y2="40" stroke="#C9956A" stroke-width="1.5"/>
+        <polygon points="280,36 276,44 284,44" fill="#C9956A"/>
+        <polygon points="280,414 276,406 284,406" fill="#C9956A"/>
+
+        <text x="280" y="22" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#7B4F2E" font-weight="bold" letter-spacing="0.5">EXPERIÊNCIA DE DESTINO</text>
+        <text x="280" y="432" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#7B4F2E" font-weight="bold" letter-spacing="0.5">REFEIÇÃO COTIDIANA</text>
+        <text x="28" y="224" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#7B4F2E" font-weight="bold" transform="rotate(-90, 28, 224)" letter-spacing="0.5">ESPECIALIDADE</text>
+        <text x="532" y="224" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#7B4F2E" font-weight="bold" transform="rotate(90, 532, 224)" letter-spacing="0.5">CARDÁPIO AMPLO</text>
+
+        <circle cx="160" cy="110" r="8" fill="#A0693A"/>
+        <text x="160" y="96" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#4A3728" font-weight="bold">● Kokeshi</text>
+        <text x="160" y="140" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#9E8070" font-style="italic">(japonês)</text>
+
+        <circle cx="252" cy="148" r="18" fill="#F5EDE4" stroke="#7B4F2E" stroke-width="1.5" opacity="0.6"/>
+        <polygon points="252,133 255,143 266,143 257,150 260,160 252,154 244,160 247,150 238,143 249,143" fill="#7B4F2E"/>
+        <text x="252" y="178" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="#7B4F2E" font-weight="bold">★ Camilo</text>
+        <text x="252" y="193" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#A0693A" font-style="italic">(peixe)</text>
+
+        <circle cx="150" cy="320" r="8" fill="#A0693A"/>
+        <text x="150" y="310" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#4A3728" font-weight="bold">● WA Steak</text>
+
+        <circle cx="390" cy="290" r="8" fill="#A0693A"/>
+        <text x="390" y="278" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#4A3728" font-weight="bold">● Italiano</text>
+
+        <circle cx="370" cy="340" r="8" fill="#A0693A"/>
+        <text x="370" y="328" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#4A3728" font-weight="bold">● República</text>
+
+      </svg>
+    </div>
+
+    <details>
+      <summary>Ver leitura estratégica do mapa</summary>
+      <div class="dobra-content">
+        <p>O Camilo ocupa o <strong>quadrante superior esquerdo</strong> — especialidade + experiência de destino. Está acima de todos os concorrentes no eixo de experiência e é o único com especialidade real de produto. O Kokeshi se aproxima no eixo de destino, mas está preso a um nicho restrito. Italiano e República dominam volume cotidiano sem disputar o espaço de experiência. <strong>O território de destino gastronômico com identidade de natureza e especialidade em peixe é exclusivo do Camilo.</strong></p>
+      </div>
+    </details>
+  </div>
+
+  <!-- 16 · DECLARAÇÃO DE POSICIONAMENTO -->
+  <div class="section-label">
+    <div class="section-icon">⭐</div>
+    <div>
+      <h2>Declaração de Posicionamento</h2>
+      <span>A síntese de tudo — o que o Camilo é, para quem e por quê</span>
+    </div>
+  </div>
+
+  <div class="statement-wrap">
+    <div class="statement-label">⭐ Declaração de Posicionamento — Camilo</div>
+    <blockquote>
+      "Para <strong>famílias e viajantes</strong> que buscam uma refeição autêntica e memorável, o Camilo é o <strong>único restaurante da região</strong> que une peixe fresco de verdade com a experiência de um ambiente amplo — conectando as pessoas à natureza e a quem elas amam. <strong>Porque aqui, a comida é o símbolo das boas relações.</strong>"
+    </blockquote>
+  </div>
+
+</main>
+
+<footer>
+  🧨 Pavio Branding · Relatório Estratégico Camilo · Workshop 27.05.2026 · Pilar 3 — Valor
+</footer>
+
+</body>
+</html>

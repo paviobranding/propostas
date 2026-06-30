@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Estratégico — Camilo | Pavio Branding</title>
+<style>
+  :root {
+    --brown: #7B4F2E;
+    --brown-light: #A0693A;
+    --brown-pale: #F5EDE4;
+    --brown-border: #C9956A;
+    --white: #FFFFFF;
+    --gray-soft: #F9F6F3;
+    --gray-text: #4A3728;
+    --gray-muted: #9E8070;
+    --font: 'Georgia', serif;
+    --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--gray-soft);
+    font-family: var(--font-sans);
+    color: var(--gray-text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    border-bottom: 3px solid var(--brown);
+    padding: 32px 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .header-studio {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    font-family: var(--font-sans);
+  }
+
+  .header-title {
+    font-family: var(--font);
+    font-size: 28px;
+    color: var(--brown);
+    font-weight: normal;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--gray-muted);
+    margin-top: 4px;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--brown-pale);
+    border: 1px solid var(--brown-border);
+    color: var(--brown);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: fit-content;
+  }
+
+  /* LAYOUT */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* SECTION TITLE */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    margin-top: 48px;
+  }
+
+  .section-label:first-of-type { margin-top: 0; }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--brown);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .section-label h2 {
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: normal;
+    color: var(--brown);
+  }
+
+  .section-label span {
+    font-size: 12px;
+    color: var(--gray-muted);
+    display: block;
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* CARD GRID */
+  .cards-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .cards-grid.col-2 { grid-template-columns: 1fr 1fr; }
+  .cards-grid.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .cards-grid.col-1 { grid-template-columns: 1fr; }
+
+  /* CARD */
+  .card {
+    background: var(--white);
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover { box-shadow: 0 4px 16px rgba(123,79,46,0.10); }
+
+  .card.accent {
+    background: var(--brown-pale);
+    border-color: var(--brown);
+  }
+
+  .card.highlight {
+    border-color: var(--brown);
+    border-width: 2px;
+    border-left: 5px solid var(--brown);
+  }
+
+  .card-tag {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+    font-family: var(--font-sans);
+  }
+
+  .card h3 {
+    font-family: var(--font);
+    font-size: 16px;
+    color: var(--brown);
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--gray-text);
+  }
+
+  /* DOBRA (accordion) */
+  details {
+    margin-top: 10px;
+  }
+
+  details summary {
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--brown-light);
+    font-style: italic;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+    padding: 4px 0;
+  }
+
+  details summary::before {
+    content: '▸';
+    font-size: 11px;
+    transition: transform 0.2s;
+  }
+
+  details[open] summary::before { content: '▾'; }
+
+  details .dobra-content {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--gray-text);
+    padding-left: 4px;
+    border-left: 2px solid var(--brown-border);
+    padding-left: 12px;
+  }
+
+  /* LISTA */
+  .card ul {
+    padding-left: 0;
+    list-style: none;
+    margin-top: 4px;
+  }
+
+  .card ul li {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--gray-text);
+    padding: 5px 0;
+    border-bottom: 1px solid #F0E6DC;
+    display: flex;
+    gap: 8px;
+  }
+
+  .card ul li:last-child { border-bottom: none; }
+
+  .card ul li::before {
+    content: '–';
+    color: var(--brown-border);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* TABELA */
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead tr {
+    background: var(--brown);
+    color: white;
+  }
+
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr:nth-child(even) { background: var(--brown-pale); }
+  tbody tr:nth-child(odd) { background: var(--white); }
+
+  tbody td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #EDE0D4;
+    line-height: 1.5;
+  }
+
+  /* OBJETIVO PRINCIPAL */
+  .objetivo-box {
+    background: var(--brown);
+    color: white;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-top: 16px;
+  }
+
+  .objetivo-box .obj-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 12px;
+  }
+
+  .objetivo-box blockquote {
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.8;
+    font-style: italic;
+    opacity: 0.95;
+  }
+
+  .objetivo-box .obj-focus {
+    margin-top: 16px;
+    font-size: 13px;
+    opacity: 0.8;
+    line-height: 1.6;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 14px;
+  }
+
+  /* HORIZONTE TABS */
+  .horizonte-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .horizonte-card {
+    border: 1.5px solid var(--brown-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  .horizonte-header {
+    background: var(--brown-pale);
+    padding: 10px 14px;
+    border-bottom: 1.5px solid var(--brown-border);
+  }
+
+  .horizonte-header .prazo {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+  }
+
+  .horizonte-header .tempo {
+    font-size: 13px;
+    color: var(--brown);
+    font-family: var(--font);
+    margin-top: 2px;
+  }
+
+  .horizonte-body {
+    padding: 14px;
+  }
+
+  .horizonte-body ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .horizonte-body ul li {
+    font-size: 12.5px;
+    color: var(--gray-text);
+    padding: 5px 0;
+    border-bottom: 1px solid #F0E6DC;
+    display: flex;
+    gap: 7px;
+    line-height: 1.5;
+  }
+
+  .horizonte-body ul li:last-child { border-bottom: none; }
+
+  .horizonte-body ul li::before {
+    content: '▸';
+    color: var(--brown-border);
+    font-size: 10px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    color: var(--gray-muted);
+    border-top: 1px solid #EDE0D4;
+    margin-top: 40px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .cards-grid.col-2,
+    .cards-grid.col-3,
+    .horizonte-grid { grid-template-columns: 1fr; }
+    header { padding: 24px 20px; }
+    main { padding: 28px 16px 60px; }
+    .objetivo-box { padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-studio">🧨 Pavio Branding — Relatório Estratégico de Marca</div>
+  <div class="header-title">Camilo — Workshop de Negócio</div>
+  <div class="header-sub">Olá, Meri! Este é o resultado do nosso primeiro pilar estratégico, construído a partir do workshop do dia 27.05.2026 e enriquecido com dados de mercado regional.</div>
+  <div class="header-badge">Pilar 1 · Negócio · Base Estratégica</div>
+</header>
+
+<main>
+
+  <!-- SEÇÃO 1: PREMISSAS -->
+  <div class="section-label">
+    <div class="section-icon">1</div>
+    <div>
+      <h2>Premissas de Mercado</h2>
+      <span>Contexto do mercado e cenário de Irati</span>
+    </div>
+  </div>
+
+  <div class="cards-grid col-1">
+    <div class="card highlight">
+      <div class="card-tag">Cenário Regional</div>
+      <p>O mercado de alimentação fora do lar em cidades médias do interior do Paraná está em consolidação. Irati — com cerca de 60 mil habitantes e economia baseada em agropecuária, indústria madeireira e serviços — tem um consumidor que valoriza autenticidade, ambiente e custo-benefício, e que ampliou o hábito de comer fora em ocasiões sociais e familiares.</p>
+    </div>
+  </div>
+
+  <div class="cards-grid col-2" style="margin-top:14px">
+    <div class="card">
+      <div class="card-tag">Oportunidade</div>
+      <h3>Território ainda vazio</h3>
+      <p>Peixes e frutos do mar são um segmento <strong>subexplorado localmente</strong>. A maioria dos estabelecimentos opera com cardápios generalistas, sem especialização. Ser o primeiro a ocupar esse espaço com consistência é uma vantagem de primeira entrada real.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag">Tendências que chegam ao interior</div>
+      <h3>O que o cliente quer agora</h3>
+      <ul>
+        <li>Pratos mais leves e com narrativa de origem</li>
+        <li>Ambientes com contato com a natureza</li>
+        <li>Experiências memoráveis além da refeição</li>
+        <li>Consumo compartilhado: porções, tábuas, família</li>
+        <li>Acolhimento e conforto como parte do produto</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cards-grid col-1" style="margin-top:14px">
+    <div class="card">
+      <div class="card-tag">Dados do Consumidor Paranaense</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Indicador</th>
+              <th>Dado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Perfil etário principal</td><td>25 a 44 anos, renda intermediária, rotina presencial ou híbrida</td></tr>
+            <tr><td>Frequência de almoço fora</td><td>72% ao menos uma vez por mês</td></tr>
+            <tr><td>Frequência de jantar fora</td><td>64% ao menos uma vez por mês</td></tr>
+            <tr><td>Ticket médio jantar (PR)</td><td>R$ 75 a R$ 92 por pessoa</td></tr>
+            <tr><td>Principais critérios de escolha</td><td>Higiene, qualidade da comida, ambiente, preço-valor</td></tr>
+            <tr><td>Motivação de consumo</td><td>Praticidade (almoço) e encontro social / experiência (jantar)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2: ALINHAMENTO DE OBJETIVOS -->
+  <div class="section-label">
+    <div class="section-icon">2</div>
+    <div>
+      <h2>Alinhamento de Objetivos</h2>
+      <span>Onde a marca quer chegar — nas palavras do time</span>
+    </div>
+  </div>
+
+  <div class="cards-grid col-1">
+    <div class="card accent">
+      <div class="card-tag">Ponto de Partida</div>
+      <h3>Por que o rebranding?</h3>
+      <p>O processo nasce de uma insatisfação produtiva: a percepção de que o negócio ficou na mesmice enquanto o cliente evoluiu. A marca quer ser vista como <strong>uma empresa atualizada, organizada e acolhedora</strong> — sem perder a identidade que já conquistou seu público fiel.</p>
+      <details>
+        <summary>Ver perguntas que o rebranding precisa responder</summary>
+        <div class="dobra-content">
+          <ul>
+            <li>O que as pessoas pensarão daqui depois da mudança?</li>
+            <li>Seremos vistos como mais atualizados, organizados e acolhedores?</li>
+            <li>As pessoas continuarão se sentindo bem?</li>
+            <li>A mudança será bem recebida por quem já é cliente?</li>
+          </ul>
+          <p style="margin-top:10px">Essas perguntas definem o tom do processo: <em>evolução com respeito à história</em>, não ruptura.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="horizonte-grid" style="margin-top:14px">
+    <div class="horizonte-card">
+      <div class="horizonte-header">
+        <div class="prazo">Curto Prazo</div>
+        <div class="tempo">Até 6 meses</div>
+      </div>
+      <div class="horizonte-body">
+        <ul>
+          <li>Atualização visual que mostre investimento</li>
+          <li>Cardápio revisado com opções diferenciadas</li>
+          <li>Atendimento otimizado e treinado</li>
+          <li>Ativação do espaço nos dias ociosos</li>
+          <li>Mudança física visível ao cliente</li>
+        </ul>
+      </div>
+    </div>
+    <div class="horizonte-card">
+      <div class="horizonte-header">
+        <div class="prazo">Médio Prazo</div>
+        <div class="tempo">Até 1 ano</div>
+      </div>
+      <div class="horizonte-body">
+        <ul>
+          <li>Pelo menos 1 festa temática realizada</li>
+          <li>Mini conveniência estruturada</li>
+          <li>Área infantil implantada</li>
+          <li>Espaço de café e lazer funcionando</li>
+          <li>Fondue e experiências exclusivas ativas</li>
+          <li>Gestão melhor assessorada</li>
+        </ul>
+      </div>
+    </div>
+    <div class="horizonte-card">
+      <div class="horizonte-header">
+        <div class="prazo">Longo Prazo</div>
+        <div class="tempo">Até 5 anos</div>
+      </div>
+      <div class="horizonte-body">
+        <ul>
+          <li>Marca muito mais identificada visualmente</li>
+          <li>Negócio financeiramente maior</li>
+          <li>Estrutura renovada — fora da mesmice</li>
+          <li>Ações proporcionais a uma empresa grande</li>
+          <li>Equipe de gestão formada e autônoma</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3: PONTOS DE ATENÇÃO -->
+  <div class="section-label">
+    <div class="section-icon">3</div>
+    <div>
+      <h2>Pontos de Atenção</h2>
+      <span>Riscos mapeados — inclusive pelo próprio time no workshop</span>
+    </div>
+  </div>
+
+  <div class="cards-grid col-2">
+    <div class="card">
+      <div class="card-tag">⚠ Risco Crítico</div>
+      <h3>Escutar o cliente na transição</h3>
+      <p>O maior risco identificado pelo próprio time: tomar decisões que não fazem sentido para quem já frequenta. Mudanças precisam ser validadas com o comportamento real do cliente — não apenas com referências externas.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag">⚠ Estrutural</div>
+      <h3>Acessibilidade como critério</h3>
+      <p>Mudanças físicas que não considerem <strong>idosos e crianças</strong> podem alienar exatamente o público central: as famílias. Acessibilidade não é detalhe — é critério de projeto.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag">⚠ Proposta</div>
+      <h3>Não tentar agradar a todos</h3>
+      <p>A tentação de diversificar demais — buffet, cardápio apimentado, soluções que atrapalham a experiência coletiva — pode diluir a proposta e afastar tanto o público fiel quanto o novo.</p>
+      <details>
+        <summary>Ver o que o time listou como riscos de fracasso</summary>
+        <div class="dobra-content">
+          <ul>
+            <li>Não escutar o cliente nem analisar seu comportamento</li>
+            <li>Não atingir o público de famílias e jovens acompanhados</li>
+            <li>Decisões como buffet que não fazem sentido para o perfil</li>
+            <li>Cardápio apimentado ou muito diferente do esperado</li>
+            <li>Mudanças digitais que atrapalhem a experiência coletiva</li>
+            <li>Estrutura inacessível para idosos e crianças</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+    <div class="card">
+      <div class="card-tag">⚠ Operacional</div>
+      <h3>Sazonalidade e ociosidade</h3>
+      <p>A demanda se concentra em fins de semana e datas comemorativas. Os dias de semana exigem estratégias de ativação específicas — sem forçar um posicionamento que destoe da identidade construída.</p>
+    </div>
+  </div>
+
+  <div class="cards-grid col-1" style="margin-top:14px">
+    <div class="card">
+      <div class="card-tag">⚠ Reputação Local</div>
+      <h3>Consistência de atendimento</h3>
+      <p>Em Irati, reputação se move por boca a boca. Qualquer inconsistência no serviço — especialmente nos primeiros meses pós-rebranding — terá impacto direto e rápido na percepção da mudança. O atendimento é parte do produto, não suporte a ele.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4: OBJETIVO PRINCIPAL -->
+  <div class="section-label">
+    <div class="section-icon">4</div>
+    <div>
+      <h2>Objetivo Principal Definido</h2>
+      <span>Foco estratégico central do rebranding</span>
+    </div>
+  </div>
+
+  <div class="objetivo-box">
+    <div class="obj-label">Declaração de Objetivo</div>
+    <blockquote>
+      "Evoluir a marca do Camilo de peixaria conhecida para o restaurante de referência em gastronomia de peixes e experiência familiar em Irati — com identidade visual renovada, operação mais consistente e um espaço que ofereça o que nenhum outro lugar da cidade oferece, sem perder a essência que fez o público chegar até aqui."
+    </blockquote>
+    <div class="obj-focus">
+      <strong>Foco estratégico central:</strong> Crescer sem se perder. Atualizar com coragem e escuta ativa — garantindo que o cliente de sempre se sinta parte da evolução, e que o cliente novo encontre um motivo claro para escolher o Camilo.
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  🧨 Pavio Branding &nbsp;·&nbsp; Relatório Estratégico Camilo &nbsp;·&nbsp; Workshop 27.05.2026 &nbsp;·&nbsp; Pilar 1 — Negócio
+</footer>
+
+</body>
+</html>
