@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing Criativo — ILUMINE</title>
+<style>
+  :root {
+    --amarelo: #FFC93C;
+    --laranja: #FF8C42;
+    --roxo: #6A4C93;
+    --bg: #FFFBF2;
+    --texto: #2E2233;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--texto);
+    margin: 0;
+    padding: 0 0 60px;
+  }
+  header {
+    background: linear-gradient(120deg, var(--roxo), var(--laranja), var(--amarelo));
+    padding: 40px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+  header p {
+    margin-top: 8px;
+    font-size: 1rem;
+    opacity: 0.95;
+  }
+  .container {
+    max-width: 720px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+  .verse {
+    background: #fff;
+    border-left: 5px solid var(--laranja);
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-style: italic;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .section {
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 18px 22px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--roxo);
+  }
+  .section-header:hover { background: #FAF6EE; }
+  .section-header .arrow {
+    transition: transform 0.25s ease;
+    color: var(--laranja);
+    font-size: 1.2rem;
+  }
+  .section.open .arrow { transform: rotate(180deg); }
+  .section-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    padding: 0 22px;
+  }
+  .section.open .section-body {
+    max-height: 2000px;
+    padding: 4px 22px 24px;
+  }
+  .question {
+    margin-bottom: 18px;
+  }
+  .question label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .question textarea, .question input[type="text"] {
+    width: 100%;
+    border: 1px solid #E4DCCB;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    background: #FFFDF8;
+  }
+  .question textarea:focus, .question input:focus {
+    outline: none;
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(255,140,66,0.15);
+  }
+  .progress-wrap {
+    max-width: 720px;
+    margin: 0 auto 10px;
+    padding: 0 20px;
+  }
+  .progress-bar-bg {
+    background: #EFE6D8;
+    border-radius: 20px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--amarelo), var(--laranja));
+    transition: width 0.3s ease;
+  }
+  .progress-text {
+    font-size: 0.85rem;
+    color: var(--roxo);
+    margin-top: 6px;
+    text-align: right;
+  }
+  .submit-wrap {
+    text-align: center;
+    margin-top: 30px;
+  }
+  button.submit-btn {
+    background: var(--roxo);
+    color: #fff;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button.submit-btn:hover { background: #543a78; }
+  button.submit-btn:disabled {
+    background: #b8a9c9;
+    cursor: not-allowed;
+  }
+  .status-msg {
+    margin-top: 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .status-msg.success { color: #2c7a3f; }
+  .status-msg.error { color: #b03030; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>✨ Briefing Criativo — ILUMINE</h1>
+  <p>Identidade Visual do Ministério Infantil</p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-text" id="progressText">0% preenchido</div>
+</div>
+
+<div class="container">
+
+  <div class="verse">
+    "Da mesma forma, brilhe a luz de vocês diante dos homens, para que vejam as suas boas obras e glorifiquem a seu Pai, que está nos céus." — Mateus 5:16
+  </div>
+
+  <form id="briefingForm" action="https://formspree.io/f/xqevjrwg" method="POST">
+    <input type="hidden" name="_subject" value="Novo Briefing ILUMINE recebido">
+
+    <!-- SEÇÃO 1 -->
+    <div class="section open">
+      <button type="button" class="section-header" onclick="toggleSection(this)">
+        1. Percepção & Essência da Marca <span class="arrow">▾</span>
+      </button>
+      <div class="section-body">
+        <div class="question">
+          <label>Se a ILUMINE fosse uma pessoa, como ela se apresentaria em uma frase?</label>
+          <textarea name="1_apresentacao_pessoa" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Qual sentimento a criança deve ter ao ver a marca pela primeira vez?</label>
+          <textarea name="2_sentimento_crianca" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Qual sentimento os pais/líderes devem ter ao ver a marca?</label>
+          <textarea name="3_sentimento_pais_lideres" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Se tivessem que resumir a ILUMINE em 3 palavras, quais seriam?</label>
+          <input type="text" name="4_tres_palavras">
+        </div>
+        <div class="question">
+          <label>O que a marca NÃO pode transmitir?</label>
+          <textarea name="5_o_que_nao_transmitir" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Existe alguma palavra-chave bíblica além de "luz" que deva estar presente no conceito (ex: sal, sementeira, geração, chama, vigília)?</label>
+          <textarea name="6_palavra_chave_biblica" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 2 -->
+    <div class="section">
+      <button type="button" class="section-header" onclick="toggleSection(this)">
+        2. Personalidade da Marca <span class="arrow">▾</span>
+      </button>
+      <div class="section-body">
+        <div class="question">
+          <label>A ILUMINE deve parecer mais brincalhona e leve, ou mais séria e contemplativa?</label>
+          <textarea name="7_tom_brincalhona_ou_seria" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Vocês imaginam a marca com uma "presença" fixa e reconhecível (um símbolo, um elemento que sempre aparece), ou algo mais livre e variável?</label>
+          <textarea name="8_presenca_fixa_ou_variavel" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Existe alguma faixa etária predominante entre as crianças que deva guiar o tom da comunicação?</label>
+          <textarea name="9_faixa_etaria_predominante" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 3 -->
+    <div class="section">
+      <button type="button" class="section-header" onclick="toggleSection(this)">
+        3. Referências & Contexto <span class="arrow">▾</span>
+      </button>
+      <div class="section-body">
+        <div class="question">
+          <label>Vocês têm referências de outros ministérios infantis (nacionais ou internacionais) cuja identidade visual admiram? Pode citar 2-3.</label>
+          <textarea name="10_referencias_ministerios" rows="3"></textarea>
+        </div>
+        <div class="question">
+          <label>Há alguma marca fora do meio religioso (educação infantil, entretenimento, marca autoral) que inspire o estilo que desejam?</label>
+          <textarea name="11_referencias_fora_religioso" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Existe alguma identidade visual que vocês definitivamente NÃO querem parecer, ou com a qual não querem ser confundidos?</label>
+          <textarea name="12_o_que_nao_querem_parecer" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 4 -->
+    <div class="section">
+      <button type="button" class="section-header" onclick="toggleSection(this)">
+        4. Aplicações Práticas <span class="arrow">▾</span>
+      </button>
+      <div class="section-body">
+        <div class="question">
+          <label>Onde a marca será mais usada no dia a dia? (banner de sala, camisetas, redes sociais, crachás, materiais de discipulado, palco/cenário)</label>
+          <textarea name="13_aplicacoes_uso" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Haverá subdivisões dentro do ministério (ex: berçário, kids, pré-adolescentes) que precisarão de variações da marca?</label>
+          <textarea name="14_subdivisoes_ministerio" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>Existe já algum material impresso ou digital em uso que precise ser compatibilizado com a nova marca?</label>
+          <textarea name="15_material_existente" rows="2"></textarea>
+        </div>
+        <div class="question">
+          <label>A marca precisa funcionar tanto em ambientes de palco/culto quanto em materiais impressos do dia a dia?</label>
+          <textarea name="16_palco_e_impresso" rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn" id="submitBtn">Enviar Briefing</button>
+      <div class="status-msg" id="statusMsg"></div>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  function toggleSection(btn) {
+    const section = btn.parentElement;
+    section.classList.toggle('open');
+  }
+
+  const form = document.getElementById('briefingForm');
+  const inputs = form.querySelectorAll('textarea, input[type="text"]');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  const submitBtn = document.getElementById('submitBtn');
+  const statusMsg = document.getElementById('statusMsg');
+
+  function updateProgress() {
+    let filled = 0;
+    inputs.forEach(el => { if (el.value.trim() !== '') filled++; });
+    const percent = Math.round((filled / inputs.length) * 100);
+    progressFill.style.width = percent + '%';
+    progressText.textContent = percent + '% preenchido';
+  }
+
+  inputs.forEach(el => el.addEventListener('input', updateProgress));
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    statusMsg.textContent = '';
+    statusMsg.className = 'status-msg';
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        statusMsg.textContent = 'Briefing enviado com sucesso! 🙌 Obrigado por participar.';
+        statusMsg.classList.add('success');
+        form.reset();
+        updateProgress();
+      } else {
+        statusMsg.textContent = 'Ocorreu um erro ao enviar. Tente novamente.';
+        statusMsg.classList.add('error');
+      }
+    })
+    .catch(() => {
+      statusMsg.textContent = 'Erro de conexão. Verifique sua internet e tente novamente.';
+      statusMsg.classList.add('error');
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar Briefing';
+    });
+  });
+</script>
+
+</body>
+</html>
