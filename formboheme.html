@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Criativo — Boheme Bar e Gastronomia</title>
+<style>
+  :root {
+    --verde-escuro: #1f3d2b;
+    --verde-claro: #2e5c3e;
+    --branco: #ffffff;
+    --cinza-texto: #444444;
+    --cinza-borda: #dcdcdc;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--branco);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--cinza-texto);
+    line-height: 1.5;
+  }
+
+  header {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+
+  header p {
+    margin-top: 8px;
+    font-size: 15px;
+    opacity: 0.85;
+  }
+
+  form {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 20px 60px;
+  }
+
+  .secao {
+    border-top: 3px solid var(--verde-escuro);
+    padding-top: 25px;
+    margin-top: 45px;
+  }
+
+  .secao h2 {
+    color: var(--verde-escuro);
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .secao .subtitulo {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 20px;
+  }
+
+  .pergunta {
+    margin-bottom: 28px;
+  }
+
+  .pergunta label.titulo {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #222;
+    font-size: 15px;
+  }
+
+  .pergunta .exemplo {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+  }
+
+  input[type="text"]:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--verde-escuro);
+  }
+
+  .opcoes label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 6px;
+    cursor: pointer;
+  }
+
+  .opcoes input[type="checkbox"],
+  .opcoes input[type="radio"] {
+    accent-color: var(--verde-escuro);
+    width: 16px;
+    height: 16px;
+  }
+
+  .porcentagens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .porcentagens div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+  }
+
+  .porcentagens input[type="text"] {
+    width: 60px;
+    padding: 6px;
+    text-align: center;
+  }
+
+  .prioridade {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .prioridade div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  .prioridade input[type="text"] {
+    width: 50px;
+    text-align: center;
+    padding: 6px;
+  }
+
+  .secao-livre {
+    background-color: #f7f9f7;
+    border: 1px solid var(--cinza-borda);
+    border-left: 4px solid var(--verde-escuro);
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 45px;
+  }
+
+  .secao-livre h2 {
+    color: var(--verde-escuro);
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .secao-livre p {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 18px;
+  }
+
+  .botao-enviar {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  button {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    border: none;
+    padding: 14px 40px;
+    font-size: 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  button:hover {
+    background-color: var(--verde-claro);
+  }
+
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #aaa;
+  }
+
+  /* Mensagem de sucesso */
+  #mensagem-sucesso, #mensagem-erro {
+    display: none;
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  #mensagem-sucesso {
+    background-color: #eaf4ec;
+    border: 1px solid var(--verde-escuro);
+    color: var(--verde-escuro);
+  }
+
+  #mensagem-erro {
+    background-color: #fdecea;
+    border: 1px solid #c0392b;
+    color: #c0392b;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Boheme Bar e Gastronomia</h1>
+  <p>Formulário de Descoberta de Marca — Guia Criativo de Conteúdo</p>
+</header>
+
+<!-- Mensagens de retorno -->
+<div id="mensagem-sucesso">
+  ✅ Obrigado! Suas respostas foram enviadas com sucesso.<br>
+  Elas serão a base para a construção do Guia Criativo do Boheme.
+</div>
+<div id="mensagem-erro">
+  ⚠️ Algo deu errado ao enviar. Por favor, tente novamente ou entre em contato diretamente.
+</div>
+
+<form id="formBoheme">
+
+  <input type="hidden" name="_subject" value="Novas respostas — Guia Criativo Boheme">
+  <input type="text" name="_gotcha" style="display:none">
+
+  <!-- SEÇÃO 1 -->
+  <div class="secao">
+    <h2>1. Negócio & Contexto</h2>
+    <p class="subtitulo">Vamos entender a origem e o funcionamento do Boheme.</p>
+
+    <div class="pergunta">
+      <label class="titulo">Conte a história do Boheme: como e por que ele nasceu? Houve alguma inspiração específica?</label>
+      <textarea name="1_1_historia_boheme" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Qual o significado do nome "Boheme" para vocês? Existe uma história ou conceito por trás dele?</label>
+      <textarea name="1_2_significado_nome" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">O que diferencia o Boheme de outros bares/restaurantes de Irati?</label>
+      <textarea name="1_3_diferencial" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Quais são os 3 pratos/drinks "assinatura" que vocês têm mais orgulho? O que os torna especiais?</label>
+      <textarea name="1_4_pratos_assinatura" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Qual a faixa de ticket médio do Boheme?</label>
+      <div class="opcoes">
+        <label><input type="radio" name="1_5_ticket_medio" value="Até R$ 50"> Até R$ 50 por pessoa</label>
+        <label><input type="radio" name="1_5_ticket_medio" value="R$ 50–100"> R$ 50–100</label>
+        <label><input type="radio" name="1_5_ticket_medio" value="R$ 100–150"> R$ 100–150</label>
+        <label><input type="radio" name="1_5_ticket_medio" value="Acima de R$ 150"> Acima de R$ 150</label>
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Quais os horários/dias de maior movimento e o principal motivo das visitas em cada um?</label>
+      <div class="exemplo">Ex: sextas à noite = happy hour com amigos; sábado = jantar a dois.</div>
+      <textarea name="1_6_horarios_movimento" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Existem eventos fixos ou sazonais (noites temáticas, shows, datas especiais)? Quais e com que frequência?</label>
+      <textarea name="1_7_eventos_fixos" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <div class="secao">
+    <h2>2. Público-Alvo</h2>
+    <p class="subtitulo">Quem é o cliente que o Boheme quer encantar.</p>
+
+    <div class="pergunta">
+      <label class="titulo">Como você descreveria o cliente ideal do Boheme? (idade, perfil, estilo de vida, o que valoriza)</label>
+      <textarea name="2_1_cliente_ideal" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Que desejo ou necessidade o cliente busca satisfazer ao escolher o Boheme?</label>
+      <div class="opcoes">
+        <label><input type="checkbox" name="2_2_desejo_cliente" value="Impressionar em um encontro romântico"> Impressionar em um encontro romântico</label>
+        <label><input type="checkbox" name="2_2_desejo_cliente" value="Relaxar após o trabalho"> Relaxar após o trabalho</label>
+        <label><input type="checkbox" name="2_2_desejo_cliente" value="Celebrar uma ocasião especial"> Celebrar uma ocasião especial</label>
+        <label><input type="checkbox" name="2_2_desejo_cliente" value="Socializar com amigos"> Socializar com amigos</label>
+        <label><input type="checkbox" name="2_2_desejo_cliente" value="Vivenciar algo diferente do cotidiano de Irati"> Vivenciar algo diferente do cotidiano de Irati</label>
+        <label><input type="checkbox" name="2_2_desejo_cliente" value="Outro"> Outro:</label>
+        <input type="text" name="2_2_desejo_cliente_outro" placeholder="Especifique">
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Como o público normalmente descobre o Boheme hoje?</label>
+      <div class="opcoes">
+        <label><input type="checkbox" name="2_3_descoberta" value="Indicação de amigos"> Indicação de amigos</label>
+        <label><input type="checkbox" name="2_3_descoberta" value="Instagram/redes sociais"> Instagram/redes sociais</label>
+        <label><input type="checkbox" name="2_3_descoberta" value="Passando na rua/localização"> Passando na rua/localização</label>
+        <label><input type="checkbox" name="2_3_descoberta" value="Google/avaliações"> Google/avaliações</label>
+        <label><input type="checkbox" name="2_3_descoberta" value="Outro"> Outro:</label>
+        <input type="text" name="2_3_descoberta_outro" placeholder="Especifique">
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">O que os clientes mais elogiam em conversas, avaliações ou comentários? Cite exemplos reais.</label>
+      <textarea name="2_4_elogios_clientes" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Existe um público que vocês gostariam de atrair, mas ainda não alcançam? Descreva-o.</label>
+      <textarea name="2_5_publico_desejado" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <div class="secao">
+    <h2>3. Identidade & Personalidade da Marca</h2>
+    <p class="subtitulo">A essência que vai guiar todo o conteúdo criativo.</p>
+
+    <h3 style="color:var(--verde-escuro); margin-top:0;">3.1 Personalidade</h3>
+
+    <div class="pergunta">
+      <label class="titulo">Se o Boheme fosse uma pessoa, ele seria mais parecido com:</label>
+      <div class="opcoes">
+        <label><input type="radio" name="3_1_1_personalidade" value="Amigo boêmio"> Um amigo boêmio que sempre conhece o point certo</label>
+        <label><input type="radio" name="3_1_1_personalidade" value="Artista/músico"> Um artista/músico com estilo despojado e sofisticado</label>
+        <label><input type="radio" name="3_1_1_personalidade" value="Anfitrião elegante"> Um anfitrião elegante que recebe bem sem ser formal</label>
+        <label><input type="radio" name="3_1_1_personalidade" value="Outro"> Outro:</label>
+        <input type="text" name="3_1_1_personalidade_outro" placeholder="Especifique">
+      </div>
+      <textarea name="3_1_1_personalidade_motivo" rows="2" placeholder="Explique por quê"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Escolha 3 adjetivos que definem a marca e dê um exemplo prático de cada (atendimento, cardápio, ambiente):</label>
+      <textarea name="3_1_2_adjetivos" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Cite uma marca (de qualquer segmento) cuja comunicação vocês admiram, e o que gostam nela:</label>
+      <textarea name="3_1_3_marca_referencia" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">O que o Boheme jamais faria em uma comunicação?</label>
+      <div class="opcoes">
+        <label><input type="checkbox" name="3_1_4_nunca_faria" value="Gírias de internet/memes forçados"> Usar gírias de internet/memes forçados</label>
+        <label><input type="checkbox" name="3_1_4_nunca_faria" value="Promoção agressiva"> Fazer promoção agressiva tipo "compre 1 leve 2"</label>
+        <label><input type="checkbox" name="3_1_4_nunca_faria" value="Humor pesado/deboche"> Humor pesado ou deboche</label>
+        <label><input type="checkbox" name="3_1_4_nunca_faria" value="Formalidade excessiva"> Formalidade excessiva, tipo hotel 5 estrelas</label>
+        <label><input type="checkbox" name="3_1_4_nunca_faria" value="Outro"> Outro:</label>
+        <input type="text" name="3_1_4_nunca_faria_outro" placeholder="Especifique">
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Qual sentimento vocês querem que o cliente sinta ao ver um post do Boheme ou entrar no bar?</label>
+      <textarea name="3_1_5_sentimento" rows="3"></textarea>
+    </div>
+
+    <h3 style="color:var(--verde-escuro);">3.2 Identidade Musical (Assinatura Sonora)</h3>
+
+    <div class="pergunta">
+      <label class="titulo">Marque os estilos musicais presentes no ambiente e a % aproximada de cada:</label>
+      <div class="porcentagens">
+        <div>Jazz <input type="text" name="3_2_1_jazz_pct" placeholder="%"></div>
+        <div>Bossa Nova <input type="text" name="3_2_1_bossa_pct" placeholder="%"></div>
+        <div>Soul/R&B <input type="text" name="3_2_1_soul_pct" placeholder="%"></div>
+        <div>MPB <input type="text" name="3_2_1_mpb_pct" placeholder="%"></div>
+        <div>Indie/Alternativo <input type="text" name="3_2_1_indie_pct" placeholder="%"></div>
+        <div>Outro <input type="text" name="3_2_1_outro_pct" placeholder="%"></div>
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">A trilha muda de acordo com o horário ou ocasião? Como?</label>
+      <textarea name="3_2_2_trilha_horario" rows="2"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Existem artistas, bandas ou playlists de referência que definem o "som do Boheme"?</label>
+      <textarea name="3_2_3_referencias_musicais" rows="2"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">A música é ao vivo em algum momento? Quando e com que frequência?</label>
+      <textarea name="3_2_4_musica_ao_vivo" rows="2"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Vocês já receberam comentários de clientes sobre a música do ambiente? O que disseram?</label>
+      <textarea name="3_2_5_comentarios_musica" rows="2"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Se o Boheme fosse uma playlist, qual seria o nome dela e quais as 3 primeiras faixas?</label>
+      <textarea name="3_2_6_playlist_boheme" rows="2"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Existe algum instrumento ou som específico que remete à essência da marca (ex: piano, vinil, saxofone)?</label>
+      <textarea name="3_2_7_instrumento_essencia" rows="2"></textarea>
+    </div>
+
+    <h3 style="color:var(--verde-escuro);">3.3 Identidade Visual & Ambiente</h3>
+
+    <div class="pergunta">
+      <label class="titulo">Descreva a luz do ambiente em 3 palavras e liste 3 objetos/elementos decorativos "cara do Boheme".</label>
+      <textarea name="3_3_1_luz_decoracao" rows="2"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Anexe ou descreva 2–3 fotos/vídeos antigos que representam bem a marca:</label>
+      <input type="file" name="3_3_2_anexo_fotos" multiple>
+      <textarea name="3_3_2_descricao_fotos" rows="2" placeholder="Ou descreva aqui"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Existem cores, materiais ou texturas recorrentes na decoração que gostariam de reforçar na comunicação visual?</label>
+      <textarea name="3_3_3_cores_materiais" rows="2"></textarea>
+    </div>
+
+    <h3 style="color:var(--verde-escuro);">3.4 Identidade Verbal (Tom de Voz)</h3>
+
+    <div class="pergunta">
+      <label class="titulo">Marque as opções que mais representam o tom de voz do Boheme:</label>
+      <div class="opcoes">
+        <label><input type="checkbox" name="3_4_1_tom_voz" value="Formal e refinado"> Formal e refinado</label>
+        <label><input type="checkbox" name="3_4_1_tom_voz" value="Descontraído e próximo"> Descontraído e próximo</label>
+        <label><input type="checkbox" name="3_4_1_tom_voz" value="Poético/sensorial"> Poético/sensorial</label>
+        <label><input type="checkbox" name="3_4_1_tom_voz" value="Divertido/irônico"> Divertido/irônico</label>
+        <label><input type="checkbox" name="3_4_1_tom_voz" value="Sofisticado mas acessível"> Sofisticado mas acessível</label>
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Complete: se o Boheme fosse falar com um amigo chegando no bar, diria: "___"</label>
+      <input type="text" name="3_4_2_fala_amigo" placeholder="Resposta">
+      <label class="titulo" style="margin-top:12px;">E se fosse convidar para o happy hour de sexta em um post, começaria com: "___"</label>
+      <input type="text" name="3_4_2_convite_happyhour" placeholder="Resposta">
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Qual legenda soa mais "Boheme" (ou reescreva como o Boheme diria)?</label>
+      <div class="exemplo">A) "Sexta-feira chegou! Venha aproveitar nossos drinks especiais. Reserve já!"<br>B) "A noite pede música baixa, luz amarela e aquele drink que só existe aqui. Te esperamos."</div>
+      <textarea name="3_4_3_legenda_onbrand" rows="2"></textarea>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4 -->
+  <div class="secao">
+    <h2>4. Pontos Fortes & Provas Sociais</h2>
+    <p class="subtitulo">O que reforça a credibilidade e o valor do Boheme.</p>
+
+    <div class="pergunta">
+      <label class="titulo">Existem prêmios, certificações, parcerias ou fornecedores locais de destaque que vocês gostariam de comunicar?</label>
+      <textarea name="4_1_premios_parcerias" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Compartilhe 1–2 histórias reais de clientes marcantes:</label>
+      <textarea name="4_2_historias_clientes" rows="3"></textarea>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Que bastidores o público nunca viu, mas ajudariam a valorizar a marca?</label>
+      <textarea name="4_3_bastidores" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 5 -->
+  <div class="secao">
+    <h2>5. Objetivos de Comunicação</h2>
+    <p class="subtitulo">Para onde a comunicação digital deve levar o público.</p>
+
+    <div class="pergunta">
+      <label class="titulo">Priorize (1 a 5) o que a comunicação digital deve gerar hoje:</label>
+      <div class="prioridade">
+        <div><input type="text" name="5_1_prioridade_bar" placeholder="Nº"> Ir até o bar</div>
+        <div><input type="text" name="5_1_prioridade_reserva" placeholder="Nº"> Fazer reserva</div>
+        <div><input type="text" name="5_1_prioridade_seguir" placeholder="Nº"> Seguir/engajar no Instagram</div>
+        <div><input type="text" name="5_1_prioridade_comentar" placeholder="Nº"> Comentar/marcar amigos</div>
+        <div><input type="text" name="5_1_prioridade_promocao" placeholder="Nº"> Comprar um combo/promoção específica</div>
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <label class="titulo">Existe algum concorrente cuja comunicação vocês admiram — ou queiram evitar se parecer?</label>
+      <textarea name="5_2_concorrente_referencia" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- SEÇÃO LIVRE -->
+  <div class="secao-livre">
+    <h2>Espaço Livre</h2>
+    <p>Sinta-se à vontade para compartilhar qualquer ideia, sugestão, referência ou observação que não foi abordada nas perguntas acima, mas que você considera importante para a construção do guia criativo do Boheme.</p>
+    <textarea name="6_1_espaco_livre" rows="6" placeholder="Escreva aqui livremente..."></textarea>
+  </div>
+
+  <div class="botao-enviar">
+    <button type="submit" id="btnEnviar">Enviar Respostas</button>
+  </div>
+
+</form>
+
+<footer>
+  Boheme Bar e Gastronomia — Guia Criativo de Conteúdo
+</footer>
+
+<script>
+  const form = document.getElementById('formBoheme');
+  const btnEnviar = document.getElementById('btnEnviar');
+  const mensagemSucesso = document.getElementById('mensagem-sucesso');
+  const mensagemErro = document.getElementById('mensagem-erro');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = 'Enviando...';
+
+    try {
+      const response = await fetch('https://formspree.io/f/mqerrrlk', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        mensagemSucesso.style.display = 'block';
+        mensagemSucesso.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        mensagemErro.style.display = 'block';
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = 'Enviar Respostas';
+      }
+    } catch (error) {
+      mensagemErro.style.display = 'block';
+      btnEnviar.disabled = false;
+      btnEnviar.textContent = 'Enviar Respostas';
+    }
+  });
+</script>
+
+</body>
+</html>
