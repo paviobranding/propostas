@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Posicionamento — André</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000000;
+    --fg:#ffffff;
+    --line:#ffffff33;
+    --card:#0a0a0a;
+    --accent:#ffffff;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    padding:0 0 80px 0;
+  }
+
+  .container{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  .pixel{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#fff;
+    text-shadow:
+      2px 0 0 #fff,
+      -2px 0 0 #fff,
+      0 2px 0 #fff,
+      0 -2px 0 #fff,
+      4px 4px 0 #ffffff22,
+      -4px -4px 0 #ffffff11;
+    image-rendering: pixelated;
+    filter: contrast(1.1);
+  }
+
+  header{
+    text-align:center;
+    padding:80px 24px 60px;
+    border-bottom:1px solid var(--line);
+  }
+
+  header .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:4px;
+    color:#888;
+    margin-bottom:16px;
+  }
+
+  header h1.pixel{
+    font-size:clamp(28px, 5vw, 48px);
+    line-height:1.15;
+  }
+
+  header .meta{
+    margin-top:24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:#aaa;
+    display:flex;
+    gap:24px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  section{
+    padding:64px 0;
+    border-bottom:1px solid var(--line);
+  }
+
+  section:last-of-type{
+    border-bottom:none;
+  }
+
+  .section-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:3px;
+    color:#666;
+    margin-bottom:12px;
+  }
+
+  h2.pixel{
+    font-size:clamp(22px, 3.5vw, 32px);
+    margin-bottom:32px;
+  }
+
+  h3.pixel{
+    font-size:18px;
+    margin:32px 0 12px;
+    color:#fff;
+  }
+
+  h4.pixel{
+    font-size:14px;
+    margin:20px 0 8px;
+    color:#eee;
+  }
+
+  p{
+    color:#dcdcdc;
+    font-size:15.5px;
+    margin-bottom:16px;
+    max-width:760px;
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:24px;
+    margin-bottom:16px;
+  }
+
+  .card-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    color:#fff;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:8px;
+  }
+
+  .card p{
+    font-size:14.5px;
+    color:#bbb;
+    margin-bottom:0;
+  }
+
+  .card ul{
+    list-style:none;
+    padding:0;
+    margin-top:8px;
+  }
+  .card ul li{
+    font-size:14px;
+    color:#bbb;
+    margin-bottom:6px;
+    display:flex;
+    gap:8px;
+  }
+  .card ul li::before{
+    content:"—";
+    color:#fff;
+  }
+
+  .card .tier-tag{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    border:1px solid #fff;
+    padding:3px 10px;
+    margin-top:12px;
+  }
+
+  .grid{
+    display:grid;
+    gap:16px;
+    grid-template-columns:1fr;
+  }
+
+  @media(min-width:640px){
+    .grid.cols-3{ grid-template-columns:1fr 1fr 1fr; }
+    .grid.cols-2{ grid-template-columns:1fr 1fr; }
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+    margin-top:8px;
+  }
+
+  th, td{
+    text-align:left;
+    padding:14px 12px;
+    border:1px solid var(--line);
+    vertical-align:top;
+    color:#ccc;
+  }
+
+  th{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#fff;
+    background:#111;
+  }
+
+  .metric-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .metric-row:last-child{ border-bottom:none; }
+
+  .metric-score{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:800;
+    font-size:22px;
+    min-width:70px;
+    text-shadow:1px 0 0 #fff, -1px 0 0 #fff;
+  }
+
+  .metric-info .metric-name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:4px;
+  }
+
+  .metric-info p{
+    font-size:13.5px;
+    color:#999;
+    margin:0;
+  }
+
+  .bar-bg{
+    height:4px;
+    background:#222;
+    margin-top:8px;
+    width:100%;
+  }
+  .bar-fill{
+    height:4px;
+    background:#fff;
+  }
+
+  .status-badge{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    border:1px solid #fff;
+    padding:6px 14px;
+    margin-bottom:24px;
+  }
+
+  ul.check-list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  ul.check-list li{
+    display:flex;
+    gap:12px;
+    color:#ccc;
+    font-size:14.5px;
+  }
+  ul.check-list li::before{
+    content:"//";
+    font-family:'JetBrains Mono', monospace;
+    color:#fff;
+    font-weight:700;
+  }
+
+  .quote-box{
+    border-left:2px solid #fff;
+    padding-left:20px;
+    margin:24px 0;
+  }
+  .quote-box p{
+    font-style:italic;
+    color:#eee;
+  }
+
+  ol.steps{
+    padding-left:0;
+    list-style:none;
+    counter-reset: step;
+  }
+  ol.steps li{
+    counter-increment: step;
+    display:flex;
+    gap:16px;
+    margin-bottom:16px;
+    color:#ccc;
+    font-size:14.5px;
+  }
+  ol.steps li::before{
+    content: counter(step);
+    font-family:'JetBrains Mono', monospace;
+    font-weight:800;
+    color:#000;
+    background:#fff;
+    min-width:28px;
+    height:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    flex-shrink:0;
+  }
+
+  .final-statement{
+    text-align:center;
+    padding:80px 24px;
+  }
+
+  .final-statement .pixel{
+    font-size:clamp(20px, 4vw, 30px);
+    max-width:700px;
+    margin:0 auto 24px;
+    line-height:1.4;
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:#555;
+    letter-spacing:2px;
+  }
+
+  /* Attachment box */
+  .attachment{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    border:1px solid #fff;
+    padding:20px 24px;
+    margin-bottom:40px;
+    background:#0a0a0a;
+  }
+  .attachment .icon{
+    font-family:'JetBrains Mono', monospace;
+    font-size:24px;
+    font-weight:800;
+    border:1px solid #fff;
+    padding:8px 12px;
+  }
+  .attachment .info .name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:1px;
+    color:#fff;
+  }
+  .attachment .info .type{
+    font-size:12px;
+    color:#888;
+    margin-top:4px;
+  }
+
+  .pitch-box{
+    border:1px solid var(--line);
+    padding:20px 24px;
+    margin-bottom:16px;
+    background:#0a0a0a;
+  }
+  .pitch-box .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:1px;
+    color:#888;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .pitch-box p{
+    margin-bottom:0;
+    color:#e0e0e0;
+    font-size:14.5px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">MANUAL PRÁTICO // ESTÚDIO</div>
+  <h1 class="pixel">ESTRATÉGIA DE<br>POSICIONAMENTO</h1>
+  <div class="meta">
+    <span>DESIGNER: ANDRÉ</span>
+    <span>DATA: 05.08.2026</span>
+    <span>STATUS: 🟡 DESALINHADO</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- DIAGNÓSTICO -->
+  <section>
+    <div class="section-label">01 / DIAGNÓSTICO CENTRAL</div>
+    <h2 class="pixel">O que a IA identificou</h2>
+    <p>André está saindo de uma prospecção genérica em gastronomia para construir uma tese de posicionamento defensável: o branding como gerador de comunidade, cultura e produtos autorais — não apenas estética.</p>
+    <p>O trunfo é entender que a <strong>música</strong> é o ativo cultural capaz de conectar a experiência física ao pertencimento, viabilizando merchandising e retenção. O gargalo é que os canais públicos (Behance, LinkedIn, Instagram) ainda não refletem essa especialização.</p>
+
+    <h3 class="pixel">Pontos de Contato</h3>
+    <div class="grid cols-3">
+      <div class="card">
+        <div class="card-title">Instagram</div>
+        <p>Sem portfólio publicado com a tese atual. Ainda não reflete a promessa de comunidade em música + gastronomia.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Prospecção Direta</div>
+        <p>Foco em falhas visuais. Precisa evoluir para fidelização, cultura de marca e ticket via experiências musicais.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Behance / LinkedIn / Ads</div>
+        <p>Em planejamento. Alto potencial para atrair bares conceituais e cafeterias autorais quando alinhados ao nicho.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE VOCÊ DISSE VS O QUE EU VEJO -->
+  <section>
+    <div class="section-label">02 / LEITURA ESTRATÉGICA</div>
+    <h2 class="pixel">O que você disse vs. o que realmente é</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>O que foi dito</th>
+          <th>O que realmente é</th>
+          <th>Risco / Problema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Nicho</strong></td>
+          <td>Bares de rock/vinil e bistrôs de alto valor</td>
+          <td>Gastronomia de experiência ancorada na cultura musical</td>
+          <td>Abranger dois públicos visualmente distantes sem conector claro</td>
+        </tr>
+        <tr>
+          <td><strong>Público</strong></td>
+          <td>Proprietários dos estabelecimentos</td>
+          <td>Empreendedores culturais que vendem estilo de vida</td>
+          <td>Vender "design" em vez de comunidade e merchandising</td>
+        </tr>
+        <tr>
+          <td><strong>Posicionamento</strong></td>
+          <td>Especialista em marcas no universo música + gastronomia</td>
+          <td>Designer de ecossistemas de marca orientados a pertencimento</td>
+          <td>Falta de pontos de contato públicos que comprovem autoridade</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="pixel">Problemas de Consciência</h3>
+    <ul class="check-list">
+      <li>Prospecção desconectada da promessa — apontar "inconsistência visual" atrai clientes que querem correção pontual, não estratégia de comunidade.</li>
+      <li>Ambiguidade estética inicial — conectar rock/vinil ao bistrô autoral exige que o centro seja a experiência musical, não um estilo gráfico.</li>
+      <li>Ausência de vitrine validada — sem estudos de caso publicados, a venda depende da explicação verbal.</li>
+    </ul>
+  </section>
+
+  <!-- MÉTRICAS -->
+  <section>
+    <div class="section-label">03 / MÉTRICAS DO DIAGNÓSTICO</div>
+    <h2 class="pixel">Onde você está agora</h2>
+
+    <div class="metric-row">
+      <div class="metric-score">8/10</div>
+      <div class="metric-info">
+        <div class="metric-name">Clareza de Nicho</div>
+        <p>Recorte excelente — comportamentos, dores e linguagem em comum identificados.</p>
+        <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-score">8/10</div>
+      <div class="metric-info">
+        <div class="metric-name">Consciência de Posicionamento</div>
+        <p>Visão acima da média sobre merchandising, comunidade e pertencimento.</p>
+        <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-score">4/10</div>
+      <div class="metric-info">
+        <div class="metric-name">Alinhamento de Comunicação</div>
+        <p>Canais em estruturação; abordagem ainda fala de "design", não de "negócio".</p>
+        <div class="bar-bg"><div class="bar-fill" style="width:40%"></div></div>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <div class="metric-score">6.6</div>
+      <div class="metric-info">
+        <div class="metric-name">Nota Média</div>
+        <p>Consciência alta, execução de canais ainda em construção.</p>
+        <div class="bar-bg"><div class="bar-fill" style="width:66%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PESQUISA DE MERCADO -->
+  <section>
+    <div class="section-label">04 / PESQUISA DE MERCADO</div>
+    <h2 class="pixel">Tendências, dores e desejos</h2>
+
+    <h3 class="pixel">Tendências do nicho</h3>
+    <p>Experiências multissensoriais, design com narrativa local, personalização e comunidade fora do feed. Música deixa de ser detalhe e passa a influenciar permanência, consumo e percepção de marca. Merch como extensão cultural cresce como nova fonte de receita.</p>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="card-title">Dores dos donos</div>
+        <p>Público inconsistente, dependência de Instagram/indicação, dificuldade de justificar preço premium, marca bonita sem identidade memorável, falta de padronização entre espaço, equipe e comunicação.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Desejos dos donos</div>
+        <p>Ser reconhecido como casa autoral, criar atmosfera memorável, formar comunidade (não só fluxo), vender estilo de vida e sustentar collabs e produtos autorais.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATRIZ DE OFERTAS -->
+  <section>
+    <div class="section-label">05 / MATRIZ DE OFERTAS</div>
+    <h2 class="pixel">O que vender, para quem e por quê</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Oferta</th>
+          <th>Entrega</th>
+          <th>Para quem</th>
+          <th>Por que vende</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Diagnóstico de posicionamento</td>
+          <td>Leitura do negócio, público, narrativa e diferenciação</td>
+          <td>Casas em fase de ajuste</td>
+          <td>Baixo risco, fácil de entender</td>
+        </tr>
+        <tr>
+          <td>Branding sensorial</td>
+          <td>Direção para som, luz, atmosfera e linguagem</td>
+          <td>Casas que querem experiência memorável</td>
+          <td>Conecta com a dor real de experiência</td>
+        </tr>
+        <tr>
+          <td>Sistema de marca</td>
+          <td>Identidade visual/verbal aplicada a menu, ambiente e redes</td>
+          <td>Negócios em fase de crescimento</td>
+          <td>Mostra profissionalismo e consistência</td>
+        </tr>
+        <tr>
+          <td>Lançamento de conceito</td>
+          <td>Nome, narrativa, manifesto, campanha e materiais-base</td>
+          <td>Casas novas ou em reabertura</td>
+          <td>Ajuda a nascer com clareza</td>
+        </tr>
+        <tr>
+          <td>Comunidade e fidelização</td>
+          <td>Eventos, collabs, WhatsApp, recorrência</td>
+          <td>Casas autorais e culturais</td>
+          <td>Foca em retenção, não só atração</td>
+        </tr>
+        <tr>
+          <td>Merch e collabs</td>
+          <td>Produtos, drops e extensão cultural da marca</td>
+          <td>Casas com público engajado</td>
+          <td>Abre nova receita e reforça identidade</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- POSICIONAMENTO -->
+  <section>
+    <div class="section-label">06 / POSICIONAMENTO RECOMENDADO</div>
+    <h2 class="pixel">A declaração central</h2>
+    <div class="quote-box">
+      <p>"Crio marcas e experiências visuais para casas autorais de gastronomia e música, transformando espaço, narrativa e atmosfera em comunidade, desejo e recorrência."</p>
+    </div>
+    <p>Palavra-chave: não é só <strong>branding</strong>, é <strong>experiência com valor de marca</strong>. Isso tira André do lugar de "designer de restaurante" e o coloca como parceiro de crescimento para negócios que vivem de cultura, presença e memória.</p>
+  </section>
+
+  <!-- PROSPECÇÃO -->
+  <section>
+    <div class="section-label">07 / ESTRUTURA DE PROSPECÇÃO</div>
+    <h2 class="pixel">Como abordar o cliente ideal</h2>
+    <ol class="steps">
+      <li>Observar a casa e identificar um desalinhamento entre conceito, atmosfera e comunicação.</li>
+      <li>Abrir a conversa com uma hipótese de negócio, não com crítica estética.</li>
+      <li>Mostrar como música, identidade e experiência aumentam o valor percebido.</li>
+      <li>Oferecer uma entrada pequena — diagnóstico ou imersão estratégica.</li>
+      <li>Converter para o sistema completo de marca ou rebranding.</li>
+    </ol>
+
+    <h3 class="pixel">Frase de abordagem</h3>
+    <div class="quote-box">
+      <p>"Percebi que a casa já tem potencial de experiência, mas ainda não está convertendo essa atmosfera em marca forte, comunidade e valor percebido. Posso te mostrar onde isso está travando e como transformar em diferencial real?"</p>
+    </div>
+  </section>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <section>
+    <div class="section-label">08 / PRÓXIMOS PASSOS</div>
+    <h2 class="pixel">O que fazer agora</h2>
+    <ul class="check-list">
+      <li>Transformar a prospecção direta em conversa sobre fidelização e cultura de marca — sair da pauta de "inconsistência visual".</li>
+      <li>Empacotar o projeto atual (bar de vinil) como estudo de caso do ecossistema da marca: espaço + música + comunidade + produtos.</li>
+      <li>Adequar título do LinkedIn e bio do Instagram para deixar cristalina a especialização em música e gastronomia autoral.</li>
+    </ul>
+  </section>
+
+  <!-- RELATÓRIO ANEXO -->
+  <section>
+    <div class="section-label">09 / RELATÓRIO EM ANEXO</div>
+    <h2 class="pixel">Documento-base para uso comercial</h2>
+
+    <div class="attachment">
+      <div class="icon">PDF</div>
+      <div class="info">
+        <div class="name">relatorio_posicionamento_nicho.pdf</div>
+        <div class="type">Branding para casas autorais de gastronomia e música · 2 páginas</div>
+      </div>
+    </div>
+
+    <p>Este documento reúne uma proposta prática de posicionamento para serviços de branding em casas autorais de gastronomia e música, com foco em diferenciação, comunidade e valor percebido. Pode ser usado como base de proposta comercial, página de apresentação ou PDF de prospecção.</p>
+
+    <h3 class="pixel">1. Perfil do nicho</h3>
+    <p>Bares, cafés e restaurantes autorais que usam música, curadoria, atmosfera e narrativa como parte da experiência. Não competem apenas por comida ou bebida — competem por memória, pertencimento e estilo de vida.</p>
+
+    <h3 class="pixel">2. Principais dores</h3>
+    <ul class="check-list">
+      <li>Atrair público inconsistente e pouco fiel.</li>
+      <li>Ter boa operação, mas sem narrativa clara de marca.</li>
+      <li>Depender demais de Instagram e indicação.</li>
+      <li>Não conseguir justificar preço premium.</li>
+      <li>Ter identidade visual bonita, mas sem experiência coerente.</li>
+      <li>Não transformar atmosfera em recorrência e comunidade.</li>
+    </ul>
+
+    <h3 class="pixel">3. Tendências do nicho</h3>
+    <p>Experiência multissensorial, branding com narrativa, valorização de autenticidade local, comunidades próprias e extensão da marca em eventos, collabs e merch. Música e ambiente deixam de ser acessórios e passam a compor o valor do negócio.</p>
+
+    <h3 class="pixel">4. Oportunidades</h3>
+    <ul class="check-list">
+      <li>Reposicionar a casa como referência cultural, não só gastronômica.</li>
+      <li>Criar ofertas ligadas a experiência, comunidade e fidelização.</li>
+      <li>Transformar a marca em plataforma para eventos e collabs.</li>
+      <li>Desenvolver produtos autorais e novas receitas de valor.</li>
+      <li>Fortalecer o senso de pertencimento do público.</li>
+    </ul>
+
+    <h3 class="pixel">5. Ofertas mais aceitas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Oferta</th>
+          <th>Objetivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Diagnóstico de Posicionamento</td><td>Mapear dores, narrativa e oportunidades de ajuste</td></tr>
+        <tr><td>Branding Sensorial</td><td>Alinhar som, atmosfera, linguagem e identidade</td></tr>
+        <tr><td>Sistema de Marca</td><td>Estruturar comunicação, identidade e aplicações</td></tr>
+        <tr><td>Lançamento de Conceito</td><td>Criar nome, manifesto e base de comunicação</td></tr>
+        <tr><td>Comunidade e Fidelização</td><td>Desenhar recorrência e relações com o público</td></tr>
+        <tr><td>Merch e Collabs</td><td>Expandir a marca para receita e cultura</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="pixel">6. Posicionamento sugerido</h3>
+    <div class="quote-box">
+      <p>"Crio marcas e experiências visuais para casas autorais de gastronomia e música, transformando espaço, narrativa e atmosfera em comunidade, desejo e recorrência."</p>
+    </div>
+
+    <h3 class="pixel">7. Estrutura do PDF comercial</h3>
+    <ol class="steps">
+      <li>Capa com nome, nicho e promessa.</li>
+      <li>Diagnóstico do mercado e do cliente ideal.</li>
+      <li>Dores, tendências e oportunidades.</li>
+      <li>Serviços e formatos de entrega.</li>
+      <li>Processo de trabalho.</li>
+      <li>Chamada para contato ou reunião.</li>
+    </ol>
+
+    <h3 class="pixel">8. Mensagem final</h3>
+    <div class="quote-box">
+      <p>"O maior diferencial neste nicho é mostrar que branding não é somente estética: é ferramenta para transformar atmosfera em valor percebido, e valor percebido em comunidade e receita recorrente."</p>
+    </div>
+    <p style="font-size:12px; color:#666;">Documento-base gerado para uso interno e comercial.</p>
+  </section>
+
+  <!-- KIT DE ATIVAÇÃO COMERCIAL -->
+  <section>
+    <div class="section-label">10 / KIT DE ATIVAÇÃO COMERCIAL</div>
+    <h2 class="pixel">Pitches, bios, nomes e mensagens</h2>
+
+    <h3 class="pixel">Pitch comercial curto</h3>
+    <div class="pitch-box">
+      <div class="label">Versão 1 — Direta</div>
+      <p>Eu ajudo casas autorais de gastronomia e música a transformarem ambiente, narrativa e identidade em uma marca que gera comunidade, permanência e valor percebido.</p>
+    </div>
+    <div class="pitch-box">
+      <div class="label">Versão 2 — Premium</div>
+      <p>Crio marcas e experiências para restaurantes, bares e cafés autorais que querem deixar de competir por atenção e passar a ser lembrados como cultura, estilo de vida e ponto de encontro.</p>
+    </div>
+    <div class="pitch-box">
+      <div class="label">Versão 3 — Estratégica</div>
+      <p>Meu trabalho é alinhar espaço, som, comunicação e posicionamento para que a casa venda mais do que comida: venda experiência, desejo e recorrência.</p>
+    </div>
+
+    <h3 class="pixel">Bio para Instagram e LinkedIn</h3>
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="card-title">Instagram</div>
+        <p>Branding para casas autorais de gastronomia e música. Experiência, identidade e comunidade para bares, cafés e restaurantes com conceito. Diagnóstico e posicionamento estratégico.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">LinkedIn</div>
+        <p>Ajudo bares, cafés e restaurantes autorais a transformar identidade visual, atmosfera e narrativa em posicionamento forte, experiência memorável e conexão real com o público.</p>
+      </div>
+    </div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="card-title">Bio sofisticada</div>
+        <p>Estratégia de marca para negócios de gastronomia e cultura: identidade, experiência e posicionamento para casas autorais que querem vender pertencimento, não só produto.</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Bio autoral</div>
+        <p>Branding para casas autorais de gastronomia e música. Transformo experiência, narrativa e atmosfera em marca, comunidade e valor percebido.</p>
+      </div>
+    </div>
+
+    <h3 class="pixel">Nomes de serviços</h3>
+    <p>Evite nomes genéricos como "branding completo". Prefira nomes que traduzam benefício e contexto:</p>
+    <div class="grid cols-3">
+      <div class="card"><p>Diagnóstico de Posicionamento</p></div>
+      <div class="card"><p>Imersão de Marca</p></div>
+      <div class="card"><p>Direção de Experiência</p></div>
+      <div class="card"><p>Sistema de Marca para Casas Autorais</p></div>
+      <div class="card"><p>Branding Sensorial</p></div>
+      <div class="card"><p>Arquitetura de Narrativa</p></div>
+      <div class="card"><p>Lançamento de Conceito</p></div>
+      <div class="card"><p>Curadoria de Comunidade</p></div>
+      <div class="card"><p>Identidade para Espaços de Gastronomia</p></div>
+    </div>
+
+    <h3 class="pixel">Estrutura de oferta e pacotes</h3>
+    <div class="grid cols-3">
+      <div class="card">
+        <div class="card-title">Diagnóstico Estratégico da Casa</div>
+        <ul>
+          <li>Leitura da marca, público, experiência e comunicação</li>
+          <li>Identificação de gargalos de posicionamento</li>
+          <li>Mapa de oportunidades práticas</li>
+          <li>Direção de próximos passos</li>
+        </ul>
+        <span class="tier-tag">Ticket de entrada</span>
+      </div>
+      <div class="card">
+        <div class="card-title">Branding Sensorial e Posicionamento</div>
+        <ul>
+          <li>Narrativa de marca</li>
+          <li>Identidade visual aplicada</li>
+          <li>Atmosfera e linguagem</li>
+          <li>Direção de conteúdo</li>
+          <li>Coerência entre espaço físico e comunicação</li>
+        </ul>
+        <span class="tier-tag">Ticket médio</span>
+      </div>
+      <div class="card">
+        <div class="card-title">Sistema de Marca para Casas Autorais</div>
+        <ul>
+          <li>Posicionamento</li>
+          <li>Naming ou rebranding</li>
+          <li>Manifesto e identidade</li>
+          <li>Cardápio/menus e peças digitais</li>
+          <li>Guia de aplicação</li>
+          <li>Estratégia de comunidade e recorrência</li>
+        </ul>
+        <span class="tier-tag">Ticket premium</span>
+      </div>
+    </div>
+
+    <h3 class="pixel">Mensagens de prospecção</h3>
+    <div class="pitch-box">
+      <div class="label">Versão curta — WhatsApp / DM</div>
+      <p>Oi, [nome]. Estou olhando a casa de vocês e percebi um potencial forte de transformar a experiência atual em uma marca mais memorável e com mais valor percebido. Trabalho justamente com posicionamento e branding para casas autorais de gastronomia e música, ajudando a alinhar espaço, narrativa e comunicação para gerar comunidade e recorrência. Se fizer sentido, posso te mostrar em 15 minutos onde vejo as maiores oportunidades.</p>
+    </div>
+    <div class="pitch-box">
+      <div class="label">Versão consultiva</div>
+      <p>Oi, [nome]. Tenho estudado casas autorais que usam gastronomia, música e atmosfera como diferencial, e vi que muitas têm um produto bom, mas ainda não transformam isso em narrativa clara, comunidade e percepção premium. Acredito que a casa de vocês tem espaço para comunicar isso melhor e ganhar força como referência. Se quiser, posso te enviar um diagnóstico rápido com três oportunidades objetivas de posicionamento.</p>
+    </div>
+    <div class="pitch-box">
+      <div class="label">Versão premium</div>
+      <p>Oi, [nome]. O que mais me chamou atenção na casa de vocês é o potencial de construir uma experiência que vá além do serviço e se torne marca, memória e pertencimento. Eu ajudo negócios autorais a alinhar identidade, atmosfera e comunicação para transformar cultura em diferenciação real. Se fizer sentido, posso te apresentar uma leitura estratégica da casa e mostrar possibilidades de evolução.</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="final-statement">
+  <span class="section-label" style="display:block;">DIAGNÓSTICO FINAL</span>
+  <p class="pixel">VOCÊ TEM CLAREZA ESTRATÉGICA.<br>SEU GARGALO NÃO É O QUE FAZER —<br>É ALINHAR SUA COMUNICAÇÃO À SUA VISÃO.</p>
+  <div class="status-badge">STATUS: DESALINHADO → EXECUÇÃO EM CURSO</div>
+</div>
+
+<footer>
+  MANUAL DE POSICIONAMENTO · ANDRÉ · ESTÚDIO DE BRANDING · 2026
+</footer>
+
+</body>
+</html>
