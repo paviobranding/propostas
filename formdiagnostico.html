@@ -28,37 +28,45 @@
     padding: 60px 24px 80px;
   }
 
-  .logo-icon {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 40px;
-  }
-
-  .grid-icon {
-    background-color: #E8291C;
-    border-radius: 12px;
-    padding: 14px;
-    display: inline-grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    width: 70px;
-    height: 70px;
-  }
-
-  .grid-icon span {
-    background-color: #FBF9EF;
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-  }
-
-  h1 {
+  #typewriter-title {
     font-size: 32px;
     font-weight: 800;
     line-height: 1.15;
     text-transform: uppercase;
     margin: 0 0 24px;
     letter-spacing: -0.5px;
+    min-height: 78px;
+    cursor: pointer;
+    transition: color 0.25s ease, letter-spacing 0.25s ease;
+  }
+
+  #typewriter-title:hover {
+    color: #E8291C;
+    letter-spacing: -0.2px;
+  }
+
+  #typewriter-title:hover .typewriter-cursor {
+    background-color: #E8291C;
+    animation: blink-fast 0.4s step-end infinite;
+  }
+
+  .typewriter-cursor {
+    display: inline-block;
+    width: 3px;
+    background-color: #111111;
+    margin-left: 2px;
+    animation: blink 0.8s step-end infinite;
+    transition: background-color 0.25s ease;
+  }
+
+  @keyframes blink {
+    from, to { background-color: transparent; }
+    50% { background-color: #111111; }
+  }
+
+  @keyframes blink-fast {
+    from, to { background-color: transparent; }
+    50% { background-color: #E8291C; }
   }
 
   p.intro {
@@ -213,16 +221,8 @@
 
 <div class="container">
 
-  <div class="logo-icon">
-    <div class="grid-icon">
-      <span></span><span></span><span></span>
-      <span></span><span></span><span></span>
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-
   <div id="form-view">
-    <h1>Diagnóstico Gratuito<br>Pavio Branding</h1>
+    <h1 id="typewriter-title"></h1>
     <p class="intro">
       Preencha os dados abaixo para agendar sua sessão gratuita de diagnóstico de marca com nosso designer.
     </p>
@@ -308,6 +308,24 @@
 </div>
 
 <script>
+  // Typewriter effect
+  const titleText = "DIAGNÓSTICO GRATUITO DE POSICIONAMENTO";
+  const titleEl = document.getElementById('typewriter-title');
+  let charIndex = 0;
+
+  function typeWriter() {
+    if (charIndex <= titleText.length) {
+      titleEl.innerHTML = titleText.slice(0, charIndex) + '<span class="typewriter-cursor">&nbsp;</span>';
+      charIndex++;
+      setTimeout(typeWriter, 45);
+    } else {
+      titleEl.innerHTML = titleText + '<span class="typewriter-cursor">&nbsp;</span>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', typeWriter);
+
+  // Form submission via AJAX
   const form = document.getElementById('pavio-form');
   const formView = document.getElementById('form-view');
   const successView = document.getElementById('success-view');
