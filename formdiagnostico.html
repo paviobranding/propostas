@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pavio Branding — Diagnóstico Gratuito</title>
+<style>
+  @font-face {
+    font-family: 'Neue Montreal';
+    src: local('Neue Montreal'), local('Helvetica Neue'), local('Helvetica');
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #FBF9EF;
+    font-family: 'Neue Montreal', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #111111;
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  .logo-icon {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+  }
+
+  .grid-icon {
+    background-color: #E8291C;
+    border-radius: 12px;
+    padding: 14px;
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 70px;
+    height: 70px;
+  }
+
+  .grid-icon span {
+    background-color: #FBF9EF;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.15;
+    text-transform: uppercase;
+    margin: 0 0 24px;
+    letter-spacing: -0.5px;
+  }
+
+  p.intro {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: #333333;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  label {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #111111;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 12px 14px;
+    border: 2px solid #111111;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    color: #111111;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #E8291C;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+  }
+
+  .radio-option input[type="radio"] {
+    accent-color: #E8291C;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'><path d='M1 1l6 6 6-6' stroke='%23111111' stroke-width='2' fill='none' fill-rule='evenodd'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  button[type="submit"] {
+    margin-top: 12px;
+    background-color: #E8291C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 50px;
+    padding: 18px 32px;
+    font-size: 17px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    letter-spacing: 0.3px;
+  }
+
+  button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(232, 41, 28, 0.35);
+  }
+
+  button[type="submit"]:active {
+    transform: translateY(0);
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: #666666;
+    margin-top: 20px;
+    line-height: 1.5;
+  }
+
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 60px 24px;
+  }
+
+  .success-message.show {
+    display: block;
+  }
+
+  .success-message h2 {
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .success-message p {
+    font-size: 16px;
+    color: #333333;
+    line-height: 1.6;
+  }
+
+  .brand-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: #111111;
+    margin-top: 60px;
+    padding-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo-icon">
+    <div class="grid-icon">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div id="form-view">
+    <h1>Diagnóstico Gratuito<br>Pavio Branding</h1>
+    <p class="intro">
+      Preencha os dados abaixo para agendar sua sessão gratuita de diagnóstico de marca com nosso designer.
+    </p>
+
+    <form id="pavio-form" action="https://formspree.io/f/xaewrpqe" method="POST">
+
+      <div class="field">
+        <label for="nome-completo">Nome completo</label>
+        <input type="text" id="nome-completo" name="nome_completo" required>
+      </div>
+
+      <div class="field">
+        <label for="whatsapp">Número de WhatsApp</label>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Melhor email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="field">
+        <label for="estabelecimento">Nome do estabelecimento</label>
+        <input type="text" id="estabelecimento" name="estabelecimento" required>
+      </div>
+
+      <div class="field">
+        <label for="instagram">@ do Instagram do estabelecimento</label>
+        <input type="text" id="instagram" name="instagram" placeholder="@seuestabelecimento" required>
+      </div>
+
+      <div class="field">
+        <label for="categoria">Categoria</label>
+        <select id="categoria" name="categoria" required>
+          <option value="" disabled selected>Selecione uma opção</option>
+          <option value="Bar">Bar</option>
+          <option value="Restaurante">Restaurante</option>
+          <option value="Casa de show">Casa de show</option>
+          <option value="Bistrô">Bistrô</option>
+          <option value="Cafeteria">Cafeteria</option>
+          <option value="Híbrido">Híbrido</option>
+          <option value="Espaço cultural">Espaço cultural</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Preferência de período para a reunião</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" id="periodo-manha" name="periodo" value="Manhã" required>
+            <label for="periodo-manha">Manhã</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" id="periodo-tarde" name="periodo" value="Tarde" required>
+            <label for="periodo-tarde">Tarde</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="observacoes">O que você gostaria que nosso designer soubesse antes da reunião?</label>
+        <textarea id="observacoes" name="observacoes" placeholder="Conte um pouco sobre seu momento, desafios ou expectativas..."></textarea>
+      </div>
+
+      <button type="submit">Agendar minha sessão</button>
+
+      <p class="footer-note">
+        Em caso de problemas com o envio, mande uma mensagem no nosso Instagram @paviobranding com a palavra "diagnóstico".
+      </p>
+    </form>
+  </div>
+
+  <div class="success-message" id="success-view">
+    <h2>Recebido!</h2>
+    <p>Coletamos suas respostas! Em breve entraremos em contato via WhatsApp para marcar a sua sessão.</p>
+  </div>
+
+  <div class="brand-footer">
+    <span>PAVIO BRANDING ©</span>
+    <span>TODOS OS DIREITOS RESERVADOS</span>
+  </div>
+
+</div>
+
+<script>
+  const form = document.getElementById('pavio-form');
+  const formView = document.getElementById('form-view');
+  const successView = document.getElementById('success-view');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        formView.style.display = 'none';
+        successView.classList.add('show');
+      } else {
+        alert('Ocorreu um erro ao enviar. Tente novamente ou nos contate pelo Instagram.');
+      }
+    } catch (error) {
+      alert('Ocorreu um erro ao enviar. Tente novamente ou nos contate pelo Instagram.');
+    }
+  });
+</script>
+
+</body>
+</html>
