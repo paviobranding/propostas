@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neval Sorvetes — Guia Criativo de Social Media</title>
+<style>
+  :root{
+    --navy: #0B2545;
+    --navy-soft: #33507A;
+    --navy-faint: #7488A6;
+    --yellow: #FFCC33;
+    --yellow-deep: #E8B400;
+    --bg: #FFFFFF;
+    --panel: #F6F8FB;
+    --line: #E3E8EF;
+    --radius: 18px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--navy);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+
+  /* ---------- Layout shell ---------- */
+  .shell{
+    display:flex;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  nav.rail{
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100vh;
+    width: 272px;
+    flex-shrink: 0;
+    padding: 40px 20px 40px 32px;
+    overflow-y: auto;
+    border-right: 1px solid var(--line);
+  }
+
+  .rail-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom: 34px;
+  }
+  .rail-brand .dot{
+    width:12px; height:12px; border-radius:50%;
+    background: var(--yellow);
+    flex-shrink:0;
+  }
+  .rail-brand .txt{
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: var(--navy);
+  }
+  .rail-brand .sub{
+    font-size: 11px;
+    color: var(--navy-faint);
+    display:block;
+    font-weight: 500;
+  }
+
+  .rail-list{
+    list-style: none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap: 2px;
+  }
+  .rail-list a{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    text-decoration:none;
+    color: var(--navy-soft);
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 8px 10px;
+    border-radius: 10px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .rail-list a:hover{
+    background: var(--panel);
+    color: var(--navy);
+  }
+  .rail-list a .n{
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--yellow-deep);
+    min-width: 16px;
+  }
+
+  main{
+    flex: 1;
+    min-width: 0;
+    padding: 56px 56px 120px 56px;
+  }
+
+  /* ---------- Header / hero ---------- */
+  .hero{
+    margin-bottom: 64px;
+  }
+  .hero .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--navy-soft);
+    margin-bottom: 22px;
+  }
+  .hero .eyebrow .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--yellow);
+  }
+  .hero h1{
+    font-size: 42px;
+    line-height: 1.12;
+    margin: 0 0 16px 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    max-width: 680px;
+  }
+  .hero p.lead{
+    font-size: 17px;
+    color: var(--navy-soft);
+    max-width: 620px;
+    margin: 0;
+  }
+
+  /* ---------- Sections ---------- */
+  section{
+    padding-top: 56px;
+    margin-top: 56px;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 32px;
+  }
+  section:first-of-type{
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .sec-head{
+    display:flex;
+    align-items:flex-start;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+  .sec-num{
+    flex-shrink:0;
+    width: 40px; height:40px;
+    border-radius: 12px;
+    background: var(--navy);
+    color: var(--yellow);
+    font-weight: 700;
+    font-size: 15px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sec-head h2{
+    font-size: 25px;
+    font-weight: 700;
+    margin: 4px 0 0 0;
+    letter-spacing: -0.2px;
+  }
+
+  section > .body{
+    padding-left: 58px;
+  }
+
+  p{ margin: 0 0 14px 0; color: var(--navy); }
+  .muted{ color: var(--navy-soft); }
+
+  .callout{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--yellow);
+    border-radius: 14px;
+    padding: 18px 22px;
+    font-size: 14.5px;
+    color: var(--navy);
+    margin: 18px 0;
+  }
+  .callout strong{ color: var(--navy); }
+
+  /* ---------- DNA table ---------- */
+  .dna{
+    display:flex;
+    flex-direction:column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .dna-row{
+    display:grid;
+    grid-template-columns: 190px 1fr;
+    background: var(--bg);
+  }
+  .dna-row .k{
+    background: var(--panel);
+    padding: 16px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .dna-row .v{
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--navy-soft);
+  }
+  .dna-row .v.avoid{ color: #8A5A00; }
+
+  /* ---------- Phase timeline ---------- */
+  .phases{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .phase{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+  }
+  .phase .tag{
+    display:inline-block;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--navy);
+    background: var(--yellow);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .phase h4{
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .phase p{
+    font-size: 13.5px;
+    color: var(--navy-soft);
+    margin: 0;
+  }
+
+  /* ---------- KPI cards ---------- */
+  .kpi-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .kpi{
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .kpi.primary{
+    border-color: var(--yellow);
+    background: linear-gradient(180deg, #FFFBEF 0%, #FFFFFF 60%);
+  }
+  .kpi h4{
+    margin:0 0 8px 0;
+    font-size: 14.5px;
+    font-weight: 700;
+  }
+  .kpi p{
+    font-size: 13.5px;
+    color: var(--navy-soft);
+    margin: 0;
+  }
+  .kpi .sub-split{
+    margin-top: 12px;
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .kpi .sub-split div{
+    font-size: 13px;
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .kpi .sub-split b{ color: var(--navy); }
+
+  .secondary-list{
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+  .secondary-list .item{
+    display:flex;
+    gap: 12px;
+    align-items:flex-start;
+    font-size: 14px;
+    padding: 12px 16px;
+    background: var(--panel);
+    border-radius: 12px;
+  }
+  .secondary-list .item .bullet{
+    width:6px; height:6px; border-radius:50%;
+    background: var(--navy-faint);
+    margin-top: 7px;
+    flex-shrink:0;
+  }
+
+  /* ---------- Instagram mock ---------- */
+  .ig-wrap{
+    display:grid;
+    grid-template-columns: 300px 1fr;
+    gap: 28px;
+    align-items:start;
+  }
+  .ig-card{
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    background: var(--panel);
+  }
+  .ig-card .avatar{
+    width: 54px; height:54px;
+    border-radius: 50%;
+    background: var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  .ig-card .bio{
+    font-size: 13px;
+    color: var(--navy);
+    line-height: 1.6;
+    white-space: pre-line;
+    font-weight: 500;
+  }
+  .highlights{
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+  .highlight{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+  .highlight .circ{
+    width: 38px; height:38px;
+    border-radius: 50%;
+    background: var(--yellow);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 17px;
+    flex-shrink:0;
+  }
+  .highlight .txt b{
+    display:block;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .highlight .txt span{
+    font-size: 12.5px;
+    color: var(--navy-soft);
+  }
+
+  /* ---------- Products ---------- */
+  .products{
+    display:flex;
+    flex-direction:column;
+    gap: 14px;
+  }
+  .product{
+    display:grid;
+    grid-template-columns: 46px 1fr;
+    gap: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .product .rank{
+    width: 32px; height:32px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--yellow);
+    font-weight:700;
+    font-size: 13.5px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .product h4{
+    margin:0 0 6px 0;
+    font-size: 15.5px;
+    font-weight: 700;
+  }
+  .product p{
+    margin:0;
+    font-size: 13.8px;
+    color: var(--navy-soft);
+  }
+
+  /* ---------- Formats A/B/C ---------- */
+  .formats{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .format{
+    border-radius: var(--radius);
+    padding: 24px 22px;
+    background: var(--navy);
+    color: #EAF0FA;
+  }
+  .format .letter{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width: 34px; height:34px;
+    border-radius: 10px;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+  .format h4{
+    margin: 0 0 10px 0;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+  .format p{
+    margin:0;
+    font-size: 13.5px;
+    color: #C3D0E6;
+  }
+  .format-rule{
+    margin-top: 18px;
+    font-size: 13.5px;
+    color: var(--navy-soft);
+    background: var(--panel);
+    border-radius: 12px;
+    padding: 14px 18px;
+  }
+
+  /* ---------- Climate calendar ---------- */
+  .climate-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .climate{
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+  }
+  .climate.hot{ background: #FFFBEF; border-color: var(--yellow); }
+  .climate.cold{ background: var(--panel); }
+  .climate h4{
+    margin: 0 0 8px 0;
+    font-size: 14.5px;
+    font-weight: 700;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .climate p{ margin:0; font-size: 13.8px; color: var(--navy-soft); }
+  .risk-flag{
+    display:inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #8A5A00;
+    background: #FFE9B3;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-left: 6px;
+  }
+
+  /* ---------- Roles ---------- */
+  .roles{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .role{
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .role h4{
+    margin: 0 0 10px 0;
+    font-size: 14.5px;
+    font-weight: 700;
+  }
+  .role p{ margin:0; font-size: 13.5px; color: var(--navy-soft); }
+
+  .restrictions{
+    border-radius: var(--radius);
+    border: 1px dashed var(--navy-faint);
+    padding: 18px 22px;
+    font-size: 13.8px;
+    color: var(--navy);
+  }
+  .restrictions b{ color: var(--navy); }
+
+  /* ---------- Deliverables ---------- */
+  .deliver-list{
+    counter-reset: d;
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap: 12px;
+  }
+  .deliver-list li{
+    counter-increment: d;
+    display:flex;
+    gap: 16px;
+    align-items:flex-start;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    font-size: 14px;
+  }
+  .deliver-list li::before{
+    content: counter(d);
+    flex-shrink:0;
+    width: 26px; height:26px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 12.5px;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  footer{
+    padding-left: 58px;
+    margin-top: 60px;
+    font-size: 12.5px;
+    color: var(--navy-faint);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px){
+    nav.rail{ display:none; }
+    main{ padding: 40px 22px 100px 22px; }
+    section > .body{ padding-left: 0; }
+    .sec-head{ gap: 12px; }
+    .hero h1{ font-size: 30px; }
+    .kpi-grid, .phases, .formats, .climate-grid, .roles{ grid-template-columns: 1fr; }
+    .ig-wrap{ grid-template-columns: 1fr; }
+    .dna-row{ grid-template-columns: 1fr; }
+    .dna-row .k{ padding-bottom: 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="rail">
+    <div class="rail-brand">
+      <div class="dot"></div>
+      <div>
+        <span class="txt">Neval Sorvetes</span>
+        <span class="sub">Guia Criativo · Social Media</span>
+      </div>
+    </div>
+    <ul class="rail-list">
+      <li><a href="#tese"><span class="n">01</span> Tese estratégica</a></li>
+      <li><a href="#dna"><span class="n">02</span> DNA da marca</a></li>
+      <li><a href="#objetivo"><span class="n">03</span> Objetivo do piloto</a></li>
+      <li><a href="#kpis"><span class="n">04</span> KPIs</a></li>
+      <li><a href="#instagram"><span class="n">05</span> Estrutura do Instagram</a></li>
+      <li><a href="#produtos"><span class="n">06</span> Produtos-destaque</a></li>
+      <li><a href="#formatos"><span class="n">07</span> Formatos sem porta-voz</a></li>
+      <li><a href="#calendario"><span class="n">08</span> Calendário editorial</a></li>
+      <li><a href="#papeis"><span class="n">09</span> Divisão de papéis</a></li>
+      <li><a href="#entrega"><span class="n">10</span> Entrega final</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow"><span class="dot"></span> Fase 1 · Pré-temporada Verão 2026–2027 · Contrato-piloto de 6 meses</div>
+      <h1>Guia Criativo de Social Media</h1>
+      <p class="lead">Vídeos curtos para Instagram e TikTok. Um guia de referência rápida para a equipe criativa e para o CEO acompanharem juntos cada decisão de conteúdo.</p>
+    </div>
+
+    <!-- 01 -->
+    <section id="tese">
+      <div class="sec-head">
+        <div class="sec-num">01</div>
+        <h2>Tese estratégica</h2>
+      </div>
+      <div class="body">
+        <p>A Neval entra no marketing de conteúdo sem histórico, sem porta-voz e sem dados — mas com um ativo que nenhum concorrente compra: <strong>36 anos de confiança real no litoral do PR.</strong></p>
+        <p class="muted">Isso muda o objetivo dos primeiros 6 meses: não é viralizar, é validar um sistema.</p>
+        <div class="callout">
+          <strong>Litoral do PR</strong> é o laboratório de linguagem, onde a marca já é confiável.<br>
+          <strong>Santa Catarina</strong> é o teste de expansão, onde a marca ainda precisa se apresentar.<br><br>
+          Cada vídeo, além de comunicar, é um dado. Ao final dos 6 meses, a entrega não é "ter posts bonitos" — é um <strong>playbook validado</strong> de formatos, ganchos e produtos prontos para escalar no verão.
+        </div>
+        <p>A ausência de modelo ou porta-voz não é uma limitação a esconder — é uma oportunidade de território. Em vez de imitar marcas com embaixador, a Neval constrói uma linguagem onde <strong>o produto e as mãos reais das pessoas são os protagonistas</strong>, reforçando o arquétipo Bobo da Corte + Prestativo sem depender de um rosto fixo.</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="dna">
+      <div class="sec-head">
+        <div class="sec-num">02</div>
+        <h2>DNA da marca — o que todo vídeo precisa respeitar</h2>
+      </div>
+      <div class="body">
+        <div class="dna">
+          <div class="dna-row"><div class="k">Arquétipo</div><div class="v">Bobo da Corte (60%) + Prestativo (40%) → leveza divertida com confiabilidade. Nunca só uma das duas.</div></div>
+          <div class="dna-row"><div class="k">Posicionamento</div><div class="v">"Feita com cuidado. Lembrada com carinho." — um pé no rigor do produto bem feito, um pé no afeto da memória e da família.</div></div>
+          <div class="dna-row"><div class="k">Tom de voz</div><div class="v">Leve, alegre, humor afetivo — como um amigo oferecendo sorvete num dia quente, sem pedir nada em troca.</div></div>
+          <div class="dna-row"><div class="k">Vocabulário que usa</div><div class="v">família · cuidado · sabor de verdade · feito daqui · nossa gente · memória · domingo · mesa de família</div></div>
+          <div class="dna-row"><div class="k">Vocabulário que evita</div><div class="v avoid">premium · exclusivo · sofisticado · disruptivo · curadoria · artesanal · gourmet · lifestyle · experiência imersiva</div></div>
+          <div class="dna-row"><div class="k">Universo visual</div><div class="v">Mesa de família, domingo de almoço, cidade pequena e litoral, câmara fria (bastidor), caminhão frigorífico, sorriso involuntário.</div></div>
+          <div class="dna-row"><div class="k">Nunca fazer</div><div class="v avoid">Ironizar o interior, se envergonhar da origem, comunicação fria ou técnica, tom corporativo, humor vazio sem substância.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="objetivo">
+      <div class="sec-head">
+        <div class="sec-num">03</div>
+        <h2>Objetivo do piloto e o que significa "sucesso"</h2>
+      </div>
+      <div class="body">
+        <p>Como não existe histórico de marketing, os primeiros três meses são de calibragem, não de resultado final. Isso precisa ficar claro internamente: estamos comprando dados, não só posts.</p>
+        <div class="phases">
+          <div class="phase">
+            <span class="tag">Mês 1–2</span>
+            <h4>Calibragem</h4>
+            <p>Testar formatos, ganchos, horários e produtos. Volume alto, baixa expectativa de viralização.</p>
+          </div>
+          <div class="phase">
+            <span class="tag">Mês 3–4</span>
+            <h4>Otimização</h4>
+            <p>Dobrar o que funcionou nos primeiros meses e cortar o que não gerou alcance ou salvamento.</p>
+          </div>
+          <div class="phase">
+            <span class="tag">Mês 5–6</span>
+            <h4>Aceleração pré-verão</h4>
+            <p>Concentrar orçamento e frequência nos formatos validados, já em ritmo de sazonalidade alta (nov–fev).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="kpis">
+      <div class="sec-head">
+        <div class="sec-num">04</div>
+        <h2>KPIs — como vamos medir sucesso</h2>
+      </div>
+      <div class="body">
+        <div class="kpi-grid">
+          <div class="kpi primary">
+            <h4>Alcance geral</h4>
+            <p>Volume total de contas alcançadas por vídeo/semana. Indica se o conteúdo está furando a bolha de quem já segue a marca.</p>
+          </div>
+          <div class="kpi primary">
+            <h4>Alcance regional · o KPI mais estratégico</h4>
+            <p>Segmentar o resultado entre litoral do PR e SC.</p>
+            <div class="sub-split">
+              <div><b>Litoral PR</b> — reforça e amplia a base confiante: salvamentos, comentários afetivos, "geração que cresceu com Neval".</div>
+              <div><b>SC</b> — mede reconhecimento em território novo: alcance de contas não-seguidoras, curtidas de descoberta.</div>
+            </div>
+          </div>
+          <div class="kpi primary">
+            <h4>Frequência por usuário</h4>
+            <p>Quantas vezes a mesma conta é exposta ao conteúdo por semana ou mês. Uma marca sem histórico precisa de repetição antes de esperar conversão — o objetivo dos 6 meses é elevar frequência, não performance isolada de post.</p>
+          </div>
+        </div>
+        <div class="secondary-list">
+          <div class="item"><div class="bullet"></div>Taxa de salvamento — indica afeto e utilidade, importante para o arquétipo Prestativo.</div>
+          <div class="item"><div class="bullet"></div>Comentários com menção a memória, infância ou família — indicador qualitativo do degrau emocional da escada de marca.</div>
+          <div class="item"><div class="bullet"></div>Cliques no link da bio — indicador de intenção, mesmo sem e-commerce.</div>
+          <div class="item"><div class="bullet"></div>Performance comparada por clima, dias frios versus quentes — dado crítico para a estratégia de inverno.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="instagram">
+      <div class="sec-head">
+        <div class="sec-num">05</div>
+        <h2>Estrutura do Instagram <span class="muted" style="font-weight:500;font-size:14px;">— objetivo secundário</span></h2>
+      </div>
+      <div class="body">
+        <div class="ig-wrap">
+          <div class="ig-card">
+            <div class="avatar">🍦</div>
+            <div class="bio">Neval Sorvetes — desde 1988
+Feita com cuidado. Lembrada com carinho.
+📍 Irati · Litoral do PR · agora em SC
+👇 onde encontrar / produtos
+[link para o site]</div>
+          </div>
+          <div class="highlights">
+            <div class="highlight"><div class="circ">🧊</div><div class="txt"><b>Sabores</b><span>Variedade de sabores clássicos e regionais</span></div></div>
+            <div class="highlight"><div class="circ">🆕</div><div class="txt"><b>Lançamentos</b><span>Zero Açúcar, Açaí</span></div></div>
+            <div class="highlight"><div class="circ">🏪</div><div class="txt"><b>Onde encontrar</b><span>Mapa e lista de canais — mercadinho, padaria, posto</span></div></div>
+            <div class="highlight"><div class="circ">📖</div><div class="txt"><b>Nossa história</b><span>1988, Irati, família</span></div></div>
+            <div class="highlight"><div class="circ">🎬</div><div class="txt"><b>Bastidores</b><span>Câmara fria, produção, caminhão — universo simbólico do Prestativo</span></div></div>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:18px;">Link único direcionando ao site — sem linktree. Como a marca não tem e-commerce ativo, "onde nos encontrar" deve ser a página central do site.</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="produtos">
+      <div class="sec-head">
+        <div class="sec-num">06</div>
+        <h2>Os 5 produtos-destaque</h2>
+      </div>
+      <div class="body">
+        <p class="muted">Critério de seleção: equilíbrio entre lançamento estratégico, clássico de alta preferência e formato de impulso — sempre priorizando o que é fácil de filmar sem modelo humano.</p>
+        <div class="products">
+          <div class="product">
+            <div class="rank">1</div>
+            <div><h4>Açaí — Guaraná, Banana, Morango <span class="muted" style="font-weight:500;">(pote 1L, novidade)</span></h4>
+            <p>Lançamento com maior potencial de viralização de verão — categoria em alta, visual colorido, aproveita a onda "saudável" sem reformular o produto. Prioridade #1 na pré-temporada.</p></div>
+          </div>
+          <div class="product">
+            <div class="rank">2</div>
+            <div><h4>Zero Açúcar <span class="muted" style="font-weight:500;">(Chocotello, Chocoreo, Napolitano)</span></h4>
+            <p>Responde à tendência wellness que já chegou às classes B/C. Comunicar isso agora protege a marca de perda de relevância futura, sem precisar de linha nova de produto.</p></div>
+          </div>
+          <div class="product">
+            <div class="rank">3</div>
+            <div><h4>Flocos <span class="muted" style="font-weight:500;">(potes clássicos)</span></h4>
+            <p>Sabor #1 de preferência nacional (30,1%) e transversal a todas as idades — o "porto seguro" de conteúdo, baixo risco e alto potencial de comentário afetivo.</p></div>
+          </div>
+          <div class="product">
+            <div class="rank">4</div>
+            <div><h4>Copo Napolitano</h4>
+            <p>Formato individual de consumo por impulso — praia, lanche, piquenique. Ideal para conteúdo "on the go" com o público de 25 a 34 anos. É o sabor da indecisão resolvida.</p></div>
+          </div>
+          <div class="product">
+            <div class="rank">5</div>
+            <div><h4>Recheadas — Chocolate com recheio de leitinho</h4>
+            <p>Cobre o pedido específico de "leitinho trufado" com apelo de indulgência e textura — ótimo para vídeos de quebra e ASMR, o tipo de conteúdo com maior potencial nativo de TikTok sem precisar de rosto.</p></div>
+          </div>
+        </div>
+        <div class="callout" style="margin-top:18px;">Big Sundae, Kroc e Maximum são bons candidatos de rodízio sazonal após a validação inicial — mas os 5 acima já cobrem as 4 frentes prioritárias: lançamento, clássico, wellness, impulso e indulgência.</div>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="formatos">
+      <div class="sec-head">
+        <div class="sec-num">07</div>
+        <h2>O formato que resolve a ausência de porta-voz</h2>
+      </div>
+      <div class="body">
+        <p class="muted">Em vez de criar um rosto fixo agora — risco alto sem dado nenhum ainda — a recomendação é construir uma linguagem "sem rosto, mas com mão e voz", em 3 formatos fixos que qualquer social media pode reproduzir com consistência.</p>
+        <div class="formats">
+          <div class="format">
+            <div class="letter">A</div>
+            <h4>Mão protagonista</h4>
+            <p>POV só de mãos abrindo, quebrando, mergulhando a colher. Foco total em textura e som — crocante, recheio vazando, close extremo. O produto vira o próprio personagem.</p>
+          </div>
+          <div class="format">
+            <div class="letter">B</div>
+            <h4>Voz em off + texto na tela</h4>
+            <p>Narração em primeira pessoa do plural, como na brand story oficial, com legendas dinâmicas. Quem fala é a marca, não uma pessoa — sem dependência de um único rosto.</p>
+          </div>
+          <div class="format">
+            <div class="letter">C</div>
+            <h4>Voz real do PDV</h4>
+            <p>Donos reais de mercadinho e padaria reagindo, recomendando, reabastecendo o freezer. A verdadeira prova social é o parceiro de bairro que já confia na marca há décadas.</p>
+          </div>
+        </div>
+        <div class="format-rule"><strong>Regra geral:</strong> nenhum formato depende de uma pessoa específica aparecer com frequência — isso dá flexibilidade total à equipe e elimina o risco de "quando a pessoa sai, a marca perde a voz".</div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="calendario">
+      <div class="sec-head">
+        <div class="sec-num">08</div>
+        <h2>Calendário editorial — orientado por clima e sazonalidade</h2>
+      </div>
+      <div class="body">
+        <div class="climate-grid">
+          <div class="climate hot">
+            <h4>☀️ Dias de calor / verão — pico</h4>
+            <p>Impulso e formatos individuais: Napolitano, Açaí, picolés. Conteúdo de "flagrante" — praia, passeio, lanche no caminho.</p>
+          </div>
+          <div class="climate cold">
+            <h4>❄️ Dias frios / inverno <span class="risk-flag">maior risco — queda de até 70%</span></h4>
+            <p>Reposicionar o sorvete como sobremesa de conforto: "domingo de almoço", "depois do almoço em família", potes grandes (1,5L/2L), ocasião casa e mesa em vez de rua.</p>
+          </div>
+          <div class="climate cold">
+            <h4>📅 Fins de semana</h4>
+            <p>Ocasião família e passeio — Flocos, Napolitano, potes clássicos.</p>
+          </div>
+          <div class="climate cold">
+            <h4>🗓️ Meio de semana</h4>
+            <p>Ocasião lanche e impulso — picolés individuais, Zero Açúcar como opção "sem culpa" para o dia comum.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="papeis">
+      <div class="sec-head">
+        <div class="sec-num">09</div>
+        <h2>Divisão de papéis</h2>
+      </div>
+      <div class="body">
+        <div class="roles">
+          <div class="role">
+            <h4>Design</h4>
+            <p>Toda a arte gráfica, identidade visual dos vídeos, tratamento de cor e tipografia dos posts estáticos.</p>
+          </div>
+          <div class="role">
+            <h4>Social Media</h4>
+            <p>Roteiro, escolha do formato (A/B/C), escolha de produto da régua, aderência ao clima e ao calendário, captação de dados de KPI, relacionamento com PDVs para o Formato C.</p>
+          </div>
+        </div>
+        <div class="restrictions">
+          <b>Restrições de produção — checar antes de gravar:</b> sem pano estendido sobre mesa, sem rodos visíveis, sem elementos de ambiente de fábrica ou estoque no enquadramento. O cenário deve remeter à mesa de família, não à operação industrial — o universo "bastidor / câmara fria" é conteúdo institucional separado, não social cotidiano.
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="entrega">
+      <div class="sec-head">
+        <div class="sec-num">10</div>
+        <h2>O que entregar ao final dos 6 meses</h2>
+      </div>
+      <div class="body">
+        <p class="muted">Um relatório vivo, atualizado mensalmente, com:</p>
+        <ol class="deliver-list">
+          <li>Qual formato — A, B ou C — teve melhor frequência e alcance por praça, PR versus SC.</li>
+          <li>Qual dos 5 produtos-destaque teve melhor resposta, para orientar o mix de mídia paga futura.</li>
+          <li>Comparativo de performance clima frio versus quente, para desenhar a campanha de inverno 2027.</li>
+          <li>Recomendação de continuidade: manter ou testar porta-voz fixo, escalar o Formato C com PDVs, ou seguir 100% sem rosto.</li>
+        </ol>
+      </div>
+    </section>
+
+    <footer>Neval Sorvetes · Guia Criativo de Social Media · Fase 1 do Marketing de Conteúdo · Contrato-piloto de 6 meses</footer>
+  </main>
+</div>
+
+</body>
+</html>
