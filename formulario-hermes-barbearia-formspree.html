@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><script src="https://myhub.ia.br/canvas-vendor/tailwind.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesquisa rápida · Hermes Barbearia</title>
+<style>
+  :root {
+    --navy: #1F3A5F;
+    --navy-light: #E8EEF6;
+    --navy-mid: #4A6A94;
+    --text: #1E2530;
+    --muted: #5B6573;
+    --line: #DDE3EC;
+    --soft: #F6F8FB;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; color: var(--text); background: var(--soft); line-height: 1.5; font-size: 15px; padding: 24px 12px 60px; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header.hero { background: var(--navy); color: #fff; border-radius: 16px; padding: 32px 28px; margin-bottom: 20px; }
+  header.hero .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #B7C7DC; }
+  header.hero h1 { font-size: 28px; font-weight: 500; margin: 6px 0 10px; }
+  header.hero p { color: #D6E0EE; font-size: 14.5px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 22px; margin-bottom: 16px; }
+  .block-title { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--navy-mid); margin-bottom: 4px; }
+  .block-sub { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  fieldset { border: 0; margin: 0; }
+  .q { padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .q:last-child { border-bottom: 0; padding-bottom: 0; }
+  .q legend, .q .qlabel { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 8px; display: block; }
+  .q .qhint { font-size: 12.5px; color: var(--muted); margin: -4px 0 8px; display: block; }
+  .opts { display: grid; gap: 8px; }
+  .opts.two { grid-template-columns: 1fr 1fr; }
+  label.opt { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; cursor: pointer; background: #fff; font-size: 14px; }
+  label.opt:hover { border-color: var(--navy-mid); background: var(--soft); }
+  label.opt input { accent-color: var(--navy); width: 16px; height: 16px; flex-shrink: 0; }
+  label.opt:has(input:checked) { border-color: var(--navy); background: var(--navy-light); }
+  .scale-row { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 14px; }
+  .scale-row .stmt { font-size: 14px; color: var(--text); font-style: italic; }
+  .scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .scale label { display: flex; flex-direction: column; align-items: center; gap: 4px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 4px; cursor: pointer; font-size: 13px; color: var(--muted); background: #fff; }
+  .scale label:has(input:checked) { border-color: var(--navy); background: var(--navy); color: #fff; }
+  .scale input { accent-color: var(--navy); }
+  .scale-legend { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+  input[type="text"], textarea { width: 100%; font-family: inherit; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; color: var(--text); background: #fff; }
+  input[type="text"]:focus, textarea:focus { outline: 2px solid var(--navy-mid); outline-offset: 0; border-color: var(--navy); }
+  textarea { min-height: 90px; resize: vertical; }
+  .cond { margin-top: 12px; padding: 14px; background: var(--soft); border-radius: 8px; border-left: 3px solid var(--navy); }
+  .privacy { font-size: 13px; color: var(--muted); background: var(--navy-light); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; }
+  .actions { text-align: center; margin-top: 8px; }
+  button[type="submit"] { font-family: inherit; font-size: 15px; font-weight: 500; background: var(--navy); color: #fff; border: 0; border-radius: 999px; padding: 12px 32px; cursor: pointer; }
+  button[type="submit"]:hover { background: var(--navy-mid); }
+  button[type="submit"]:disabled { opacity: .6; cursor: wait; }
+  .error { color: #9B2C2C; font-size: 13.5px; margin-top: 12px; text-align: center; }
+  .done { text-align: center; padding: 40px 20px; }
+  .done h2 { color: var(--navy); font-weight: 500; font-size: 22px; margin-bottom: 8px; }
+  .done p { color: var(--muted); }
+  .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  @media (max-width: 560px) {
+    .opts.two { grid-template-columns: 1fr; }
+    .scale { grid-template-columns: repeat(5, 1fr); }
+    .scale label { font-size: 12px; }
+    header.hero h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Hermes Barbearia · Pesquisa com clientes</span>
+    <h1>Pesquisa rápida</h1>
+    <p>Queremos entender melhor como você vive a experiência na Hermes para continuar melhorando o atendimento. Leva cerca de 3 minutos.</p>
+  </header>
+
+  <div class="privacy">Suas respostas são anônimas, usadas apenas de forma agregada e não serão vendidas nem compartilhadas. Não pedimos CPF, endereço completo nem dados financeiros.</div>
+
+  <form id="form" action="https://formspree.io/f/mbgobqnj" method="POST" novalidate>
+    <input type="hidden" name="_subject" value="Nova resposta: pesquisa de clientes Hermes Barbearia">
+    <div class="hp" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+
+    <!-- BLOCO 1 -->
+    <section class="card">
+      <div class="block-title">Bloco 1</div>
+      <div class="block-sub">Perfil</div>
+      <fieldset>
+        <div class="q">
+          <legend>1. Quem está respondendo?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="q1" value="Eu mesmo(a)" required> Eu mesmo(a)</label>
+            <label class="opt"><input type="radio" name="q1" value="Sou responsável por um menor que atendemos"> Sou responsável por um menor que atendemos</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>2. Qual é a sua faixa etária?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q2" value="16–24" required> 16–24</label>
+            <label class="opt"><input type="radio" name="q2" value="25–34"> 25–34</label>
+            <label class="opt"><input type="radio" name="q2" value="35–44"> 35–44</label>
+            <label class="opt"><input type="radio" name="q2" value="45–54"> 45–54</label>
+            <label class="opt"><input type="radio" name="q2" value="55–64"> 55–64</label>
+            <label class="opt"><input type="radio" name="q2" value="65+"> 65+</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>3. Qual é a sua ocupação?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="q3" value="Empresário(a) ou dono(a) de negócio" required> Empresário(a) ou dono(a) de negócio</label>
+            <label class="opt"><input type="radio" name="q3" value="Profissional liberal (médico, advogado etc.)"> Profissional liberal (médico, advogado etc.)</label>
+            <label class="opt"><input type="radio" name="q3" value="Contratado(a) ou gerente"> Contratado(a) ou gerente</label>
+            <label class="opt"><input type="radio" name="q3" value="CLT"> CLT</label>
+            <label class="opt"><input type="radio" name="q3" value="Estudante"> Estudante</label>
+            <label class="opt"><input type="radio" name="q3" value="Outra"> Outra</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>4. Em qual região de Paulo Afonso você mora ou trabalha?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q4" value="Caminho dos Lagos" required> Caminho dos Lagos</label>
+            <label class="opt"><input type="radio" name="q4" value="General Dutra"> General Dutra</label>
+            <label class="opt"><input type="radio" name="q4" value="Paulo Afonso Chesf"> Paulo Afonso Chesf</label>
+            <label class="opt"><input type="radio" name="q4" value="Alto do Araticum"> Alto do Araticum</label>
+            <label class="opt"><input type="radio" name="q4" value="Centro"> Centro</label>
+            <label class="opt"><input type="radio" name="q4" value="Outra"> Outra</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>5. Você leva filhos ou outros familiares à Hermes?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q5" value="Sim" required> Sim</label>
+            <label class="opt"><input type="radio" name="q5" value="Não"> Não</label>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- BLOCO 2 -->
+    <section class="card">
+      <div class="block-title">Bloco 2</div>
+      <div class="block-sub">Relação com a Hermes</div>
+      <fieldset>
+        <div class="q">
+          <legend>6. Há quanto tempo você é cliente da Hermes?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q6" value="Menos de 6 meses" required> Menos de 6 meses</label>
+            <label class="opt"><input type="radio" name="q6" value="De 6 meses a 1 ano"> De 6 meses a 1 ano</label>
+            <label class="opt"><input type="radio" name="q6" value="De 1 a 3 anos"> De 1 a 3 anos</label>
+            <label class="opt"><input type="radio" name="q6" value="Mais de 3 anos"> Mais de 3 anos</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>7. Com que frequência você costuma cortar o cabelo ou fazer a barba?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q7" value="Semanal" required> Semanal</label>
+            <label class="opt"><input type="radio" name="q7" value="A cada 15 dias"> A cada 15 dias</label>
+            <label class="opt"><input type="radio" name="q7" value="Mensal"> Mensal</label>
+            <label class="opt"><input type="radio" name="q7" value="A cada 2 meses ou mais"> A cada 2 meses ou mais</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>8. Quais serviços você costuma usar?</legend>
+          <span class="qhint">Marque todos que se aplicam.</span>
+          <div class="opts two">
+            <label class="opt"><input type="checkbox" name="q8" value="Corte"> Corte</label>
+            <label class="opt"><input type="checkbox" name="q8" value="Barba"> Barba</label>
+            <label class="opt"><input type="checkbox" name="q8" value="Sobrancelha"> Sobrancelha</label>
+            <label class="opt"><input type="checkbox" name="q8" value="Hidratação"> Hidratação</label>
+            <label class="opt"><input type="checkbox" name="q8" value="Pigmentação"> Pigmentação</label>
+            <label class="opt"><input type="checkbox" name="q8" value="Selagem ou progressiva"> Selagem ou progressiva</label>
+            <label class="opt"><input type="checkbox" name="q8" value="Produtos"> Produtos</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>9. Como você conheceu a Hermes?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q9" value="Indicação de amigo ou cliente" required> Indicação de amigo ou cliente</label>
+            <label class="opt"><input type="radio" name="q9" value="Instagram"> Instagram</label>
+            <label class="opt"><input type="radio" name="q9" value="Passei na fachada"> Passei na fachada</label>
+            <label class="opt"><input type="radio" name="q9" value="WhatsApp"> WhatsApp</label>
+            <label class="opt"><input type="radio" name="q9" value="Outro"> Outro</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>10. Você compra produtos da Hermes?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q10" value="Sim, regularmente" required> Sim, regularmente</label>
+            <label class="opt"><input type="radio" name="q10" value="Às vezes"> Às vezes</label>
+            <label class="opt"><input type="radio" name="q10" value="Nunca"> Nunca</label>
+          </div>
+          <div id="q10a-wrap" class="cond" hidden>
+            <legend>10a. Por que você não compra?</legend>
+            <span class="qhint">Marque todos que se aplicam.</span>
+            <div class="opts">
+              <label class="opt"><input type="checkbox" name="q10a" value="Já tenho produtos"> Já tenho produtos</label>
+              <label class="opt"><input type="checkbox" name="q10a" value="Não sabia que havia"> Não sabia que havia</label>
+              <label class="opt"><input type="checkbox" name="q10a" value="Acho caro"> Acho caro</label>
+              <label class="opt"><input type="checkbox" name="q10a" value="Não senti necessidade"> Não senti necessidade</label>
+              <label class="opt"><input type="checkbox" name="q10a" value="Outro"> Outro</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- BLOCO 3 -->
+    <section class="card">
+      <div class="block-title">Bloco 3</div>
+      <div class="block-sub">Valor e atendimento</div>
+      <fieldset>
+        <div class="q">
+          <legend>11. O que você mais valoriza no atendimento?</legend>
+          <span class="qhint">Escolha até 3 opções.</span>
+          <div class="opts two" id="q11-group">
+            <label class="opt"><input type="checkbox" name="q11" value="Ser ouvido"> Ser ouvido</label>
+            <label class="opt"><input type="checkbox" name="q11" value="Orientação sobre estilo e cuidados"> Orientação sobre estilo e cuidados</label>
+            <label class="opt"><input type="checkbox" name="q11" value="Pontualidade"> Pontualidade</label>
+            <label class="opt"><input type="checkbox" name="q11" value="Ambiente"> Ambiente</label>
+            <label class="opt"><input type="checkbox" name="q11" value="Higiene"> Higiene</label>
+            <label class="opt"><input type="checkbox" name="q11" value="Rapidez"> Rapidez</label>
+            <label class="opt"><input type="checkbox" name="q11" value="Conversa"> Conversa</label>
+            <label class="opt"><input type="checkbox" name="q11" value="Preço"> Preço</label>
+            <label class="opt"><input type="checkbox" name="q11" value="Privacidade"> Privacidade</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>12. Em relação ao que recebe, você considera o valor cobrado:</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q12" value="Abaixo do que vale" required> Abaixo do que vale</label>
+            <label class="opt"><input type="radio" name="q12" value="Justo"> Justo</label>
+            <label class="opt"><input type="radio" name="q12" value="Acima do que vale"> Acima do que vale</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>13. Quanto tempo levou para conseguir o último horário?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q13" value="No mesmo dia" required> No mesmo dia</label>
+            <label class="opt"><input type="radio" name="q13" value="1 a 3 dias"> 1 a 3 dias</label>
+            <label class="opt"><input type="radio" name="q13" value="Mais de 3 dias"> Mais de 3 dias</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>14. Indique seu grau de concordância (1 = discordo totalmente, 5 = concordo totalmente)</legend>
+
+          <div class="scale-row">
+            <span class="stmt">14a. Sinto que a Hermes me ouve antes de cortar.</span>
+            <div class="scale">
+              <label><input type="radio" name="q14a" value="1" required>1</label>
+              <label><input type="radio" name="q14a" value="2">2</label>
+              <label><input type="radio" name="q14a" value="3">3</label>
+              <label><input type="radio" name="q14a" value="4">4</label>
+              <label><input type="radio" name="q14a" value="5">5</label>
+            </div>
+          </div>
+
+          <div class="scale-row">
+            <span class="stmt">14b. Sinto que a Hermes não me empurra serviços ou produtos.</span>
+            <div class="scale">
+              <label><input type="radio" name="q14b" value="1" required>1</label>
+              <label><input type="radio" name="q14b" value="2">2</label>
+              <label><input type="radio" name="q14b" value="3">3</label>
+              <label><input type="radio" name="q14b" value="4">4</label>
+              <label><input type="radio" name="q14b" value="5">5</label>
+            </div>
+          </div>
+
+          <div class="scale-row">
+            <span class="stmt">14c. O atendimento é parecido independentemente de quem me atende.</span>
+            <div class="scale">
+              <label><input type="radio" name="q14c" value="1" required>1</label>
+              <label><input type="radio" name="q14c" value="2">2</label>
+              <label><input type="radio" name="q14c" value="3">3</label>
+              <label><input type="radio" name="q14c" value="4">4</label>
+              <label><input type="radio" name="q14c" value="5">5</label>
+            </div>
+          </div>
+
+          <div class="scale-row">
+            <span class="stmt">14d. Eu indicaria a Hermes para um amigo.</span>
+            <div class="scale">
+              <label><input type="radio" name="q14d" value="1" required>1</label>
+              <label><input type="radio" name="q14d" value="2">2</label>
+              <label><input type="radio" name="q14d" value="3">3</label>
+              <label><input type="radio" name="q14d" value="4">4</label>
+              <label><input type="radio" name="q14d" value="5">5</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- BLOCO 4 -->
+    <section class="card">
+      <div class="block-title">Bloco 4</div>
+      <div class="block-sub">Estilo de vida e hábitos</div>
+      <fieldset>
+        <div class="q">
+          <legend>15. Quais destas atividades você pratica com frequência?</legend>
+          <span class="qhint">Marque todas que se aplicam.</span>
+          <div class="opts two">
+            <label class="opt"><input type="checkbox" name="q15" value="Academia"> Academia</label>
+            <label class="opt"><input type="checkbox" name="q15" value="Corrida ou ciclismo"> Corrida ou ciclismo</label>
+            <label class="opt"><input type="checkbox" name="q15" value="Tênis"> Tênis</label>
+            <label class="opt"><input type="checkbox" name="q15" value="Esportes aquáticos"> Esportes aquáticos</label>
+            <label class="opt"><input type="checkbox" name="q15" value="Viagens"> Viagens</label>
+            <label class="opt"><input type="checkbox" name="q15" value="Churrasco e encontros com amigos"> Churrasco e encontros com amigos</label>
+            <label class="opt"><input type="checkbox" name="q15" value="Nenhuma"> Nenhuma</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>16. Onde você busca referências sobre estilo e cuidados pessoais?</legend>
+          <span class="qhint">Marque todas que se aplicam.</span>
+          <div class="opts two">
+            <label class="opt"><input type="checkbox" name="q16" value="Instagram"> Instagram</label>
+            <label class="opt"><input type="checkbox" name="q16" value="YouTube"> YouTube</label>
+            <label class="opt"><input type="checkbox" name="q16" value="Indicação de amigos"> Indicação de amigos</label>
+            <label class="opt"><input type="checkbox" name="q16" value="Revistas"> Revistas</label>
+            <label class="opt"><input type="checkbox" name="q16" value="Profissionais da área"> Profissionais da área</label>
+            <label class="opt"><input type="checkbox" name="q16" value="Não busco"> Não busco</label>
+          </div>
+        </div>
+        <div class="q">
+          <legend>17. Qual é o seu principal objetivo com o visual hoje?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q17" value="Manter o padrão" required> Manter o padrão</label>
+            <label class="opt"><input type="radio" name="q17" value="Mudar o estilo"> Mudar o estilo</label>
+            <label class="opt"><input type="radio" name="q17" value="Melhorar a aparência profissional"> Melhorar a aparência profissional</label>
+            <label class="opt"><input type="radio" name="q17" value="Ocasião especial"> Ocasião especial</label>
+            <label class="opt"><input type="radio" name="q17" value="Outro"> Outro</label>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- BLOCO 5 -->
+    <section class="card">
+      <div class="block-title">Bloco 5</div>
+      <div class="block-sub">Fechamento</div>
+      <fieldset>
+        <div class="q">
+          <legend>18. Você aceitaria uma conversa de 15 minutos para aprofundar sua opinião?</legend>
+          <div class="opts two">
+            <label class="opt"><input type="radio" name="q18" value="Sim" required> Sim</label>
+            <label class="opt"><input type="radio" name="q18" value="Não"> Não</label>
+          </div>
+          <div id="q18a-wrap" class="cond" hidden>
+            <label class="qlabel" for="q18a">18a. Deixe um contato para retorno (opcional)</label>
+            <input type="text" id="q18a" name="q18a" placeholder="Telefone ou e-mail">
+          </div>
+        </div>
+        <div class="q">
+          <label class="qlabel" for="q19">19. Algo que a Hermes deveria saber e não perguntamos? (opcional)</label>
+          <textarea id="q19" name="q19" placeholder="Escreva aqui, se quiser"></textarea>
+        </div>
+      </fieldset>
+    </section>
+
+    <div class="actions">
+      <button type="submit" id="submitBtn">Enviar respostas</button>
+      <div id="errorMsg" class="error" hidden>Não foi possível enviar agora. Tente novamente em instantes.</div>
+      <div id="validMsg" class="error" hidden>Responda todas as perguntas obrigatórias antes de enviar.</div>
+    </div>
+  </form>
+
+  <div id="thanks" class="card done" hidden>
+    <h2>Obrigado!</h2>
+    <p>Suas respostas foram enviadas. Elas vão nos ajudar a melhorar o atendimento da Hermes.</p>
+  </div>
+
+</div>
+
+<script>
+  const form = document.getElementById('form');
+  const submitBtn = document.getElementById('submitBtn');
+  const errorMsg = document.getElementById('errorMsg');
+  const validMsg = document.getElementById('validMsg');
+  const thanks = document.getElementById('thanks');
+
+  // Pergunta 10a: aparece só se q10 = "Nunca"
+  function toggleQ10a() {
+    const sel = form.querySelector('input[name="q10"]:checked');
+    const show = sel && sel.value === 'Nunca';
+    const wrap = document.getElementById('q10a-wrap');
+    wrap.hidden = !show;
+    wrap.querySelectorAll('input').forEach(i => i.disabled = !show);
+  }
+
+  // Pergunta 18a: aparece só se q18 = "Sim"
+  function toggleQ18a() {
+    const sel = form.querySelector('input[name="q18"]:checked');
+    const show = sel && sel.value === 'Sim';
+    const wrap = document.getElementById('q18a-wrap');
+    wrap.hidden = !show;
+    wrap.querySelectorAll('input').forEach(i => i.disabled = !show);
+  }
+
+  // Pergunta 11: limite de 3 opções
+  document.querySelectorAll('input[name="q11"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const marcados = form.querySelectorAll('input[name="q11"]:checked');
+      if (marcados.length > 3) {
+        cb.checked = false;
+        validMsg.textContent = 'Você pode escolher no máximo 3 opções na pergunta 11.';
+        validMsg.hidden = false;
+      } else {
+        validMsg.hidden = true;
+      }
+    });
+  });
+
+  form.querySelectorAll('input[name="q10"]').forEach(r => r.addEventListener('change', toggleQ10a));
+  form.querySelectorAll('input[name="q18"]').forEach(r => r.addEventListener('change', toggleQ18a));
+  toggleQ10a();
+  toggleQ18a();
+
+  // Validação: obrigatórias e 10a quando "Nunca"
+  function validar() {
+    const faltando = [];
+    const radios = new Set([...form.querySelectorAll('input[type="radio"][required]')].map(r => r.name));
+    radios.forEach(name => {
+      if (!form.querySelector(`input[name="${name}"]:checked`)) faltando.push(name);
+    });
+    return faltando;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorMsg.hidden = true;
+    validMsg.textContent = 'Responda todas as perguntas obrigatórias antes de enviar.';
+
+    const faltando = validar();
+    if (faltando.length) {
+      validMsg.hidden = false;
+      const primeiro = form.querySelector(`input[name="${faltando[0]}"]`);
+      primeiro.closest('.q').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    validMsg.hidden = true;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+
+    try {
+      const resp = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!resp.ok) throw new Error('Falha no envio');
+      form.hidden = true;
+      thanks.hidden = false;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      errorMsg.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar respostas';
+    }
+  });
+</script>
+</body>
+</html>
