@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><script src="https://myhub.ia.br/canvas-vendor/tailwind.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes Barbearia | Relatório de Branding</title>
+<style>
+  :root {
+    --navy: #1F3A5F;
+    --navy-light: #E8EEF6;
+    --navy-mid: #4A6A94;
+    --text: #1E2530;
+    --muted: #5B6573;
+    --line: #DDE3EC;
+    --bg: #FFFFFF;
+    --soft: #F6F8FB;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 500; color: var(--text); background: var(--bg); line-height: 1.6; font-size: 15px; }
+  a { color: var(--navy); text-decoration: none; }
+  header { position: sticky; top: 0; z-index: 10; background: #fff; border-bottom: 1px solid var(--line); }
+  .topbar { max-width: 1100px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { font-weight: 600; color: var(--navy); letter-spacing: .02em; }
+  nav { display: flex; gap: 6px; flex-wrap: wrap; }
+  nav a { padding: 6px 12px; border-radius: 999px; font-size: 13px; color: var(--muted); }
+  nav a:hover { background: var(--navy-light); color: var(--navy); }
+  nav a.active { background: var(--navy); color: #fff; }
+  main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+  .page { display: none; animation: fade .25s ease; }
+  .page.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px);} to { opacity: 1; transform: none; } }
+
+  h1 { font-size: 34px; font-weight: 500; color: var(--navy); margin-bottom: 8px; letter-spacing: -.01em; }
+  h2 { font-size: 22px; font-weight: 500; color: var(--navy); margin: 40px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); }
+  h3 { font-size: 16px; font-weight: 500; color: var(--text); margin: 20px 0 8px; }
+  p { margin-bottom: 12px; color: var(--text); }
+  .lead { font-size: 17px; color: var(--muted); max-width: 760px; margin-bottom: 24px; }
+  .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--navy-mid); margin-bottom: 6px; display: block; }
+  .muted { color: var(--muted); font-size: 13px; }
+
+  .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
+  .tag-c { background: #E6F0E9; color: #2D6A43; }
+  .tag-m { background: #E8EEF6; color: #1F3A5F; }
+  .tag-p { background: #F4EBDD; color: #8A5A1B; }
+
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card { border: 1px solid var(--line); border-radius: 12px; padding: 20px; background: #fff; }
+  .card-link { display: block; color: inherit; transition: all .2s ease; cursor: pointer; }
+  .card-link:hover { border-color: var(--navy); box-shadow: 0 6px 20px rgba(31,58,95,.10); transform: translateY(-2px); }
+  .pilar-num { width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 12px; }
+  .card h4 { font-size: 16px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+  .card p { font-size: 13.5px; color: var(--muted); margin: 0; }
+  .card .more { margin-top: 12px; font-size: 13px; color: var(--navy); }
+  .soft { background: var(--soft); border-radius: 12px; padding: 20px; }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 20px 0; }
+  .kpi { border-left: 3px solid var(--navy); padding: 10px 14px; background: var(--soft); border-radius: 6px; }
+  .kpi .v { font-size: 22px; color: var(--navy); font-weight: 500; }
+  .kpi .l { font-size: 12px; color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 13.5px; }
+  th { text-align: left; background: var(--navy); color: #fff; font-weight: 500; padding: 10px 12px; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--text); }
+  tr:nth-child(even) td { background: var(--soft); }
+
+  .prio { display: inline-block; font-size: 12px; padding: 2px 10px; border-radius: 999px; font-weight: 500; }
+  .prio-alta { background: var(--navy); color: #fff; }
+  .prio-media { background: var(--navy-light); color: var(--navy); }
+  .prio-mon { background: #F1F3F6; color: var(--muted); }
+
+  .bars { margin: 16px 0; }
+  .bar-row { display: grid; grid-template-columns: 170px 1fr 90px; gap: 12px; align-items: center; margin-bottom: 10px; font-size: 13px; }
+  .bar-track { background: var(--navy-light); border-radius: 4px; height: 14px; overflow: hidden; }
+  .bar-fill { background: var(--navy); height: 100%; border-radius: 4px; }
+  .bar-val { text-align: right; color: var(--muted); }
+
+  .timeline { position: relative; margin: 24px 0; padding-left: 28px; }
+  .timeline::before { content: ""; position: absolute; left: 8px; top: 4px; bottom: 4px; width: 2px; background: var(--navy-light); }
+  .tl-item { position: relative; margin-bottom: 22px; }
+  .tl-item::before { content: ""; position: absolute; left: -26px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--navy); border: 3px solid #fff; box-shadow: 0 0 0 1px var(--navy); }
+  .tl-year { font-size: 12px; color: var(--navy-mid); letter-spacing: .06em; }
+  .tl-title { font-weight: 500; color: var(--navy); font-size: 15px; }
+  .tl-text { font-size: 13.5px; color: var(--muted); }
+
+  .flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 20px 0; }
+  .flow-step { background: var(--navy-light); border-radius: 10px; padding: 12px 10px; text-align: center; position: relative; }
+  .flow-step.peak { background: var(--navy); color: #fff; }
+  .flow-step .n { font-size: 11px; opacity: .75; }
+  .flow-step .t { font-size: 13px; font-weight: 500; }
+
+  .ladder { display: flex; flex-direction: column; gap: 6px; max-width: 520px; margin: 16px 0; }
+  .rung { padding: 12px 16px; border-radius: 8px; color: #fff; font-size: 14px; }
+  .rung span { opacity: .8; font-size: 12px; display: block; }
+
+  .equation { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; padding: 22px; background: var(--navy-light); border-radius: 12px; margin: 16px 0; font-size: 15px; }
+  .eq-box { background: #fff; border-radius: 8px; padding: 10px 16px; text-align: center; border: 1px solid var(--line); }
+  .eq-box b { display: block; color: var(--navy); font-weight: 500; font-size: 13px; margin-bottom: 4px; }
+  .eq-op { font-size: 22px; color: var(--navy); }
+
+  .persona { display: grid; grid-template-columns: 220px 1fr; gap: 24px; border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .avatar { background: var(--navy-light); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+  .avatar img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 12px; }
+  .avatar .circle { width: 84px; height: 84px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 10px; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13.5px; margin-top: 10px; }
+  .facts div b { color: var(--navy); font-weight: 500; display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  .persona h4 { color: var(--navy); font-weight: 500; font-size: 15px; margin: 14px 0 6px; }
+  .persona h4:first-child { margin-top: 0; }
+  .persona ul { padding-left: 20px; margin-bottom: 4px; font-size: 14px; }
+  .persona li { margin-bottom: 3px; }
+
+  .map-wrap { border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: #fff; }
+  .map-wrap svg { width: 100%; height: auto; display: block; }
+
+  .note { border-left: 3px solid var(--navy); background: var(--soft); padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 14px; color: var(--text); }
+
+  .crumb { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .crumb a { color: var(--navy); }
+  .back { display: inline-block; margin-top: 30px; font-size: 13px; color: var(--navy); border: 1px solid var(--navy); padding: 8px 14px; border-radius: 999px; }
+  .back:hover { background: var(--navy); color: #fff; }
+
+  .hero { background: var(--navy); color: #fff; border-radius: 16px; padding: 40px 36px; margin-bottom: 28px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: center; }
+  .hero h1 { color: #fff; font-size: 36px; }
+  .hero p { color: #D6E0EE; }
+  .hero .meta { font-size: 13px; color: #B7C7DC; }
+  .hero-stat { background: rgba(255,255,255,.08); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; }
+  .hero-stat .v { font-size: 24px; font-weight: 500; }
+  .hero-stat .l { font-size: 12px; color: #B7C7DC; }
+
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin: 8px 0 20px; }
+
+  .form-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 16px 0; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+  .form-cta a.btn { display: inline-block; background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 14px; white-space: nowrap; }
+  .form-cta p { margin: 0; font-size: 14px; color: var(--muted); max-width: 560px; }
+
+  .jrn { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 20px 0 14px; }
+  .jrn button { font-family: inherit; font-weight: 500; border: 1px solid var(--line); background: var(--navy-light); color: var(--navy); border-radius: 10px; padding: 12px 8px; cursor: pointer; text-align: center; transition: all .2s ease; }
+  .jrn button .n { display: block; font-size: 11px; opacity: .75; }
+  .jrn button .t { display: block; font-size: 13px; }
+  .jrn button:hover { border-color: var(--navy); }
+  .jrn button.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .jrn-panel { display: none; border: 1px solid var(--line); border-radius: 12px; padding: 20px; background: #fff; margin-bottom: 14px; }
+  .jrn-panel.on { display: block; animation: fade .25s ease; }
+  .jrn-panel h4 { color: var(--navy); font-weight: 500; font-size: 17px; margin-bottom: 4px; }
+  .jrn-panel .pts { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .jrn-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .jrn-cols > div { background: var(--soft); border-radius: 8px; padding: 14px 16px; }
+  .jrn-cols b { display: block; color: var(--navy); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+  .jrn-cols ul { padding-left: 18px; font-size: 13.5px; color: var(--text); }
+  .jrn-cols li { margin-bottom: 4px; }
+
+  footer { border-top: 1px solid var(--line); padding: 20px 24px; text-align: center; font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 860px) {
+    .grid-4, .grid-3, .grid-2, .kpis { grid-template-columns: 1fr 1fr; }
+    .hero, .persona { grid-template-columns: 1fr; }
+    .flow, .jrn { grid-template-columns: 1fr 1fr; }
+    .jrn-cols { grid-template-columns: 1fr; }
+    .bar-row { grid-template-columns: 1fr; gap: 4px; }
+    .bar-val { text-align: left; }
+  }
+  @media (max-width: 560px) {
+    .grid-4, .grid-3, .grid-2, .kpis, .facts { grid-template-columns: 1fr; }
+    h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <a href="#inicio" class="brand">Hermes Barbearia · Branding</a>
+    <nav id="nav">
+      <a href="#inicio" data-page="inicio">Início</a>
+      <a href="#negocio" data-page="negocio">1 Negócio</a>
+      <a href="#audiencia" data-page="audiencia">2 Audiência</a>
+      <a href="#valor" data-page="valor">3 Valor</a>
+      <a href="#historia" data-page="historia">4 História</a>
+      <a href="#lacunas" data-page="lacunas">Indicadores</a>
+      <a href="#fontes" data-page="fontes">Fontes</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ INÍCIO ============ -->
+<section class="page" id="inicio">
+  <div class="hero">
+    <div>
+      <span class="eyebrow" style="color:#B7C7DC">Relatório de estratégia de marca</span>
+      <h1>Hermes Barbearia</h1>
+      <p>Um guia para fortalecer a marca, dar clareza ao valor e criar um padrão que a equipe possa replicar, sem depender do fundador.</p>
+      <p class="meta">Pavio Branding · Rascunho 1 · 26.11.2026 · Paulo Afonso, BA</p>
+    </div>
+    <div>
+      <div class="hero-stat"><div class="v">R$ 21–23 mil</div><div class="l">Faturamento mensal atual</div></div>
+      <div class="hero-stat"><div class="v">3 pessoas</div><div class="l">Equipe: fundador, barbeiro e atendimento</div></div>
+      <div class="hero-stat"><div class="v">1–3 dias</div><div class="l">Espera média para agendar</div></div>
+    </div>
+  </div>
+
+  <span class="eyebrow">Objetivo principal</span>
+  <div class="soft" style="margin-bottom:24px">
+    <p style="font-size:16px;color:var(--navy);margin:0">Fortalecer a marca Hermes e dar clareza ao seu valor, para que Háriston possa cobrar mais por atendimento, atender menos horas e liderar uma equipe que entrega o mesmo padrão, até que a Hermes seja procurada pelo nome e lembrada como referência em cuidado masculino em Paulo Afonso.</p>
+  </div>
+
+  <h2>Os quatro pilares</h2>
+  <p class="muted">Clique em um bloco para abrir o pilar.</p>
+
+  <div class="grid-4" style="margin-top:14px">
+    <a class="card card-link" href="#negocio">
+      <div class="pilar-num">1</div>
+      <h4>Negócio</h4>
+      <p>Onde a Hermes está, em que mercado atua, o que precisa mudar e aonde quer chegar.</p>
+      <div class="more">Abrir pilar →</div>
+    </a>
+    <a class="card card-link" href="#audiencia">
+      <div class="pilar-num">2</div>
+      <h4>Audiência</h4>
+      <p>Segmentos, perfil ideal de cliente e a persona Julio Carvalho.</p>
+      <div class="more">Abrir pilar →</div>
+    </a>
+    <a class="card card-link" href="#valor">
+      <div class="pilar-num">3</div>
+      <h4>Valor</h4>
+      <p>Percepção de marca, equação de valor, concorrência e posicionamento.</p>
+      <div class="more">Abrir pilar →</div>
+    </a>
+    <a class="card card-link" href="#historia">
+      <div class="pilar-num">4</div>
+      <h4>Estória</h4>
+      <p>História da marca, crenças, propósito, personalidade e arquétipo.</p>
+      <div class="more">Abrir pilar →</div>
+    </a>
+  </div>
+
+  <h2>Mais seções</h2>
+  <div class="grid-2">
+    <a class="card card-link" href="#lacunas">
+      <h4>Indicadores</h4>
+      <p>Métricas para acompanhar a evolução da marca após a entrega.</p>
+      <div class="more">Ver seção →</div>
+    </a>
+    <a class="card card-link" href="#fontes">
+      <h4>Fontes</h4>
+      <p>Dados oficiais e reportagens usados nas análises de mercado.</p>
+      <div class="more">Ver seção →</div>
+    </a>
+  </div>
+
+  <h2>Resumo em uma página</h2>
+  <div class="flow" style="grid-template-columns:repeat(4,1fr)">
+    <div class="flow-step"><div class="n">Hoje</div><div class="t">Marca presa ao fundador, serviço de qualidade, processos fracos</div></div>
+    <div class="flow-step"><div class="n">Caminho</div><div class="t">Clareza, padrão escrito e ticket maior com menos horas de cadeira</div></div>
+    <div class="flow-step peak"><div class="n">Diferencial</div><div class="t">Escuta que vira orientação, com honestidade comercial</div></div>
+    <div class="flow-step"><div class="n">Destino</div><div class="t">Referência regional em cuidado masculino, replicável por toda a equipe</div></div>
+  </div>
+
+  <div class="legend" style="margin-top:20px">
+    <span><span class="tag tag-c">Cliente</span> dito pelo Háriston</span>
+    <span><span class="tag tag-m">Mercado</span> dado externo, com fonte</span>
+    <span><span class="tag tag-p">Pavio</span> leitura ou hipótese nossa, a validar</span>
+  </div>
+</section>
+
+<!-- ============ 1. NEGÓCIO ============ -->
+<section class="page" id="negocio">
+  <div class="crumb"><a href="#inicio">Início</a> / Pilar 1</div>
+  <span class="eyebrow">Pilar 1 · Estado final</span>
+  <h1>Negócio</h1>
+  <p class="lead">Onde a Hermes está hoje, em que mercado atua e o que precisa mudar.</p>
+
+  <div class="note"><span class="tag tag-m">Mercado</span> <b>246 empresas ativas</b> no segmento de salões de beleza e barbearias, segundo o SonarDados.</div>
+
+  <h2>01. Premissas</h2>
+  <p>A Hermes é uma barbearia de três pessoas, com agenda cheia e uma marca ainda muito presa à figura do fundador. O mercado é favorável, mas o setor entra em fase de maturação, e quem ganha agora é quem se organiza e se diferencia.</p>
+
+  <h3>Evolução do faturamento <span class="tag tag-c">Cliente</span></h3>
+  <div class="bars">
+    <div class="bar-row"><span>Háriston sozinho</span><div class="bar-track"><div class="bar-fill" style="width:45%"></div></div><span class="bar-val">R$ 13–15 mil</span></div>
+    <div class="bar-row"><span>Com Alan (set/2024)</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">R$ 21–23 mil</span></div>
+  </div>
+
+  <h3>Quem é o fundador <span class="tag tag-c">Cliente</span></h3>
+  <div class="grid-3">
+    <div class="card"><h4>Qualidades</h4><p>Batalhador, receptivo, de bom humor, sabe ouvir, sonhador, quer crescimento e evolução.</p></div>
+    <div class="card"><h4>Funções</h4><p>Administração, atendimento, mídia, limpeza, gestão, produtos, ambiente e despesas.</p></div>
+    <div class="card"><h4>Risco</h4><p>"Se ele não trabalha, o negócio não gira." Quem se importa com isso: ele e seus clientes.</p></div>
+  </div>
+
+  <h2>Mercado em Paulo Afonso</h2>
+  <p>Polo regional de comércio e serviços, com renda por habitante acima da média da Bahia, mas poucas pessoas nas faixas de renda alta. <span class="tag tag-m">Mercado</span> Fonte: painel municipal da Caravela (IBGE, RAIS, CAGED, Receita e Banco Central), atualizado até outubro de 2026.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">112,9 mil</div><div class="l">População (Censo 2022)</div></div>
+    <div class="kpi"><div class="v">R$ 37,7 mil</div><div class="l">PIB per capita</div></div>
+    <div class="kpi"><div class="v">R$ 2.015</div><div class="l">Renda média dos responsáveis por domicílio</div></div>
+    <div class="kpi"><div class="v">5.777</div><div class="l">MEI ativos (maior taxa da região)</div></div>
+  </div>
+
+  <h3>PIB per capita comparado</h3>
+  <div class="bars">
+    <div class="bar-row"><span>Paulo Afonso</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="bar-val">R$ 37,7 mil</span></div>
+    <div class="bar-row"><span>Bahia</span><div class="bar-track"><div class="bar-fill" style="width:81%"></div></div><span class="bar-val">R$ 30,5 mil</span></div>
+    <div class="bar-row"><span>Região</span><div class="bar-track"><div class="bar-fill" style="width:48%"></div></div><span class="bar-val">R$ 18,2 mil</span></div>
+  </div>
+
+  <h3>Leituras <span class="tag tag-p">Pavio</span></h3>
+  <div class="grid-2">
+    <div class="card"><h4>Nicho premium pequeno</h4><p>O crescimento vem por profundidade (recorrência, ticket e produtos), não por volume.</p></div>
+    <div class="card"><h4>Ticket sensível para o público geral</h4><p>Dois cortes por mês custam R$ 90 (3,3% da remuneração formal média). Para o público-alvo, é irrelevante.</p></div>
+    <div class="card"><h4>Renda ancorada em emprego estável</h4><p>A administração pública é o maior empregador, o que sustenta clientes contratados com renda previsível.</p></div>
+    <div class="card"><h4>Momento de cautela</h4><p>Saldo de empregos negativo em 2026, mas crédito +28,7%. A mensagem deve falar a quem investe em si.</p></div>
+  </div>
+
+  <h3>Sazonalidade provável <span class="tag tag-p">Pavio</span></h3>
+  <p>Dezembro concentra a maior movimentação financeira (14,2% acima dos demais meses). Dezembro e o ciclo junino devem ser picos de agenda. Vale confirmar nos dados da Hermes.</p>
+
+  <h2>Mercado de barbearias no Brasil e na Bahia</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="v">~R$ 140 bi</div><div class="l">Setor de beleza em 2026 <span class="tag tag-m">Sebrae</span></div></div>
+    <div class="kpi"><div class="v">94%</div><div class="l">Das empresas de beleza formalizadas são MEI</div></div>
+    <div class="kpi"><div class="v">&lt; 30%</div><div class="l">Dos negócios usam sistema de gestão</div></div>
+    <div class="kpi"><div class="v">+9% a.a.</div><div class="l">Crescimento projetado para beleza masculina até 2030</div></div>
+  </div>
+  <div class="note">A Hermes fatura cerca de 42% a 46% do teto de R$ 50 mil/mês que define a maioria dos negócios do setor, e já usa sistema de agenda, o que a coloca à frente da maioria.</div>
+
+  <h2>Modelo de negócio (canvas)</h2>
+  <p>A receita depende do tempo de cadeira. Quase tudo o que gera dinheiro é serviço feito por uma pessoa, uma hora de cada vez. <span class="tag tag-c">Cliente</span></p>
+
+  <table>
+    <tr><th style="width:24%">Bloco</th><th>Hermes hoje</th></tr>
+    <tr><td><b>Segmentos</b></td><td>Médicos, comerciantes, advogados, estudantes, clientes mais maduros. Faixa de 5 a 60 anos</td></tr>
+    <tr><td><b>Proposta de valor</b></td><td>Boa aparência, personalização, bom atendimento, acolhimento</td></tr>
+    <tr><td><b>Canais</b></td><td>WhatsApp (principal), Instagram, boca a boca, salão</td></tr>
+    <tr><td><b>Receita</b></td><td>Corte (maior procura), sobrancelha (mais rentável), barba, produtos, consumíveis</td></tr>
+    <tr><td><b>Parcerias</b></td><td>Clientes que indicam; fornecedores de produto (Don Alcides, Baboom)</td></tr>
+    <tr><td><b>Custos</b></td><td>Pessoal, aluguel, energia, consumíveis e descartáveis</td></tr>
+  </table>
+
+  <h3>Portfólio e preços <span class="tag tag-c">Cliente</span></h3>
+  <div class="grid-3">
+    <div class="card"><h4>Corte</h4><p style="font-size:20px;color:var(--navy)">R$ 45</p></div>
+    <div class="card"><h4>Barba</h4><p style="font-size:20px;color:var(--navy)">R$ 40</p></div>
+    <div class="card"><h4>Sobrancelha</h4><p style="font-size:20px;color:var(--navy)">R$ 20</p></div>
+    <div class="card"><h4>Hidratação</h4><p style="font-size:20px;color:var(--navy)">R$ 30</p></div>
+    <div class="card"><h4>Pigmentação</h4><p style="font-size:20px;color:var(--navy)">R$ 30</p></div>
+    <div class="card"><h4>Produtos</h4><p style="font-size:20px;color:var(--navy)">~R$ 60</p></div>
+  </div>
+
+  <h3>Leituras <span class="tag tag-p">Pavio</span></h3>
+  <ol style="padding-left:20px;color:var(--text)">
+    <li style="margin-bottom:6px">O teto é o tempo de cadeira. Para faturar mais sem trabalhar mais, é preciso subir o ticket e vender produtos.</li>
+    <li style="margin-bottom:6px">A sobrancelha é a mais rentável e a mais barata. Antes de mudar a tabela, meça a rentabilidade por hora de cada serviço.</li>
+    <li style="margin-bottom:6px">O canal principal é manual. Depende de Larissa e de Háriston, o que explica a espera de 1 a 3 dias.</li>
+    <li style="margin-bottom:6px">As parcerias são só de fornecimento. Colégios e organizações do público-alvo ainda não estão ativos.</li>
+  </ol>
+
+  <h2>Jornada do consumidor</h2>
+  <p>A jornada tem seis etapas, da descoberta à indicação. Clique em cada etapa para ver o que o cliente faz, o que acontece hoje e como a Hermes pode melhorar. <span class="tag tag-c">Cliente</span></p>
+
+  <div class="jrn" id="jrn">
+    <button class="on" data-s="1"><span class="n">1</span><span class="t">Não conhece</span></button>
+    <button data-s="2"><span class="n">2</span><span class="t">Conhece</span></button>
+    <button data-s="3"><span class="n">3</span><span class="t">Decide</span></button>
+    <button data-s="4"><span class="n">4</span><span class="t">Prossegue</span></button>
+    <button data-s="5"><span class="n">5</span><span class="t">Dá preferência</span></button>
+    <button data-s="6"><span class="n">6</span><span class="t">Fã e promotor</span></button>
+  </div>
+
+  <div class="jrn-panel on" id="jp1">
+    <h4>1. Não conhece</h4>
+    <div class="pts"><b>Sentimento:</b> curiosidade e desconfiança. Julga pela fachada e pelas fotos antes de qualquer contato.</div>
+    <div class="pts">Pontos de contato: fachada, Instagram, indicação</div>
+    <div class="jrn-cols">
+      <div><b>O que acontece hoje <span class="tag tag-c">Cliente</span></b>
+        <ul><li>Passa pela fachada</li><li>Vê o Instagram</li><li>Ouve uma indicação</li></ul></div>
+      <div><b>Como melhorar <span class="tag tag-p">Pavio</span></b>
+        <ul><li>Alinhar o Instagram ao nível real do atendimento</li><li>Mostrar bastidores de higiene e antes e depois</li></ul></div>
+    </div>
+  </div>
+
+  <div class="jrn-panel" id="jp2">
+    <h4>2. Conhece</h4>
+    <div class="pts"><b>Sentimento:</b> interesse, mas ainda sem confiança. Quer saber se o serviço vale o preço.</div>
+    <div class="pts">Pontos de contato: Instagram, WhatsApp</div>
+    <div class="jrn-cols">
+      <div><b>O que acontece hoje <span class="tag tag-c">Cliente</span></b>
+        <ul><li>Chama no WhatsApp</li><li>Recebe os horários disponíveis</li><li>Quer conhecer o negócio e valida</li></ul></div>
+      <div><b>Como melhorar <span class="tag tag-p">Pavio</span></b>
+        <ul><li>Mensagem de boas-vindas padronizada, com horários e valores</li><li>Resposta no mesmo dia</li><li>Métrica: tempo médio de resposta no WhatsApp</li></ul></div>
+    </div>
+  </div>
+
+  <div class="jrn-panel" id="jp3">
+    <h4>3. Decide</h4>
+    <div class="pts"><b>Sentimento:</b> ansiedade pela espera. Se o horário demora, o cliente desiste ou procura outra barbearia.</div>
+    <div class="pts">Pontos de contato: WhatsApp</div>
+    <div class="jrn-cols">
+      <div><b>O que acontece hoje <span class="tag tag-c">Cliente</span></b>
+        <ul><li>Aguarda o dia e o horário marcados, de 1 a 3 dias</li></ul></div>
+      <div><b>Como melhorar <span class="tag tag-p">Pavio</span></b>
+        <ul><li>Lista de encaixe para quem tem agenda restrita</li><li>Lembrete automático antes do horário</li><li>Métrica: taxa de faltas e cancelamentos por semana</li></ul></div>
+    </div>
+  </div>
+
+  <div class="jrn-panel" id="jp4">
+    <h4>4. Prossegue</h4>
+    <div class="pts"><b>Sentimento:</b> conforto e atenção. É o momento em que a experiência se confirma ou se desfaz.</div>
+    <div class="pts">Pontos de contato: salão, WhatsApp</div>
+    <div class="jrn-cols">
+      <div><b>O que acontece hoje <span class="tag tag-c">Cliente</span></b>
+        <ul><li>Confirmação do horário e recepção na porta</li><li>Espera, se houver; café ou cerveja; lavagem, se preciso</li><li>Descoberta do que procura, execução do corte e pesquisa sobre a rotina de cuidado</li><li>Orientação e finalização</li><li>Venda de produtos: se o cliente já usa, Háriston pergunta por ele; se não se interessa, pergunta o motivo</li></ul></div>
+      <div><b>Como melhorar <span class="tag tag-p">Pavio</span></b>
+        <ul><li>Consulta inicial padronizada: o que quer, onde quer chegar, rotina</li><li>Ficha de preferências no sistema</li><li>Roteiro de conversa que mantém o tom profissional</li><li>Venda pela orientação, não por metas</li><li>Métrica: clientes que compram produto por mês</li></ul></div>
+    </div>
+  </div>
+
+  <div class="jrn-panel" id="jp5">
+    <h4>5. Dá preferência</h4>
+    <div class="pts"><b>Sentimento:</b> satisfação, mas com risco de esquecimento. Sem próxima visita marcada, o retorno depende da memória do cliente.</div>
+    <div class="pts">Pontos de contato: salão, WhatsApp</div>
+    <div class="jrn-cols">
+      <div><b>O que acontece hoje <span class="tag tag-c">Cliente</span></b>
+        <ul><li>Pergunta se o cliente está satisfeito ou se quer ajustar algo</li><li>O cliente satisfeito retorna</li></ul></div>
+      <div><b>Como melhorar <span class="tag tag-p">Pavio</span></b>
+        <ul><li>Agendar a próxima visita antes de o cliente sair</li><li>Prazo da próxima visita ligado ao tipo de corte</li><li>Métrica: percentual de clientes que agendam antes de sair</li></ul></div>
+    </div>
+  </div>
+
+  <div class="jrn-panel" id="jp6">
+    <h4>6. Fã e promotor</h4>
+    <div class="pts"><b>Sentimento:</b> orgulho de indicar. Recomenda quando se sente seguro com a marca e com o resultado.</div>
+    <div class="pts">Pontos de contato: Instagram, indicação</div>
+    <div class="jrn-cols">
+      <div><b>O que acontece hoje <span class="tag tag-c">Cliente</span></b>
+        <ul><li>Indica por boca a boca e pelo Instagram</li></ul></div>
+      <div><b>Como melhorar <span class="tag tag-p">Pavio</span></b>
+        <ul><li>Pedir indicação de forma ativa (cartão, convite a um amigo)</li><li>Registrar autorizações para fotos</li><li>Métrica: indicações por cliente ativo</li></ul></div>
+    </div>
+  </div>
+
+  <div class="note"><b>Final feliz definido por Háriston:</b> "a satisfação de ser atendido com um serviço de excelência". A venda de produtos parte da orientação, não de metas, o que combina com a honestidade que a marca defende.</div>
+
+  <h2>Pontos de atenção</h2>
+  <p>Os três mais graves são a dependência do fundador, a falta de processos e o descompasso entre o que a marca promete e o que o cliente vive.</p>
+  <table>
+    <tr><th>#</th><th>Ponto de atenção</th><th>Direção</th><th>Prioridade</th></tr>
+    <tr><td>1</td><td>Dependência do fundador</td><td>Escrever o padrão Hermes e apresentar Alan e Larissa como parte da marca</td><td><span class="prio prio-alta">Alta</span></td></tr>
+    <tr><td>2</td><td>Falta de processos e padronização</td><td>Roteiro de atendimento, ficha de cliente, rotina de abertura e fechamento</td><td><span class="prio prio-alta">Alta</span></td></tr>
+    <tr><td>3</td><td>Descompasso entre online e experiência real</td><td>Alinhar comunicação à promessa e experiência real para além do antes e depois</td><td><span class="prio prio-alta">Alta</span></td></tr>
+    <tr><td>4</td><td>Tom do atendimento</td><td>Definir o que é proximidade da Hermes e onde fica o limite</td><td><span class="prio prio-media">Média</span></td></tr>
+    <tr><td>5</td><td>Cultura e propósito não formados</td><td>Apresentar os itens 17 a 22 à equipe</td><td><span class="prio prio-media">Média</span></td></tr>
+    <tr><td>6</td><td>Capacidade da equipe e tempo de espera</td><td>Direcionar clientes novos para Alan; metas de agenda por profissional</td><td><span class="prio prio-media">Média</span></td></tr>
+    <tr><td>7</td><td>Clientes de agenda imprevisível</td><td>Política de confirmação e reagendamento</td><td><span class="prio prio-media">Média</span></td></tr>
+    <tr><td>8</td><td>Diferenciais que concorrentes também reivindicam</td><td>Transformar a escuta em método reconhecível</td><td><span class="prio prio-media">Média</span></td></tr>
+    <tr><td>9</td><td>Preço em mercado de renda formal baixa</td><td>Escalonar o aumento e comunicá-lo pelo valor</td><td><span class="prio prio-media">Média</span></td></tr>
+    <tr><td>10</td><td>Falta de dados de margem</td><td>Levantar tempo e custo por serviço</td><td><span class="prio prio-media">Média</span></td></tr>
+    <tr><td>11</td><td>Símbolo atual ("não se identifica com a asa")</td><td>Tratar na fase de identidade visual</td><td><span class="prio prio-mon">Monitorar</span></td></tr>
+    <tr><td>12</td><td>Execução do projeto</td><td>Prioridades e revisões em 30, 60 e 90 dias</td><td><span class="prio prio-alta">Alta</span></td></tr>
+  </table>
+
+  <a class="back" href="#inicio">← Voltar ao início</a>
+</section>
+
+<!-- ============ 2. AUDIÊNCIA ============ -->
+<section class="page" id="audiencia">
+  <div class="crumb"><a href="#inicio">Início</a> / Pilar 2</div>
+  <span class="eyebrow">Pilar 2 · Primeira versão</span>
+  <h1>Audiência</h1>
+  <p class="lead">Quem são os clientes, quem é o perfil ideal e a quem a comunicação deve falar.</p>
+
+  <h2>Segmentos de mercado <span class="tag tag-c">Cliente</span></h2>
+  <div class="grid-4">
+    <div class="card"><h4>Proprietários</h4><p>Empresários donos do próprio negócio.</p></div>
+    <div class="card"><h4>Contratados</h4><p>Médicos, advogados e gerentes que trabalham para um estabelecimento.</p></div>
+    <div class="card"><h4>Menores</h4><p>Crianças e adolescentes, atendidos por meio dos pais.</p></div>
+    <div class="card"><h4>CLT</h4><p>Trabalhadores com horários limitados.</p></div>
+  </div>
+
+  <h2>Perfil ideal de cliente</h2>
+  <p>O perfil ideal é o <b>proprietário empreendedor</b>: busca estabilidade, tem sede de crescimento, disciplina e "bom faro para negócio". Vê a barbearia como espaço de conversa e troca.</p>
+
+  <div class="flow" style="grid-template-columns:repeat(3,1fr)">
+    <div class="flow-step peak"><div class="n">Prioridade 1</div><div class="t">Proprietários</div></div>
+    <div class="flow-step"><div class="n">Prioridade 2</div><div class="t">Agenda restrita (médicos, advogados)</div></div>
+    <div class="flow-step"><div class="n">Prioridade 3</div><div class="t">Pais que levam os filhos</div></div>
+  </div>
+  <div class="note">Gerente de loja imprevisível e vendedor de renda limitada são os perfis que menos sustentam o objetivo de ticket maior. Não precisam ser dispensados, mas não devem guiar a comunicação.</div>
+
+  <h2>Persona: Julio Carvalho</h2>
+  <div class="persona">
+    <div class="avatar">
+      <img src="http://paviobranding.github.io/propostas/julio_persona_Hermes.jpg" alt="Foto de perfil de Julio Carvalho" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="circle" style="display:none">JC</div>
+      <b style="color:var(--navy);font-weight:500">Julio Carvalho</b>
+      <span class="muted">35 anos · Paulo Afonso (BA)</span>
+    </div>
+    <div>
+      <h4>Descrição geral</h4>
+      <div class="facts" style="margin-top:0;margin-bottom:14px">
+        <div><b>Nome</b>Julio Carvalho</div>
+        <div><b>Idade</b>35 anos</div>
+        <div><b>Local</b>Caminho dos Lagos, Paulo Afonso (BA)</div>
+        <div><b>Renda</b>R$ 18 mil/mês</div>
+      </div>
+
+      <h4>Bio</h4>
+      <p>Casado, pai de dois filhos (menino de 10 e menina de 6). Começou como vendedor CLT em loja de material de construção, formou-se em administração e hoje é dono de uma loja de equipamentos eletrônicos. Rotina sistemática: leva os filhos ao reforço, toca a loja, almoça em casa com a família e treina na academia. Nos fins de semana, churrasco com amigos e lancha. Trabalha muito para estar preparado para o futuro da família.</p>
+
+      <h4>Frase de efeito</h4>
+      <p style="font-style:italic;color:var(--navy)">"Quero crescer sem deixar de estar presente para a minha família."</p>
+
+      <h4>Palavras-chave</h4>
+      <p>Pai de família · empreendedor · organizado · estabilidade · autocuidado · objetivo · confiante · calculista</p>
+
+      <h4>Desejos</h4>
+      <ul>
+        <li>Tranquilidade financeira</li>
+        <li>Tempo livre com a família</li>
+        <li>Paz interior</li>
+        <li>Boa aparência constante</li>
+        <li>Uma casa na praia ou na beira do rio</li>
+      </ul>
+
+      <h4>Medos</h4>
+      <ul>
+        <li>Processo trabalhista</li>
+        <li>Aumento de tributos e malha fina</li>
+        <li>Estagnação do negócio</li>
+        <li>Ser engolido pela concorrência ou ficar obsoleto</li>
+        <li>Não ter o reconhecimento da família pelo esforço e pelo risco</li>
+      </ul>
+
+      <h4>Necessidades</h4>
+      <ul>
+        <li>Equipe alinhada ao padrão</li>
+        <li>Bom dia de vendas</li>
+        <li>Capacidade de delegar tarefas completas</li>
+        <li>Exercício que dê relaxamento</li>
+        <li>Tempo com a família</li>
+      </ul>
+
+      <h4>Objetivos</h4>
+      <ul>
+        <li>Garantir o futuro dos filhos</li>
+        <li>Cuidar da aparência com praticidade (corte, barba, balm, pomada e leave-in)</li>
+        <li>Ter atendimento objetivo, com tempo para conversar</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Mapa de empatia</h3>
+  <div class="grid-2">
+    <div class="card"><h4>Faz</h4><p>Corta o cabelo, treina, almoça com a família, participa de congressos, feiras e mentorias de negócios.</p></div>
+    <div class="card"><h4>Ouve e fala</h4><p>Investimentos, alavancagem, fechar negócios, política, esportes.</p></div>
+  </div>
+
+  <h3>A persona se sustenta com os dados? <span class="tag tag-m">Mercado</span><span class="tag tag-p">Pavio</span></h3>
+  <p>Sim, no essencial. Caminho dos Lagos aparece entre os bairros de maior poder aquisitivo da cidade, e o perfil de dono de comércio combina com a vocação de polo comercial de Paulo Afonso. O interesse por produtos masculinos (72%) sustenta a venda de produtos.</p>
+  <ul style="padding-left:20px;margin-bottom:12px">
+    <li>Renda de R$ 18 mil fica bem acima da média local: tratar como persona do "topo" e criar uma persona secundária (o médico atarefado), mais numerosa.</li>
+    <li>Confirmar com clientes reais se lancha, jet ski e tênis são hobbies recorrentes ou só plausíveis.</li>
+    <li>O relato sobre redes sociais (contido) sugere que o Instagram deve falar com ele por prova e autoridade, não por humor.</li>
+  </ul>
+  <div class="note"><b>Lacuna:</b> não encontramos pesquisa publicada sobre o comportamento do consumidor masculino especificamente em Paulo Afonso. Sugerimos uma pesquisa curta com 15 a 20 clientes atuais (frequência, o que valoriza, o que consome, como conheceu), que gera o dado local que falta.</div>
+
+  <div class="form-cta">
+    <a class="btn" href="https://paviobranding.github.io/propostas/formulario-hermes-barbearia-formspree.html" target="_blank" rel="noopener">Acessar formulário para clientes →</a>
+    <p>Basta copiar o link do formulário e enviá-lo aos clientes. As respostas formam o dado local que falta para validar a persona.</p>
+  </div>
+
+  <a class="back" href="#inicio">← Voltar ao início</a>
+</section>
+
+<!-- ============ 3. VALOR ============ -->
+<section class="page" id="valor">
+  <div class="crumb"><a href="#inicio">Início</a> / Pilar 3</div>
+  <span class="eyebrow">Pilar 3 · Primeira versão</span>
+  <h1>Valor</h1>
+  <p class="lead">Como a marca é percebida, como se compõe o valor, onde estão os concorrentes e qual espaço a Hermes pode ocupar.</p>
+
+  <h2>Fatos, obstáculos e oportunidades <span class="tag tag-c">Cliente</span></h2>
+  <div class="grid-3">
+    <div class="card"><h4>Fatos</h4><p>Serviço de qualidade, bom atendimento, ambiente aconchegante, pessoas acolhedoras e dispostas a ouvir.</p></div>
+    <div class="card"><h4>Obstáculos</h4><p>Falta de processos, de padronização, de clareza na visão e de comunicação interna.</p></div>
+    <div class="card"><h4>Oportunidades</h4><p>Cuidado pessoal constante, cortes alternativos ao degradê, consumo de produtos masculinos e prática esportiva.</p></div>
+  </div>
+
+  <h2>Equação da proposta de valor</h2>
+  <div class="equation">
+    <div class="eq-box"><b>Transformação</b>resultado percebido</div>
+    <div class="eq-op">=</div>
+    <div class="eq-box"><b>Benefícios</b>funcionais, emocionais, simbólicos</div>
+    <div class="eq-op">−</div>
+    <div class="eq-box"><b>Custos</b>financeiros, tempo, psicológicos</div>
+  </div>
+  <table>
+    <tr><th style="width:20%">Tipo</th><th>Benefícios</th><th>Custos</th></tr>
+    <tr><td><b>Funcionais</b></td><td>Corte, barba, hidratação, pigmentação, sobrancelha, produtos</td><td>Corte R$ 45, barba R$ 40, hidratação R$ 30, pigmentação R$ 30, sobrancelha R$ 20, produtos ~R$ 60</td></tr>
+    <tr><td><b>Emocionais</b></td><td>Sentir-se bem recebido, único ("o tempo foi reservado para mim"), acolhido</td><td>Tempo e acesso: 1 a 3 dias para agendar</td></tr>
+    <tr><td><b>Simbólicos</b></td><td>"Um cara de bom gosto", exigente, fino, de espírito jovem</td><td>Desmerecimento pelo valor, realidade para o público atual</td></tr>
+  </table>
+  <div class="note"><span class="tag tag-p">Pavio</span> O custo psicológico mais comum é "vou ser empurrado a comprar algo" ou "vou ser julgado". A promessa de honestidade da Hermes já ataca o primeiro, e vale destacá-la como diferencial explícito.</div>
+
+  <h2>Percepção de marca e como ela quer ser lembrada <span class="tag tag-c">Cliente</span></h2>
+  <div class="grid-2">
+    <div class="card"><h4>Lembrança</h4><p>Pela satisfação que proporciona, pelo bom serviço e pela qualidade.</p></div>
+    <div class="card"><h4>Mensagem</h4><p>Autoestima e autoconfiança, com incentivo e afirmação honestos.</p></div>
+  </div>
+  <div class="soft" style="margin-top:14px"><p style="margin:0;color:var(--navy);font-size:16px">"O cliente não volta pela novidade, volta pela cumplicidade e segurança."</p></div>
+
+  <h2>Escada da marca</h2>
+  <p class="muted">Da camada percebida hoje até a camada ampliada.</p>
+  <div class="ladder">
+    <div class="rung" style="background:#6E8DB5">Acolhimento, bom serviço, honestidade, ambiente tranquilo<span>Marca percebida hoje</span></div>
+    <div class="rung" style="background:#4A6A94">Padrão replicável por toda a equipe<span>Ponte para o futuro</span></div>
+    <div class="rung" style="background:#1F3A5F">Referência regional em cuidado masculino, reconhecida pelo nome Hermes<span>Marca ampliada</span></div>
+  </div>
+
+  <h2>Concorrência</h2>
+  <p>Os concorrentes se agrupam em três eixos: disponibilidade e mídia (Club Strom, Espaço A), estrutura (Navalha) e a pessoa do barbeiro (Caio Ferreira). <span class="tag tag-p">Pavio</span></p>
+
+  <table>
+    <tr><th>Concorrente</th><th>Forças apontadas por Háriston <span class="tag tag-c">Cliente</span></th></tr>
+    <tr><td><b>Club Strom</b></td><td>Pioneirismo, marca consolidada, muitas cadeiras e barbeiros, melhor localização</td></tr>
+    <tr><td><b>Espaço A</b></td><td>Nome consolidado, muita presença na mídia, atendimento mais íntimo</td></tr>
+    <tr><td><b>Barbearia Navalha</b></td><td>Novidade, bom ambiente e estrutura, qualidade de serviço</td></tr>
+    <tr><td><b>Caio Ferreira</b></td><td>Bom atendimento, serviço exclusivo e individual; a marca é a pessoa</td></tr>
+  </table>
+
+  <h3>Observações de identidade dos concorrentes <span class="tag tag-c">Cliente</span></h3>
+  <p class="muted">Leitura feita a partir das descrições fornecidas na entrevista.</p>
+  <table>
+    <tr><th style="width:16%">Dimensão</th><th>Espaço A</th><th>Barbearia Navalha</th><th>Club Strom</th></tr>
+    <tr><td><b>Posicionamento</b></td><td>Centrado na imagem do dono. Mostra certificações, cursos, prêmios e troféus. Não é premium, mas é convidativo</td><td>Premium e minimalista, o mais sofisticado dos citados, à frente do Club Strom</td><td>Barbearia pioneira em Paulo Afonso no autocuidado masculino, referência em corte, barba e sobrancelha. Percepção de parceria mais coloquial, com alguns elementos de prestígio</td></tr>
+    <tr><td><b>Voz verbal</b></td><td>Focada no dono, que expõe a vida pessoal e a família. Homem comum que deu certo</td><td>Mais fechada e menos coloquial. Foco na qualidade e no padrão, não na pessoa do dono</td><td>Linguagem bem próxima, sotaque regional realçado e expressões regionais usadas com tranquilidade. Nos vídeos, tom de amigo e contato íntimo. Brinca com as palavras ("corte de rico", "dar um jeito no visual")</td></tr>
+    <tr><td><b>Cores</b></td><td>Vermelho como destaque, além do preto</td><td>Preto predominante, com tons de madeira na mobília</td><td>Predominantemente preto, com tons de madeira no espaço</td></tr>
+    <tr><td><b>Logo</b></td><td>Letra A cortada por uma tesoura</td><td>Tipográfico, branco sobre preto, caixa alta, sem serifa e peso leve. Navalha substitui a letra V</td><td>Tipográfico em blocos, estilo oldschool</td></tr>
+    <tr><td><b>Ambiente</b></td><td>Divertido e diverso: piso quadriculado, tijolo à vista, espelhos, mistura de cores</td><td>Amplitude, espaços de respiro, couro, costuras de ouro e LEDs ao redor do espelho</td><td>Elementos vintage, iluminação de LED quente e espaço amplo, com corredor livre atrás das cadeiras. Bar, mesas, sinuca e atrações; mostra o ambiente além dos cortes</td></tr>
+    <tr><td><b>Fachada</b></td><td>Moderna, em ACM chapado</td><td>Minimalista, ACM preto com escrita branca simples</td><td>A levantar</td></tr>
+  </table>
+
+  <h3>Leitura do Club Strom <span class="tag tag-p">Pavio</span></h3>
+  <div class="grid-2">
+    <div class="card"><h4>Onde ocupa o mapa</h4><p>Tom informal e próximo, como o Espaço A, mas o foco está no espaço e na experiência, não na pessoa do dono. Fica mais informal que a Hermes no eixo de tom, por causa da linguagem de amigo e das brincadeiras com o corte.</p></div>
+    <div class="card"><h4>O que disputa com a Hermes</h4><p>A linguagem de amigo e as brincadeiras com o corte disputam o cliente que quer proximidade, mas sem tom de piada.</p></div>
+  </div>
+  <div class="note"><b>Oportunidade:</b> o Club Strom compete no lazer (bar, sinuca, mesas). A Hermes não precisa entrar nesse terreno: a diferença está na escuta, na orientação e na honestidade comercial, que o concorrente não comunica no mesmo nível.</div>
+
+  <h2>Mapa de posicionamento</h2>
+  <p class="muted">Eixo X: foco da comunicação. Eixo Y: tom de relacionamento, do mais formal (topo) ao mais informal (base). Posições provisórias, a validar com a pesquisa de concorrentes.</p>
+  <div class="map-wrap">
+    <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif" font-weight="500">
+      <rect x="40" y="30" width="250" height="195" fill="#F6F8FB"/>
+      <rect x="310" y="30" width="250" height="195" fill="#E8EEF6"/>
+      <rect x="40" y="235" width="250" height="195" fill="#FFFFFF" stroke="#DDE3EC"/>
+      <rect x="310" y="235" width="250" height="195" fill="#E8EEF6"/>
+      <rect x="40" y="30" width="520" height="400" fill="none" stroke="#DDE3EC"/>
+      <line x1="300" y1="30" x2="300" y2="430" stroke="#1F3A5F" stroke-width="1.5"/>
+      <line x1="40" y1="230" x2="560" y2="230" stroke="#1F3A5F" stroke-width="1.5"/>
+      <text x="300" y="452" text-anchor="middle" font-size="12" fill="#5B6573">CENTRADO NO FUNDADOR  ←  →  CENTRADO NA MARCA E NO PADRÃO</text>
+      <text x="22" y="230" text-anchor="middle" font-size="12" fill="#5B6573" transform="rotate(-90 22 230)">FORMAL E RESERVADO  ←  →  INFORMAL E PRÓXIMO</text>
+      <text x="58" y="52" font-size="11" fill="#5B6573">FORMAL · DONO</text>
+      <text x="542" y="52" text-anchor="end" font-size="11" fill="#5B6573">FORMAL · MARCA</text>
+      <text x="58" y="418" font-size="11" fill="#5B6573">INFORMAL · DONO</text>
+      <text x="542" y="418" text-anchor="end" font-size="11" fill="#1F3A5F">INFORMAL · PADRÃO</text>
+      <circle cx="350" cy="110" r="10" fill="#4A6A94"/>
+      <text x="368" y="115" font-size="14" fill="#1E2530">Navalha</text>
+      <circle cx="150" cy="320" r="10" fill="#4A6A94"/>
+      <text x="168" y="325" font-size="14" fill="#1E2530">Espaço A</text>
+      <circle cx="370" cy="372" r="10" fill="#4A6A94"/>
+      <text x="390" y="377" font-size="14" fill="#1E2530">Club Strom</text>
+      <circle cx="440" cy="290" r="14" fill="#1F3A5F"/>
+      <text x="462" y="296" font-size="15" fill="#1F3A5F">Hermes</text>
+    </svg>
+  </div>
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card"><h4>Quadrante de padrão</h4><p>Tom informal e centrado no padrão, acima do Club Strom. A Hermes ocupa esse espaço com escuta e orientação, sem o tom de amigo do concorrente.</p></div>
+    <div class="card"><h4>Ponto a validar</h4><p>A posição da Hermes no eixo Y depende do tom que for definido (ponto de atenção 4).</p></div>
+  </div>
+
+  <h2>Diferenciais estratégicos</h2>
+  <p>Ordenados do mais defensável ao menos defensável. <span class="tag tag-p">Pavio</span></p>
+  <div class="grid-3">
+    <div class="card"><div class="pilar-num">1</div><h4>Escuta que vira orientação</h4><p>A Hermes descobre o que o cliente quer, para onde espera chegar, e orienta. É o ativo mais difícil de copiar.</p></div>
+    <div class="card"><div class="pilar-num">2</div><h4>Honestidade comercial</h4><p>Não vender o que o cliente não precisa. Lidera a comunicação e o atendimento.</p></div>
+    <div class="card"><div class="pilar-num">3</div><h4>Padrão de higiene como herança</h4><p>Gola descartável, pentes e espanadores lavados a cada cliente. Prova de que o cuidado é prática, não discurso.</p></div>
+  </div>
+
+  <h2>Tese de marca (a refinar)</h2>
+  <div class="soft">
+    <p style="margin:0;font-size:15px">A Hermes é a barbearia de Paulo Afonso para o homem que constrói a própria vida e quer parecer à altura dela. Ouvimos antes de cortar, orientamos com honestidade e entregamos mais do que a categoria costuma entregar, porque a confiança de alguém na própria imagem muda como ele se apresenta ao mundo.</p>
+  </div>
+
+  <a class="back" href="#inicio">← Voltar ao início</a>
+</section>
+
+<!-- ============ 4. HISTÓRIA ============ -->
+<section class="page" id="historia">
+  <div class="crumb"><a href="#inicio">Início</a> / Pilar 4</div>
+  <span class="eyebrow">Pilar 4 · Primeira versão</span>
+  <h1>Estória</h1>
+  <p class="lead">A origem da marca, o que ela acredita e como ela se apresenta.</p>
+
+  <h2>História de criação</h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2015–2016 · A necessidade</div><div class="tl-title">Antes de ser profissão, foi cuidado</div><div class="tl-text">Háriston cortou o cabelo do pai, que tem necessidades especiais, em casa. Aprendeu pelo YouTube e estudou por vergonha de errar.</div></div>
+    <div class="tl-item"><div class="tl-year">2016–2017 · A formação</div><div class="tl-title">200 km de moto para aprender o ofício</div><div class="tl-text">O mercado local cobrava de R$ 10 a 13. Toda quinta, às 5h, pegava a estrada para o curso em Arapiraca, muitas vezes sob chuva.</div></div>
+    <div class="tl-item"><div class="tl-year">2017–2019 · O começo</div><div class="tl-title">Cobrar R$ 25 em uma cidade que pagava R$ 13</div><div class="tl-text">Inauguração em 8 de março de 2017. Em quatro ou cinco meses a agenda explodiu. Antes de 1 ano e meio já eram 4 barbeiros.</div></div>
+    <div class="tl-item"><div class="tl-year">2019–2020 · O teto e a ruptura</div><div class="tl-title">Quando o sucesso deixou de caber na rotina</div><div class="tl-text">Sem férias e trabalhando até meia-noite, chegou ao limite da cadeira. Em 2020 passou a atender a domicílio, e o período terminou em esgotamento.</div></div>
+    <div class="tl-item"><div class="tl-year">2021–hoje · A reconstrução e a Hermes</div><div class="tl-title">Do nome de uma pessoa ao nome de um negócio</div><div class="tl-text">Em 2021 alugou o primeiro ponto. Em maio de 2024 tirou o próprio nome da fachada, para que o cliente procurasse a barbearia. Em setembro de 2024 Alan entrou e o faturamento saltou.</div></div>
+  </div>
+  <div class="note"><span class="tag tag-p">Nota editorial</span> Os detalhes de saúde e de vida pessoal do período de 2020 não devem ser publicados sem autorização de Háriston. Também vale validar o quanto da história do Club Strom pode ser pública, já que hoje é concorrente.</div>
+
+  <h2>Sistema de crenças</h2>
+  <div class="grid-2">
+    <div class="card"><h4>Valores do dia a dia <span class="tag tag-c">Cliente</span></h4><p>Honestidade e transparência, "do cliente à estrutura".</p></div>
+    <div class="card"><h4>Legado <span class="tag tag-c">Cliente</span></h4><p>O cliente ter encontrado uma boa companhia, um bom ouvinte, e a Hermes ter se interessado pela vida de cada cliente.</p></div>
+  </div>
+
+  <h2>Propósito, visão e missão</h2>
+  <div class="card" style="margin-bottom:14px">
+    <h4>Propósito <span class="tag tag-c">Cliente</span></h4>
+    <p>Um mundo em que as pessoas tenham mais autoestima e autoconfiança e expressem a própria personalidade, "ouvindo, fazendo refletir e amadurecer suas queixas".</p>
+  </div>
+  <div class="grid-2">
+    <div class="card"><h4>Visão <span class="tag tag-p">Proposta</span></h4><p>Ser a primeira referência em cuidado genuíno com o homem em Paulo Afonso e região.</p></div>
+    <div class="card"><h4>Missão <span class="tag tag-p">Proposta</span></h4><p>Cuidar da aparência de cada cliente ouvindo antes de cortar, para que ele saia mais confiante em quem é.</p></div>
+  </div>
+
+  <h2>Personalidade e arquétipo</h2>
+  <div class="grid-2">
+    <div class="card"><h4>Arquétipo base: o Prestativo <span class="tag tag-p">Pavio</span></h4><p>Cuida, acolhe, serve. É a raiz da história (o pai) e dos valores.</p></div>
+    <div class="card"><h4>Arquétipo de apoio: Sábio com toque de Mago <span class="tag tag-p">Pavio</span></h4><p>Sábio porque orienta com conhecimento. Mago porque transforma: o cliente entra de um jeito e sai diferente.</p></div>
+  </div>
+
+  <table style="margin-top:16px">
+    <tr><th style="width:50%">Defendemos</th><th>Somos contra</th></tr>
+    <tr><td>Honestidade, empatia, excelência, hospitalidade, servir, altruísmo</td><td>Desonestidade, desrespeito, preguiça, mau atendimento, indiferença, preconceito</td></tr>
+  </table>
+
+  <h3>Atributos de marca</h3>
+  <div class="flow" style="grid-template-columns:repeat(5,1fr)">
+    <div class="flow-step"><div class="t">Acolhedora</div></div>
+    <div class="flow-step"><div class="t">Honesta</div></div>
+    <div class="flow-step"><div class="t">Detalhista</div></div>
+    <div class="flow-step"><div class="t">Sóbria</div></div>
+    <div class="flow-step peak"><div class="t">Requintada na medida do empreendedor</div></div>
+  </div>
+
+  <h2>Brandstory: a jornada do herói</h2>
+  <div class="soft" style="margin-bottom:16px">
+    <p style="margin:0;font-size:16px;color:var(--navy)">Hermes Barbearia: a história do homem que se apresenta à altura da própria vida</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="card"><div class="pilar-num">1</div><h4>O herói</h4><p>O homem que constrói a própria vida. Trabalha duro, tem família e negócio para sustentar e quer ser visto como alguém que conquista. Está sempre em movimento e precisa de uma imagem que acompanhe esse ritmo.</p></div>
+    <div class="card"><div class="pilar-num">2</div><h4>O guia: a Hermes</h4><p>O mensageiro que ajuda o herói a atravessar. Ouve antes de agir, orienta com honestidade e transforma o visual com cuidado. Não empurra serviço nem produto.</p></div>
+    <div class="card"><div class="pilar-num">3</div><h4>O chamado</h4><p>O herói chega com pouco tempo e com a aparência fora do ritmo que gostaria. Sabe que a imagem importa, mas não tem tempo para cuidar dela.</p></div>
+  </div>
+
+  <div class="note"><b>Ponto de entrada:</b> "Ouvimos antes de cortar."</div>
+
+  <h3>A jornada</h3>
+  <table>
+    <tr><th style="width:18%">Etapa</th><th style="width:41%">O que o herói enfrenta</th><th>Como a Hermes age</th></tr>
+    <tr><td><b>Chamado</b></td><td>Quer melhorar o visual, mas não sabe por onde começar</td><td>Escuta e pergunta o que ele quer e onde quer chegar</td></tr>
+    <tr><td><b>Recusa</b></td><td>Desconfia de ser empurrado a comprar ou de ser julgado</td><td>Mostra honestidade e recomenda só o que faz sentido</td></tr>
+    <tr><td><b>Mentor</b></td><td>Precisa de alguém que entenda o seu ritmo</td><td>Ajusta o corte à rotina dele e orienta os cuidados</td></tr>
+    <tr><td><b>Provas</b></td><td>Quer confirmar que o resultado vale o investimento</td><td>Entrega com padrão, higiene e atenção aos detalhes</td></tr>
+    <tr><td><b>Transformação</b></td><td>Sai mais confiante e em movimento</td><td>Agenda a próxima visita antes de ele sair</td></tr>
+    <tr><td><b>Retorno</b></td><td>Volta e indica</td><td>Mantém o vínculo e facilita a indicação</td></tr>
+  </table>
+
+  <div class="grid-2">
+    <div class="card"><h4>O vilão</h4><p>A rotina que consome tudo, as pressões do dia a dia e a crença de que a autoestima vem depois do trabalho. Essas três forças se alimentam: o homem se dedica tanto à obra que deixa de se sentir merecedor de estar bem. Sem essa energia, ele hesita em arriscar e tende a se acomodar.</p></div>
+    <div class="card"><h4>O que o herói deve evitar</h4>
+      <ul style="padding-left:20px;font-size:14px">
+        <li style="margin-bottom:6px">Tratar a imagem como algo secundário. A aparência é parte de como ele é percebido nos negócios e na vida.</li>
+        <li style="margin-bottom:6px">Descuidar dos detalhes que o fazem parecer bem-sucedido: corte alinhado, barba bem desenhada, postura e apresentação.</li>
+        <li>Achar que todo corte é igual. O serviço precisa ser pensado para o rosto, o estilo e a rotina dele.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note"><b>O vilão não é um concorrente.</b> É a ideia de que cuidar de si pode esperar.</div>
+
+  <h3>O final feliz</h3>
+  <div class="soft">
+    <p style="margin:0 0 8px">"A satisfação de ser atendido com um serviço de excelência." <span class="muted">— Háriston, fundador</span></p>
+    <p style="margin:0">O herói sai pronto para empreender, arriscar e se dedicar ao dia a dia, com a imagem à altura do que conquista. Volta por cumplicidade e segurança, não por novidade.</p>
+  </div>
+
+  <div class="card" style="margin-top:14px;text-align:center">
+    <span class="eyebrow">Frase-síntese</span>
+    <p style="font-size:17px;color:var(--navy);margin:0">"Ouvimos antes de cortar, orientamos com honestidade e cuidamos da imagem de quem está sempre em movimento."</p>
+  </div>
+
+  <h2>Universo da marca</h2>
+  <p class="muted">Três camadas: a essência no centro, a identidade central no meio e a identidade estendida por fora.</p>
+  <div class="map-wrap" style="max-width:620px;margin:0 auto">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif" font-weight="500">
+      <circle cx="300" cy="300" r="280" fill="#E8EEF6"/>
+      <circle cx="300" cy="300" r="200" fill="#B7C7DC"/>
+      <circle cx="300" cy="300" r="120" fill="#1F3A5F"/>
+
+      <text x="300" y="38" text-anchor="middle" font-size="11" letter-spacing="1" fill="#1F3A5F">IDENTIDADE ESTENDIDA</text>
+      <text x="300" y="60" text-anchor="middle" font-size="12" fill="#1E2530">Profissional · requintada · responsável</text>
+      <text x="300" y="78" text-anchor="middle" font-size="12" fill="#1E2530">amigável · especialista</text>
+      <text x="300" y="96" text-anchor="middle" font-size="12" fill="#1E2530">gera oportunidades · confortável</text>
+
+      <text x="300" y="122" text-anchor="middle" font-size="10" letter-spacing="1" fill="#1F3A5F">IDENTIDADE CENTRAL</text>
+      <text x="300" y="140" text-anchor="middle" font-size="11" fill="#1E2530">Detalhista · Higiênica · Escuta ativa</text>
+      <text x="300" y="156" text-anchor="middle" font-size="11" fill="#1E2530">Acolhedora · Hospitaleira · Honesta</text>
+      <text x="300" y="172" text-anchor="middle" font-size="11" fill="#1E2530">Verdadeira · Altruísta</text>
+
+      <text x="300" y="250" text-anchor="middle" font-size="11" letter-spacing="1" fill="#FFFFFF">ESSÊNCIA</text>
+      <text x="300" y="272" text-anchor="middle" font-size="11" fill="#FFFFFF">O mensageiro que entrega</text>
+      <text x="300" y="288" text-anchor="middle" font-size="11" fill="#FFFFFF">hospitalidade e detalhismo,</text>
+      <text x="300" y="304" text-anchor="middle" font-size="11" fill="#FFFFFF">conectando homens em ascensão</text>
+    </svg>
+  </div>
+
+  <a class="back" href="#inicio">← Voltar ao início</a>
+</section>
+
+<!-- ============ LACUNAS ============ -->
+<section class="page" id="lacunas">
+  <div class="crumb"><a href="#inicio">Início</a> / Indicadores</div>
+  <span class="eyebrow">Próximos passos</span>
+  <h1>Indicadores</h1>
+
+  <h2>Indicadores de sucesso</h2>
+  <p>Hoje não há linha de base para a maioria destes números. Medir nas próximas semanas e definir metas depois, sem chutar valores.</p>
+  <table>
+    <tr><th>Indicador</th><th>Por que mede</th><th>Linha de base</th></tr>
+    <tr><td>Ticket médio por atendimento</td><td>Valor percebido</td><td>A levantar</td></tr>
+    <tr><td>Horas semanais de Háriston na cadeira</td><td>Atender menos</td><td>A levantar</td></tr>
+    <tr><td>Atendimentos por profissional</td><td>Padrão replicável</td><td>A levantar</td></tr>
+    <tr><td>Taxa de retorno em até 30 dias</td><td>Cumplicidade e segurança</td><td>A levantar</td></tr>
+    <tr><td>Tempo de espera para agendar</td><td>Acesso</td><td>1–3 dias</td></tr>
+    <tr><td>Cancelamentos e faltas</td><td>Cadeira vazia</td><td>A levantar</td></tr>
+    <tr><td>Clientes que compram produto</td><td>Receita fora da cadeira</td><td>A levantar</td></tr>
+    <tr><td>Novos clientes por indicação</td><td>Fã e promotor</td><td>A levantar</td></tr>
+    <tr><td>Aderência ao padrão (checklist)</td><td>Replicabilidade</td><td>A criar</td></tr>
+  </table>
+
+  <h2>Cenários de ticket (simulação)</h2>
+  <p class="muted">Aritmética sobre o faturamento atual de R$ 21–23 mil, sem projeção e sem perda de clientes. <span class="tag tag-p">Pavio</span></p>
+  <div class="bars">
+    <div class="bar-row"><span>Hoje</span><div class="bar-track"><div class="bar-fill" style="width:80%;background:#8FA7C7"></div></div><span class="bar-val">R$ 21–23 mil</span></div>
+    <div class="bar-row"><span>Ticket +10%, mesmo volume</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span class="bar-val">R$ 23,1–25,3 mil</span></div>
+    <div class="bar-row"><span>Ticket +20%, mesmo volume</span><div class="bar-track"><div class="bar-fill" style="width:96%"></div></div><span class="bar-val">R$ 25,2–27,6 mil</span></div>
+    <div class="bar-row"><span>Ticket +25%, 20% menos atendimentos</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><span class="bar-val">R$ 21–23 mil</span></div>
+  </div>
+  <div class="note">O último cenário traduz o objetivo do Háriston: mesma receita com 20% mais tempo livre.</div>
+
+  <h2>Horizontes de resultado</h2>
+  <div class="grid-3">
+    <div class="card"><h4>6 meses</h4><p>Padrão de atendimento escrito, tabela revisada, Instagram alinhado ao atendimento real.</p></div>
+    <div class="card"><h4>1 ano</h4><p>Ticket médio maior, Alan com agenda mais cheia, Háriston atendendo menos horas.</p></div>
+    <div class="card"><h4>5 anos</h4><p>Referência regional, marca replicável e possibilidade de crescer em estrutura.</p></div>
+  </div>
+
+  <h2>Como evitar o cenário pessimista <span class="tag tag-p">Pavio</span></h2>
+  <div class="grid-3">
+    <div class="card"><h4>Prioridades</h4><p>Fechar no máximo três prioridades nos primeiros 90 dias, cada uma com um responsável.</p></div>
+    <div class="card"><h4>Revisões</h4><p>Revisões curtas aos 30, 60 e 90 dias.</p></div>
+    <div class="card"><h4>Equipe</h4><p>Háriston apresenta o resultado a Alan e Larissa, para que também se reconheçam na marca.</p></div>
+  </div>
+
+  <a class="back" href="#inicio">← Voltar ao início</a>
+</section>
+
+<!-- ============ FONTES ============ -->
+<section class="page" id="fontes">
+  <div class="crumb"><a href="#inicio">Início</a> / Fontes</div>
+  <span class="eyebrow">Referências</span>
+  <h1>Fontes</h1>
+  <p class="lead">Dados oficiais e reportagens usados nas análises de mercado.</p>
+
+  <table>
+    <tr><th>Fonte</th><th>Uso</th></tr>
+    <tr><td>IBGE, Cidades e Estados · Paulo Afonso</td><td>Dados municipais</td></tr>
+    <tr><td>Caravela · perfil de Paulo Afonso (agregador de dados oficiais)</td><td>Painel municipal</td></tr>
+    <tr><td>SEI Bahia · Info Bahia 2026</td><td>Dados estaduais</td></tr>
+    <tr><td>A Tarde · beleza masculina na Bahia (31/08/2025)</td><td>Mercado de beleza masculina</td></tr>
+    <tr><td>A Tarde · Paulo Afonso como polo de comércio e serviços</td><td>Contexto regional</td></tr>
+    <tr><td>Agência Sebrae · beleza em 2025 e 2026</td><td>Abertura de negócios e tendências</td></tr>
+    <tr><td>UAI · faturamento e gestão em salões e barbearias</td><td>Faixas de faturamento</td></tr>
+    <tr><td>Jornal Opção · empresas de beleza abertas</td><td>Novas empresas</td></tr>
+    <tr><td>Correio Braziliense · maturação do setor (dez/2025)</td><td>Fase de maturação</td></tr>
+    <tr><td>Correio Braziliense · skincare masculino (Kantar e Opinion Box)</td><td>Hábitos de cuidado</td></tr>
+  </table>
+  <p class="muted">Documentos do projeto: kickoff, entrevista, workshops de negócio, segmentos de mercado e valor, mapa de empatia e história de marca (Pavio, out/2026).</p>
+
+  <a class="back" href="#inicio">← Voltar ao início</a>
+</section>
+
+</main>
+
+<footer>Hermes Barbearia · Relatório de Branding · Pavio Branding · Rascunho 1</footer>
+
+<script>
+  const pages = ["inicio", "negocio", "audiencia", "valor", "historia", "lacunas", "fontes"];
+
+  function showPage() {
+    let id = (location.hash || "#inicio").slice(1);
+    if (!pages.includes(id)) id = "inicio";
+    document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
+    document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("active", a.dataset.page === id));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  window.addEventListener("hashchange", showPage);
+  showPage();
+
+  (function () {
+    var btns = document.querySelectorAll("#jrn button");
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var s = b.getAttribute("data-s");
+        btns.forEach(function (x) { x.classList.toggle("on", x === b); });
+        document.querySelectorAll(".jrn-panel").forEach(function (p) {
+          p.classList.toggle("on", p.id === "jp" + s);
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
